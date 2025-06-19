@@ -1,0 +1,118 @@
+package stepdefinitions;
+
+import Page.headerAndFooter_Page;
+import Page.loginAndLogOut_Page;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import utilities.ConfigReader;
+import utilities.ReusableMethods;
+
+import java.time.Duration;
+import java.util.Set;
+
+import static org.junit.Assert.*;
+import static utilities.Driver.getDriver;
+
+public class headerAndFooter_Steps {
+    loginAndLogOut_Page enter = new loginAndLogOut_Page();
+    headerAndFooter_Page page = new headerAndFooter_Page();
+
+    @Given("user with login {string} and with password {string} logs into the {string} system")
+    public void  userWithLoginAndWithPasswordLogsIntoTheSystem(String arg0, String arg1, String arg2) {
+        getDriver().get(ConfigReader.getProperty("Meis"));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        ReusableMethods.wait(1);
+        enter.emailField.sendKeys(arg0);
+        ReusableMethods.wait(1);
+        enter.passwordField.sendKeys(arg1);
+        enter.enterToTheSystem.click();
+    }
+
+    @Then("headers leftsidebare and text and contacts and notification and name and surname of user and personal cabinet buttons are clickable and visible")
+    public void headersLeftsidebareAndTextAndContactsAndNotificationAndNameAndSurnameOfUserAndPersonalCabinetButtonsAreClickableAndVisible() {
+        ReusableMethods.wait(2);
+        page.leftSideBarBtn.click();
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.leftSideBarBtn2, getDriver());
+        ReusableMethods.wait(1);
+        page.closeleftSideBar.click();
+
+        assertTrue(page.headersText.isDisplayed());
+        ReusableMethods.flash(page.headersText, getDriver());
+        ReusableMethods.wait(1);
+
+        assertTrue(page.headerContacts.isDisplayed());
+        ReusableMethods.flash(page.headerContacts, getDriver());
+        page.headerContacts.click();
+        ReusableMethods.wait(1);
+
+        assertTrue(page.headerNotifaction.isDisplayed());
+        ReusableMethods.flash(page.headerNotifaction, getDriver());
+        page.headerNotifaction.click();
+        ReusableMethods.wait(1);
+        page.justClick.click();
+        //page.closeNote.click();
+
+        assertTrue(page.headerFullname.isDisplayed());
+        ReusableMethods.flash(page.headerFullname, getDriver());
+        ReusableMethods.wait(1);
+
+        ReusableMethods.clickByJavaScript(page.headersPersonalCab);
+        assertTrue(page.headersPersonalCab.isDisplayed());
+        //page.headersPersonalCab.click();
+        ReusableMethods.flash(page.headersPersonalCab, getDriver());
+        ReusableMethods.clickByJavaScript(page.headersPersonalCab);
+        ReusableMethods.wait(1);
+    }
+
+    @When("user scrolls to the end of page")
+    public void userScrollsToTheEndOfPage() {
+        ReusableMethods.scrollEndByJavascript();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("footers copyright text and icons are displayed and redirected")
+    public void footersCopyrightTextAndIconsAreDisplayedAndRedirected() {
+        ReusableMethods.flash(page.footerIconFirst, getDriver());
+        assertTrue(page.footerIconFirst.isDisplayed());
+        ReusableMethods.wait(1);
+        page.footerIconFirst.click();
+        ReusableMethods.wait(1);
+        String originalWindowHandle = getDriver().getWindowHandle(); // Store the original window handle
+        ReusableMethods.wait(1);
+        Set<String> windowHandles = getDriver().getWindowHandles();
+        for (String handle : windowHandles) {
+            if (!handle.equals(originalWindowHandle)) {
+                getDriver().switchTo().window(handle); // Switch to the new window
+                ReusableMethods.flash(page.footerIconFirstCheck, getDriver());
+                getDriver().close();
+                getDriver().switchTo().window(originalWindowHandle); // Switch back to the original window
+                break; // Exit the loop after switching back to the original window
+            }
+        }
+
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.footercopyright, getDriver());
+        System.out.println("getDriver().getCurrentUrl() = " + getDriver().getCurrentUrl());
+        assertTrue(page.footercopyright.isDisplayed());
+
+        ReusableMethods.flash(page.footerIconSecond,getDriver());
+        page.footerIconSecond.click();
+        String originalWindowHandle1 = getDriver().getWindowHandle(); // Store the original window handle
+        ReusableMethods.wait(1);
+        Set<String> windowHandles1 = getDriver().getWindowHandles();
+        for (String handle : windowHandles1) {
+            if (!handle.equals(originalWindowHandle1)) {
+                getDriver().switchTo().window(handle); // Switch to the new window
+                ReusableMethods.wait(1);
+                ReusableMethods.flash(page.footerIconSecondCheck,getDriver());
+                getDriver().close();
+                getDriver().switchTo().window(originalWindowHandle1); // Switch back to the original window
+                break; // Exit the loop after switching back to the original window
+            }
+        }
+        ReusableMethods.wait(1);
+      //  getDriver().close();
+    }
+}
