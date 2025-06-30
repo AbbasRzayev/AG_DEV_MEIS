@@ -461,6 +461,21 @@ public class ReusableMethods {
         }
     }
 
+    public static void flashCorner(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        String originalStyle = element.getAttribute("style");
+
+        // Apply a red border for highlighting
+//        js.executeScript("arguments[0].setAttribute('style', arguments[0].getAttribute('style') + '; border: 2px solid red;');", element);
+        js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center' });", element);
+        // Pause for a moment to visualize the effect
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     /**
      * bu metot flash metodu icine atanir. bu metot ile elementin rengi parametre olarak atanacagi bildirilir
      *
@@ -522,7 +537,6 @@ public class ReusableMethods {
     public static void clickableWait(WebElement element, int sayi) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(sayi));
         wait.until(ExpectedConditions.elementToBeClickable(element));
-
     }
 
     public static String getPathSegment(String targetSegment) {

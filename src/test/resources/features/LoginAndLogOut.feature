@@ -4,10 +4,10 @@ Feature: Login to the MEIS system
   @LogIn
   Scenario Outline: Entering the MEIS system with positive and negative data
     Given user enters the "AG-MEIS" system
-    When user adds "<login>" and "<parol>"
+    When user adds "<login>" and "<password>"
     Then entrance to the system is "<checked>"
     Examples:
-      | login                  | parol        | checked |
+      | login                  | password     | checked |
       | imranovfarid@gmail.com | Farid1020@@@ | true    |
       | farid@gmail.com        | Farid        | false   |
   #Scenariyoda yoxlanlır:

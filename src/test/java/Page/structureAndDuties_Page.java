@@ -14,40 +14,42 @@ public class structureAndDuties_Page {
     public WebElement controlPanel;
     @FindBy(xpath = "//a[@class='mat-ripple ng-star-inserted active']")
     public WebElement userTab;
-    @FindBy(xpath = "(//input[@type='text'])[1]")
+    @FindBy(xpath = "//mat-label[text()='Ad']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input")
     public WebElement nameField;
-    @FindBy(xpath = "//input[contains(@formcontrolname, 'pin')]")
+    @FindBy(xpath = "//mat-label[text()='FİN']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input")
     public WebElement finField;
     @FindBy(xpath = "//button[contains(@type, 'submit')]")
     public WebElement searchButton;
-    @FindBy(xpath = "//td[text()='Abbas Rzayev']")
+    @FindBy(xpath = "(//tr[@role='row'])[2]")
     public WebElement foundedUser;
     @FindBy(xpath = "//span[text()='Struktur və vəzifə dəyişdirilməsi']")
     public WebElement structureAndDutiesChangePage;
-    @FindBy(xpath = "(//div[@class='list_item ng-star-inserted']//img[@src='assets/img/common/next.svg'])[1]")
-    public WebElement openChildListStructure;
-    @FindBy(xpath = "//label[text()='Bakı şəhər şöbəsi']")
-    public WebElement bakuCityStructure;
+    @FindBy(xpath = "//span[text()='Bu şəxsin adından sistemə giriş etmək']")
+    public WebElement enterToTheSystemFromAdminPanel;
 
-    @FindBy(xpath = "/html/body/app-root/div/div/main/app-change-position/form/div/input-search-select/div/mat-form-field/div[1]/div[2]/div[1]")
+    @FindBy(xpath = "//h6[contains(text(),'Keyfiyyətə Nəzarət(AT)')]/preceding::button[.//img[contains(@src,'next.svg')]][1]")
+    public WebElement openQualityControlStructureParentList;
+
+    @FindBy(xpath = "//h6[contains(text(),'Avtomatlaşdırılma və manual testlər')]")
+    public WebElement ATAndManualSector;
+
+    @FindBy(xpath = "//h6[contains(text(),'AISTGroup MMC')]")
+    public WebElement openAISTMMCStructureParentList;
+
+    @FindBy(xpath = "//button[.//mat-icon[text()='expand_more']]")
     public WebElement dutiesSearchField;
 
-    @FindBy(xpath = "//span[text()=' Baş məsləhətçi ']")
-    public WebElement selectInspecter;
+    @FindBy(xpath = "//div[contains(text(),' Şöbə Müdiri ')]")
+    public WebElement selectSectionDirector;
 
     @FindBy(xpath = "//span[@class='mdc-button__label']")
-    public WebElement strucAndDutiesSubmit;
-
-    //td[@role='cell']
-    //td[text()='Baş məsləhətçi']
-    @FindBy(xpath = "(//td[@role='cell'])[3]")
-    public WebElement dutiesCheck;
-
-    @FindBy(id = "mat-input-9")
     public WebElement againNameField;
 
     @FindBy(xpath = "(//span[@class='mat-mdc-list-item-unscoped-content'])[2]")
     public WebElement perCabinet;
+
+    @FindBy(xpath = "//input[@placeholder='Vəzifə seçin']")
+    public WebElement dutyInput;
 
     @FindBy(xpath = "//span[text()='Strukturda yerim və vəzifəm']")
     public WebElement strucAndDutyTab;
@@ -59,6 +61,8 @@ public class structureAndDuties_Page {
     public WebElement informationStruck;
     @FindBy(xpath = "//span[text()=' Sektor müdiri ']")
     public WebElement sectorDirector;
+    @FindBy(xpath = "//div[text()=' QA_AT ']")
+    public WebElement qaAtPosition;
     @FindBy(xpath = "//span[text()='Bu şəxsin adından sistemə giriş etmək']")
     public WebElement logInWithThisPerson;
     @FindBy(xpath = "//span[text()='Struktur və vəzifə']")
@@ -111,5 +115,28 @@ public class structureAndDuties_Page {
     //label[contains(@class,'QA')] - elementin icinde element axtarishi
     @FindBy(xpath = "//span[text()='Bəli']")
     public WebElement yesButton;
-
+    @FindBy(xpath = "//span[text()=' Təsdiqlə ']")
+    public WebElement structureAndDutiesSubmit;
+    @FindBy(xpath = "//td[text()=' Keyfiyyətə Nəzarət(AT) ']")
+    public WebElement QualityControlStructureCheck;
+    @FindBy(xpath = "//td[text()=' QA_AT ']")
+    public WebElement qaAtPositionTableCheck;
+    @FindBy(xpath = "//td[text()=' Şöbə Müdiri ']")
+    public WebElement sectorDirectorPositionTableCheck;
+    @FindBy(xpath = "//td[text()=' AISTGroup MMC ']")
+    public WebElement aistMMCStructureCheck;
+    @FindBy(xpath = "//span[text()='Strukturda yerim və vəzifəm']")
+    public WebElement mYStructureAndPositionTab;
+    @FindBy(xpath = "//h6[contains(., 'Keyfiyyətə Nəzarət(AT)')]")
+    public WebElement qaATstructureProfilePage;
+    @FindBy(xpath = "//h6[contains(., 'AISTGroup MMC')]")
+    public WebElement aistMMCstructureProfilePage;
+    @FindBy(xpath = "//h6[contains(., 'Avtomatlaşdırılma və manual testlər')]")
+    public WebElement structureSectorProfilePage;
+    @FindBy(xpath = "//button[.//img[@alt='openChild' and contains(@src, 'next.svg')]]")
+    public WebElement openStructureSectorProfilePage;
+    @FindBy(xpath = "//p[contains(., 'Şöbə Müdiri')]")
+    public WebElement sectorDirecotrPositionProfilePage;
+    @FindBy(xpath = "//p[contains(., 'QA_AT')]")
+    public WebElement qaAtPositionProfilePage;
 }

@@ -1,10 +1,12 @@
 package stepdefinitions;
 
+import Page.searchByUserData_Page;
 import Page.structureAndDuties_Page;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -19,71 +21,77 @@ import static utilities.Driver.getDriver;
 
 public class structureAndDuties_Steps {
     structureAndDuties_Page page = new structureAndDuties_Page();
+    searchByUserData_Page searchByUserDataPage = new searchByUserData_Page();
     private WebDriverWait wait;
 
     @And("goes to the control panel")
     public void goesToTheControlPanel() {
         page.controlPanel.click();
         ReusableMethods.wait(1);
-        page.userTab.click();
     }
 
-    @And("adds name {string} and fin {string} to the name and fin fields")
-    public void addsNameAndFinToTheNameAndFinFields(String name, String fin) {
-        page.nameField.sendKeys(name);
-        ReusableMethods.wait(1);
-        page.finField.sendKeys(fin);
-        ReusableMethods.wait(1);
+    @And("adds name {string} and fin to the name and fin fields")
+    public void addsNameAndFinToTheNameAndFinFields(String name) {
+        if(name.contains("Abbas")) {
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
+            page.nameField.sendKeys("Abbas");
+            ReusableMethods.wait(1);
+            page.finField.sendKeys("19HSHLY");
+            ReusableMethods.wait(1);
+        }
     }
 
-    @And("selects search button and switches to the change structure and duties tab")
-    public void selectsSearchButtonAndSwitchesToTheChangeStructureAndDutiesTab() {
-        page.searchButton.click();
-        ReusableMethods.wait(1);
+    @And("switches to the user change structure and duties tab")
+    public void switchesToTheUserChangeStructureAndDutiesTab() {
         page.foundedUser.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.structureAndDutiesChangePage.click();
         ReusableMethods.wait(1);
     }
 
-    @And("user select new {string} position")
-    public void userSelectNewPosition(String structure) {
-        if (structure.contains("Bakı şəhər şöbəsi")) {
-            page.openChildListStructure.click();
+    @And("user selects new {string} position")
+    public void userSelectsNewPosition(String structure) {
+        if (structure.contains("AISTGroup MMC")) {
+            page.openQualityControlStructureParentList.click();
             ReusableMethods.wait(1);
-            page.bakuCityStructure.click();
+            page.ATAndManualSector.click();
             ReusableMethods.wait(1);
-            ReusableMethods.scrollTopByJavascript();
-        } else {
-            page.openChildListStructure.click();
+
+        } else if(structure.contains("Keyfiyyətə Nəzarət(AT)")) {
+            page.openAISTMMCStructureParentList.click();
             ReusableMethods.wait(1);
-            page.informationStruck.click();
-            ReusableMethods.wait(1);
-            //ReusableMethods.scrollTopByJavascript();
         }
     }
 
     @And("selects new {string}")
     public void selectsNew(String duties) {
-        if (duties.contains("Baş məsləhətçi")) {
+        if (duties.contains("Şöbə Müdiri")) {
             ReusableMethods.wait(1);
-            page.dutiesSearchField.click();
+//            page.dutiesSearchField.click();
+            page.dutyInput.clear();
             ReusableMethods.wait(1);
-            page.selectInspecter.click();
+            page.dutyInput.sendKeys("Şöbə Müdiri");
+            ReusableMethods.wait(1);
+            page.selectSectionDirector.click();
             ReusableMethods.wait(2);
-        } else {
+        } else if (duties.contains("QA_AT")){
             ReusableMethods.wait(1);
-            page.dutiesSearchField.click();
+//            page.dutiesSearchField.click();
+            page.dutyInput.clear();
             ReusableMethods.wait(1);
-            page.sectorDirector.click();
+            page.dutyInput.sendKeys("QA_AT");
+            ReusableMethods.wait(1);
+            page.qaAtPosition.click();
             ReusableMethods.wait(1);
         }
 
     }
 
-    @And("selects submit button to change stucture and duties")
-    public void selectsSubmitButtonToChangeStuctureAndDuties() {
-        page.strucAndDutiesSubmit.click();
+    @And("selects submit button to change structure and duties")
+    public void selectsSubmitButtonToChangeStructureAndDuties() {
+        page.structureAndDutiesSubmit.click();
         ReusableMethods.wait(1);
     }
 
@@ -98,23 +106,6 @@ public class structureAndDuties_Steps {
     public void selectsSearchButtonForResults() {
         page.searchButton.click();
         ReusableMethods.wait(1);
-    }
-
-    @Then("users {string} has been changed successfully")
-    public void usersHasBeenChangedSuccessfully(String duty) {
-        if (duty.contains("Baş məsləhətçi")) {
-            String expetedDuty = "Baş məsləhətçi";
-            System.out.println(page.dutiesCheck.getText());
-            ReusableMethods.flash(page.dutiesCheck, getDriver());
-            assertEquals(expetedDuty, page.dutiesCheck.getText());
-            assertTrue(page.dutiesCheck.isDisplayed());
-        } else {
-            String expetedDuty = "Sektor müdiri";
-            System.out.println(page.dutiesCheck.getText());
-            ReusableMethods.flash(page.dutiesCheck, getDriver());
-            assertEquals(expetedDuty, page.dutiesCheck.getText());
-            assertTrue(page.dutiesCheck.isDisplayed());
-        }
     }
 
     @And("selects search button and switches to his page")
@@ -303,5 +294,79 @@ public class structureAndDuties_Steps {
         } catch (NoSuchElementException e) {
             System.out.println("Element is not found. Test passed.");
         }
+    }
+
+    @Then("after the first changes for structure and position are successfully updated in the users table")
+    public void afterTheFirstChangesForStructureAndPositionAreSuccessfullyUpdatedInTheUsersTable() {
+        ReusableMethods.flash(page.sectorDirectorPositionTableCheck,getDriver());
+        ReusableMethods.wait(1);
+        String expectedPosition = "Şöbə Müdiri";
+        Assert.assertEquals(page.sectorDirectorPositionTableCheck.getText().trim(),expectedPosition);
+
+        ReusableMethods.flash(page.QualityControlStructureCheck,getDriver());
+        ReusableMethods.wait(1);
+        String expectedStructure = "Keyfiyyətə Nəzarət(AT)";
+        Assert.assertEquals(page.QualityControlStructureCheck.getText().trim(),expectedStructure);
+    }
+
+    @When("user goes to the my structure and position tab")
+    public void userGoesToTheMyStructureAndPositionTab() {
+        page.mYStructureAndPositionTab.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("after the first changes for structure and position are successfully updated in the my structure and position tab")
+    public void afterTheFirstChangesForStructureAndPositionAreSuccessfullyUpdatedInTheMyStructureAndPositionTab() {
+        ReusableMethods.flash(page.qaATstructureProfilePage,getDriver());
+        ReusableMethods.wait(1);
+        String expectedStructure = "Keyfiyyətə Nəzarət(AT)";
+        Assert.assertEquals(page.qaATstructureProfilePage.getText().trim(),expectedStructure);
+        page.openStructureSectorProfilePage.click();
+        ReusableMethods.wait(1);
+
+        ReusableMethods.flash(page.structureSectorProfilePage,getDriver());
+        String expectedStructurePosition = "Avtomatlaşdırılma və manual testlər";
+        ReusableMethods.wait(1);
+        Assert.assertEquals(page.structureSectorProfilePage.getText().trim(),expectedStructurePosition);
+
+        ReusableMethods.flash(page.sectorDirecotrPositionProfilePage,getDriver());
+        ReusableMethods.wait(1);
+        String positionExpected = "Şöbə Müdiri";
+        Assert.assertEquals(page.sectorDirecotrPositionProfilePage.getText().trim(),positionExpected);
+
+    }
+    @And("user enters the system from admin panel by using entrance by user name button")
+    public void userEntersTheSystemFromAdminPanelByUsingEntranceByUserNameButton() {
+        ReusableMethods.wait(1);
+        page.foundedUser.click();
+        ReusableMethods.wait(2);
+        page.enterToTheSystemFromAdminPanel.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("after the second changes for structure and position are successfully updated in the users table")
+    public void afterTheSecondChangesForStructureAndPositionAreSuccessfullyUpdatedInTheUsersTable() {
+        ReusableMethods.flash(page.qaAtPositionTableCheck,getDriver());
+        ReusableMethods.wait(1);
+        String expectedPosition = "QA_AT";
+        Assert.assertEquals(page.qaAtPositionTableCheck.getText().trim(),expectedPosition);
+
+        ReusableMethods.flash(page.aistMMCStructureCheck,getDriver());
+        ReusableMethods.wait(1);
+        String expectedStructure = "AISTGroup MMC";
+        Assert.assertEquals(page.aistMMCStructureCheck.getText().trim(),expectedStructure);
+    }
+
+    @Then("after the second changes for structure and position are successfully updated in the my structure and position tab")
+    public void afterTheSecondChangesForStructureAndPositionAreSuccessfullyUpdatedInTheMyStructureAndPositionTab() {
+        ReusableMethods.flash(page.aistMMCstructureProfilePage,getDriver());
+        ReusableMethods.wait(1);
+        String expectedStructure = "AISTGroup MMC";
+        Assert.assertEquals(page.aistMMCstructureProfilePage.getText().trim(),expectedStructure);
+
+        ReusableMethods.flash(page.qaAtPositionProfilePage,getDriver());
+        ReusableMethods.wait(1);
+        String positionExpected = "QA_AT";
+        Assert.assertEquals(page.qaAtPositionProfilePage.getText().trim(),positionExpected);
     }
 }

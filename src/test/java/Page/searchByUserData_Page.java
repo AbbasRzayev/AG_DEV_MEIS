@@ -11,8 +11,8 @@ public class searchByUserData_Page {
     }
     @FindBy(css = "td.mat-column-fullName")
     public WebElement name;
-    @FindBy(id = "mat-input-3")
-    public WebElement surename;
+    @FindBy(xpath = "//mat-label[text()='Soyad']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input")
+    public WebElement surname;
     @FindBy(id = "mat-select-0")
     public WebElement dropDown;
     @FindBy(xpath = "//span[text()='Təmizlə']")
@@ -29,12 +29,12 @@ public class searchByUserData_Page {
     public WebElement fatherNameField;
     @FindBy(xpath = "(//p[@class='preview-text ng-star-inserted'])[5]")
     public WebElement fatherNameText;
-    @FindBy(xpath = "//td[text()='Abbas Rzayev']")
+    @FindBy(xpath = "//td[text()=' Abbas Rzayev ']")
     public WebElement foundName;
-    @FindBy(xpath = "//input[contains(@formcontrolname, 'pin')]")
+    @FindBy(xpath = "//mat-label[text()='FİN']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input")
     public WebElement finField;
-    @FindBy(xpath = "(//p[@class='preview-text ng-star-inserted'])[3]")
-    public WebElement fintext;
+    @FindBy(xpath = "(//p[@class='ng-star-inserted'])[1]")
+    public WebElement pinText;
     @FindBy(id = "mat-input-19")
     public WebElement workPlaceInput;
     @FindBy(xpath = "(//td[text()='Azərbaycan Metrologiya İnstitutu'])[1]")
@@ -43,4 +43,37 @@ public class searchByUserData_Page {
     public WebElement searchBtn;
     @FindBy(css = "tbody.mat-mdc-row")
     public WebElement workClass;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[1]")
+    public WebElement nameFilter;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[2]")
+    public WebElement dutyFilter;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[3]")
+    public WebElement structureFilter;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[4]")
+    public WebElement adminConfirmedFilter;
+    @FindBy(xpath = "//span[text()='Filter tətbiq et']")
+    public WebElement openFilter;
+    @FindBy(xpath = "//span[text()='Dəyişiklikləri sıfırla']")
+    public WebElement restTheChanges;
+    @FindBy(css = "div.mat-mdc-paginator-range-label")
+    public WebElement getTableDataText;
+    @FindBy(xpath = "//div[contains(@class, 'filter-overlay')]")
+    public WebElement filterModal;
+    @FindBy(xpath = "//button[.//mat-icon[text()='close']]")
+    public WebElement closeFilterModal;
+    @FindBy(xpath = "//label[.//mat-label[text()='Vəzifə']]/following-sibling::input")
+    public WebElement dutyInput;
+    @FindBy(xpath = "//mat-label[text()='Çalışdığı müəssisə']/ancestor::label/following-sibling::input")
+    public WebElement structureInput;
+    @FindBy(xpath = "//mat-label[text()='Təsdiqin statusu']/ancestor::label/following-sibling::mat-select")
+    public WebElement adminApprovalList;
+    @FindBy(xpath = "//div[contains(@class,'manual-option') and contains(.,'QA|AT')]")
+    public WebElement dutyQASelect;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[2]")
+    public WebElement dutyInputSecond;
+    @FindBy(xpath = "//span[contains(., 'İnzibatçı təsdiqləyib')]")
+    public WebElement selectAdminApproval;
+    @FindBy(xpath = "//span[contains(., 'Təsdiqlənməyib')]")
+    public WebElement selectAdminNotApproval;
+
 }
