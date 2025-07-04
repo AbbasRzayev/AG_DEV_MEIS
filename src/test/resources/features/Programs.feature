@@ -1,5 +1,5 @@
 @Program @all
-Feature: User creats program
+Feature: User creat program
 
   Scenario: Check if user can create program
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system

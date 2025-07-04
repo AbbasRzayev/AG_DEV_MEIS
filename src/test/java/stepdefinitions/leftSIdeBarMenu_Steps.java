@@ -31,7 +31,7 @@ leftSIdeBarMenu_Page page =new leftSIdeBarMenu_Page();
         ReusableMethods.flash(page.mainLogo,getDriver());
         String tittle = "Ana səhifə | MEIS";
         assertEquals(tittle,getDriver().getTitle());
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(2);
     }
     @When("user selects personal cabinet from left sidebar")
     public void userSelectsPersonalCabinetFromLeftSidebar() {
@@ -77,13 +77,13 @@ leftSIdeBarMenu_Page page =new leftSIdeBarMenu_Page();
     @When("user selects idea bank from left sidebar")
     public void userSelectsIdeaBankFromLeftSidebar() {
         page.idea.click();
-        ReusableMethods.wait(20);
+        ReusableMethods.wait(2);
     }
 
     @Then("user successfully switches to the idea bank page")
     public void userSuccessfullySwitchesToTheIdeaBankPage() {
         ReusableMethods.flash(page.ideaLogo,getDriver());
-        String tittle = "Fikir bankı | MEIS";
+        String tittle = "İdea bankı | MEIS";
         assertEquals(tittle,getDriver().getTitle());
     }
 

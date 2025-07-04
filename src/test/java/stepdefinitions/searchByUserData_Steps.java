@@ -30,7 +30,9 @@ public class searchByUserData_Steps {
     public void addsNameToTheNameFieldInTheFilter() {
         ReusableMethods.waitForClickabilityAndClick(page.nameFilter, 10);
         ReusableMethods.pageDown();
+        ReusableMethods.wait(1);
         getTableData = page.getTableDataText.getText();
+        System.out.println("expected = " + getTableData);
         ReusableMethods.flash(page.getTableDataText, getDriver());
         ReusableMethods.wait(1);
         ReusableMethods.pageUp();
@@ -232,17 +234,21 @@ public class searchByUserData_Steps {
     @And("adds duty to the duty field in the filter")
     public void addsDutyToTheDutyFieldInTheFilter() {
 //        ReusableMethods.pageDown();
+        ReusableMethods.wait(1);
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        ReusableMethods.wait(1);
         getTableData = page.getTableDataText.getText();
+        System.out.println("expected = " + getTableData);
         ReusableMethods.flash(page.getTableDataText, getDriver());
         ReusableMethods.wait(1);
         ReusableMethods.pageUp();
         ReusableMethods.waitForClickabilityAndClick(page.dutyFilter, 5);
         ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
-        page.dutyInput.sendKeys("QA|AT");
+        page.dutyInput.sendKeys("QA_AT");
         ReusableMethods.wait(1);
-        ReusableMethods.waitForClickabilityAndClick(page.dutyQASelect, 5);
+        ReusableMethods.waitForClickabilityAndClick(page.dutyQASelect, 10);
+        ReusableMethods.wait(1);
     }
 
     @Then("search results are displayed by according to search duty params")
@@ -251,7 +257,7 @@ public class searchByUserData_Steps {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         for (WebElement cell : positionCells) {
             String text = cell.getText().trim();
-            if (text.equals("QA|AT")) {
+            if (text.equals("QA_AT")) {
                 System.out.println("Uyğunsuz dəyər tapıldı: " + text);
                 String flashScript =
                         "let element = arguments[0];" +
@@ -273,17 +279,17 @@ public class searchByUserData_Steps {
 
     @When("user selects enter in the users tab for duty")
     public void userSelectsEnterInTheUsersTabForDuty() {
-//        Actions actions = new Actions(getDriver());
-//        actions.sendKeys(Keys.ENTER).perform();
+        Actions actions = new Actions(getDriver());
+        actions.sendKeys(Keys.ENTER).perform();
 //        WebElement element = getDriver().findElement(By.xpath("//div[@class='content-heading']"));
 //        element.click();
 //        ReusableMethods.wait(1);
 //        element.click();
 //        Actions actions = new Actions(getDriver());
 //        actions.moveByOffset(10, 10).click().perform();
-
-        ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
-        ReusableMethods.wait(2);
+//        page.closeFilterModal.click();
+//        ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+//        ReusableMethods.wait(2);
     }
 
     @And("adds workplace {string} to the workplace field in the filter")
@@ -291,7 +297,9 @@ public class searchByUserData_Steps {
         if (workPlace.contains("Keyfiyyətə Nəzarət(AT)")) {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
             getTableData = page.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
             ReusableMethods.flash(page.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
@@ -339,7 +347,9 @@ public class searchByUserData_Steps {
         if(approval.contains("applied")){
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(2);
             getTableData = page.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
             ReusableMethods.flash(page.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
@@ -353,7 +363,9 @@ public class searchByUserData_Steps {
             System.out.println("im here");
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(2);
             getTableData = page.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
             ReusableMethods.flash(page.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();

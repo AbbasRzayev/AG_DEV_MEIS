@@ -67,7 +67,7 @@ public class searchByUserData_Page {
     public WebElement structureInput;
     @FindBy(xpath = "//mat-label[text()='Təsdiqin statusu']/ancestor::label/following-sibling::mat-select")
     public WebElement adminApprovalList;
-    @FindBy(xpath = "//div[contains(@class,'manual-option') and contains(.,'QA|AT')]")
+    @FindBy(xpath = "//div[contains(@class,'manual-option') and contains(.,'QA_AT')]")
     public WebElement dutyQASelect;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[2]")
     public WebElement dutyInputSecond;

@@ -1,4 +1,4 @@
-@all   @SearchParams
+@all  @SearchParams
 Feature: Search by user data
 
   @SearchByNameBySurnameByPin
@@ -26,6 +26,13 @@ Feature: Search by user data
     #Fin koduna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     When user reset the changes
     Then the changes is successfully resets
+    #Test ssenarilər:
+    #1.İstifadəçinin adına görə nəticələrin yoxlanılması
+    #2.Adına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    #3.İstifadəçinin soyadına görə nəticələrin yoxlanılması
+    #4.Soyadına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    #5.İstifadəçinin fin koduna görə nəticələrin yoxlanılması
+    #6.Fin koduna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
   @SearchByDuty
   Scenario: Check users search parameters by duty
@@ -38,6 +45,9 @@ Feature: Search by user data
     #İstifadəçinin çalışdığı müəssisəyə görə nəticələrin yoxlanılması
     When user reset the changes for duty
     Then the changes is successfully resets
+    #Test ssenarilər:
+    #7.İstifadəçinin vəzifəsinə görə nəticələrin yoxlanılması
+    #8.Vəzifəsinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
   @SearchByWorkPlace
   Scenario: Check users search parameters by workplace
@@ -50,6 +60,9 @@ Feature: Search by user data
     #Çalışdığı müəssisəyə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     When user reset the changes for workplace
     Then the changes is successfully resets
+    #Test ssenarilər:
+    #9.İstifadəçinin çalışdığı müəssisəyə görə nəticələrin yoxlanılması
+    #10.Çalışdığı müəssisəyə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
   @SearchByAdminApproval
   Scenario Outline: Check users search parameters by administrator approval
@@ -68,17 +81,9 @@ Feature: Search by user data
       | applied  |
       | not      |
     #Test ssenarilər:
-    #1.İstifadəçinin adına görə nəticələrin yoxlanılması
-    #2.Adına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-    #3.İstifadəçinin soyadına görə nəticələrin yoxlanılması
-    #4.Soyadına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-    #5.İstifadəçinin fin koduna görə nəticələrin yoxlanılması
-    #6.Fin koduna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-    #7.İstifadəçinin vəzifəsinə görə nəticələrin yoxlanılması
-    #8.Vəzifəsinə görə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-    #9.İstifadəçinin çalışdığı müəssisəyə görə nəticələrin yoxlanılması
-    #10.Çalışdığı müəssisəyə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     #11.İstifadəçinin inzibatçının təsdiqinə görə nəticələrin yoxlanılması
     #12.İnzibatçının təsdiqinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     #13.İstifadəçinin inzibatçının təsdiq etmədiyi seçimlərə görə nəticələrin yoxlanılması
     #14.İnzibatçının təsdiq etmədiyi seçimlərə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+
+   #Cari statusu elave edildikden sonra autotestler yazilmalidir

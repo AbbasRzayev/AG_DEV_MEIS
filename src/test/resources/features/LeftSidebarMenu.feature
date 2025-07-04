@@ -17,9 +17,9 @@ Feature: Left sidebar menu
 #    When user selects announcement and congratulations from left sidebar
 #      #Elan və təbriklər
 #    Then user successfully switches to the announcement and congratulations page
-#    When user selects idea bank from left sidebar
+    When user selects idea bank from left sidebar
       #Idea bankı
-#    Then user successfully switches to the idea bank page
+    Then user successfully switches to the idea bank page
     When user selects legal basis from left sidebar
       #Hüquqi baza
     Then user successfully switches to the legal basis page
