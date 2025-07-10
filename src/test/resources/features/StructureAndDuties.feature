@@ -148,7 +148,7 @@ Feature: Users structure and duties
 
   @DutyAddAndDelete
   Scenario: Check if user can add and edit then delete a new duty
-    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
+    Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And goes to the control panel
     And switches to the structure and duties tab
     And switches to the duties tab
@@ -185,8 +185,8 @@ Feature: Users structure and duties
     And user selects enter in the users tab
     And switches to the user change structure and duties tab
     When selects new "<IT Mühəndis(QA)>"
-    And page is reloaded
 #    Then the deactivated duty is not displayed in the duty selection list
+    And page is reloaded
     #İdarəetmə panelində aktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
     #Aktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     And goes to the control panel

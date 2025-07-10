@@ -84,6 +84,7 @@ public class loginAndLogOut_Steps {
         page.exitBtn.click();
         ReusableMethods.wait(1);
         page.yesExit.click();
+        ReusableMethods.wait(1);
     }
 
     @Then("user has been successfully logged out from system")

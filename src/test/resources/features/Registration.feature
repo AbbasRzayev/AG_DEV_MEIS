@@ -1,68 +1,133 @@
 @all @Registration
 Feature: User registration
 
-  @Reg1
-  Scenario: Check if the user can register in the meis system then log in and archive the user
-    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
+  @UserRegistration
+  Scenario: Check if the user can register in the AG-MEIS system then log in and archive the user
+    Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
+    #Yeni istifadəçinin qeydiyyatı
     And goes to the control panel
     And selects new user button
     And adds information to the field on the first registration stage
+    #FakePin, Fake emailAddress, Fake serialNumber
       | FIN     | Sənədin seriya və nömrəsi | Elektron poçt            | LDAP istifadəçi adı |
-      | 1231231 | AA1233211                 | zamanovabbasqa@gmail.com | Abbas               |
-    And selects not domein registration
-    And selects next button on the first stage
+      | 1231231 | AA778899443               | zamanovabbasqa@gmail.com | Abbas               |
+    And selects not domain registration
+    And selects next button
     And adds picture and information to the field on the second registration stage
       | Ad    | Soyad   | Ata adı | Dogum tarixi | Etibarlıq müddəti | Yaşadıqı ünvan |
       | Abbas | Zamanov | Fuad    | 22.04.1988   | 20.07.2025        | Səbayıl rayonu |
-    And selects next button on the second stage
+    And selects next button
     And information to the field on the third registration stage
-      | Yeni şifrə | Sifrənin təkrarı |
-      | Abbas88!!! | Abbas88!!!       |
-    And selects next button on the third stage
+      | Yeni şifrə   | Sifrənin təkrarı |
+      | Rabbas8888!! | Rabbas8888!!     |
+    And selects next button
     And information to the field on the fourth registration stage
       | Otaq  | Mobil nömrə  | İP telefon nömrəsi | Stasinonar nömrə |
       | 11111 | 55 396 88 88 | 2222               | 788787788        |
-    And selects next button on the fourth stage
+    And selects next button
     And selects duty and structure on the fifth stage
-    And selects next button on the fifth stage
+    And selects next button
     And selects instructor on the sixth stage
-    And selects complete registration button
-    And gets the verification code from email and puts it to the add code field
+    And selects next button
+    And close register modal window
+    #And gets the verification code from email and puts it to the add code field
     #When user selects confirm button
-    Then new user successfully registered
-
-  @Reg2
-  Scenario: Check if the admin can grant permission to the new user
-   #Given admin logs to the system to give the necessary permissions to the use
-    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
     And goes to the control panel
-    And adds name "Abbas" and fin "1231231" to the name and fin fields
-    And selects search button in the users tab
-    And selects founded user and switches to the user permissions tab
-    When admin gives rights to new user to login the system
-    Then new user logs to the system successfully
-    And user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
-    #And admin logs to the system to give the necessary permissions to the use
-    And admin goes to the control panel
-    And adds name "Abbas" and fin "1231231" to the name and fin fields
-    And selects search button in the users tab
-    And selects founded user and switches to the user permissions tab
-    And admin selects archive user button
-    And admin adds name "Abbas" and fin "1231231" to the name and fin fields
-    When admin selects search button in the users tab
+    And adds name "Zamanov" and fin to the name and fin fields
+    When user selects enter in the users tab
+    #Yeni qeydiyyat olunan istifadəçinin sistemdə mövcud olmasının yoxlanılması
+    Then new user "Zamanov" successfully registered
+    #İstifadəçinin qeydiyyat bitikdən sonra şəxsi və əlaqəli məlumatlarının yoxlanılması
+    And selects founded user from table
+    Then new registered users pin and serial number are displayed correctly
+    Then new registered users name and surname and father name and birth data and gender and validity period are displayed correctly
+      | Ad    | Soyad   | Ata adı | Dogum tarixi | Etibarlıq müddəti | Cins |
+      | Abbas | Zamanov | Fuad    | 22.04.1988   | 20.07.2025        | Kişi |
+    Then new registered users room and ip phone and stationary number and mobile number and email is displayed correctly
+      | Otaq  | Mobil nömrə | IP telefon nömrəsi | Stasinonar nömrə |
+      | 11111 | 553968888   | 2222               | 788787788        |
+     #Admin istifadəçinin şəxsi və əlaqə məlumatlarını redaktə edir
+     And admin select edit button in the user account control page
+     When admin edited users personal and contact info in the user account control page
+      | Ad    | Soyad | Ata adı | Dogum tarixi | Etibarlıq müddəti | Cins | Otaq | Mobil nömrə | IP   | Stasionar nömrə | FIN     | Seriya    | Email                    | Komputer |
+      | Musab | İyad  | Umeyr   | 22.04.1988   | 12.12.2025        | Kişi | 3333 | 506730717   | 1010 | 98899889989     | 19HLOII | AA7788994 | zamanovabbasqa@gmail.com | PC-007   |
+    #Redaktə edildikdən sonra istifadəçinin şəxsi və əlaqə məlumatlarının yoxlanılması
+    Then users personal and contact info are successfully edited
+      | Ad    | Soyad | Ata adı | Dogum tarixi | Etibarlıq müddəti | Cins | Otaq | Mobil nömrə | IP   | Stasionar nömrə | FIN     | Seriya    | Email                    | Komputer |
+      | Musab | İyad  | Umeyr   | 22.04.1988   | 12.12.2025        | Kişi | 3333 | 506730717   | 1010 | 98899889989     | 19HLOII | AA7788994 | zamanovabbasqa@gmail.com | PC-007   |
+    #Adminin istifadəçiyə icazə və MEİS-də səlahiyyətləri verməsi
+    And goes to the user permissions tab
+    And admin gives rights and permissions to the new user
+    And goes to the control panel
+    And adds name "Musab" and fin to the name and fin fields
+    When user selects enter in the users tab
+    #Idarəetmə-istifadəçilər cədvəlində inzibatçı təstiqi və statusunun yoxlanılması
+    Then admin control is displayed as a given in the users table
+    Then status is displayed as a given in the users table
+    When user selects exit button
+    #Yeni istifadəçinin icazə və səlahiyyətlət verildikdən sonra sistemə daxil olması
+    When new user logs into the "AG-MEIS" system
+      | Email                    | Şifrə        |
+      | zamanovabbasqa@gmail.com | Rabbas8888!! |
+    Then new user has been successfully log into the system
+    #Yeni istifadəçi şəxsi kainetində, şəxsi və əlaqə məlumatlarının yoxlanılçası
+    And user goes to the personal cabinet
+    When user switches to the personal info tab in the personal cabinet
+    Then the users personal info is displayed correctly
+      | Ad    | Soyad | Ata adı | Dogum tarixi | Etibarlıq müddəti | Cins | FIN     | Seriya    |
+      | Musab | İyad  | Umeyr   | 22.04.1988   | 12.12.2025        | Kişi | 19HLOII | AA7788994 |
+    When user switches to the connection info tab in the personal cabinet
+    Then the users connection info is displayed correctly
+      | Otaq | Mobil nömrə | IP   | Stasionar nömrə | Email                    | Komputer |
+      | 3333 | 506730717   | 1010 | 98899889989     | zamanovabbasqa@gmail.com | PC-007   |
+    When user selects exit button
+    #Adminin yeni istifadəçini arxivləşdirməsi və sistemdə mövcud olmamasının yoxlanılması
+    And user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
+    And goes to the control panel
+    And adds name "Musab" and fin to the name and fin fields
+    And user selects enter in the users tab
+    And selects founded user from table
+    And goes to the user permissions tab
+    And admin archived the new user
+    And adds name "Musab" and fin to the name and fin fields
+    And user selects enter in the users tab
     Then user not found and successfully archived
-
-
-  @Reg3
-  Scenario: Deleting the confirmation letter from meis
-    Given user goes to the gmail
-    Then deletes confirmation letter
+    When user selects exit button
+    #Arxivləşdirdikdən sonra istifadəçinin sistemdə daxil ola bilməməsinin yoxlanılması
+    And new user logs into the "AG-MEIS" system
+      | Email                    | Şifrə        |
+      | zamanovabbasqa@gmail.com | Rabbas8888!! |
+    Then the archived user cannot access to the system
   #Test ssenarilər:
   #1.Qeydiyyat bütün mərhələlərində vacib xanalara əlavə edərək keçid etməsi (7-mərhələ)
-  #2.Qeydiyyatı yekunlaşdırması üçün sonuncu mərhələdə istifadəçinin  elektron poçt ünvanına təstiq kodunun gəlməsi
-  #3.Təstiq kodunu əlavə edərək qeydiyyatı uğurla yekunlaşdırması
-  #4.İnzibatçının yeni istifadəçiyə sistemə daxil olması üçün səlahiyyətlərin verilməsi
-  #5.Səlahiyyətlər verildikdən sonra yeni istifadəçinin elektron poçt ünvanına hesabının təstiq olunması barədə bildirişin gəlməsi
-  #6.Səlahiyyətlər verildikdən sonra yeni istifadəçinin sistemə daxil olması
-  #7.İnzibatçı tərəfindən yeni istifadəçi hesabının arxivləşdirməsi
-  #8.Arxivləşdirilmiş istifadəçinin sistemdə mövcud olmamasının təstiqi
+  #2.Yeni istifadəçinin qeydiyyat edilməsi
+  #3.Qeydiyyat yekunlaşdıqdan sonra yeni istifadəçinin sistemdə mövcud olmasının yoxlanılması
+  #4.Yeni istifadəçinin şəxsi məlumatlarım hissəsində FİN məlumatlarının yoxlanılması
+  #5.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Ad məlumatlarının yoxlanılması
+  #6.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Soyad məlumatlarının yoxlanılması
+  #7.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Ata adı məlumatlarının yoxlanılması
+  #8.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Doğum tarixi məlumatlarının yoxlanılması
+  #9.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Cinsi məlumatlarının yoxlanılması
+  #10.Yeni istifadəçinin şəxsi məlumatlarım hissəsində Otaq məlumatlarının yoxlanılması
+  #11.Yeni istifadəçinin əlaqə məlumatlarım hissəsində İP telefon nömrəsi məlumatlarının yoxlanılması
+  #12.Yeni istifadəçinin əlaqə məlumatlarım hissəsində Stasionar nömrə məlumatlarının yoxlanılması
+  #13.Yeni istifadəçinin əlaqə məlumatlarım hissəsində Mobil nömrə məlumatlarının yoxlanılması
+  #14.Yeni istifadəçinin əlaqə məlumatlarım hissəsində Elektron poçt məlumatlarının yoxlanılması
+  #15.Yeni istifadəçinin şəxsi məlumatlarının redaktə edilməsi
+  #16.Redaktə edildikdən sonra istifadəçi məlumatlarının yoxlanılması
+  #17.Yeni istifadəçinin şəxsi məlumatlarının redaktə edilməsi
+  #18.Redaktə edildikdən sonra istifadəçi məlumatlarının yoxlanılması
+  #19.Adminin istifadəçiyə icazə və MEİS-də səlahiyyətləri verməsi
+  #20.İcazə verildikdən sonra istifadəçinin, idarəetmə-istifadəçilər cədvəlində inzibatçı təstiqi və statusunun yoxlanılması
+  #21.Yeni istifadəçinin icazə və səlahiyyətlət verildikdən sonra sistemə daxil olması
+  #22.Yeni istifadəçi şəxsi kainetində, şəxsi və əlaqə məlumatlarının yoxlanılçası
+  #23.Adminin yeni istifadəçini arxivləşdirməsi
+  #24.Arxivləşdirdikdən sonra istifadəçinin sistemdə olmamasının yoxlanılması
+  #25.Arxivləşdirdikdən sonra istifadəçinin sistemdə daxil ola bilməməsinin yoxlanılması
+
+
+
+
+#  Scenario: Deleting the confirmation letter from meis
+#    Given user goes to the gmail
+#    Then deletes confirmation letter

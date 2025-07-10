@@ -27,7 +27,7 @@ public class programs_Steps {
     }
 
     contactInformationEditing_Page userPer = new contactInformationEditing_Page();
-    structureAndDuties_Page somePage = new structureAndDuties_Page();
+    structureAndDuties_Page structure = new structureAndDuties_Page();
 
     @And("select new program button")
     public void selectNewProgramButton() {
@@ -202,7 +202,7 @@ public class programs_Steps {
 
     @And("after searching selects founded user")
     public void afterSearchingSelectsFoundedUser() {
-        somePage.searchButton.click();
+        structure.searchButton.click();
         ReusableMethods.wait(1);
         userPer.foundedUser.click();
         ReusableMethods.wait(1);
@@ -354,5 +354,11 @@ public class programs_Steps {
         page.searchInput.sendKeys("AistGroup");
         ReusableMethods.wait(1);
         ReusableMethods.assertElementNotDisplayed(page.createdProqNew);
+    }
+
+    @And("selects founded user from table")
+    public void selectsFoundedUserFromTable() {
+        structure.foundedUser.click();
+        ReusableMethods.wait(2);
     }
 }

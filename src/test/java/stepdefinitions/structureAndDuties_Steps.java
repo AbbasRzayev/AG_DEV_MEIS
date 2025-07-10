@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import Page.registration_Page;
 import Page.searchByUserData_Page;
 import Page.structureAndDuties_Page;
 import io.cucumber.datatable.DataTable;
@@ -23,16 +24,20 @@ public class structureAndDuties_Steps {
     structureAndDuties_Page page = new structureAndDuties_Page();
     searchByUserData_Page searchByUserDataPage = new searchByUserData_Page();
 
+
     String getTableData;
 
     @And("goes to the control panel")
     public void goesToTheControlPanel() {
+        ReusableMethods.wait(2);
         page.controlPanel.click();
         ReusableMethods.wait(1);
     }
 
     @And("adds name {string} and fin to the name and fin fields")
     public void addsNameAndFinToTheNameAndFinFields(String name) {
+        String fakePinuu = "7732248";
+//        String fakeSerialNumuu ="AZ5679968";
         if (name.contains("Abbas")) {
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
@@ -42,6 +47,26 @@ public class structureAndDuties_Steps {
             page.finField.sendKeys("19HSHLY");
             ReusableMethods.wait(1);
         }
+        else if (name.contains("Zamanov")) {
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
+            page.nameField.sendKeys("Abbas");
+            ReusableMethods.wait(1);
+//            page.finField.sendKeys(fakePinuu);
+            page.finField.sendKeys(registration_Steps.fakePin);
+            ReusableMethods.wait(1);
+
+        }    else if (name.contains("Musab")) {
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
+            page.nameField.sendKeys("Musab");
+            ReusableMethods.wait(1);
+            page.finField.sendKeys("19HLOII");
+            ReusableMethods.wait(1);
+        }
+
     }
 
     @And("switches to the user change structure and duties tab")
@@ -129,7 +154,7 @@ public class structureAndDuties_Steps {
     @And("user goes to the personal cabinet")
     public void userGoesToThePersonalCabinet() {
         page.perCabinet.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @When("user switches to my position in the structure tab")
@@ -248,7 +273,7 @@ public class structureAndDuties_Steps {
 
     @Then("newly duty has been deleted successfully")
     public void newlyDutyHasBeenDeletedSuccessfully() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         try {
             if (page.ITEditedDuty.isDisplayed()) {
                 throw new AssertionError("❌ Xəta:Silinən vəzifə görünür");
@@ -1005,6 +1030,7 @@ public class structureAndDuties_Steps {
 
     @Then("the deactivated duty is not displayed in the duty selection list")
     public void theDeactivatedDutyIsNotDisplayedInTheDutySelectionList() {
+        ReusableMethods.wait(1);
         try {
             if (page.ITPosition.isDisplayed()) {
                 throw new AssertionError("❌ Xəta:Deaktiv ITPosition elementi səhifədə görünür");
@@ -1012,6 +1038,13 @@ public class structureAndDuties_Steps {
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             System.out.println("✅ Deaktiv ITPosition elementi səhifədə yoxdur – gözlənilən vəziyyət.");
         }
+
+//        List<WebElement> itElements = getDriver().findElements(By.xpath("//div[normalize-space(text())='IT Mühəndis(QA)']"));
+//        if (!itElements.isEmpty() && itElements.get(0).isDisplayed()) {
+//            throw new AssertionError("❌ Xəta: Deaktiv ITPosition elementi səhifədə görünür");
+//        } else {
+//            System.out.println("✅ Deaktiv ITPosition elementi səhifədə yoxdur – gözlənilən vəziyyət.");
+//        }
 
     }
 
@@ -1096,6 +1129,7 @@ public class structureAndDuties_Steps {
 
     @And("page is reloaded")
     public void pageIsReloaded() {
+        ReusableMethods.wait(3);
         getDriver().navigate().refresh();
         ReusableMethods.wait(1);
     }

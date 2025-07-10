@@ -75,7 +75,7 @@ public class structureAndDuties_Page {
     public WebElement sectorDirector;
     @FindBy(xpath = "//div[text()=' QA_AT ']")
     public WebElement qaAtPosition;
-    @FindBy(xpath = "//div[text()=' IT Mühəndis(QA) ']")
+    @FindBy(xpath = "//div[normalize-space(text())='IT Mühəndis(QA)']")
     public WebElement ITPosition;
     @FindBy(xpath = "(//button[descendant::img[contains(@src, 'edit-colorless.svg')]])[1]")
     public WebElement dutyEditBtn;
