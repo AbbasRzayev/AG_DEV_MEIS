@@ -1,23 +1,26 @@
 @all
 Feature: Headers and Footers icons,buttons,texts
+
   @HeaderAndFooter
   Scenario: Check headers and footers icons-buttons-text are clickable and visible
-    Given user with login "abbas.rzayev@aist.group" and with password "Rabbas88!!" logs into the "Meis" system
-#      | Header menu   | Leftsidebare                                   |
-#      | Header text   | Mərkəzləşdirilmiş Elektron İnformasiya Sistemi |
-#      | Header button | Contacts                                       |
-#      | Header button | Notification                                   |
-#      | Header text   | Fullname of user                               |
-#      | Header button | Personal cabinet                               |
-    Then headers leftsidebare and text and contacts and notification and name and surname of user and personal cabinet buttons are clickable and visible
+    Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
+    #Header
+    Then headers left sidebar are clickable and visible
+    Then "Mərkəzləşdirilmiş Elektron İnformasiya Sistemi" is displayed in the header section
+    Then contacts are clickable and visible in the header section
+    Then notification is clickable and visible in the header section
+    Then personal cabinet is clickable and visible in the header section
+    Then "Fərid İmranov" name and surname of user is displayed correctly in the header section
+    #Footer
     When user scrolls to the end of page
-#      | Footer icon      | Azərbaycan Respublikasının İqtisadiyyat Nazirliyi yanında Antiinhisar və İstehlak Bazarına Nəzarət Dövlət Xidməti |
-#      | Footer copyright | Bütün hüquqlar qorunur                                                                                            |
-#      | Footer icon      | AISTGroup MMC                                                                                                     |
-   Then footers copyright text and icons are displayed and redirected
-
-  #1.Header hissəsində:Solsidebar menyu, Mərkəzləşdirilmiş Elektron İnformasiya Sistemi(text),Kontaklar(düymə), Bildirişlər(düymə), İstifadəçi ad-soyad,Şəxsi kabinetim(düymə) əks olunması
-  #2.Footer hissəsində: "Azərbaycan Respublikasının İqtisadiyyat Nazirliyi yanında Antiinhisar və İstehlak Bazarına Nəzarət Dövlət Xidməti"-logo, Bütün hüquqlar qorunur - copyright, AISTGroup MMC- logo əks olunması
-  #3.Logoları klik etdikdə saytlara keçid etmə və url yoxlanılması
-
-
+    Then copyright is displayed in the footer section
+    Then logo is displayed and redirected in the footer section
+  #Test ssenarilər:
+  #1.Header hissəsində sol side barın mövcud olması
+  #2.Header hissəsində Mərkəzləşdirilmiş Elektron İnformasiya Sistemi əks olunması
+  #3.Header hissəsində kontaklarımın əks olunması və seçilməsi
+  #4.Header hissəsində bildirişlərin əks olunması və seçilməsi
+  #5.Header hissəsində şəxsi kabinetimin əks olunması və seçilməsi
+  #6.Header hissəsində ad və soyadın əks olunması
+  #7.Footer "Bütün hüquqlar qorunur - copyright" əks olunması
+  #8.Header hissəsində "AISTGroup MMC"- logo əks olunması əks olunması və klik etdikdə keçid etmə və url yoxlanılması

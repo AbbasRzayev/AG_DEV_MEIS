@@ -46,9 +46,9 @@ Feature: User registration
     Then new registered users room and ip phone and stationary number and mobile number and email is displayed correctly
       | Otaq  | Mobil nömrə | IP telefon nömrəsi | Stasinonar nömrə |
       | 11111 | 553968888   | 2222               | 788787788        |
-     #Admin istifadəçinin şəxsi və əlaqə məlumatlarını redaktə edir
-     And admin select edit button in the user account control page
-     When admin edited users personal and contact info in the user account control page
+    #Admin istifadəçinin şəxsi və əlaqə məlumatlarını redaktə edir
+    And admin select edit button in the user account control page
+    When admin edited users personal and contact info in the user account control page
       | Ad    | Soyad | Ata adı | Dogum tarixi | Etibarlıq müddəti | Cins | Otaq | Mobil nömrə | IP   | Stasionar nömrə | FIN     | Seriya    | Email                    | Komputer |
       | Musab | İyad  | Umeyr   | 22.04.1988   | 12.12.2025        | Kişi | 3333 | 506730717   | 1010 | 98899889989     | 19HLOII | AA7788994 | zamanovabbasqa@gmail.com | PC-007   |
     #Redaktə edildikdən sonra istifadəçinin şəxsi və əlaqə məlumatlarının yoxlanılması
@@ -70,7 +70,7 @@ Feature: User registration
       | Email                    | Şifrə        |
       | zamanovabbasqa@gmail.com | Rabbas8888!! |
     Then new user has been successfully log into the system
-    #Yeni istifadəçi şəxsi kainetində, şəxsi və əlaqə məlumatlarının yoxlanılçası
+    #Yeni istifadəçi şəxsi kainetində, şəxsi və əlaqə məlumatlarının yoxlanılması
     And user goes to the personal cabinet
     When user switches to the personal info tab in the personal cabinet
     Then the users personal info is displayed correctly
@@ -124,8 +124,6 @@ Feature: User registration
   #23.Adminin yeni istifadəçini arxivləşdirməsi
   #24.Arxivləşdirdikdən sonra istifadəçinin sistemdə olmamasının yoxlanılması
   #25.Arxivləşdirdikdən sonra istifadəçinin sistemdə daxil ola bilməməsinin yoxlanılması
-
-
 
 
 #  Scenario: Deleting the confirmation letter from meis

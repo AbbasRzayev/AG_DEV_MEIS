@@ -3,33 +3,63 @@ Feature: Graduation
 
   @graduation
   Scenario: Check that if it is possible assignment the graduation to the user in the MEİS system
-    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
+    Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And goes to the control panel
-    And adds name "Abbas" and fin "19HSHLY" to the name and fin fields
-    And after searching selects founded user
+    And adds name "Abbas" and fin to the name and fin fields
+    And user selects enter in the users tab
+    And selects founded user from table
     And switches to the user permissions tab
-    And administrator approval switcher turned on or off
-    And current account status switcher turned on or off
+    And administrator approval switcher turned off
+    And current account status switcher turned off
+    And page is down
+    #Istifadəçiyə məzuniyyət təyin edilir
     And graduation start date is added
     And graduation end date is added
+    And graduation note is added
     And user saved changes
     And goes to the control panel
-    And adds name "Abbas" and fin "19HSHLY" to the name and fin fields
-    When after searching the results are displayed in the users table
-    Then the user's administrative approval is displayed as closed in the table
-    Then the user's current account status is displayed as closed in the table
-    And after searching selects founded user
+    And adds name "Abbas" and fin to the name and fin fields
+    And user selects enter in the users tab
+    #Məzuniyyət verildikdən sonra istifadəçinin status və sistemə daxil olmasının yoxlanılması
+    Then admin control is displayed as not approved in the users table
+    Then status is displayed as not approved in the users table
+    And user selects exit button
+    #Məzuniyyətdə olan istifadəçinin sistemə daxil olması
+    When user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
+    Then A user on vacation is unable to enter the system
+    #Istifadəçidən məzuniyyətin ləğv edilməsi
+    And user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
+    And goes to the control panel
+    And adds name "Abbas" and fin to the name and fin fields
+    And user selects enter in the users tab
+    And selects founded user from table
     And switches to the user permissions tab
-    And administrator approval switcher turned on or off
-    And current account status switcher turned on or off
+    And page is down
+    #Məzuniyyət barədə öncəki tarixlər və qeydlər yoxlanılır
+    And previous start date for graduation is displayed
+    And previous end date for graduation is displayed
+    And previous note for graduation is displayed
+    And page is up
+    And administrator approval switcher turned on
+    And current account status switcher turned on
+    And page is down
     And user saved changes
     And goes to the control panel
-    And adds name "Abbas" and fin "19HSHLY" to the name and fin fields
-    When after searching the results are displayed in the users table
-    Then the user's administrative approval is displayed as opened in the table
-    Then the user's current account status is displayed as opened in the table
+    And adds name "Abbas" and fin to the name and fin fields
+    And user selects enter in the users tab
+    #Istifadəçilər tabında istifadəçinin icazə statuslarının yoxlanılması
+    Then admin control is displayed as a given in the users table
+    Then status is displayed as a given in the users table
+    When user selects exit button
+    #Məzuniyyəti ləğv edildikdən sonra istifadəçinin sistemə daxil olması
+    When user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
+    Then the user is successfully entered to the system
     #Test ssenarilər:
-    #1.İstifadəçi üçün məzuniyyətin başlanma tarixinin əlavə edilməsinin yoxlanılması
-    #2.İstifadəçi üçün məzuniyyətin bitmə tarixinin əlavə edilməsinin yoxlanılması
-    #3.Dəyişikliklər yadda saxladıqdan sonra admin panelin istifadəçilər tabında istifadəçinin icazə statuslarının yoxlanılması
-    #4.İstifadəçinin məzuniyyətini deaktiv etdikdən sonra admin panelin istifadəçilər tabında istifadəçinin icazə statuslarının yoxlanılması
+    #1.İstifadəçi üçün məzuniyyətin başlanma tarixinin əlavə edilməsi
+    #2.İstifadəçi üçün məzuniyyətin bitmə tarixinin əlavə edilməsi
+    #3.İstifadəçi üçün məzuniyyət qeydinin əlavə edilməsi
+    #4.Dəyişikliklər yadda saxladıqdan sonra admin panelin istifadəçilər tabında istifadəçinin icazə statuslarının yoxlanılması
+    #5.Məzuniyyət təyin edilən istifadəçinin adından sistemə giriş edilə bilməməsinin yoxlanılması
+    #6.Istifadəçinin məzuniyyəti deaktiv edilmədən öncə məzuniyyət barədə təyin edilən tarixlərin və qeydin yoxlanılması
+    #7.İstifadəçinin məzuniyyətini deaktiv etdikdən sonra admin panelin istifadəçilər tabında istifadəçinin icazə statuslarının yoxlanılması
+    #8.İstifadəçinin məzuniyyətini deaktiv etdikdən sonra istifadəçinin sistemə uğurla daxil olmasının yoxlanılması

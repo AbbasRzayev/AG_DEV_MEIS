@@ -107,15 +107,24 @@ public class changePassword_Steps {
     }
 
     @Given("user with login {string} and password {string} logs into the {string} system")
-    public void userWithLoginAndPasswordLogsIntoTheSystem(String arg0, String arg1, String environment) {
-        if(environment.contains("AG-MEIS")){
-        getDriver().get(ConfigReader.getProperty("AG-MEIS"));
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        ReusableMethods.wait(1);
-        page.emailField.sendKeys(ConfigReader.getProperty("FaridLogin"));
-        ReusableMethods.wait(1);
-        page.passwordField.sendKeys(ConfigReader.getProperty("FaridPassword"));
-        page.enterToTheSystem.click();
+    public void userWithLoginAndPasswordLogsIntoTheSystem(String user, String arg1, String environment) {
+        if(environment.contains("AG-MEIS") && user.equals("imranovfarid@gmail.com")){
+            getDriver().get(ConfigReader.getProperty("AG-MEIS"));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            ReusableMethods.wait(1);
+            page.emailField.sendKeys(ConfigReader.getProperty("FaridLogin"));
+            ReusableMethods.wait(1);
+            page.passwordField.sendKeys(ConfigReader.getProperty("FaridPassword"));
+            page.enterToTheSystem.click();
+        }
+        else if(environment.contains("AG-MEIS") && user.equals("abbas.rzayev@aist.group")){
+            getDriver().get(ConfigReader.getProperty("AG-MEIS"));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            ReusableMethods.wait(1);
+            page.emailField.sendKeys(ConfigReader.getProperty("AbbasLogin"));
+            ReusableMethods.wait(1);
+            page.passwordField.sendKeys(ConfigReader.getProperty("AbbasPassword"));
+            page.enterToTheSystem.click();
         }
     }
 

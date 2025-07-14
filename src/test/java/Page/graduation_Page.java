@@ -7,11 +7,11 @@ import utilities.Driver;
 
 public class graduation_Page {
     public  graduation_Page(){PageFactory.initElements(Driver.getDriver(),this);}
-    @FindBy(xpath = "//label[text()='İnzibatçının təsdiqi']")
+    @FindBy(xpath = "(//div[@class='toggle-thumb'])[1]")
     public WebElement adminApprovalSwitcher;
-    @FindBy(xpath = "//label[text()='Hesabın cari statusu']")
+    @FindBy(xpath = "(//div[@class='toggle-thumb'])[2]")
     public  WebElement currentAccountStatusSwticher;
-    @FindBy(xpath = "(//span[text()='Dəyişiklikləri yadda saxla'])[1]")
+    @FindBy(xpath = "//span[normalize-space()='Yadda saxla']")
     public  WebElement saveChangesBtn;
     @FindBy(xpath = "//input[@formcontrolname='vacationStartDate']")
     public  WebElement graduationTodayDate;
@@ -21,5 +21,7 @@ public class graduation_Page {
     public  WebElement adminApprovalResultTable;
     @FindBy(xpath = "(//td[@role='cell'])[6]")
     public  WebElement currentAccountResultTable;
+    @FindBy(xpath = "//textarea[@formcontrolname='deactivationNote']")
+    public  WebElement graduationNote;
 
 }

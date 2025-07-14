@@ -5,6 +5,7 @@ import Page.loginAndLogOut_Page;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
@@ -29,43 +30,6 @@ public class headerAndFooter_Steps {
         enter.enterToTheSystem.click();
     }
 
-    @Then("headers leftsidebare and text and contacts and notification and name and surname of user and personal cabinet buttons are clickable and visible")
-    public void headersLeftsidebareAndTextAndContactsAndNotificationAndNameAndSurnameOfUserAndPersonalCabinetButtonsAreClickableAndVisible() {
-        ReusableMethods.wait(2);
-        page.leftSideBarBtn.click();
-        ReusableMethods.wait(1);
-        ReusableMethods.flash(page.leftSideBarBtn2, getDriver());
-        ReusableMethods.wait(1);
-        page.closeleftSideBar.click();
-
-        assertTrue(page.headersText.isDisplayed());
-        ReusableMethods.flash(page.headersText, getDriver());
-        ReusableMethods.wait(1);
-
-        assertTrue(page.headerContacts.isDisplayed());
-        ReusableMethods.flash(page.headerContacts, getDriver());
-        page.headerContacts.click();
-        ReusableMethods.wait(1);
-
-        assertTrue(page.headerNotifaction.isDisplayed());
-        ReusableMethods.flash(page.headerNotifaction, getDriver());
-        page.headerNotifaction.click();
-        ReusableMethods.wait(1);
-        page.justClick.click();
-        //page.closeNote.click();
-
-        assertTrue(page.headerFullname.isDisplayed());
-        ReusableMethods.flash(page.headerFullname, getDriver());
-        ReusableMethods.wait(1);
-
-        ReusableMethods.clickByJavaScript(page.headersPersonalCab);
-        assertTrue(page.headersPersonalCab.isDisplayed());
-        //page.headersPersonalCab.click();
-        ReusableMethods.flash(page.headersPersonalCab, getDriver());
-        ReusableMethods.clickByJavaScript(page.headersPersonalCab);
-        ReusableMethods.wait(1);
-    }
-
     @When("user scrolls to the end of page")
     public void userScrollsToTheEndOfPage() {
         ReusableMethods.scrollEndByJavascript();
@@ -74,29 +38,90 @@ public class headerAndFooter_Steps {
 
     @Then("footers copyright text and icons are displayed and redirected")
     public void footersCopyrightTextAndIconsAreDisplayedAndRedirected() {
-        ReusableMethods.flash(page.footerIconFirst, getDriver());
-        assertTrue(page.footerIconFirst.isDisplayed());
-        ReusableMethods.wait(1);
-        page.footerIconFirst.click();
-        ReusableMethods.wait(1);
-        String originalWindowHandle = getDriver().getWindowHandle(); // Store the original window handle
-        ReusableMethods.wait(1);
-        Set<String> windowHandles = getDriver().getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(originalWindowHandle)) {
-                getDriver().switchTo().window(handle); // Switch to the new window
-                ReusableMethods.flash(page.footerIconFirstCheck, getDriver());
-                getDriver().close();
-                getDriver().switchTo().window(originalWindowHandle); // Switch back to the original window
-                break; // Exit the loop after switching back to the original window
-            }
-        }
+//        ReusableMethods.flash(page.footerIconFirst, getDriver());
+//        assertTrue(page.footerIconFirst.isDisplayed());
+//        ReusableMethods.wait(1);
+//        page.footerIconFirst.click();
+//        ReusableMethods.wait(1);
+//        String originalWindowHandle = getDriver().getWindowHandle(); // Store the original window handle
+//        ReusableMethods.wait(1);
+//        Set<String> windowHandles = getDriver().getWindowHandles();
+//        for (String handle : windowHandles) {
+//            if (!handle.equals(originalWindowHandle)) {
+//                getDriver().switchTo().window(handle); // Switch to the new window
+//                ReusableMethods.flash(page.footerIconFirstCheck, getDriver());
+//                getDriver().close();
+//                getDriver().switchTo().window(originalWindowHandle); // Switch back to the original window
+//                break; // Exit the loop after switching back to the original window
+//            }
+//        }
 
+      //  getDriver().close();
+    }
+
+    @Then("headers left sidebar are clickable and visible")
+    public void headersLeftSidebarAreClickableAndVisible() {
+        ReusableMethods.wait(2);
+        page.leftSideBarBtn.click();
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.leftSideBarBtn2, getDriver());
+        ReusableMethods.wait(1);
+        page.closeLeftSideBar.click();
+    }
+
+    @Then("{string} is displayed in the header section")
+    public void isDisplayedInTheHeaderSection(String text) {
+//        assertTrue(page.headersText.isDisplayed());
+        Assert.assertTrue(page.headersText.getText().contains(text));
+        ReusableMethods.flash(page.headersText, getDriver());
+        ReusableMethods.wait(1);
+    }
+
+    @Then("contacts are clickable and visible in the header section")
+    public void contactsAreClickableAndVisibleInTheHeaderSection() {
+        assertTrue(page.headerContacts.isDisplayed());
+        ReusableMethods.flash(page.headerContacts, getDriver());
+        page.headerContacts.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("notification is clickable and visible in the header section")
+    public void notificationIsClickableAndVisibleInTheHeaderSection() {
+        assertTrue(page.headerNotifaction.isDisplayed());
+        ReusableMethods.flash(page.headerNotifaction, getDriver());
+        page.headerNotifaction.click();
+        ReusableMethods.wait(1);
+//        page.headerNotifaction.click();
+        page.closeNote.click();
+    }
+
+    @Then("personal cabinet is clickable and visible in the header section")
+    public void personalCabinetIsClickableAndVisibleInTheHeaderSection() {
+        page.personalCabinetHeader.click();
+        ReusableMethods.wait(1);
+        page.personalCabinetLink.click();
+        ReusableMethods.wait(1);
+    }
+
+
+    @Then("{string} name and surname of user is displayed correctly in the header section")
+    public void nameAndSurnameOfUserIsDisplayedCorrectlyInTheHeaderSection(String nameAndSurname) {
+//      assertTrue(page.headerFullname.isDisplayed());
+        assertTrue(page.headerFullname.getText().contains(nameAndSurname));
+        ReusableMethods.flash(page.headerFullname, getDriver());
+        ReusableMethods.wait(1);
+    }
+
+    @Then("copyright is displayed in the footer section")
+    public void copyrightIsDisplayedInTheFooterSection() {
         ReusableMethods.wait(1);
         ReusableMethods.flash(page.footercopyright, getDriver());
         System.out.println("getDriver().getCurrentUrl() = " + getDriver().getCurrentUrl());
         assertTrue(page.footercopyright.isDisplayed());
+    }
 
+    @Then("logo is displayed and redirected in the footer section")
+    public void logoIsDisplayedAndRedirectedInTheFooterSection() {
         ReusableMethods.flash(page.footerIconSecond,getDriver());
         page.footerIconSecond.click();
         String originalWindowHandle1 = getDriver().getWindowHandle(); // Store the original window handle
@@ -113,6 +138,5 @@ public class headerAndFooter_Steps {
             }
         }
         ReusableMethods.wait(1);
-      //  getDriver().close();
     }
 }

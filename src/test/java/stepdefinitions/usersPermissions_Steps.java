@@ -19,7 +19,7 @@ public class usersPermissions_Steps {
     @And("switches to the user permissions tab")
     public void switchesToTheUserPermissionsTab() {
         page1.userPermissionsTab.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @And("selects {string} in the permissions tab")

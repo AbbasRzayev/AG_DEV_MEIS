@@ -80,7 +80,7 @@ public class structureAndDuties_Steps {
     @And("user selects new {string} position")
     public void userSelectsNewPosition(String structure) {
         if (structure.contains("AISTGroup MMC")) {
-            page.openQualityControlStructureParentList.click();
+//            page.openQualityControlStructureParentList.click();
             ReusableMethods.wait(1);
             page.ATAndManualSector.click();
             ReusableMethods.wait(1);
