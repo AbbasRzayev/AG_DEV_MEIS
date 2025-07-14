@@ -1,7 +1,7 @@
 @all  @SearchParams
 Feature: Search by user data
 
-  @SearchByNameBySurnameByPin
+  @search_by_name_by_surname_by_pin
   Scenario: Check users search parameters by name surname and pin
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel
@@ -34,7 +34,7 @@ Feature: Search by user data
     #5.İstifadəçinin fin koduna görə nəticələrin yoxlanılması
     #6.Fin koduna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
-  @SearchByDuty
+  @search_by_duty
   Scenario: Check users search parameters by duty
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel
@@ -49,7 +49,7 @@ Feature: Search by user data
     #7.İstifadəçinin vəzifəsinə görə nəticələrin yoxlanılması
     #8.Vəzifəsinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
-  @SearchByWorkPlace
+  @search_by_workplace
   Scenario: Check users search parameters by workplace
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel
@@ -64,7 +64,7 @@ Feature: Search by user data
     #9.İstifadəçinin çalışdığı müəssisəyə görə nəticələrin yoxlanılması
     #10.Çalışdığı müəssisəyə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
 
-  @SearchByAdminApproval
+  @search_by_admin_approval
   Scenario Outline: Check users search parameters by administrator approval
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel

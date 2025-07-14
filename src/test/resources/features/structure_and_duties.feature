@@ -1,7 +1,7 @@
-@all @StructureAndDuties
+@all @structure_and_duties_add
 Feature: Users structure and duties
 
-  @StructureAndDutiesAdd
+  @structure_and_duties_add
   Scenario Outline: Check if user can change his position in the structure and in his duties
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     #Istifadəçi strukturun, alt şöbəsi və vəzifəsi dəyişdirilir
@@ -53,7 +53,7 @@ Feature: Users structure and duties
 
 
 
-  @StructureAddAndEditThenDelete
+  @structure_add_and_edit_then_delete
   Scenario: Check if user can add and edit then delete a new structure
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel
@@ -146,7 +146,7 @@ Feature: Users structure and duties
     #32.Silindikdən sonra idarəetmə panelinde silinən strukturun mövcud olmamasının yoxlanılması
 
 
-  @DutyAddAndDelete
+  @duty_add_and_delete
   Scenario: Check if user can add and edit then delete a new duty
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And goes to the control panel

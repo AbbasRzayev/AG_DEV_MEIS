@@ -1,7 +1,7 @@
 @all
 Feature: Headers and Footers icons,buttons,texts
 
-  @HeaderAndFooter
+  @header_and_footer
   Scenario: Check headers and footers icons-buttons-text are clickable and visible
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     #Header

@@ -1,7 +1,7 @@
-@all @ChangePassword
+@all @change_password
 Feature: Change of password
 
-  @CP1
+  @change_users_password
   Scenario Outline: Check if user can change the password
     And the user with login "<userLogin>" and password "<userPassword>" logs into the "AG-MEIS" system
     And switches to the Personal cabinet
@@ -26,7 +26,7 @@ Feature: Change of password
 #3.Istifadəçinin öncəki şifrəni 5 dəfə fərqli şifrəyə dəyişdikdən sonra ilkin şirfəni seçməsi
 #4.İlkin şifrəni bərpa etdikdən sonra sistemə daxil olması
 
-  @CP2-positive
+  @change_positive
   Scenario: Check with negative cases change password fields validation
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And switches to the Personal cabinet
@@ -42,7 +42,7 @@ Feature: Change of password
 
   #5.Şifrəni dəyiş hissəsində mövcud xanaların validasiyalarının yoxlanılması (pozitiv case)
 
-  @CP3-negative
+  @change_negative
   Scenario: Check with negative cases change password fields validation
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And switches to the Personal cabinet

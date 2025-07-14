@@ -1,7 +1,7 @@
 @all
 Feature: Left sidebar menu
 
-  @leftSideBar
+  @left_sidebar
   Scenario: Check if user can navigate to the tabs from left sidebar menu
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And user selects left sidebar button

@@ -1,7 +1,7 @@
-@all @Registration
+@all @registration
 Feature: User registration
 
-  @UserRegistration
+  @user_registration
   Scenario: Check if the user can register in the AG-MEIS system then log in and archive the user
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     #Yeni istifadəçinin qeydiyyatı

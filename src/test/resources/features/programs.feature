@@ -1,4 +1,4 @@
-@Program @all
+@program @all
 Feature: User creat program
 
   Scenario: Check if user can create program
