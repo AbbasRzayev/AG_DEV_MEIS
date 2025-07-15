@@ -1,7 +1,7 @@
-@all @HelpDesk
+@all @helpDesk
 Feature: Help Desk
 
-  @NewRequest
+  @newRequest
   Scenario: Check the creation of a new request in the help desk tab
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
     And goes to the help desk tab from main page

@@ -7,7 +7,10 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import utilities.ReusableMethods;
 
@@ -23,7 +26,9 @@ public class programs_Steps {
 
     @And("switches to the my programs tab")
     public void switchesToTheMyProgramsTab() {
+        ReusableMethods.wait(1);
         page.programTab.click();
+        ReusableMethods.wait(7);
     }
 
     contactInformationEditing_Page userPer = new contactInformationEditing_Page();
@@ -70,7 +75,7 @@ public class programs_Steps {
     @And("added program icon")
     public void addedProgramIcon() {
         String photoPath = "C:\\Users\\User\\TestFiles\\Test.png";
-        page.IconButton.click();
+        page.iconButton.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
     }
 
@@ -100,6 +105,7 @@ public class programs_Steps {
     public void userSelectsTheSaveButtonToCreateANewProgram() {
         ReusableMethods.wait(1);
         page.saveButton.click();
+        ReusableMethods.wait(15);
         //ReusableMethods.clickByJavaScript(page.saveButton);
         //ReusableMethods.waitForClickabilityAndClick(page.saveButton,2);
         //ReusableMethods.clickJSElementWithJavaScript(String.valueOf(page.saveButton));
@@ -108,12 +114,15 @@ public class programs_Steps {
     @Then("the program successfully created")
     public void theProgramSuccessfullyCreated() {
         page.searchInput.sendKeys("Bright Future");
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(17);
         ReusableMethods.flash(page.createdProq, getDriver());
+        Assert.assertTrue("Test.png şəkli DOM-da görünmür!", page.programName.isDisplayed());
+        Assert.assertTrue("Bright Future", page.createdProq.isDisplayed());
         ReusableMethods.wait(1);
         page.createdProq.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(55);
     }
+
 
 
     @And("selects operation on modules button")
@@ -311,7 +320,7 @@ public class programs_Steps {
             ReusableMethods.wait(1);
             page.apiIntegrationField.sendKeys(progIntegration);
             ReusableMethods.wait(1);
-            page.IconButton.click();
+            page.iconButton.click();
             ReusableMethods.wait(1);
             ReusableMethods.robotClassDosyaYukleme(progIcon);
         }
@@ -339,7 +348,7 @@ public class programs_Steps {
         ReusableMethods.flash(page.programAdressField,getDriver());
         ReusableMethods.flash(page.noteAboutProgramField,getDriver());
         ReusableMethods.flash(page.apiIntegrationField,getDriver());
-        ReusableMethods.flash(page.IconButton,getDriver());
+        ReusableMethods.flash(page.iconButton,getDriver());
     }
 
     @When("user selects delete button to delete the program")
@@ -360,5 +369,101 @@ public class programs_Steps {
     public void selectsFoundedUserFromTable() {
         structure.foundedUser.click();
         ReusableMethods.wait(2);
+    }
+
+    @And("added video to the video instruction file")
+    public void addedVideoToTheVideoInstructionFile() {
+        String photoPath = "C:\\Users\\User\\TestFiles\\AutomatedTesting.mp4";
+        page.iconVideoBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath);
+        ReusableMethods.wait(8);
+    }
+
+    @And("added pdf file to the instruction file")
+    public void addedPdfFileToTheInstructionFile() {
+        String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
+        page.iconInstructionBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath);
+        ReusableMethods.wait(3);
+    }
+
+    @And("added one more pdf file to the another file")
+    public void addedOneMorePdfFileToTheAnotherFile() {
+        String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
+        page.iconAnotherFileBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath);
+        ReusableMethods.wait(3);
+    }
+
+    @Then("all information is displayed in the review section of the program")
+    public void allInformationIsDisplayedInTheReviewSectionOfTheProgram(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String programName = row.get("PROGRAM NAME");
+            String keyword = row.get("KEYWORD");
+            String programAddress = row.get("PROGRAM ADDRESS");
+            String apiUrl = row.get("API URL");
+            String note = row.get("NOTE");
+
+
+            ReusableMethods.flash(page.programNameField,getDriver());
+            WebElement inputValue = getDriver().findElement(By.xpath("//label[contains(., 'Proqramın adı')]/following::input[1]"));
+            String progNameEx = inputValue.getAttribute("value");
+            System.out.println("actual = " + progNameEx);
+            Assert.assertEquals(progNameEx,programName);
+
+            ReusableMethods.flash(page.kewwordField,getDriver());
+            WebElement inputValue2 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[2]"));
+            String progKWEx = inputValue2.getAttribute("value");
+            System.out.println("actual = " + progKWEx);
+            Assert.assertEquals(progKWEx,keyword);
+
+            ReusableMethods.flash(page.programAdressField,getDriver());
+            WebElement inputValue3 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[3]"));
+            String progAddress = inputValue3.getAttribute("value");
+            System.out.println("actual = " + progAddress);
+            Assert.assertEquals(progAddress,programAddress);
+
+            ReusableMethods.flash(page.apiIntegrationField,getDriver());
+            WebElement inputValue4 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[4]"));
+            String progApi = inputValue4.getAttribute("value");
+            System.out.println("actual = " + progApi);
+            Assert.assertEquals(apiUrl,progApi);
+
+            ReusableMethods.flash(page.noteAboutProgramField,getDriver());
+            WebElement inputValue5 = getDriver().findElement(By.xpath(" //following::textarea[1]"));
+            String progNote = inputValue5.getAttribute("value");
+            System.out.println("actual = " + progNote);
+            Assert.assertEquals(progNote,note);
+        }
+    }
+
+    @Then("logo is displayed in the review section of the program")
+    public void logoIsDisplayedInTheReviewSectionOfTheProgram() {
+        ReusableMethods.flash(page.iconButton,getDriver());
+        Assert.assertTrue("Logo görünmür", page.programIconCheck.isDisplayed());
+        Assert.assertTrue("Test.png yazısı yoxdur", page.iconText.isDisplayed());
+    }
+
+    @Then("video instruction file is displayed in the review section of the program")
+    public void videoInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
+        ReusableMethods.flash(page.VideoButton,getDriver());
+        Assert.assertTrue("Logo görünmür", page.videoIcon.isDisplayed());
+        Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
+
+    }
+
+    @Then("instruction file is displayed in the review section of the program")
+    public void instructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
+        ReusableMethods.flash(page.fileButton,getDriver());
+        Assert.assertTrue("Logo görünmür", page.fileIcon.isDisplayed());
+        Assert.assertTrue("Test.png yazısı yoxdur", page.videoText.isDisplayed());
+    }
+
+    @Then("the another instruction file is displayed in the review section of the program")
+    public void theAnotherInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
+        ReusableMethods.flash(page.otherFile,getDriver());
+        Assert.assertTrue("Logo görünmür", page.otherIcon.isDisplayed());
+        Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
     }
 }
