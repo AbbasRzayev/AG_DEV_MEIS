@@ -3,7 +3,7 @@ Feature: Help Desk
 
   @newRequest
   Scenario: Check the creation of a new request in the help desk tab
-    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
+    Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the help desk tab from main page
     And selects software selection from the direction dropdown list
     #And selects change password from the software dropdown list
@@ -14,11 +14,11 @@ Feature: Help Desk
     When user selects save button in the help desk tab
     Then new request has been successfully created
     #Test ssenarilər əhatə edir:
-    #1.İstifadəçinin Yardım masası tabından yeni müraciət əlavə etməsi
+    #1.İstifadəçinin Yardım masası tabından yeni müraciətin əlavə edilm'si
     #2.Yeni müraciət məlumatlarının yoxlanılması
 
 
-  @DesignetPersonOnTheStructure
+  @designetPersonOnTheStructure
   Scenario:Check the notification information directed to the e-mail address of the designated person on the structure
     Given test user with login "irina.kolesnikova62@mail.ru" and with password "Ibrahimibrahim88!!" logs into the "Meis" system
     And goes to the help desk tab from main page

@@ -32,6 +32,7 @@ public class helpDesk_Steps {
 
     @And("goes to the help desk tab from main page")
     public void goesToTheHelpDeskTabFromMainPage() {
+        ReusableMethods.wait(1);
         page.helpDeskBtnFromMainPage.click();
         ReusableMethods.wait(1);
     }

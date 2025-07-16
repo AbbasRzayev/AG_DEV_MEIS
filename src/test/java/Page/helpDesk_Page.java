@@ -25,13 +25,13 @@ public class helpDesk_Page {
     @FindBy(xpath = "//span[contains(.,' Şifrənin dəyişdirilməsi ')]")
     public WebElement changePass;
 
-    @FindBy(xpath = "/html/body/app-root/div/div/main/app-helpdesk/app-helpdesk/div[1]/div/div[1]/mat-form-field[2]/div[1]/div[2]/div")
+    @FindBy(xpath = "//mat-select[@formcontrolname='feedBackType']//span[contains(@class, 'mat-mdc-select-placeholder')]")
     public WebElement noteTypeList;
 
     @FindBy(xpath = "//span[contains(.,'Xəta')]")
     public WebElement noteTypeSelect;
 
-    @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-11']")
+    @FindBy(xpath = "//mat-select[@formcontrolname='priorityType']")
     public WebElement notePriority;
 
     @FindBy(xpath = "//span[contains(.,'Yüksək')]")
@@ -40,10 +40,10 @@ public class helpDesk_Page {
     @FindBy(id = "mat-input-2")
     public WebElement addText;
 
-    @FindBy(xpath = "//label[@class='mat-ripple file-wrapper']")
+    @FindBy(xpath = "//p[contains(., 'Fayl əlavə edin')]")
     public WebElement addFile;
 
-    @FindBy(xpath = "//span[text()='Yadda saxla']")
+    @FindBy(xpath = "//span[normalize-space()='Yadda saxla']")
     public WebElement saveRequest;
 
     @FindBy(xpath = "(//span[@class='ng-star-inserted'])[1]")
