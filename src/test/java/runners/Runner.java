@@ -27,7 +27,7 @@ senaryoyu çalıştırabiliriz
 2- Hooks classin yolunu veririz.
 
                                              */
-        tags = "@newRequest",
+        tags = "@filter",
         dryRun = false,
         monochrome = false //console okunakli hale getirir,false scenario adimlarini renkli gosterir,  true renksiz yapar
 )

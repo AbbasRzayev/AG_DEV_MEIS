@@ -43,7 +43,7 @@ Feature: Search by user data
     When user selects enter in the users tab for duty
     Then search results are displayed by according to search duty params
     #İstifadəçinin çalışdığı müəssisəyə görə nəticələrin yoxlanılması
-    When user reset the changes for duty
+    When user reset the changes for "duty"
     Then the changes is successfully resets
     #Test ssenarilər:
     #7.İstifadəçinin vəzifəsinə görə nəticələrin yoxlanılması

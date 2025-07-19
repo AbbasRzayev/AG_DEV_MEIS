@@ -138,7 +138,6 @@ public class searchByUserData_Steps {
 
     @And("adds workplace to the workplace field")
     public void addsWorkplaceToTheWorkplaceField() {
-
         ReusableMethods.wait(1);
         page.clearFields.click();
         //ReusableMethods.sendKeysJS("Azərbaycan Metrologiya İnstitutu",page.workPlaceInput);
@@ -198,21 +197,40 @@ public class searchByUserData_Steps {
         }
     }
 
-    @When("user reset the changes for duty")
-    public void userResetTheChangesForDuty() {
-        ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
-        ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
-        ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
-        ReusableMethods.wait(1);
-        while (true) {
-            try {
-                if (!page.filterModal.isDisplayed()) {
+    @When("user reset the changes for {string}")
+    public void userResetTheChangesFor(String selection) {
+        if(selection.contains("duty")) {
+            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+            ReusableMethods.wait(1);
+            while (true) {
+                try {
+                    if (!page.filterModal.isDisplayed()) {
+                        break;
+                    }
+                    ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                    ReusableMethods.wait(1);
+                } catch (NoSuchElementException noSuchElementException) {
                     break;
                 }
-                ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
-                ReusableMethods.wait(1);
-            } catch (NoSuchElementException noSuchElementException) {
-                break;
+            }
+        }
+        else if(selection.contains("direction")) {
+            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+            ReusableMethods.wait(1);
+            while (true) {
+                try {
+                    if (!page.filterModal.isDisplayed()) {
+                        break;
+                    }
+                    ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                    ReusableMethods.wait(1);
+                } catch (NoSuchElementException noSuchElementException) {
+                    break;
+                }
             }
         }
     }
@@ -253,28 +271,47 @@ public class searchByUserData_Steps {
 
     @Then("search results are displayed by according to search duty params")
     public void searchResultsAreDisplayedByAccordingToSearchDutyParams() {
-        List<WebElement> positionCells = getDriver().findElements(By.cssSelector("td.cdk-column-organizationPosition"));
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        for (WebElement cell : positionCells) {
-            String text = cell.getText().trim();
-            if (text.equals("QA_AT")) {
-                System.out.println("Uyğunsuz dəyər tapıldı: " + text);
-                String flashScript =
-                        "let element = arguments[0];" +
-                                "let originalColor = element.style.backgroundColor;" +
-                                "let i = 0;" +
-                                "let interval = setInterval(() => {" +
-                                "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
-                                "  i++;" +
-                                "  if(i === 6) {" +  // 3 saniyə flash (yashil - orijinal) = 6 toggle
-                                "    clearInterval(interval);" +
-                                "    element.style.backgroundColor = originalColor;" +
-                                "  }" +
-                                "}, 300);";  // 500 ms interval
-                js.executeScript(flashScript, cell);
+        boolean matchFound = false;
+        int retries = 3;
+
+        for (int attempt = 0; attempt < retries; attempt++) {
+            try {
+                List<WebElement> positionCells = getDriver().findElements(By.cssSelector("td.cdk-column-organizationPosition"));
+
+                for (WebElement cell : positionCells) {
+                    String text = cell.getText().trim();
+                    if (text.equals("QA_AT")) {
+                        System.out.println("Uyğunsuz dəyər tapıldı: " + text);
+                        matchFound = true;
+
+                        String flashScript =
+                                "let element = arguments[0];" +
+                                        "let originalColor = element.style.backgroundColor;" +
+                                        "let i = 0;" +
+                                        "let interval = setInterval(() => {" +
+                                        "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                        "  i++;" +
+                                        "  if(i === 6) {" +
+                                        "    clearInterval(interval);" +
+                                        "    element.style.backgroundColor = originalColor;" +
+                                        "  }" +
+                                        "}, 300);";
+                        js.executeScript(flashScript, cell);
+                        break; // uğurla tapıldısa, artıq təkrar yox
+                    }
+                }
+//                break; // uğurla bitdisə, artıq retry etmə
+            } catch (StaleElementReferenceException e) {
+                System.out.println("DOM dəyişdi, yenidən yoxlanır... Attempt " + (attempt + 1));
+                ReusableMethods.wait(1); // kiçik gözləmə
             }
         }
+
         ReusableMethods.wait(2);
+        if (!matchFound) {
+            throw new AssertionError("XƏTA: Heç bir nəticə 'QA_AT' ilə uyğun gəlmir!");
+        }
     }
 
     @When("user selects enter in the users tab for duty")

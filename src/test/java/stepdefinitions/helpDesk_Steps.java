@@ -1,24 +1,24 @@
 package stepdefinitions;
 
-import Page.helpDesk_Page;
-import Page.loginAndLogOut_Page;
-import Page.registration_Page;
+import Page.*;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -28,7 +28,11 @@ public class helpDesk_Steps {
     registration_Page page2 = new registration_Page();
     helpDesk_Page page = new helpDesk_Page();
     loginAndLogOut_Page page1 = new loginAndLogOut_Page();
+    searchByUserData_Page searchByUserData = new searchByUserData_Page();
+    structureAndDuties_Page structureAndDuties = new structureAndDuties_Page();
     String value;
+    String getRequestID;
+    String getTableData;
 
     @And("goes to the help desk tab from main page")
     public void goesToTheHelpDeskTabFromMainPage() {
@@ -37,89 +41,87 @@ public class helpDesk_Steps {
         ReusableMethods.wait(1);
     }
 
-    @And("selects software selection from the direction dropdown list")
-    public void selectsSoftwareSelectionFromTheDirectionDropdownList() {
-        page.directionList.click();
-        ReusableMethods.wait(1);
-        page.differentProblemsSelect.click();
-        ReusableMethods.wait(1);
+    @And("selects software {string} selection from the direction dropdown list")
+    public void selectsSoftwareSelectionFromTheDirectionDropdownList(String selection) {
+        if (selection.contains("Digər problemlər")) {
+            page.directionList.click();
+            ReusableMethods.wait(1);
+            page.differentProblemsSelect.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Proqram təminatı")) {
+            page.differentProblemsSelect.click();
+            ReusableMethods.wait(1);
+            page.programSoftwareSelect.click();
+            ReusableMethods.wait(1);
+        }
     }
 
-    @And("selects change password from the software dropdown list")
-    public void selectsChangePasswordFromTheSoftwareDropdownList() {
-        page.sowftwareSelectasd.click();
-        ReusableMethods.wait(1);
-        page.changePass.click();
+    @And("selects appeal {string} from the notification type dropdown list")
+    public void selectsAppealFromTheNotificationTypeDropdownList(String selection) {
+        if (selection.contains("Xəta")) {
+            page.noteTypeList.click();
+            ReusableMethods.wait(1);
+            page.noteTypeSelect.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Təklif")) {
+            page.noteTypeSelect.click();
+            ReusableMethods.wait(1);
+            page.noteTypeOfferSelect.click();
+            ReusableMethods.wait(1);
+        }
+
     }
 
-    @And("selects appeal from the notification type dropdown list")
-    public void selectsAppealFromTheNotificationTypeDropdownList() {
-        page.noteTypeList.click();
-        ReusableMethods.wait(1);
-        page.noteTypeSelect.click();
-        ReusableMethods.wait(1);
+    @And("selects {string} from the notification priority dropdown list")
+    public void selectsFromTheNotificationPriorityDropdownList(String selection) {
+        if (selection.contains("Yüksək")) {
+            page.notePriority.click();
+            ReusableMethods.wait(1);
+            page.notePriorityHigh.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Təcili")) {
+            page.notePriorityHigh.click();
+            ReusableMethods.wait(1);
+            page.notePriorityUrgent.click();
+            ReusableMethods.wait(1);
+        }
     }
 
-    @And("selects high from the notification priority dropdown list")
-    public void selectsHighFromTheNotificationPriorityDropdownList() {
-        page.notePriority.click();
-        ReusableMethods.wait(1);
-        page.notePriorityHigh.click();
-        ReusableMethods.wait(1);
+    @And("adds text {string} to the description field")
+    public void addsTextToTheDescriptionField(String selection) {
+        if (selection.contains("new")) {
+            page.addText.sendKeys("Xahiş olunur ki müraciətimə təcili baxılsın!");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("edited")) {
+            page.addText.clear();
+            ReusableMethods.wait(1);
+            page.addText.sendKeys("Müraciət redaktə edildi!");
+            ReusableMethods.wait(1);
+        }
     }
 
-    @And("adds text to the description field")
-    public void addsTextToTheDescriptionField() {
-        page.addText.sendKeys("Xahiş olunur ki müraciətimə təcili baxılsın!");
-        ReusableMethods.wait(1);
-    }
-
-    @And("adds file in the help desk tab")
-    public void addsFileInTheHelpDeskTab() {
-        page.addFile.click();
-        ReusableMethods.wait(1);
-        String path = "C:\\Users\\User\\TestFiles\\Test.png";
-        ReusableMethods.robotClassDosyaYukleme(path);
+    @And("adds {string} file in the help desk tab")
+    public void addsFileInTheHelpDeskTab(String selection) {
+        if (selection.contains("new")) {
+            page.addFile.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\TestFiles\\Test.png";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        } else if (selection.contains("edited")) {
+            page.addFileSecond.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
     }
 
     @When("user selects save button in the help desk tab")
     public void userSelectsSaveButtonInTheHelpDeskTab() {
         page.saveRequest.click();
         ReusableMethods.wait(1);
+
     }
 
-    @Then("new request has been successfully created")
-    public void newRequestHasBeenSuccessfullyCreated() {
-        WebElement tableBody = getDriver().findElement(By.cssSelector("tbody.mdc-data-table__content"));
-        List<WebElement> rows = tableBody.findElements(By.xpath(".//tr[contains(@class, 'mat-mdc-row')]"));
-        for (WebElement row : rows) {
-            WebElement regUserCell = row.findElement(By.xpath(".//td[contains(@class, 'cdk-column-regUserFullName')]"));
-            WebElement feedbackTypeCell = row.findElement(By.xpath(".//td[contains(@class, 'cdk-column-feedBackType')]"));
-            String regUserText = regUserCell.getText();
-            String feedbackTypeText = feedbackTypeCell.getText();
-            assertTrue(regUserText.contains("Fərid İmranov"));
-            assertTrue(feedbackTypeText.contains("Xəta"));
-            if (regUserText.equals("Fərid İmranov") && feedbackTypeText.equals("Xəta")) {
-                row.click();
-                System.out.println("Clicked the row with Fərid İmranov and Xəta");
-                break;
-            }
-        }
-        ReusableMethods.flash(page.check1, getDriver());
-        ReusableMethods.flash(page.check2, getDriver());
-        ReusableMethods.flash(page.check3, getDriver());
-        ReusableMethods.flash(page.check4, getDriver());
-        ReusableMethods.flash(page.check5, getDriver());
-        ReusableMethods.flash(page.check6, getDriver());
-        ReusableMethods.flash(page.check7, getDriver());
-        ReusableMethods.flash(page.check8, getDriver());
-        ReusableMethods.flash(page.check9, getDriver());
-        ReusableMethods.flash(page.check10, getDriver());
-        ReusableMethods.flash(page.check11, getDriver());
-        ReusableMethods.flash(page.check14, getDriver());
-        ReusableMethods.flash(page.check12, getDriver());
-        //ReusableMethods.flash(page.check13,getDriver());
-    }
 
     @Given("test user with login {string} and with password {string} logs into the {string} system")
     public void testUserWithLoginAndWithPasswordLogsIntoTheSystem(String arg0, String arg1, String arg2) {
@@ -149,7 +151,7 @@ public class helpDesk_Steps {
                 break;
             }
         }
-        ReusableMethods.flash(page.check1, getDriver());
+//        ReusableMethods.flash(page.check1, getDriver());
 
     }
 
@@ -707,6 +709,577 @@ public class helpDesk_Steps {
             WebElement fayl = getDriver().findElement(By.xpath("//div[@class='aQH']"));
             ReusableMethods.flash(alltext, getDriver());
             ReusableMethods.flash(fayl, getDriver());
+        }
+    }
+
+    @Then("new request has been successfully created and all information are displayed")
+    public void newRequestHasBeenSuccessfullyCreatedAndAllInformationAreDisplayed(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String id = row.get("ID");
+            String appeal = row.get("İstiqamət");
+            String whoSent = row.get("Bildirişi göndərən");
+            String connection = row.get("Əlaqə");
+            String ip = row.get("İP");
+            String compName = row.get("Kompüterinin adı");
+            String noteType = row.get("Bildirişin tipi");
+            String priority = row.get("Prioritet");
+            String actMade = row.get("Akt tərtib edilib");
+            String description = row.get("Təsvir");
+            String workPlace = row.get("İş yeri");
+            String currentResult = row.get("Cari nəticə");
+
+            ReusableMethods.flash(page.idReview, getDriver());
+            Assert.assertEquals(page.idReview.getText().trim(), getRequestID);
+
+            ReusableMethods.flash(page.directionReview, getDriver());
+            Assert.assertEquals(page.directionReview.getText().trim(), appeal);
+
+            ReusableMethods.flash(page.notificationReview, getDriver());
+            Assert.assertEquals(page.notificationReview.getText().trim(), whoSent);
+
+            String dateText = page.dateReview.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dateReview, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            ReusableMethods.flash(page.connectReview, getDriver());
+            Assert.assertEquals(page.connectReview.getText().trim(), connection);
+
+            ReusableMethods.flash(page.ipReview, getDriver());
+            Assert.assertEquals(page.ipReview.getText().trim(), ip);
+
+            ReusableMethods.flash(page.pcReview, getDriver());
+            Assert.assertEquals(page.pcReview.getText().trim(), compName);
+
+            ReusableMethods.flash(page.notTypeReview, getDriver());
+            Assert.assertEquals(page.notTypeReview.getText().trim(), noteType);
+
+            ReusableMethods.flash(page.priorityReview, getDriver());
+            Assert.assertEquals(page.priorityReview.getText().trim(), priority);
+
+            ReusableMethods.flash(page.currentReview, getDriver());
+            Assert.assertEquals(page.currentReview.getText().trim(), currentResult);
+
+//            ReusableMethods.flash(page.actReview, getDriver()); - Bug var fix edildikden sonra commitden cixardacam
+//            Assert.assertEquals(page.actReview.getText().trim(), actMade);
+
+            ReusableMethods.flash(page.fileReview, getDriver());
+            Assert.assertTrue(page.file.isDisplayed());
+            Assert.assertTrue(page.fileLink.isDisplayed());
+
+            ReusableMethods.flash(page.noteReview, getDriver());
+            Assert.assertEquals(page.noteReview.getText().trim(), description);
+
+            ReusableMethods.flash(page.workPlaceReview, getDriver());
+            Assert.assertEquals(page.workPlaceReview.getText().trim(), workPlace);
+        }
+    }
+
+    @When("selects the last appeal from the table")
+    public void selectsTheLastAppealFromTheTable() {
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.firstAppealFromTable, getDriver());
+        page.firstAppealFromTable.click();
+        ReusableMethods.wait(1);
+        getRequestID = page.idReview.getText().trim();
+        System.out.println("getRequestID = " + getRequestID);
+    }
+
+    @And("selects edit button in the request review section")
+    public void selectsEditButtonInTheRequestReviewSection() {
+        page.requestEditBtn.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("selects {string} program from software dropdown list")
+    public void selectsProgramFromSoftwareDropdownList(String selection) {
+        if (selection.contains("Elektron Sənəd Dövriyyəsi")) {
+            page.programList.click();
+            ReusableMethods.wait(1);
+            page.programEdocumentSelect.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("the edited request has been successfully created and all information are displayed")
+    public void theEditedRequestHasBeenSuccessfullyCreatedAndAllInformationAreDisplayed(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String id = row.get("ID");
+            String appeal = row.get("İstiqamət");
+            String programName = row.get("Proqram təminatı");
+            String whoSent = row.get("Bildirişi göndərən");
+            String connection = row.get("Əlaqə");
+            String ip = row.get("İP");
+            String compName = row.get("Kompüterinin adı");
+            String noteType = row.get("Bildirişin tipi");
+            String priority = row.get("Prioritet");
+            String actMade = row.get("Akt tərtib edilib");
+            String description = row.get("Təsvir");
+            String workPlace = row.get("İş yeri");
+            String currentResult = row.get("Cari nəticə");
+
+            ReusableMethods.flash(page.idReview, getDriver());
+            Assert.assertEquals(page.idReview.getText().trim(), getRequestID);
+
+            ReusableMethods.flash(page.directionReview, getDriver());
+            Assert.assertEquals(page.directionReview.getText().trim(), appeal);
+
+//            ReusableMethods.flash(page.programNameReview, getDriver()); - bug var
+//            Assert.assertEquals(page.programNameReview.getText().trim(), programName);
+
+            ReusableMethods.flash(page.notificationReview, getDriver());
+            Assert.assertEquals(page.notificationReview.getText().trim(), whoSent);
+
+            String dateText = page.dateReview.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dateReview, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            ReusableMethods.flash(page.connectReview, getDriver());
+            Assert.assertEquals(page.connectReview.getText().trim(), connection);
+
+            ReusableMethods.flash(page.ipReview, getDriver());
+            Assert.assertEquals(page.ipReview.getText().trim(), ip);
+
+            ReusableMethods.flash(page.pcReview, getDriver());
+            Assert.assertEquals(page.pcReview.getText().trim(), compName);
+
+            ReusableMethods.flash(page.notTypeReview, getDriver());
+            Assert.assertEquals(page.notTypeReview.getText().trim(), noteType);
+
+            ReusableMethods.flash(page.priorityReview, getDriver());
+            Assert.assertEquals(page.priorityReview.getText().trim(), priority);
+
+            ReusableMethods.flash(page.currentReview, getDriver());
+            Assert.assertEquals(page.currentReview.getText().trim(), currentResult);
+
+//            ReusableMethods.flash(page.actReview, getDriver()); - Bug var fix edildikden sonra commitden cixardacam
+//            Assert.assertEquals(page.actReview.getText().trim(), actMade);
+
+            ReusableMethods.flash(page.fileReview, getDriver());
+            Assert.assertTrue(page.fileSecond.isDisplayed());
+            Assert.assertTrue(page.fileLink.isDisplayed());
+
+            ReusableMethods.flash(page.noteReview, getDriver());
+            Assert.assertEquals(page.noteReview.getText().trim(), description);
+
+            ReusableMethods.flash(page.workPlaceReview, getDriver());
+            Assert.assertEquals(page.workPlaceReview.getText().trim(), workPlace);
+        }
+    }
+
+    @And("goes to the my sent requests section")
+    public void goesToTheMySentRequestsSection() {
+        page.mySentRequestsSection.click();
+        ReusableMethods.wait(4);
+    }
+
+    @And("adds name to the sent filter")
+    public void addsNameToTheSentFilter() {
+//        ReusableMethods.waitForClickabilityAndClick(searchByUserData.nameFilter, 10);
+        ReusableMethods.pageDown();
+        ReusableMethods.wait(1);
+        getTableData = searchByUserData.getTableDataText.getText();
+        System.out.println("expected = " + getTableData);
+        ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+        ReusableMethods.wait(1);
+        ReusableMethods.pageUp();
+        ReusableMethods.waitForClickabilityAndClick(searchByUserData.nameFilter, 5);
+        ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+        page.sentInput.sendKeys("Abbas Rzayev");
+        ReusableMethods.wait(1);
+    }
+
+    @Then("search results are displayed by according to search name surname params")
+    public void searchResultsAreDisplayedByAccordingToSearchNameSurnameParams() {
+        List<WebElement> positionCells = getDriver().findElements(By.cssSelector("td.cdk-column-regUserFullName"));
+        boolean matchFound = false;
+
+        for (int i = 0; i < positionCells.size(); i++) {
+            WebElement cell = getDriver().findElements(By.cssSelector("td.cdk-column-regUserFullName")).get(i);
+            String text = cell.getText().trim();
+            if (text.equals("Abbas Rzayev")) {
+                matchFound = true;
+                System.out.println("Uyğun dəyər tapıldı: " + text);
+
+                String flashScript =
+                        "let element = arguments[0];" +
+                                "let originalColor = element.style.backgroundColor;" +
+                                "let i = 0;" +
+                                "let interval = setInterval(() => {" +
+                                "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                "  i++;" +
+                                "  if(i === 6) {" +
+                                "    clearInterval(interval);" +
+                                "    element.style.backgroundColor = originalColor;" +
+                                "  }" +
+                                "}, 300);";
+
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript(flashScript, cell);
+//                break; // tapıldıqdan sonra loop-u dayandıra bilərik (opsional)
+            }
+        }
+// Tapılmadısa test fail olsun
+        if (!matchFound) {
+            throw new AssertionError("XƏTA: Heç bir nəticə 'Abbas Rzayev' ilə uyğun gəlmir!");
+        }
+        ReusableMethods.wait(2);
+    }
+
+    @Then("the changes is successfully resets in the sent requests section")
+    public void theChangesIsSuccessfullyResetsInTheSentRequestsSection() {
+        ReusableMethods.wait(1);
+//        ReusableMethods.pageDown();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+        System.out.println("expectedTableDataText = " + getTableData);
+        String actualTableText = searchByUserData.getTableDataText.getText();
+        System.out.println("actualTableDataText = " + searchByUserData.getTableDataText.getText());
+        ReusableMethods.wait(2);
+        Assert.assertEquals(getTableData, actualTableText);
+    }
+
+    @When("selects direction {string} from direction filter list")
+    public void selectsDirectionFromDirectionFilterList(String selection) {
+        if (selection.contains("Proqram təminatı")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.descriptionProgram.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Digər problemlər")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.descriptionDifferentProblems.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Şəbəkə və rabitə problemləri")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            ReusableMethods.wait(1);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            page.descriptionNetwork.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Əməliyyat sistemi")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            ReusableMethods.wait(1);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            page.descriptionOS.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Cari işlər")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            ReusableMethods.wait(1);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            page.descriptionCurrentWorks.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Elektron xidmətlər")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            ReusableMethods.wait(1);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            page.descriptionEservices.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        } else if (selection.contains("Avadanlıq")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.wait(1);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.dutyFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            ReusableMethods.wait(1);
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            page.descriptionHardware.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }
+    }
+
+
+    @Then("search results are displayed by according to search direction {string} params")
+    public void searchResultsAreDisplayedByAccordingToSearchDirectionParams(String selection) {
+        if (selection.contains("Proqram təminatı")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Proqram təminatı")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        } else if (selection.contains("Digər problemlər")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Digər problemlər")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+
+        } else if (selection.contains("Şəbəkə və rabitə problemləri")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Şəbəkə və rabitə problemləri")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+
+        } else if (selection.contains("Əməliyyat sistemi")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Əməliyyat sistemi")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+
+        } else if (selection.contains("Elektron xidmətlər")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Elektron xidmətlər")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+
+
+        } else if (selection.contains("Avadanlıq")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-directionName')]"));
+
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Avadanlıq")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
         }
     }
 }

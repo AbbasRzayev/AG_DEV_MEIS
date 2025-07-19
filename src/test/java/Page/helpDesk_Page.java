@@ -16,64 +16,44 @@ public class helpDesk_Page {
     @FindBy(xpath = "//*[@id='mat-select-value-1']")
     public WebElement directionList;
 
-    @FindBy(xpath = "//span[contains(.,'Digər problemlər')]")
+    @FindBy(xpath = "(//span[contains(.,'Digər problemlər')])[1]")
     public WebElement differentProblemsSelect;
 
-    @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-13']")
-    public WebElement sowftwareSelectasd;
+    @FindBy(xpath = "//span[contains(.,'Proqram təminatı')]")
+    public WebElement programSoftwareSelect;
+    @FindBy(xpath = "//span[normalize-space()='Elektron Sənəd Dövriyyəsi']")
+    public WebElement programEdocumentSelect;
 
-    @FindBy(xpath = "//span[contains(.,' Şifrənin dəyişdirilməsi ')]")
-    public WebElement changePass;
+    @FindBy(xpath = "//mat-label[normalize-space()='Proqram təminatı*']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//mat-select")
+    public WebElement programList;
 
     @FindBy(xpath = "//mat-select[@formcontrolname='feedBackType']//span[contains(@class, 'mat-mdc-select-placeholder')]")
     public WebElement noteTypeList;
 
-    @FindBy(xpath = "//span[contains(.,'Xəta')]")
+    @FindBy(xpath = "(//span[contains(.,'Xəta')])[1]")
     public WebElement noteTypeSelect;
+    @FindBy(xpath = "//span[contains(.,'Təklif')]")
+    public WebElement noteTypeOfferSelect;
 
     @FindBy(xpath = "//mat-select[@formcontrolname='priorityType']")
     public WebElement notePriority;
 
-    @FindBy(xpath = "//span[contains(.,'Yüksək')]")
+    @FindBy(xpath = "(//span[contains(.,'Yüksək')])[1]")
     public WebElement notePriorityHigh;
+    @FindBy(xpath = "//span[contains(.,'Təcili')]")
+    public WebElement notePriorityUrgent;
 
-    @FindBy(id = "mat-input-2")
+    @FindBy(xpath = "//textarea[@formcontrolname='description']")
     public WebElement addText;
 
     @FindBy(xpath = "//p[contains(., 'Fayl əlavə edin')]")
     public WebElement addFile;
+    @FindBy(xpath = "//mat-icon[normalize-space()='change_circle']")
+    public WebElement addFileSecond;
 
     @FindBy(xpath = "//span[normalize-space()='Yadda saxla']")
     public WebElement saveRequest;
 
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[1]")
-    public WebElement check1;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[2]")
-    public WebElement check2;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[3]")
-    public WebElement check3;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[4]")
-    public WebElement check4;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[5]")
-    public WebElement check5;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[6]")
-    public WebElement check6;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[7]")
-    public WebElement check7;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[8]")
-    public WebElement check8;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[9]")
-    public WebElement check9;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[10]")
-    public WebElement check10;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[11]")
-    public WebElement check11;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[12]")
-    public WebElement check12;
-    @FindBy(xpath = "(//span[@class='ng-star-inserted'])[13]")
-    public WebElement check13;
-    @FindBy(xpath = "//a[@class='ng-star-inserted']")
-    public WebElement check14;
     @FindBy(xpath = "(//span[@class='mdc-list-item__content'])[9]")
     public WebElement adminPanelBtn;
     @FindBy(xpath = "//span[contains(., 'Yardım masası')]")
@@ -188,8 +168,65 @@ public class helpDesk_Page {
     @FindBy(xpath = "(//td[text()='İcra edilib'])[1]")
     public WebElement checkDoneStatusTable;
 
-
-
-
+    @FindBy(xpath = "//span[normalize-space(text())='ID']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement idReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Proqram təminatı']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement programNameReview;
+    @FindBy(xpath = "//span[normalize-space(text())='İstiqamət']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement directionReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Bildirişi göndərən']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement notificationReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Tarix']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement dateReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Əlaqə']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement connectReview;
+    @FindBy(xpath = "//span[normalize-space(text())='İP telefon nömrəsi']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement ipReview;
+    @FindBy(xpath = "//span[normalize-space(text())='İstifadəçi kompüterinin adı']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement pcReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Bildirişin tipi']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement notTypeReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Prioritet']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement priorityReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Cari nəticə']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement currentReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Akt tərtib edilib']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement actReview;
+    @FindBy(xpath = "//span[normalize-space(text())='Fayl']/following-sibling::a")
+    public WebElement fileReview;
+    @FindBy(xpath = "//following::a[@download='Test.png']")
+    public WebElement file;
+    @FindBy(xpath = "//following::a[@download='QAAT.png']")
+    public WebElement fileSecond;
+    @FindBy(xpath = "//following::a[contains(@href, 'data:/image/png')]")
+    public WebElement fileLink;
+    @FindBy(xpath = "//span[normalize-space(text())='İcra edənin qeydi']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement noteReview;
+    @FindBy(xpath = "//span[normalize-space(text())='İş yeri']/following-sibling::p/span[normalize-space(text())]")
+    public WebElement workPlaceReview;
+    @FindBy(xpath = "(//tr[@role='row'])[2]")
+    public WebElement firstAppealFromTable;
+    @FindBy(xpath = "//span[text()='Düzəliş et']")
+    public WebElement requestEditBtn;
+    @FindBy(xpath = "//span[normalize-space()='Göndərdiyim müraciətlər']")
+    public WebElement mySentRequestsSection;
+    @FindBy(xpath = "//mat-label[text()='Göndərən']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input")
+    public WebElement sentInput;
+    @FindBy(xpath = "//ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//mat-select")
+    public WebElement descriptionList;
+    @FindBy(xpath = "//span[text()='Proqram təminatı']")
+    public WebElement descriptionProgram;
+    @FindBy(xpath = "//span[text()='Digər problemlər']")
+    public WebElement descriptionDifferentProblems;
+    @FindBy(xpath = "//span[text()='Şəbəkə və rabitə problemləri']")
+    public WebElement descriptionNetwork;
+    @FindBy(xpath = "//span[text()='Əməliyyat sistemi']")
+    public WebElement descriptionOS;
+    @FindBy(xpath = "//span[text()='Cari işlər']")
+    public WebElement descriptionCurrentWorks;
+    @FindBy(xpath = "//span[text()='Elektron xidmətlər']")
+    public WebElement descriptionEservices;
+    @FindBy(xpath = "//span[text()='Avadanlıq']")
+    public WebElement descriptionHardware;
 
 }
