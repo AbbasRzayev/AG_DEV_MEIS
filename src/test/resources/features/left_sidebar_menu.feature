@@ -1,4 +1,4 @@
-@all
+@all @new
 Feature: Left sidebar menu
 
   @left_sidebar
@@ -11,12 +11,12 @@ Feature: Left sidebar menu
     When user selects personal cabinet from left sidebar
       #ŞəxsiKabinetim
     Then user successfully switches to the personal cabinet tab
-#    When user selects programs from left sidebar
-#      #Proqramlarım
-#    Then user successfully switches to the program tab
-#    When user selects announcement and congratulations from left sidebar
-#      #Elan və təbriklər
-#    Then user successfully switches to the announcement and congratulations page
+    When user selects programs from left sidebar
+      #Proqramlarım
+    Then user successfully switches to the program tab
+    When user selects announcement and congratulations from left sidebar
+      #Elan və təbriklər
+    Then user successfully switches to the announcement and congratulations page
     When user selects idea bank from left sidebar
       #Idea bankı
     Then user successfully switches to the idea bank page
@@ -39,14 +39,14 @@ Feature: Left sidebar menu
       #Çıxış
     Then user successfully log out from "AG-MEIS" system
   #Test Ssenarilər
-  #1.Sidebardan "Əsas səhifə"-tabına keçid edərək url və title yoxlanılması
-  #2.Sidebardan "Şəxsi Kabinetim"-tabına keçid edərək url və title yoxlanılması
-  #3.Sidebardan "Proqramlarım"-tabına keçid edərək url və title yoxlanılması
-  #4.Sidebardan "Elan və Təbriklər"-tabına keçid edərək url və title yoxlanılması
-  #5.Sidebardan "İdea bankı"-tabına keçid edərək url və title yoxlanılması
-  #6.Sidebardan "Hüquqi baza"-tabına keçid edərək url və title yoxlanılması
-  #7.Sidebardan "Elektron kitabxana"-tabına keçid edərək url və title yoxlanılması
-  #8.Sidebardan "Təqvim"-tabına keçid edərək url və title yoxlanılması
-  #9.Sidebardan "İdarəetmə"-tabına keçid edərək url və title yoxlanılması
-  #10.Sidebardan "Yardım masası"-tabına keçid edərək url və title yoxlanılması
-  #11.Sidebardan "Çıxış"-düyməsini təstiqləyərək autorizasiya səhifəsinə keçid, url və title yoxlanılması
+  #1.Sol sidebar menudan "Əsas səhifə"-tabına keçid edərək url və title yoxlanılması
+  #2.Sol sidebar menudan "Şəxsi Kabinetim"-tabına keçid edərək url və title yoxlanılması
+  #3.Sol sidebar menudan "Proqramlarım"-tabına keçid edərək url və title yoxlanılması
+  #4.Sol sidebar menudan "Elan və Təbriklər"-tabına keçid edərək url və title yoxlanılması
+  #5.Sol sidebar menudan "İdea bankı"-tabına keçid edərək url və title yoxlanılması
+  #6.Sol sidebar menudan "Hüquqi baza"-tabına keçid edərək url və title yoxlanılması
+  #7.Sol sidebar menudan "Elektron kitabxana"-tabına keçid edərək url və title yoxlanılması
+  #8.Sol sidebar menudan "Təqvim"-tabına keçid edərək url və title yoxlanılması
+  #9.Sol sidebar menudan "İdarəetmə"-tabına keçid edərək url və title yoxlanılması
+  #10.Sol sidebar menudan "Yardım masası"-tabına keçid edərək url və title yoxlanılması
+  #11.Sol sidebar menudan "Çıxış"-düyməsini təstiqləyərək autorizasiya səhifəsinə keçid, url və title yoxlanılması

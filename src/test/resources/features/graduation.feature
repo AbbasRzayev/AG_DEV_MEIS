@@ -1,7 +1,7 @@
 @all
 Feature: Graduation
 
-  @graduation
+  @graduation @new
   Scenario: Check that if it is possible assignment the graduation to the user in the MEİS system
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And goes to the control panel

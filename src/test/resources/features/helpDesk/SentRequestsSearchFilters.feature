@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @new
 Feature: Search filters in the sent requests section
 
   Background:
@@ -52,12 +52,12 @@ Feature: Search filters in the sent requests section
     #Müraciəti cari işlər istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     When user reset the changes for "direction"
     Then the changes is successfully resets in the sent requests section
-#    #Müraciəti elektron xidmətlər istiqamətinə görə axtarış filterin yoxlanılması
-#    When selects direction "Elektron xidmətlər" from direction filter list
-#    Then search results are displayed by according to search direction "Elektron xidmətlər" params
+    #Müraciəti elektron xidmətlər istiqamətinə görə axtarış filterin yoxlanılması
+    When selects direction "Elektron xidmətlər" from direction filter list
+    Then search results are displayed by according to search direction "Elektron xidmətlər" params
     #Müraciəti elektron xidmətlər istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-#    When user reset the changes for "direction"
-#    Then the changes is successfully resets in the sent requests section
+    When user reset the changes for "direction"
+    Then the changes is successfully resets in the sent requests section
     #Müraciəti avadanlıq istiqamətinə görə axtarış filterin yoxlanılması
     When selects direction "Avadanlıq" from direction filter list
     Then search results are displayed by according to search direction "Avadanlıq" params
@@ -79,3 +79,64 @@ Feature: Search filters in the sent requests section
     #33.Müraciəti elektron xidmətlər istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     #34.Müraciəti avadanlıq istiqamətinə görə axtarış filterin yoxlanılması
     #35.Müraciəti avadanlıq istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+
+
+  @notificationTypeSearchFilter
+  Scenario: Checking the notification type filter in the sent requests section
+    #Bildiriş tipi "Xəta"-ya görə axtarışın filterin yoxlanılması
+    When selects "Xəta" from notification type filter list
+    Then search results are displayed by according to search note type "Xəta" params
+    #Bildiriş tipi "Xəta"-ya görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Təklif"-ə görə axtarışın filterin yoxlanılması
+    When selects "Təklif" from notification type filter list
+    Then search results are displayed by according to search note type "Təklif" params
+    #Bildiriş tipi "Təklif"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Qeyd"-ə görə axtarışın filterin yoxlanılması
+    When selects "Qeyd" from notification type filter list
+    Then search results are displayed by according to search note type "Qeyd" params
+    #Bildiriş tipi "Qeyd"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Quraşdırma/Sazlama"-ra görə axtarışın filterin yoxlanılması
+    When selects "Quraşdırma/Sazlama" from notification type filter list
+    Then search results are displayed by according to search note type "Quraşdırma/Sazlama" params
+    #Bildiriş tipi "Quraşdırma/Sazlama"-ra görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Sorğu"-ya görə axtarışın filterin yoxlanılması
+    When selects "Sorğu" from notification type filter list
+    Then search results are displayed by according to search note type "Sorğu" params
+    #Bildiriş tipi "Sorğu"-ya görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Müraciət"-ə görə axtarışın filterin yoxlanılması
+    When selects "Müraciət" from notification type filter list
+    Then search results are displayed by according to search note type "Müraciət" params
+    #Bildiriş tipi "Müraciət"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+    #Bildiriş tipi "Digər"-ə görə axtarışın filterin yoxlanılması
+    When selects "Müraciət" from notification type filter list
+    Then search results are displayed by according to search note type "Digər" params
+    #Bildiriş tipi "Digər"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+    When user reset the changes for "note type"
+    Then the changes is successfully resets in the sent requests section
+  #Test ssenarilər:
+  #36.Bildiriş tipi "Xəta"-ya görə axtarışın filtrinin yoxlanılması
+  #37.Bildiriş tipi "Xəta"-ya görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #38.Bildiriş tipi "Təklif"-ə görə axtarışın filtrinin yoxlanılması
+  #39.Bildiriş tipi "Təklif"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #40.Bildiriş tipi "Qeyd"-ə görə axtarışın filtrinin yoxlanılması
+  #41.Bildiriş tipi "Qeyd"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #42.Bildiriş tipi "Quraşdırma/Sazlama"-ya görə axtarışın filtrinin yoxlanılması
+  #43.Bildiriş tipi "Quraşdırma/Sazlama"-ya görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #44.Bildiriş tipi "Sorğu"-ya görə axtarışın filtrinin yoxlanılması
+  #45.Bildiriş tipi "Sorğu"-ya görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #46.Bildiriş tipi "Müraciət"-ə görə axtarışın filtrinin yoxlanılması
+  #47.Bildiriş tipi "Müraciət"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #48.Bildiriş tipi "Digər"-ə görə axtarışın filtrinin yoxlanılması
+  #49.Bildiriş tipi "Digər"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması

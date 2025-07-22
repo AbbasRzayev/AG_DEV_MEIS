@@ -44,7 +44,7 @@ public class structureAndDuties_Steps {
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
             page.nameField.sendKeys("Abbas");
             ReusableMethods.wait(1);
-            page.finField.sendKeys("19HSHLY");
+            page.finField.sendKeys("19HSHLC");
             ReusableMethods.wait(1);
         }
         else if (name.contains("Zamanov")) {
@@ -71,6 +71,7 @@ public class structureAndDuties_Steps {
 
     @And("switches to the user change structure and duties tab")
     public void switchesToTheUserChangeStructureAndDutiesTab() {
+        ReusableMethods.wait(2);
         page.foundedUser.click();
         ReusableMethods.wait(2);
         page.structureAndDutiesChangePage.click();
@@ -80,7 +81,7 @@ public class structureAndDuties_Steps {
     @And("user selects new {string} position")
     public void userSelectsNewPosition(String structure) {
         if (structure.contains("AISTGroup MMC")) {
-//            page.openQualityControlStructureParentList.click();
+            page.openQualityControlStructureParentList.click();
             ReusableMethods.wait(1);
             page.ATAndManualSector.click();
             ReusableMethods.wait(1);

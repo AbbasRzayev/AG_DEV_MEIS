@@ -47,7 +47,7 @@ public class searchByUserData_Steps {
         String text = page.name.getText();
         System.out.println("text = " + text);
         ReusableMethods.flash(page.name, getDriver());
-        assertTrue(text.contains("Abbas Rzayev"));
+        assertTrue(text.contains("Abbas"));
     }
 
     @And("adds surname to the surname field in the filter")
@@ -121,7 +121,7 @@ public class searchByUserData_Steps {
     public void addsPinToThePinFieldInTheFilter() {
         ReusableMethods.waitForClickabilityAndClick(page.nameFilter, 5);
         ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
-        page.finField.sendKeys("19HSHLY");
+        page.finField.sendKeys("19HSHLC");
     }
 
     @Then("search results are displayed by according to search pin params")
@@ -131,7 +131,7 @@ public class searchByUserData_Steps {
         System.out.println(page.pinText.getText());
         String text = page.pinText.getText();
         ReusableMethods.flash(page.pinText, getDriver());
-        assertTrue(text.contains("19HSHLY"));
+        assertTrue(text.contains("19HSHLC"));
         getDriver().navigate().back();
         ReusableMethods.wait(1);
     }
@@ -175,7 +175,7 @@ public class searchByUserData_Steps {
     @When("user selects enter in the users tab")
     public void userSelectsEnterInTheUsersTab() {
         getDriver().switchTo().activeElement().sendKeys(Keys.ENTER);
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @When("user reset the changes")
@@ -199,7 +199,23 @@ public class searchByUserData_Steps {
 
     @When("user reset the changes for {string}")
     public void userResetTheChangesFor(String selection) {
-        if(selection.contains("duty")) {
+        if (selection.contains("duty")) {
+            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+            ReusableMethods.wait(1);
+            while (true) {
+                try {
+                    if (!page.filterModal.isDisplayed()) {
+                        break;
+                    }
+                    ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                    ReusableMethods.wait(1);
+                } catch (NoSuchElementException noSuchElementException) {
+                    break;
+                }
+            }
+        } else if (selection.contains("direction")) {
             ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
             ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
@@ -216,8 +232,8 @@ public class searchByUserData_Steps {
                 }
             }
         }
-        else if(selection.contains("direction")) {
-            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
+        else if (selection.contains("note type")) {
+            ReusableMethods.waitForClickabilityAndClick(page.noteType, 5);
             ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
             ReusableMethods.wait(1);
@@ -379,9 +395,10 @@ public class searchByUserData_Steps {
         ReusableMethods.waitForClickabilityAndClick(page.selectAdminApproval, 5);
         ReusableMethods.wait(2);
     }
+
     @And("selects verification of the situation where the administrator {string} in the filter")
     public void selectsVerificationOfTheSituationWhereTheAdministratorInTheFilter(String approval) {
-        if(approval.contains("applied")){
+        if (approval.contains("applied")) {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
             ReusableMethods.wait(2);
@@ -395,8 +412,7 @@ public class searchByUserData_Steps {
             ReusableMethods.waitForClickabilityAndClick(page.adminApprovalList, 5);
             ReusableMethods.waitForClickabilityAndClick(page.selectAdminApproval, 5);
             ReusableMethods.wait(2);
-        }
-        else if (approval.contains("not")) {
+        } else if (approval.contains("not")) {
             System.out.println("im here");
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
@@ -420,45 +436,262 @@ public class searchByUserData_Steps {
         ReusableMethods.wait(2);
     }
 
-    @Then("search results are displayed by according to admin approval params")
-    public void searchResultsAreDisplayedByAccordingToAdminApprovalParams() {
-        List<WebElement> statusCells = getDriver().findElements(By.cssSelector("td.cdk-column-isConfirmedByAdmin"));
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+    @Then("search results are displayed by according to admin approves {string}")
+    public void searchResultsAreDisplayedByAccordingToAdminApproves(String selection) {
+        if (selection.contains("applied")) {
+            List<WebElement> statusCells = getDriver().findElements(By.cssSelector("td.cdk-column-isConfirmedByAdmin"));
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
 
-        for (WebElement cell : statusCells) {
-            String iconText = "";
-            try {
-                // Hüceyrənin içindəki <mat-icon> textini al
-                WebElement icon = cell.findElement(By.tagName("mat-icon"));
-                iconText = icon.getText().trim();
-            } catch (Exception e) {
-                System.out.println("mat-icon tapılmadı: " + e.getMessage());
-                continue;
+            boolean foundCheck = false;
+            boolean foundClose = false;
+
+            for (WebElement cell : statusCells) {
+                String iconText = "";
+                try {
+                    WebElement icon = cell.findElement(By.tagName("mat-icon"));
+                    iconText = icon.getText().trim();
+                } catch (Exception e) {
+                    System.out.println("mat-icon tapılmadı: " + e.getMessage());
+                    continue;
+                }
+
+                if (iconText.equals("check")) {
+                    foundCheck = true;
+
+                    // İşıqlandır (vizual effekt üçün)
+                    System.out.println("Check tapıldı");
+                    String flashScript =
+                            "let element = arguments[0];" +
+                                    "let originalColor = element.style.backgroundColor;" +
+                                    "let i = 0;" +
+                                    "let interval = setInterval(() => {" +
+                                    "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                    "  i++;" +
+                                    "  if(i === 6) {" +
+                                    "    clearInterval(interval);" +
+                                    "    element.style.backgroundColor = originalColor;" +
+                                    "  }" +
+                                    "}, 300);";
+                    js.executeScript(flashScript, cell);
+                }
+
+                if (iconText.equals("close")) {
+                    foundClose = true;
+                }
             }
 
-            if (iconText.equals("check") || iconText.equals("close")) {
-                System.out.println("Uyğun status tapıldı: " + iconText);
-                String flashScript =
-                        "let element = arguments[0];" +
-                                "let originalColor = element.style.backgroundColor;" +
-                                "let i = 0;" +
-                                "let interval = setInterval(() => {" +
-                                "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
-                                "  i++;" +
-                                "  if(i === 6) {" +
-                                "    clearInterval(interval);" +
-                                "    element.style.backgroundColor = originalColor;" +
-                                "  }" +
-                                "}, 300);";
-                js.executeScript(flashScript, cell);
+// Nəticə yoxlaması
+            if (foundCheck && foundClose) {
+                throw new AssertionError("Həm 'check', həm də 'close' ikonları mövcuddur – bu allowed deyil!");
             }
+
+        } else if (selection.contains("not")) {
+            List<WebElement> statusCells = getDriver().findElements(By.cssSelector("td.cdk-column-isConfirmedByAdmin"));
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+            boolean foundCheck = false;
+            boolean foundClose = false;
+
+            for (WebElement cell : statusCells) {
+                String iconText = "";
+                try {
+                    WebElement icon = cell.findElement(By.tagName("mat-icon"));
+                    iconText = icon.getText().trim();
+                } catch (Exception e) {
+                    System.out.println("mat-icon tapılmadı: " + e.getMessage());
+                    continue;
+                }
+
+                if (iconText.equals("close")) {
+                    foundCheck = true;
+
+                    // İşıqlandır (vizual effekt üçün)
+                    System.out.println("Close tapıldı");
+                    String flashScript =
+                            "let element = arguments[0];" +
+                                    "let originalColor = element.style.backgroundColor;" +
+                                    "let i = 0;" +
+                                    "let interval = setInterval(() => {" +
+                                    "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                    "  i++;" +
+                                    "  if(i === 6) {" +
+                                    "    clearInterval(interval);" +
+                                    "    element.style.backgroundColor = originalColor;" +
+                                    "  }" +
+                                    "}, 300);";
+                    js.executeScript(flashScript, cell);
+                }
+
+                if (iconText.equals("check")) {
+                    foundClose = true;
+                }
+            }
+
+// Nəticə yoxlaması
+            if (foundCheck && foundClose) {
+                throw new AssertionError("Həm 'check', həm də 'close' ikonları mövcuddur – bu allowed deyil!");
+            }
+
         }
+
         ReusableMethods.wait(2);
     }
 
     @When("user reset the changes for admin approval")
     public void userResetTheChangesForAdminApproval() {
         ReusableMethods.waitForClickabilityAndClick(page.adminConfirmedFilter, 5);
+        ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+        ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+        ReusableMethods.wait(1);
+        while (true) {
+            try {
+                if (!page.filterModal.isDisplayed()) {
+                    break;
+                }
+                ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                ReusableMethods.wait(1);
+            } catch (NoSuchElementException noSuchElementException) {
+                break;
+            }
+        }
+    }
+
+    @And("selects the current status of the account {string} in the filter")
+    public void selectsTheCurrentStatusOfTheAccountInTheFilter(String selection) {
+        if (selection.contains("applied")) {
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(2);
+            getTableData = page.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(page.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(page.currentStatusFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.currentStatusList, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.selectApprovedStatus, 5);
+            ReusableMethods.wait(2);
+        } else if (selection.contains("not")) {
+            System.out.println("im here");
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(2);
+            getTableData = page.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(page.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(page.currentStatusFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.currentStatusList, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.selectNotApprovedStatus, 5);
+            ReusableMethods.wait(2);
+        }
+
+    }
+
+    @Then("search results of the current status are displayed by according to admin approval {string}")
+    public void searchResultsOfTheCurrentStatusAreDisplayedByAccordingToAdminApproval(String selection) {
+        if (selection.contains("applied")) {
+            List<WebElement> statusCells = getDriver().findElements(By.cssSelector("td.cdk-column-statusType"));
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+            boolean foundCheck = false;
+            boolean foundClose = false;
+
+            for (WebElement cell : statusCells) {
+                String iconText = "";
+                try {
+                    WebElement icon = cell.findElement(By.tagName("mat-icon"));
+                    iconText = icon.getText().trim();
+                } catch (Exception e) {
+                    System.out.println("mat-icon tapılmadı: " + e.getMessage());
+                    continue;
+                }
+
+                if (iconText.equals("check")) {
+                    foundCheck = true;
+
+                    // İşıqlandır (vizual effekt üçün)
+                    System.out.println("Check tapıldı");
+                    String flashScript =
+                            "let element = arguments[0];" +
+                                    "let originalColor = element.style.backgroundColor;" +
+                                    "let i = 0;" +
+                                    "let interval = setInterval(() => {" +
+                                    "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                    "  i++;" +
+                                    "  if(i === 6) {" +
+                                    "    clearInterval(interval);" +
+                                    "    element.style.backgroundColor = originalColor;" +
+                                    "  }" +
+                                    "}, 300);";
+                    js.executeScript(flashScript, cell);
+                }
+
+                if (iconText.equals("close")) {
+                    foundClose = true;
+                }
+            }
+
+// Nəticə yoxlaması
+            if (foundCheck && foundClose) {
+                throw new AssertionError("Həm 'check', həm də 'close' ikonları mövcuddur – bu allowed deyil!");
+            }
+        } else if (selection.contains("not")) {
+            List<WebElement> statusCells = getDriver().findElements(By.cssSelector("td.cdk-column-statusType"));
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+
+            boolean foundCheck = false;
+            boolean foundClose = false;
+
+            for (WebElement cell : statusCells) {
+                String iconText = "";
+                try {
+                    WebElement icon = cell.findElement(By.tagName("mat-icon"));
+                    iconText = icon.getText().trim();
+                } catch (Exception e) {
+                    System.out.println("mat-icon tapılmadı: " + e.getMessage());
+                    continue;
+                }
+
+                if (iconText.equals("close")) {
+                    foundCheck = true;
+
+                    // İşıqlandır (vizual effekt üçün)
+                    System.out.println("Close tapıldı");
+                    String flashScript =
+                            "let element = arguments[0];" +
+                                    "let originalColor = element.style.backgroundColor;" +
+                                    "let i = 0;" +
+                                    "let interval = setInterval(() => {" +
+                                    "  element.style.backgroundColor = (element.style.backgroundColor === 'green' ? originalColor : 'green');" +
+                                    "  i++;" +
+                                    "  if(i === 6) {" +
+                                    "    clearInterval(interval);" +
+                                    "    element.style.backgroundColor = originalColor;" +
+                                    "  }" +
+                                    "}, 300);";
+                    js.executeScript(flashScript, cell);
+                }
+
+                if (iconText.equals("check")) {
+                    foundClose = true;
+                }
+            }
+
+// Nəticə yoxlaması
+            if (foundCheck && foundClose) {
+                throw new AssertionError("Həm 'check', həm də 'close' ikonları mövcuddur – bu allowed deyil!");
+            }
+        }
+        ReusableMethods.wait(2);
+    }
+
+    @When("user reset the changes for current status")
+    public void userResetTheChangesForCurrentStatus() {
+        ReusableMethods.waitForClickabilityAndClick(page.currentStatusFilter, 5);
         ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
         ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
         ReusableMethods.wait(1);

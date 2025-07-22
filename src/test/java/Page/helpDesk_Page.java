@@ -228,5 +228,19 @@ public class helpDesk_Page {
     public WebElement descriptionEservices;
     @FindBy(xpath = "//span[text()='Avadanlıq']")
     public WebElement descriptionHardware;
+    @FindBy(xpath = "//span[text()='Xəta']")
+    public WebElement errorNotType;
+    @FindBy(xpath = "//span[text()='Təklif']")
+    public WebElement offerNotType;
+    @FindBy(xpath = "//span[text()='Qeyd']")
+    public WebElement noticeNotType;
+    @FindBy(xpath = "//span[text()='Quraşdırma/Sazlama']")
+    public WebElement installNotType;
+    @FindBy(xpath = "//span[text()='Sorğu']")
+    public WebElement surveyNotType;
+    @FindBy(xpath = "//span[text()='Müraciət']")
+    public WebElement requestNotType;
+    @FindBy(xpath = "//span[text()='Digər']")
+    public WebElement otherNotType;
 
 }

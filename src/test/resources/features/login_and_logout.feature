@@ -1,4 +1,4 @@
-@all @login_and_logout
+@all @login_and_logout @new
 Feature: Login to the MEIS system
 
   @login

@@ -51,6 +51,8 @@ public class searchByUserData_Page {
     public WebElement structureFilter;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[4]")
     public WebElement adminConfirmedFilter;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[5]")
+    public WebElement currentStatusFilter;
     @FindBy(xpath = "//span[text()='Filter tətbiq et']")
     public WebElement openFilter;
     @FindBy(xpath = "//span[text()='Dəyişiklikləri sıfırla']")
@@ -67,13 +69,21 @@ public class searchByUserData_Page {
     public WebElement structureInput;
     @FindBy(xpath = "//mat-label[text()='Təsdiqin statusu']/ancestor::label/following-sibling::mat-select")
     public WebElement adminApprovalList;
+  @FindBy(xpath = "//mat-label[text()='Statusu']/ancestor::label/following-sibling::mat-select")
+    public WebElement currentStatusList;
     @FindBy(xpath = "//div[contains(@class,'manual-option') and contains(.,'QA_AT')]")
     public WebElement dutyQASelect;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[2]")
     public WebElement dutyInputSecond;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[3]")
+    public WebElement noteType;
     @FindBy(xpath = "//span[contains(., 'İnzibatçı təsdiqləyib')]")
     public WebElement selectAdminApproval;
     @FindBy(xpath = "//span[contains(., 'Təsdiqlənməyib')]")
     public WebElement selectAdminNotApproval;
+    @FindBy(xpath = "//span[contains(., 'Deaktiv')]")
+    public WebElement selectNotApprovedStatus;
+    @FindBy(xpath = "//span[contains(., 'Aktiv')]")
+    public WebElement selectApprovedStatus;
 
 }

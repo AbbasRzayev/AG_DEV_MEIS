@@ -7,7 +7,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ExcelUtils;
 import utilities.ReusableMethods;
@@ -45,9 +49,9 @@ public class changePassword_Steps {
 
     @And("goes to the change password tab")
     public void goesToTheChangePasswordTab() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
         changePage.changePasswordTab.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @And("add the {string} password")
@@ -166,27 +170,34 @@ public class changePassword_Steps {
 
     }
 
-    @When("user added valid datas to the new password field and to the repeat new password field")
-    public void userAddedValidDatasToTheNewPasswordFieldAndToTheRepeatNewPasswordField() {
+    @When("user added valid dates to the new password field and to the repeat new password field")
+    public void userAddedValidDatesToTheNewPasswordFieldAndToTheRepeatNewPasswordField() {
         int size = excelUtils.rowCount();
         System.out.println("size = " + size);
         for (int i = 1; i <= size; i++){
-            String newpass = excelUtils.getCellData(i,0);
-            changePage.newPassword.sendKeys(newpass);
+            String newPass = excelUtils.getCellData(i,0);
+            changePage.newPassword.sendKeys(newPass);
             ReusableMethods.wait(1);
             String repPass = excelUtils.getCellData(i,1);
             changePage.repeatNewPassword.sendKeys(repPass);
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
+            WebElement element = getDriver().findElement(By.xpath("//button[.//span[contains(text(), 'Yadda saxlayın')]]"));
+            String isDisabled = element.getAttribute("disabled");
+            if (isDisabled != null && (isDisabled.equals("true") || isDisabled.equals("disabled"))) {
+                System.out.println("Düymə deaktivdir (disabled=true), test dayandırıldı ❌");
+                fail("Yadda saxlayın düyməsi deaktivdir!");
+            }
+            System.out.println("Is Enabled? " + element.isEnabled());
+            System.out.println("Is Displayed? " + element.isDisplayed());
             changePage.newPassword.clear();
             changePage.repeatNewPassword.clear();
-
         }
     }
 
     @Then("the submit button becomes active")
     public void theSubmitButtonBecomesActive() {
-        assertTrue(changePage.subPassword.isEnabled());
+
+        WebElement element = getDriver().findElement(By.xpath("//span[normalize-space()='Yadda saxlayın']"));
+        assertTrue(element.isDisplayed() && element.isEnabled());
     }
-
-
 }

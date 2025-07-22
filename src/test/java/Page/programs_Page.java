@@ -52,7 +52,7 @@ public class programs_Page {
     public WebElement iconAnotherFileBtn;
     @FindBy(xpath = "//span[contains(.,'Yadda saxla')]")
     public WebElement saveButton;
-    @FindBy(xpath = "//input[@type='text']")
+    @FindBy(xpath = "(//input[@type='text'])[1]")
     public WebElement searchInput;
     @FindBy(xpath = "//p[text()='Bright Future']")
     public WebElement createdProq;

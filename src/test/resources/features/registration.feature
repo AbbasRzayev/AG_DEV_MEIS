@@ -1,4 +1,4 @@
-@all @registration
+@all @registration @new
 Feature: User registration
 
   @user_registration

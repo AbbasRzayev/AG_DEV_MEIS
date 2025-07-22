@@ -1,4 +1,4 @@
-@all
+@all @new
 Feature: Headers and Footers icons,buttons,texts
 
   @header_and_footer
@@ -23,4 +23,4 @@ Feature: Headers and Footers icons,buttons,texts
   #5.Header hissəsində şəxsi kabinetimin əks olunması və seçilməsi
   #6.Header hissəsində ad və soyadın əks olunması
   #7.Footer "Bütün hüquqlar qorunur - copyright" əks olunması
-  #8.Header hissəsində "AISTGroup MMC"- logo əks olunması əks olunması və klik etdikdə keçid etmə və url yoxlanılması
+  #8.Footer hissəsində "AISTGroup MMC"- logo əks olunması əks olunması və klik etdikdə keçid etmə və url yoxlanılması

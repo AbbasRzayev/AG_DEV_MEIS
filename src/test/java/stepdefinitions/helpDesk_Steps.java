@@ -835,8 +835,8 @@ public class helpDesk_Steps {
             ReusableMethods.flash(page.directionReview, getDriver());
             Assert.assertEquals(page.directionReview.getText().trim(), appeal);
 
-//            ReusableMethods.flash(page.programNameReview, getDriver()); - bug var
-//            Assert.assertEquals(page.programNameReview.getText().trim(), programName);
+            ReusableMethods.flash(page.programNameReview, getDriver());
+            Assert.assertEquals(page.programNameReview.getText().trim(), programName);
 
             ReusableMethods.flash(page.notificationReview, getDriver());
             Assert.assertEquals(page.notificationReview.getText().trim(), whoSent);
@@ -955,7 +955,7 @@ public class helpDesk_Steps {
         System.out.println("expectedTableDataText = " + getTableData);
         String actualTableText = searchByUserData.getTableDataText.getText();
         System.out.println("actualTableDataText = " + searchByUserData.getTableDataText.getText());
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         Assert.assertEquals(getTableData, actualTableText);
     }
 
@@ -1273,6 +1273,346 @@ public class helpDesk_Steps {
                     System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
                 }
             }
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }
+    }
+
+    @When("selects {string} from notification type filter list")
+    public void selectsFromNotificationTypeFilterList(String selection) {
+        if(selection.contains("Xəta")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.errorNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Təklif")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.offerNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Qeyd")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.noticeNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Quraşdırma/Sazlama")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.installNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Sorğu")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.surveyNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Müraciət")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.requestNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }else if(selection.contains("Digər")){
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            getTableData = searchByUserData.getTableDataText.getText();
+            System.out.println("expected = " + getTableData);
+            ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
+            ReusableMethods.wait(1);
+            ReusableMethods.pageUp();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+            page.descriptionList.click();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            ReusableMethods.wait(1);
+            page.otherNotType.click();
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
+            ReusableMethods.wait(3);
+        }
+    }
+
+    @Then("search results are displayed by according to search note type {string} params")
+    public void searchResultsAreDisplayedByAccordingToSearchNoteTypeParams(String selection) {
+        if (selection.contains("Xəta")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Xəta")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        } else if (selection.contains("Təklif")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Təklif")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }
+        else if (selection.contains("Qeyd")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Qeyd")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }else if (selection.contains("Quraşdırma/Sazlama")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Quraşdırma/Sazlama")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }else if (selection.contains("Sorğu")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Sorğu")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }else if (selection.contains("Müraciət")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Müraciət")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
+            if (!foundValidRow) {
+                Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
+            }
+
+            if (foundInvalidRow) {
+                Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
+            }
+        }else if (selection.contains("Digər")) {
+            List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
+            if (!noResults.isEmpty()) {
+                // Tapılıbsa → flash et və keç
+                ReusableMethods.flash(noResults.get(0), getDriver());
+                return;
+            }
+
+            List<WebElement> rows = getDriver().findElements(By.xpath("//td[contains(@class,'cdk-column-feedBackType')]"));
+            boolean foundValidRow = false;
+            boolean foundInvalidRow = false;
+            for (WebElement row : rows) {
+                String text = row.getText().trim();
+
+                if (text.equals("Digər")) {
+                    ReusableMethods.flash(row, getDriver());
+                    foundValidRow = true;
+                } else {
+                    foundInvalidRow = true;
+                    System.out.println("Xəta: Gözlənilməyən istiqamət tapıldı: " + text);
+                }
+            }
+
             if (!foundValidRow) {
                 Assert.fail("Nə '" + selection + "', nə də 'Heç bir nəticə tapılmadı.' tapılmadı!");
             }

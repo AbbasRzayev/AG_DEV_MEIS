@@ -1,7 +1,7 @@
 @programs @all
 Feature: User creat program
 
-  @create_program
+  @create_program @new
   Scenario: Check if user can create program
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And switches to the my programs tab

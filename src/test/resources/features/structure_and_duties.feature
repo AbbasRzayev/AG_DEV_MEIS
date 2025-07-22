@@ -1,4 +1,4 @@
-@all @structure_and_duties_add
+@all @structure_and_duties @new
 Feature: Users structure and duties
 
   @structure_and_duties_add
@@ -117,33 +117,33 @@ Feature: Users structure and duties
     When user deletes the newly added structure using the delete button
     Then the structure has been deleted successfully
     #Test ssenarilər:
-    #6.Yeni strukturun əlavə edilməsi
-    #7.İdarəetmə panelində yeni strukturun mövcud olmasının yoxlanılması
-    #8.Struktur baxış hissəsində "Strukturun adı" məlumatlarının düzgünlüyünün yoxlanılması
-    #9.Struktur baxış hissəsində "Strukturun qısa adı" məlumatlarının düzgünlüyünün yoxlanılması
-    #10.Struktur baxış hissəsində "Müəssisənin kodu" məlumatlarının düzgünlüyünün yoxlanılması
-    #11.Struktur baxış hissəsində "Prioritet" məlumatlarının düzgünlüyünün yoxlanılması
-    #12..Struktur baxış hissəsində "Strukturun ünvanı" məlumatlarının düzgünlüyünün yoxlanılması
-    #13..Struktur baxış hissəsində "Strukturun VÖEN-i" məlumatlarının düzgünlüyünün yoxlanılması
-    #14.Struktur baxış hissəsində "Strukturun ünvanı" məlumatlarının düzgünlüyünün yoxlanılması
-    #15.Struktur baxış hissəsində "Struktur haqqında ətraflı məlumat" məlumatlarının düzgünlüyünün yoxlanılması
-    #16.Yeni strukturun redaktə edilməsi
-    #17.Redaktə edildikdən sonra strukturun yenilənmış bütün məlumatlarının admin panel və strukturun baxış hissəsində yoxlanılması
-    #18.Struktura yeni şöbənin əlavə edilməsi
-    #19.İdarəetmə panelində struktura əlavə edilən şöbənin movcud olmasının yoxlanılması
-    #20.Şöbənin baxış hissəsində bütün məlumatların düzgünlüyünün yoxlanılması
-    #21.Şöbəyə yeni sektorun əlavə edilməsi
-    #22.İdarəetmə panelində şöbəyə əlavə edilən sektorun movcud olmasının yoxlanılması
-    #23.Şöbənin baxış hissəsində bütün məlumatların düzgünlüyünün yoxlanılması
-    #24.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni strukturun əks olunmasının yoxlanılması
-    #25.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni şöbənin əks olunmasının yoxlanılması
-    #26.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni sektorun əks olunmasının yoxlanılması
-    #27.Yeni sektorun silinməsi
-    #28.Silindikdən sonra idarəetmə panelinde silinən sektorun mövcud olmamasının yoxlanılması
-    #29.Yeni şöbənin silinməsi
-    #30.Silindikdən sonra idarəetmə panelinde silinən şöbənin mövcud olmamasının yoxlanılması
-    #31.Yeni sektorun silinməsi
-    #32.Silindikdən sonra idarəetmə panelinde silinən strukturun mövcud olmamasının yoxlanılması
+    #7.Yeni strukturun əlavə edilməsi
+    #8.İdarəetmə panelində yeni strukturun mövcud olmasının yoxlanılması
+    #9.Struktur baxış hissəsində "Strukturun adı" məlumatlarının düzgünlüyünün yoxlanılması
+    #10.Struktur baxış hissəsində "Strukturun qısa adı" məlumatlarının düzgünlüyünün yoxlanılması
+    #11.Struktur baxış hissəsində "Müəssisənin kodu" məlumatlarının düzgünlüyünün yoxlanılması
+    #12.Struktur baxış hissəsində "Prioritet" məlumatlarının düzgünlüyünün yoxlanılması
+    #13.Struktur baxış hissəsində "Strukturun ünvanı" məlumatlarının düzgünlüyünün yoxlanılması
+    #14.Struktur baxış hissəsində "Strukturun VÖEN-i" məlumatlarının düzgünlüyünün yoxlanılması
+    #15.Struktur baxış hissəsində "Strukturun ünvanı" məlumatlarının düzgünlüyünün yoxlanılması
+    #16.Struktur baxış hissəsində "Struktur haqqında ətraflı məlumat" məlumatlarının düzgünlüyünün yoxlanılması
+    #17.Yeni strukturun redaktə edilməsi
+    #18.Redaktə edildikdən sonra strukturun yenilənmış bütün məlumatlarının admin panel və strukturun baxış hissəsində yoxlanılması
+    #19.Struktura yeni şöbənin əlavə edilməsi
+    #20.İdarəetmə panelində struktura əlavə edilən şöbənin movcud olmasının yoxlanılması
+    #21.Şöbənin baxış hissəsində bütün məlumatların düzgünlüyünün yoxlanılması
+    #22.Şöbəyə yeni sektorun əlavə edilməsi
+    #23.İdarəetmə panelində şöbəyə əlavə edilən sektorun movcud olmasının yoxlanılması
+    #24.Şöbənin baxış hissəsində bütün məlumatların düzgünlüyünün yoxlanılması
+    #25.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni strukturun əks olunmasının yoxlanılması
+    #26.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni şöbənin əks olunmasının yoxlanılması
+    #27.İstifadəçiyə yeni struktur təyin edilmə hissəsində yeni sektorun əks olunmasının yoxlanılması
+    #28.Yeni sektorun silinməsi
+    #29.Silindikdən sonra idarəetmə panelinde silinən sektorun mövcud olmamasının yoxlanılması
+    #30.Yeni şöbənin silinməsi
+    #31.Silindikdən sonra idarəetmə panelinde silinən şöbənin mövcud olmamasının yoxlanılması
+    #32.Yeni sektorun silinməsi
+    #33.Silindikdən sonra idarəetmə panelinde silinən strukturun mövcud olmamasının yoxlanılması
 
 
   @duty_add_and_delete
@@ -164,7 +164,7 @@ Feature: Users structure and duties
     #İdarəetmə panelində yeni vəzifənin adına görə nəticələrin yoxlanılması
     #Adına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     Then search results by name and new duty is displayed in the admin panel
-    When user reset the changes for duty
+    When user reset the changes for "duty"
     Then the changes is successfully resets in the duty tab
     #İdarəetmə panelində yeni vəzifənin id-sinə görə nəticələrin yoxlanılması
     #Id-sinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
@@ -185,7 +185,7 @@ Feature: Users structure and duties
     And user selects enter in the users tab
     And switches to the user change structure and duties tab
     When selects new "<IT Mühəndis(QA)>"
-#    Then the deactivated duty is not displayed in the duty selection list
+    Then the deactivated duty is not displayed in the duty selection list
     And page is reloaded
     #İdarəetmə panelində aktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
     #Aktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
@@ -222,19 +222,19 @@ Feature: Users structure and duties
     And user deletes the newly added duty using the delete button
     Then newly duty has been deleted successfully
   #Test ssenarilər:
-  #33.Yeni vəzifənin əlavə edilməsi
-  #34.İdarəetmə panelində yeni vəzifənin mövcud olmasının yoxlanılması
-  #35.İdarəetmə panelində yeni vəzifənin adına görə nəticələrin yoxlanılması
-  #36.Adına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-  #37.İdarəetmə panelində yeni vəzifənin id-sinə görə nəticələrin yoxlanılması
-  #38.id-sinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-  #39.İdarəetmə panelində deaktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
-  #40.Deaktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-  #41.Deaktiv olan vəzifəni istifaçiyə təyin etməyin mümkün olmamasının yoxlanılması
-  #42.İdarəetmə panelində aktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
-  #43.Aktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-  #44.Aktiv olan vəzifəni istifaçiyə təyin etməyin mümkün olmasının yoxlanılması
-  #45.Yeni vəzifənin redaktə edilməsi
-  #46.Redaktə edildikdən sonra vəzifənin yenilənmış məlumatların yoxlanılması
-  #47.Yeni vəzifənin silinməsi
-  #48.Silindikdən sonra idarəetmə panelinde silinən vəzifənin mövcud olmamasının yoxlanılması
+  #34.Yeni vəzifənin əlavə edilməsi
+  #35.İdarəetmə panelində yeni vəzifənin mövcud olmasının yoxlanılması
+  #36.İdarəetmə panelində yeni vəzifənin adına görə nəticələrin yoxlanılması
+  #37.Adına görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #38.İdarəetmə panelində yeni vəzifənin id-sinə görə nəticələrin yoxlanılması
+  #39.id-sinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #40.İdarəetmə panelində deaktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
+  #41.Deaktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #42.Deaktiv olan vəzifəni istifaçiyə təyin etməyin mümkün olmamasının yoxlanılması
+  #43.İdarəetmə panelində aktiv olan vəzifənin statusuna görə nəticələrin yoxlanılması
+  #44.Aktiv olan vəzifənin statusuna görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
+  #45.Aktiv olan vəzifəni istifaçiyə təyin etməyin mümkün olmasının yoxlanılması
+  #46.Yeni vəzifənin redaktə edilməsi
+  #47.Redaktə edildikdən sonra vəzifənin yenilənmış məlumatların yoxlanılması
+  #48.Yeni vəzifənin silinməsi
+  #49.Silindikdən sonra idarəetmə panelinde silinən vəzifənin mövcud olmamasının yoxlanılması

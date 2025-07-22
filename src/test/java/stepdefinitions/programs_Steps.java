@@ -113,6 +113,7 @@ public class programs_Steps {
 
     @Then("the program successfully created")
     public void theProgramSuccessfullyCreated() {
+        ReusableMethods.wait(1);
         page.searchInput.sendKeys("Bright Future");
         ReusableMethods.wait(17);
         ReusableMethods.flash(page.createdProq, getDriver());
