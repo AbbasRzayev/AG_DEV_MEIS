@@ -200,7 +200,7 @@ public class searchByUserData_Steps {
     @When("user reset the changes for {string}")
     public void userResetTheChangesFor(String selection) {
         if (selection.contains("duty")) {
-            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.priorityType, 5);
             ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
             ReusableMethods.wait(1);
@@ -235,6 +235,38 @@ public class searchByUserData_Steps {
         else if (selection.contains("note type")) {
             ReusableMethods.waitForClickabilityAndClick(page.noteType, 5);
             ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+            ReusableMethods.wait(1);
+            while (true) {
+                try {
+                    if (!page.filterModal.isDisplayed()) {
+                        break;
+                    }
+                    ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                    ReusableMethods.wait(1);
+                } catch (NoSuchElementException noSuchElementException) {
+                    break;
+                }
+            }
+        }else if (selection.contains("current result")) {
+            ReusableMethods.waitForClickabilityAndClick(page.currentResultType, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+            ReusableMethods.wait(1);
+            while (true) {
+                try {
+                    if (!page.filterModal.isDisplayed()) {
+                        break;
+                    }
+                    ReusableMethods.waitForClickabilityAndClick(page.closeFilterModal, 5);
+                    ReusableMethods.wait(1);
+                } catch (NoSuchElementException noSuchElementException) {
+                    break;
+                }
+            }
+        }else if (selection.contains("priority")) {
+            ReusableMethods.waitForClickabilityAndClick(page.priorityType, 5);
+//            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
             ReusableMethods.wait(1);
             while (true) {

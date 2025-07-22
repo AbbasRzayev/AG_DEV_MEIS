@@ -77,6 +77,10 @@ public class searchByUserData_Page {
     public WebElement dutyInputSecond;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[3]")
     public WebElement noteType;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[5]")
+    public WebElement currentResultType;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[6]")
+    public WebElement priorityType;
     @FindBy(xpath = "//span[contains(., 'İnzibatçı təsdiqləyib')]")
     public WebElement selectAdminApproval;
     @FindBy(xpath = "//span[contains(., 'Təsdiqlənməyib')]")

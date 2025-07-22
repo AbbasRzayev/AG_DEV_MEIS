@@ -242,5 +242,21 @@ public class helpDesk_Page {
     public WebElement requestNotType;
     @FindBy(xpath = "//span[text()='Digər']")
     public WebElement otherNotType;
+    @FindBy(xpath = "//span[text()='İlkin']")
+    public WebElement primaryRequest;
+    @FindBy(xpath = "//span[text()='Təcili']")
+    public WebElement urgentSelect;
+    @FindBy(xpath = "//span[text()='İcraya qəbul edilib']")
+    public WebElement admittedToTheExecution;
+    @FindBy(xpath = "//span[text()='Yüksək']")
+    public WebElement highSelect;
+    @FindBy(xpath = "//span[text()='Normal']")
+    public WebElement normalSelect;
+    @FindBy(xpath = "//span[text()='Aşağı']")
+    public WebElement lowSelect;
+    @FindBy(xpath = "//span[text()='İcra edilib']")
+    public WebElement expiredRequest;
+    @FindBy(xpath = "//span[text()='İcradan imtina edilib']")
+    public WebElement cancelExecute;
 
 }
