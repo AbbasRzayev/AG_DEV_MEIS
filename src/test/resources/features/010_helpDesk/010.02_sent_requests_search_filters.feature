@@ -79,8 +79,7 @@ Feature: Search filters in the sent requests section
     #33.Müraciəti elektron xidmətlər istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     #34.Müraciəti avadanlıq istiqamətinə görə axtarış filterin yoxlanılması
     #35.Müraciəti avadanlıq istiqamətinə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-
-
+  
   @notificationTypeSearchFilter
   Scenario: Checking the notification type filter in the sent requests section
     #Bildiriş tipi "Xəta"-ya görə axtarışın filterin yoxlanılması
@@ -140,7 +139,6 @@ Feature: Search filters in the sent requests section
   #47.Bildiriş tipi "Müraciət"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
   #48.Bildiriş tipi "Digər"-ə görə axtarışın filtrinin yoxlanılması
   #49.Bildiriş tipi "Digər"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
-
 
   @currentResultSearchFilter
   Scenario: Checking the current status filter in the sent requests section

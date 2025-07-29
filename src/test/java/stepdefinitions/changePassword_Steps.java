@@ -129,6 +129,22 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("AbbasPassword"));
             page.enterToTheSystem.click();
+        }else if(environment.contains("AG-MEIS") && user.equals("ibrahimzamanov88@proton.me")){
+            getDriver().get(ConfigReader.getProperty("AG-MEIS"));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            ReusableMethods.wait(1);
+            page.emailField.sendKeys(ConfigReader.getProperty("IbrahimLogin"));
+            ReusableMethods.wait(1);
+            page.passwordField.sendKeys(ConfigReader.getProperty("IbrahimPassword"));
+            page.enterToTheSystem.click();
+        }else if(environment.contains("AG-MEIS") && user.equals("davudzamanov88@proton.me")){
+            getDriver().get(ConfigReader.getProperty("AG-MEIS"));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            ReusableMethods.wait(1);
+            page.emailField.sendKeys(ConfigReader.getProperty("DavudNewLogin"));
+            ReusableMethods.wait(1);
+            page.passwordField.sendKeys(ConfigReader.getProperty("DavudPassword"));
+            page.enterToTheSystem.click();
         }
     }
 

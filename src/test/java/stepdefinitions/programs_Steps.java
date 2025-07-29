@@ -105,7 +105,7 @@ public class programs_Steps {
     public void userSelectsTheSaveButtonToCreateANewProgram() {
         ReusableMethods.wait(1);
         page.saveButton.click();
-        ReusableMethods.wait(15);
+        ReusableMethods.wait(20);
         //ReusableMethods.clickByJavaScript(page.saveButton);
         //ReusableMethods.waitForClickabilityAndClick(page.saveButton,2);
         //ReusableMethods.clickJSElementWithJavaScript(String.valueOf(page.saveButton));

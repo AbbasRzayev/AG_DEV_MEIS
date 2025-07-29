@@ -89,5 +89,8 @@ public class searchByUserData_Page {
     public WebElement selectNotApprovedStatus;
     @FindBy(xpath = "//span[contains(., 'Aktiv')]")
     public WebElement selectApprovedStatus;
+    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[1]")
+    public WebElement idFilter;
+
 
 }

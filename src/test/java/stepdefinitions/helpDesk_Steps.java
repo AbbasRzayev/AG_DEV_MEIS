@@ -20,6 +20,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 import static utilities.Driver.getDriver;
@@ -119,7 +121,6 @@ public class helpDesk_Steps {
     public void userSelectsSaveButtonInTheHelpDeskTab() {
         page.saveRequest.click();
         ReusableMethods.wait(1);
-
     }
 
 
@@ -273,8 +274,6 @@ public class helpDesk_Steps {
 //            ReusableMethods.clickByJavaScript(exit);
 //            exit.click();
 //            exitYes.click();
-
-
         }
     }
 
@@ -327,20 +326,6 @@ public class helpDesk_Steps {
 
     @Then("the system notification and information about request are displayed")
     public void theSystemNotificationAndInformationAboutRequestAreDisplayed() {
-//        if (!page.noteMainCheck.isDisplayed()) {
-//            page.systemNotBtn.click();
-//            ReusableMethods.wait(1);
-//            page.selectNotBtn.click();
-//            ReusableMethods.flash(page.noteMainCheck, getDriver());
-//            ReusableMethods.flash(page.firstNoteCheck, getDriver());
-//            ReusableMethods.flash(page.secondNoteCheck, getDriver());
-//            ReusableMethods.flash(page.thirdNoteCheck, getDriver());
-//            ReusableMethods.flash(page.fourthNoteCheck, getDriver());
-//            ReusableMethods.flash(page.fifthNoteCheck, getDriver());
-//            ReusableMethods.flash(page.sixthNoteCheck, getDriver());
-//            page.moreIntormationBtn.click();
-//            ReusableMethods.wait(1);
-//        }
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
 
@@ -769,8 +754,8 @@ public class helpDesk_Steps {
             ReusableMethods.flash(page.currentReview, getDriver());
             Assert.assertEquals(page.currentReview.getText().trim(), currentResult);
 
-//            ReusableMethods.flash(page.actReview, getDriver()); - Bug var fix edildikden sonra commitden cixardacam
-//            Assert.assertEquals(page.actReview.getText().trim(), actMade);
+            ReusableMethods.flash(page.actReview, getDriver());  //Bug var fix edildikden sonra commitden cixardacam
+            Assert.assertEquals(page.actReview.getText().trim(), actMade);
 
             ReusableMethods.flash(page.fileReview, getDriver());
             Assert.assertTrue(page.file.isDisplayed());
@@ -1285,7 +1270,7 @@ public class helpDesk_Steps {
 
     @When("selects {string} from notification type filter list")
     public void selectsFromNotificationTypeFilterList(String selection) {
-        if(selection.contains("Xəta")){
+        if (selection.contains("Xəta")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1302,7 +1287,7 @@ public class helpDesk_Steps {
             page.errorNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Təklif")){
+        } else if (selection.contains("Təklif")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1319,7 +1304,7 @@ public class helpDesk_Steps {
             page.offerNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Qeyd")){
+        } else if (selection.contains("Qeyd")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1336,7 +1321,7 @@ public class helpDesk_Steps {
             page.noticeNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Quraşdırma/Sazlama")){
+        } else if (selection.contains("Quraşdırma/Sazlama")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1353,7 +1338,7 @@ public class helpDesk_Steps {
             page.installNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Sorğu")){
+        } else if (selection.contains("Sorğu")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1370,7 +1355,7 @@ public class helpDesk_Steps {
             page.surveyNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Müraciət")){
+        } else if (selection.contains("Müraciət")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1387,7 +1372,7 @@ public class helpDesk_Steps {
             page.requestNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if(selection.contains("Digər")){
+        } else if (selection.contains("Digər")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1469,8 +1454,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }
-        else if (selection.contains("Qeyd")) {
+        } else if (selection.contains("Qeyd")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1500,7 +1484,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }else if (selection.contains("Quraşdırma/Sazlama")) {
+        } else if (selection.contains("Quraşdırma/Sazlama")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1530,7 +1514,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }else if (selection.contains("Sorğu")) {
+        } else if (selection.contains("Sorğu")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1560,7 +1544,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }else if (selection.contains("Müraciət")) {
+        } else if (selection.contains("Müraciət")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1590,7 +1574,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }else if (selection.contains("Digər")) {
+        } else if (selection.contains("Digər")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1625,7 +1609,7 @@ public class helpDesk_Steps {
 
     @When("selects {string} from current result filter list")
     public void selectsFromCurrentResultFilterList(String selection) {
-        if (selection.contains("Ilkin")){
+        if (selection.contains("Ilkin")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1642,7 +1626,7 @@ public class helpDesk_Steps {
             page.primaryRequest.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }  else if (selection.contains("Icraya qəbul edilib")){
+        } else if (selection.contains("Icraya qəbul edilib")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1659,7 +1643,7 @@ public class helpDesk_Steps {
             page.admittedToTheExecution.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if (selection.contains("Müddəti bitib")){
+        } else if (selection.contains("Müddəti bitib")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1676,7 +1660,7 @@ public class helpDesk_Steps {
             page.admittedToTheExecution.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if (selection.contains("Icra edilib")){
+        } else if (selection.contains("Icra edilib")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1693,7 +1677,7 @@ public class helpDesk_Steps {
             page.expiredRequest.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if (selection.contains("Icradan imtina edilib")){
+        } else if (selection.contains("Icradan imtina edilib")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1775,8 +1759,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }
-        else if (selection.contains("Müddəti bitib")) {
+        } else if (selection.contains("Müddəti bitib")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1806,8 +1789,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }
-        else if (selection.contains("Icra edilib")) {
+        } else if (selection.contains("Icra edilib")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1837,8 +1819,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }
-        else if (selection.contains("Icradan imtina edilib")) {
+        } else if (selection.contains("Icradan imtina edilib")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -1873,7 +1854,7 @@ public class helpDesk_Steps {
 
     @When("selects {string} from priority filter list")
     public void selectsFromPriorityFilterList(String selection) {
-        if (selection.contains("Təcili")){
+        if (selection.contains("Təcili")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1890,7 +1871,7 @@ public class helpDesk_Steps {
             page.urgentSelect.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }  else if (selection.contains("Yüksək")){
+        } else if (selection.contains("Yüksək")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1907,7 +1888,7 @@ public class helpDesk_Steps {
             page.highSelect.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if (selection.contains("Normal")){
+        } else if (selection.contains("Normal")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -1924,7 +1905,7 @@ public class helpDesk_Steps {
             page.normalSelect.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
-        }else if (selection.contains("Aşağı")){
+        } else if (selection.contains("Aşağı")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             getTableData = searchByUserData.getTableDataText.getText();
@@ -2006,8 +1987,7 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
-        }
-        else if (selection.contains("Normal")) {
+        } else if (selection.contains("Normal")) {
             List<WebElement> noResults = getDriver().findElements(By.xpath("//*[contains(text(),'Heç bir nəticə tapılmadı.')]"));
             if (!noResults.isEmpty()) {
                 // Tapılıbsa → flash et və keç
@@ -2067,6 +2047,890 @@ public class helpDesk_Steps {
             if (foundInvalidRow) {
                 Assert.fail("Başqa istiqamətlər tapıldı, yalnız '" + selection + "' gözlənilirdi!");
             }
+        }
+    }
+
+    @And("adds id to the id filter")
+    public void addsIdToTheIdFilter() {
+        String num = "77";
+        ReusableMethods.waitForClickabilityAndClick(searchByUserData.nameFilter, 5);
+        ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
+        System.out.println(getRequestID);
+        page.idInput.sendKeys(getRequestID);
+        ReusableMethods.wait(1);
+    }
+
+    @Then("current {string} result is displayed")
+    public void currentResultIsDisplayed(String selection) {
+        if (selection.contains("İlkin")) {
+            String statusText = page.executionStatusTD.getText().trim();
+            ReusableMethods.flash(page.executionStatusTD, getDriver());
+            if (!statusText.equals("İlkin")) {
+                throw new AssertionError("Status 'İlkin' deyil! Əldə olunan: " + statusText);
+            }
+        } else if (selection.contains("İcraya qəbul edilib")) {
+            String statusText = page.executionStatusTD.getText().trim();
+            ReusableMethods.flash(page.executionStatusTD, getDriver());
+            if (!statusText.equals("İcraya qəbul edilib")) {
+                throw new AssertionError("Status 'İlkin' deyil! Əldə olunan: " + statusText);
+            }
+        } else if (selection.contains("İcra edilib")) {
+            String statusText = page.executionStatusTD.getText().trim();
+            ReusableMethods.flash(page.executionStatusTD, getDriver());
+            if (!statusText.equals("İcra edilib")) {
+                throw new AssertionError("Status 'İcra edilib' deyil! Əldə olunan: " + statusText);
+            }
+        } else if (selection.contains("Müddəti bitib")) {
+            String statusText = page.executionStatusTD.getText().trim();
+            ReusableMethods.flash(page.executionStatusTD, getDriver());
+            if (!statusText.equals("Müddəti bitib")) {
+                throw new AssertionError("Status 'Müddəti bitib' deyil! Əldə olunan: " + statusText);
+            }
+        } else if (selection.contains("İcradan imtina edilib")) {
+            String statusText = page.executionStatusTD.getText().trim();
+            ReusableMethods.flash(page.executionStatusTD, getDriver());
+            if (!statusText.equals("İcradan imtina edilib")) {
+                throw new AssertionError("Status 'İcradan imtina edilib' deyil! Əldə olunan: " + statusText);
+            }
+        }
+    }
+
+    @Then("executors name {string} is displayed")
+    public void executorsNameIsDisplayed(String selection) {
+        if (selection.contains("none")) {
+            String executorText = page.executionListTD.getText().trim();
+            ReusableMethods.flash(page.executionListTD, getDriver());
+            if (!executorText.isEmpty()) {
+                throw new AssertionError("Executor list boş deyil! Icraçılar: '" + executorText + "'");
+            }
+        } else if (selection.contains("Davud")) {
+            String executeName = "Davud Zamanov";
+            String executorText = page.executionListTD.getText().trim();
+            ReusableMethods.flash(page.executionListTD, getDriver());
+            Assert.assertEquals(executorText, executeName);
+        } else if (selection.contains("Fərid İmranov")) {
+            String executeName = "Fərid İmranov";
+            String executorText = page.executionListTD.getText().trim();
+            ReusableMethods.flash(page.executionListTD, getDriver());
+            Assert.assertEquals(executorText, executeName);
+        }
+    }
+
+    @Then("all information are displayed in the request review section from admin panel")
+    public void allInformationAreDisplayedInTheRequestReviewSectionFromAdminPanel(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String id = row.get("ID");
+            String appeal = row.get("İstiqamət");
+            String whoSent = row.get("Bildirişi göndərən");
+            String compName = row.get("İstifadəçi kompüterinin adı");
+            String noteType = row.get("Bildirişin tipi");
+            String priority = row.get("Prioritet");
+            String actMade = row.get("Akt tərtib edilib");
+            String description = row.get("Təsvir");
+            String workPlace = row.get("İş yeri");
+            String currentResult = row.get("Cari nəticə");
+
+            ReusableMethods.flash(page.idReview, getDriver());
+            Assert.assertEquals(page.idReview.getText().trim(), getRequestID);
+
+            ReusableMethods.flash(page.directionReviewAdmin, getDriver());
+            Assert.assertEquals(page.directionReviewAdmin.getText().trim(), appeal);
+
+            ReusableMethods.flash(page.requestSentAdmin, getDriver());
+            Assert.assertEquals(page.requestSentAdmin.getText().trim(), whoSent);
+
+            String dateText = page.dataRequestAdmin.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dataRequestAdmin, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            ReusableMethods.flash(page.compNameAdmin, getDriver());
+            Assert.assertEquals(page.compNameAdmin.getText().trim(), compName);
+
+            ReusableMethods.flash(page.noteTyeAdmin, getDriver());
+            Assert.assertEquals(page.noteTyeAdmin.getText().trim(), noteType);
+
+            ReusableMethods.flash(page.priorityAdmin, getDriver());
+            Assert.assertEquals(page.priorityAdmin.getText().trim(), priority);
+
+            ReusableMethods.flash(page.currentResultAdmin, getDriver());
+            Assert.assertEquals(page.currentResultAdmin.getText().trim(), currentResult);
+
+            ReusableMethods.flash(page.actAdderAdmin, getDriver());  //Bug var fix edildikden sonra commitden cixardacam
+            Assert.assertEquals(page.actAdderAdmin.getText().trim(), actMade);
+
+            ReusableMethods.flash(page.fileAdmin, getDriver());
+            Assert.assertTrue(page.fileAdmin.isDisplayed());
+//            Assert.assertTrue(page.fileLink.isSelected());
+            if (page.fileAdmin.isDisplayed() && page.fileAdmin.isEnabled()) {
+                System.out.println("✅ Upload linki görünür və aktivdir.");
+            } else {
+                System.out.println("❌ Upload linki görünmür və ya deaktivdir.");
+            }
+
+            ReusableMethods.flash(page.noteAdmin, getDriver());
+            Assert.assertEquals(page.noteAdmin.getText().trim(), description);
+
+            ReusableMethods.flash(page.workPlaceAdmin, getDriver());
+            Assert.assertEquals(page.workPlaceAdmin.getText().trim(), workPlace);
+        }
+    }
+
+    @When("the admin assigns an executor {string} to the request")
+    public void theAdminAssignsAnExecutorToTheRequest(String selection) {
+        if (selection.contains("Davud")) {
+            page.addExecutorToTheRequest.click();
+            ReusableMethods.wait(1);
+            page.executorInputToTheRequest.sendKeys("Davud Zamanov");
+            ReusableMethods.wait(1);
+            page.davudExecutorSelect.click();
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Fərid")) {
+            page.addExecutorToTheRequest.click();
+            ReusableMethods.wait(1);
+            page.executorInputToTheRequest.sendKeys("Fərid İmranov");
+            ReusableMethods.wait(1);
+            page.faridExecutorSelect.click();
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("the executors name {string} and all information about execute is displayed in the request review section")
+    public void theExecutorsNameAndAllInformationAboutExecuteIsDisplayedInTheRequestReviewSection(String selection) {
+        if (selection.contains("Davud")) {
+            System.out.println("selection = " + selection);
+        }
+    }
+
+    @When("user select go back button in the request review section")
+    public void userSelectGoBackButtonInTheRequestReviewSection() {
+        ReusableMethods.pageDown();
+        ReusableMethods.wait(3);
+        page.backToTheRequestTable.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("changes the status {string} of the request by selecting the current result")
+    public void changesTheStatusOfTheRequestBySelectingTheCurrentResult(String selection) {
+        if (selection.contains("İlkin")) {
+            page.currentResultAdmin.click();
+            ReusableMethods.wait(1);
+//            page.currentDropDown.click();
+//            ReusableMethods.wait(1);
+//            page.reqStatus.click();
+//            ReusableMethods.wait(1);
+            page.noteCurrent.sendKeys("Icraçı əvəz edilir");
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("İcraya qəbul edilib")) {
+            page.currentResultAdmin.click();
+            ReusableMethods.wait(1);
+            page.currentDropDown.click();
+            ReusableMethods.wait(1);
+            page.reqAcceptStatusList.click();
+            ReusableMethods.wait(1);
+            page.noteCurrent.sendKeys("Tezliklə nəticə barədə sizə məlumat veriləcək.");
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("İcra edilib")) {
+            page.currentResultAdmin.click();
+            ReusableMethods.wait(1);
+            page.currentDropDown.click();
+            ReusableMethods.wait(1);
+            page.doneStatusList.click();
+            ReusableMethods.wait(1);
+            page.noteCurrent.sendKeys("Qeyd edilən problem aradan qaldırıldı");
+            ReusableMethods.wait(1);
+            page.actInputRequest.sendKeys("AG-88");
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Müddəti bitib")) {
+            page.currentResultAdmin.click();
+            ReusableMethods.wait(1);
+            page.currentDropDown.click();
+            ReusableMethods.wait(1);
+            page.timeExpiredStatusList.click();
+            ReusableMethods.wait(1);
+            page.noteCurrent.sendKeys("İcra tarixi bitmişdir");
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("İcradan imtina edilib")) {
+            page.currentResultAdmin.click();
+            ReusableMethods.wait(1);
+            page.currentDropDown.click();
+            ReusableMethods.wait(1);
+            page.cancelStatusList.click();
+            ReusableMethods.wait(1);
+            page.noteCurrent.sendKeys("Bu task fix olduğuna görə icrası imtina edilib");
+            ReusableMethods.wait(1);
+            page.acceptBtn.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("admin removed the executor")
+    public void adminRemovedTheExecutor() {
+        page.deleteBtnExecutor.click();
+        ReusableMethods.wait(1);
+        structureAndDuties.yesButton.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the deleted executor was successfully removed in the request section")
+    public void theDeletedExecutorWasSuccessfullyRemovedInTheRequestSection() {
+        ReusableMethods.wait(1);
+        List<WebElement> cells = getDriver().findElements(
+                By.xpath("(//table)[2]//td[contains(@class, 'mat-column-regUserFullName')]")
+        );
+        for (WebElement cell : cells) {
+            String text = cell.getText().trim();
+            if (!text.isEmpty()) {
+                throw new AssertionError("Hüceyrə boş olmalı idi, lakin tapıldı: " + text);
+            }
+        }
+    }
+
+    @Then("the deleted executor is not displayed in the requests table")
+    public void theDeletedExecutorIsNotDisplayedInTheRequestsTable() {
+        String executorText = page.executionListTD.getText().trim();
+        ReusableMethods.flash(page.executionListTD, getDriver());
+        if (!executorText.isEmpty()) {
+            throw new AssertionError("Executor list boş deyil! Icraçılar: '" + executorText + "'");
+        }
+    }
+
+    @And("executor receives the correct notification with the same ID")
+    public void executorReceivesTheCorrectNotificationWithTheSameID() {
+        ReusableMethods.wait(5);
+        String fullText = page.notIdCheck.getText();
+        ReusableMethods.flash(page.notIdCheck, getDriver());
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(fullText);
+
+        String extractedId = "";
+        if (matcher.find()) {
+            extractedId = matcher.group();
+        }
+        if (!extractedId.equals(getRequestID)) {
+            throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+        }
+    }
+
+    @And("all the information is displayed in the notification sent to the executor")
+    public void allTheInformationIsDisplayedInTheNotificationSentToTheExecutor(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+
+            // Check if the noteMainCheck is displayed
+            if (isElementVisible(page.noteMainCheck, wait)) {
+                ReusableMethods.wait(5);
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+                    String actCheck = row.get("Akt nömrəsi");
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+//                    ReusableMethods.flash(page.notCheck, getDriver());
+//                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+//                    ReusableMethods.wait(1);
+
+//                    ReusableMethods.flash(page.actCheck, getDriver());
+//                    Assert.assertEquals(page.actCheck.getText().trim(), actCheck);
+//                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+            } else {
+                ReusableMethods.wait(2);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(1);
+
+                ReusableMethods.wait(3);
+                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
+//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(2);
+
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+                    String actCheck = row.get("Akt nömrəsi");
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+//                    ReusableMethods.flash(page.notCheck, getDriver());
+//                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+//                    ReusableMethods.wait(1);
+
+//                    ReusableMethods.flash(page.actCheck, getDriver());
+//                    Assert.assertEquals(page.actCheck.getText().trim(), actCheck);
+//                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @And("the executor navigates to the request review section using the detailed button")
+    public void theExecutorNavigatesToTheRequestReviewSectionUsingTheDetailedButton() {
+        page.detailedBtn.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("selects notification in the header section")
+    public void selectsNotificationInTheHeaderSection() {
+        ReusableMethods.wait(2);
+        WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+        button.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("selects last notification from not list")
+    public void selectsLastNotificationFromNotList() {
+        ReusableMethods.wait(2);
+        WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].click();", element);
+//        element.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the executors name and the date the request was accepted and the execution status  are {string} displayed")
+    public void theExecutorsNameAndTheDateTheRequestWasAcceptedAndTheExecutionStatusAreDisplayed(String selection) {
+        if (selection.contains("İcraya qəbul edilib")) {
+            String actualName = page.executorNameReviewSection.getText().trim();
+            String expectName = "Davud Zamanov";
+            ReusableMethods.flash(page.executorNameReviewSection, getDriver());
+            Assert.assertEquals(expectName, actualName);
+
+            String dateText = page.dataReviewSection.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dataReviewSection, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            String actualStatus = page.statusReviewSection.getText().trim();
+            String expectStatus = "İcraya qəbul edilib";
+            ReusableMethods.flash(page.statusReviewSection, getDriver());
+            Assert.assertEquals(expectStatus, actualStatus);
+        }
+       else if (selection.contains("İcradan imtina edilib")) {
+            String actualName = page.executorNameReviewSection.getText().trim();
+            String expectName = "Davud Zamanov";
+            ReusableMethods.flash(page.executorNameReviewSection, getDriver());
+            Assert.assertEquals(expectName, actualName);
+
+            String dateText = page.dataReviewSection.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dataReviewSection, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            String actualStatus = page.statusReviewSection.getText().trim();
+            String expectStatus = "İcradan imtina edilib";
+            ReusableMethods.flash(page.statusReviewSection, getDriver());
+            Assert.assertEquals(expectStatus, actualStatus);
+        } else if (selection.contains("Müddəti bitib")) {
+            String actualName = page.executorNameReviewSection.getText().trim();
+            String expectName = "Davud Zamanov";
+            ReusableMethods.flash(page.executorNameReviewSection, getDriver());
+            Assert.assertEquals(expectName, actualName);
+
+            String dateText = page.dataReviewSection.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.dataReviewSection, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            String actualStatus = page.statusReviewSection.getText().trim();
+            String expectStatus = "Müddəti bitib";
+            ReusableMethods.flash(page.statusReviewSection, getDriver());
+            Assert.assertEquals(expectStatus, actualStatus);
+        }
+    }
+
+    @And("close notification in the header section")
+    public void closeNotificationInTheHeaderSection() {
+        WebElement element = getDriver().findElement(By.xpath("//div[@class='cdk-overlay-container']"));
+        element.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("information about act and execute note is displayed in the request review section")
+    public void informationAboutActAndExecuteNoteIsDisplayedInTheRequestReviewSection(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String actDone = row.get("Akt tərtib edilib");
+            String actNum = row.get("Aktın nömrəsi");
+            String noteAboutExecutor = row.get("İcra haqqında təsvir");
+
+            ReusableMethods.flash(page.actDone, getDriver());
+            Assert.assertEquals(page.actDone.getText().trim(), actDone);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.actNum, getDriver());
+            Assert.assertEquals(page.actNum.getText().trim(), actNum);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.executeNote, getDriver());
+            Assert.assertEquals(page.executeNote.getText().trim(), noteAboutExecutor);
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("executor selects edit ticket button")
+    public void executorSelectsEditTicketButton() {
+        page.ticketEdit.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("note to the note field in the ticket modal window")
+    public void noteToTheNoteFieldInTheTicketModalWindow() {
+        page.noteInputTicket.sendKeys("Bu ticket icra edildi");
+        ReusableMethods.wait(1);
+    }
+
+    @And("raises the {string}  percentage of the execution")
+    public void raisesThePercentageOfTheExecution(String selection) {
+        if (selection.contains("100%")) {
+            page.percentIncrease.click();
+            ReusableMethods.wait(1);
+            page.percentIncrease.click();
+            ReusableMethods.wait(1);
+            page.percentIncrease.click();
+            ReusableMethods.wait(1);
+            page.percentIncrease.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("{string} percentage and tickets note are displayed in the request review section")
+    public void percentageAndTicketsNoteAreDisplayedInTheRequestReviewSection(String selection) {
+        if(selection.contains("100%")){
+            String actualText = page.ticketReviewPercent.getText();
+            ReusableMethods.flash(page.ticketReviewPercent,getDriver());
+            ReusableMethods.wait(1);
+            if (!actualText.equals("100%")) {
+                throw new AssertionError("Text '100%' deyil! Əslində: " + actualText);
+            }
+//            String actualNote = page.ticketReviewNote.getText();
+//            ReusableMethods.flash(page.ticketReviewNote,getDriver());
+//            ReusableMethods.wait(1);
+//            if (!actualNote.equals("Bu ticket icra edildi")) {
+//                throw new AssertionError("Text 'Bu ticket icra edildi' deyil! Əslində: " + actualText);
+//            }
+        }
+    }
+
+    @And("all the information is displayed in the notification sent to the person who initiated the execution")
+    public void allTheInformationIsDisplayedInTheNotificationSentToThePersonWhoInitiatedTheExecution(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+
+            // Check if the noteMainCheck is displayed
+            if (isElementVisible(page.noteMainCheck, wait)) {
+                ReusableMethods.wait(3);
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+                    String actCheck = row.get("Akt nömrəsi");
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notCheck, getDriver());
+                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.actCheck, getDriver());
+                    Assert.assertEquals(page.actCheck.getText().trim(), actCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(1);
+
+                ReusableMethods.wait(3);
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
+//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(2);
+
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+                    String actCheck = row.get("Akt nömrəsi");
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notCheck, getDriver());
+                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.actCheck, getDriver());
+                    Assert.assertEquals(page.actCheck.getText().trim(), actCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Then("information about the decline execute is displayed in the request review section")
+    public void informationAboutTheDeclineExecuteIsDisplayedInTheRequestReviewSection(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String actDone = row.get("Akt tərtib edilib");
+            String noteAboutExecutor = row.get("İcra haqqında təsvir");
+
+            ReusableMethods.flash(page.actDone, getDriver());
+            Assert.assertEquals(page.actDone.getText().trim(), actDone);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.executeNote, getDriver());
+            Assert.assertEquals(page.executeNote.getText().trim(), noteAboutExecutor);
+            ReusableMethods.wait(1);
+        }
+    }
+
+
+    @And("all the information is displayed about decline request in the notification sent to the person who initiated the execution")
+    public void allTheInformationIsDisplayedAboutDeclineRequestInTheNotificationSentToThePersonWhoInitiatedTheExecution(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+
+            // Check if the noteMainCheck is displayed
+            if (isElementVisible(page.noteMainCheck, wait)) {
+                ReusableMethods.wait(3);
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notCheck, getDriver());
+                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(1);
+
+                ReusableMethods.wait(3);
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
+//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(2);
+
+                String fullText = page.notIdCheck.getText();
+                ReusableMethods.flash(page.notIdCheck, getDriver());
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(fullText);
+
+                String extractedId = "";
+                if (matcher.find()) {
+                    extractedId = matcher.group();
+                }
+                if (!extractedId.equals(getRequestID)) {
+                    throw new AssertionError("ID uyğun deyil! Gözlənilən: " + getRequestID + ", tapılan: " + extractedId);
+                }
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String appeal = row.get("İstiqamət");
+                    String whoSent = row.get("Müraciət edən");
+                    String compName = row.get("İstifadəçi komputeri");
+//                  String noteType = row.get("Bildirişin tipi");
+                    String priority = row.get("Prioritet");
+                    String executor = row.get("İcraçı");
+                    String currentResult = row.get("İcra statusu");
+                    String noteCheck = row.get("Qeyd");
+
+                    ReusableMethods.flash(page.directionNotCheck, getDriver());
+                    Assert.assertEquals(page.directionNotCheck.getText().trim(), appeal);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.priorityNotCheck, getDriver());
+                    Assert.assertEquals(page.priorityNotCheck.getText().trim(), priority);
+
+                    ReusableMethods.flash(page.executeStatusNotCheck, getDriver());
+                    Assert.assertEquals(page.executeStatusNotCheck.getText().trim(), currentResult);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notCheck, getDriver());
+                    Assert.assertEquals(page.notCheck.getText().trim(), noteCheck);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoSentCheck, getDriver());
+                    System.out.println("whoSent = " + page.whoSentCheck.getText());
+                    Assert.assertEquals(page.whoSentCheck.getText().trim(), whoSent);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.executorCheck, getDriver());
+                    Assert.assertEquals(page.executorCheck.getText().trim(), executor);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.comNameNotCheck, getDriver());
+                    Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
+                    ReusableMethods.wait(1);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

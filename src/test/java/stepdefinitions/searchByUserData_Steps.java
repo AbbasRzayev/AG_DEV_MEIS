@@ -200,7 +200,7 @@ public class searchByUserData_Steps {
     @When("user reset the changes for {string}")
     public void userResetTheChangesFor(String selection) {
         if (selection.contains("duty")) {
-            ReusableMethods.waitForClickabilityAndClick(page.priorityType, 5);
+            ReusableMethods.waitForClickabilityAndClick(page.dutyInputSecond, 5);
             ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
             ReusableMethods.wait(1);

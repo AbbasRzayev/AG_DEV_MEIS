@@ -161,11 +161,6 @@ leftSIdeBarMenu_Page page =new leftSIdeBarMenu_Page();
 //        ReusableMethods.flash(page.tittleText,getDriver());
     }
 
-    @Then("user successfully log out from meis system")
-    public void userSuccessfullyLogOutFromMeisSystem() {
-
-    }
-
     @Then("user successfully log out from {string} system")
     public void userSuccessfullyLogOutFromSystem(String environment) {
         if(environment.contains("AG-MEIS")) {

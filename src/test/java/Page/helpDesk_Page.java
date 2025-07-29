@@ -1,9 +1,12 @@
 package Page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
+
+import static utilities.Driver.getDriver;
 
 public class helpDesk_Page {
     public helpDesk_Page() {
@@ -132,6 +135,12 @@ public class helpDesk_Page {
     public WebElement reqStatusListDone;
     @FindBy(xpath = "//span[text()='İcraya qəbul edilib']")
     public WebElement reqAcceptStatusList;
+    @FindBy(xpath = "//span[text()='İcra edilib']")
+    public WebElement doneStatusList;
+    @FindBy(xpath = "//span[text()='İcradan imtina edilib']")
+    public WebElement cancelStatusList;
+    @FindBy(xpath = "//span[text()='Müddəti bitib']")
+    public WebElement timeExpiredStatusList;
     @FindBy(xpath = "//span[text()='Təsdiq et']")
     public WebElement acceptStatusNote;
     @FindBy(xpath = "//textarea[@id='mat-input-17']")
@@ -168,7 +177,8 @@ public class helpDesk_Page {
     @FindBy(xpath = "(//td[text()='İcra edilib'])[1]")
     public WebElement checkDoneStatusTable;
 
-    @FindBy(xpath = "//span[normalize-space(text())='ID']/following-sibling::p/span[normalize-space(text())]")
+//    @FindBy(xpath = "//span[normalize-space(text())='ID']/following-sibling::p/span[normalize-space(text())]")
+    @FindBy(xpath = "//following-sibling::p")
     public WebElement idReview;
     @FindBy(xpath = "//span[normalize-space(text())='Proqram təminatı']/following-sibling::p/span[normalize-space(text())]")
     public WebElement programNameReview;
@@ -258,5 +268,96 @@ public class helpDesk_Page {
     public WebElement expiredRequest;
     @FindBy(xpath = "//span[text()='İcradan imtina edilib']")
     public WebElement cancelExecute;
+    @FindBy(css = "input[onlynumbers][matinput]")
+    public WebElement idInput;
+    @FindBy(css = "td.mat-column-executionStatus")
+    public WebElement executionStatusTD;
+    @FindBy(css = "td.mat-column-executorListString")
+    public WebElement executionListTD;
+
+    @FindBy(xpath = "(//following-sibling::p)[2]")
+    public WebElement directionReviewAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[3]")
+    public WebElement requestSentAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[4]")
+    public WebElement dataRequestAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[5]")
+    public WebElement  compNameAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[6]")
+    public WebElement  noteTyeAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[7]")
+    public WebElement  priorityAdmin;
+    @FindBy(xpath = "//button[.//img[contains(@src, 'edit-colorless.svg')] and .//span[@class='mdc-button__label']]")
+    public WebElement  currentResultAdmin;
+    @FindBy(xpath = "//mat-select//span[contains(@class,'mat-mdc-select-min-line')]")
+    public WebElement  currentDropDown;
+    @FindBy(xpath = "(//following-sibling::p)[8]")
+    public WebElement  actAdderAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[9]")
+    public WebElement  fileAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[10]")
+    public WebElement  noteAdmin;
+    @FindBy(xpath = "(//following-sibling::p)[11]")
+    public WebElement  workPlaceAdmin;
+    @FindBy(xpath = "//span[normalize-space()='İcra edilməsi üçün təyinat etmək']")
+    public WebElement  addExecutorToTheRequest;
+    @FindBy(xpath = "//mat-label[text()='İcra edəcək şəxs']/following::input[@placeholder='Axtarış']")
+    public WebElement executorInputToTheRequest;
+    @FindBy(xpath = "//span[normalize-space()='Təsdiq et']")
+    public WebElement  acceptBtn;
+    @FindBy(xpath = "//span[normalize-space()='Davud Zamanov']")
+    public WebElement  davudExecutorSelect;
+    @FindBy(xpath = "//span[normalize-space()='Fərid İmranov']")
+    public WebElement  faridExecutorSelect;
+    @FindBy(xpath = "//span[normalize-space()='Geri']")
+    public WebElement  backToTheRequestTable;
+    @FindBy(xpath = "//textarea[@formcontrolname='note']")
+    public WebElement  noteCurrent;
+    @FindBy(xpath = "//input[@formcontrolname='actNumber']")
+    public WebElement  actInputRequest;
+    @FindBy(xpath = "//button[.//img[contains(@src, 'delete-colorless.svg')]]")
+    public WebElement  deleteBtnExecutor;
+    @FindBy(xpath = "//h5[contains(text(), 'Yardım masası')]")
+    public WebElement  notIdCheck;
+    @FindBy(xpath = "//div[span[text()='İstiqamət']]/p")
+    public WebElement  directionNotCheck;
+    @FindBy(xpath = "//div[span[text()='Prioritet']]/p")
+    public WebElement  priorityNotCheck;
+    @FindBy(xpath = "//div[span[text()='Akt tərtib edilib']]/p")
+    public WebElement  actDone;
+    @FindBy(xpath = "//div[span[text()='Aktın nömrəsi']]/p")
+    public WebElement  actNum;
+    @FindBy(xpath = "//div[span[text()='İcra haqqında təsvir']]/p")
+    public WebElement  executeNote;
+    @FindBy(xpath = "(//button[.//img[contains(@src, 'edit-colorless.svg')]])[2]")
+    public WebElement  ticketEdit;
+    @FindBy(xpath = "//div[span[text()='İcra statusu']]/p")
+    public WebElement  executeStatusNotCheck;
+    @FindBy(xpath = "//div[span[text()='Qeyd']]/p")
+    public WebElement  notCheck;
+    @FindBy(xpath = "//div[span[text()='Akt nömrəsi']]/p")
+    public WebElement  actCheck;
+    @FindBy(xpath = "//div[span[text()='Müraciət edən']]/p")
+    public WebElement  whoSentCheck;
+    @FindBy(xpath = "//div[span[text()='İcraçı']]/p")
+    public WebElement  executorCheck;
+    @FindBy(xpath = "//div[span[text()='İstifadəçi komputeri']]/p")
+    public WebElement  comNameNotCheck;
+    @FindBy(xpath = "//span[normalize-space()='Ətraflı']")
+    public WebElement  detailedBtn;
+    @FindBy(xpath = "(//table)[1]//td[contains(@class, 'mat-column-regUserFullName')]")
+    public WebElement  executorNameReviewSection;
+    @FindBy(xpath = "(//table)[1]//td[contains(@class, 'cdk-column-regDateStr')]")
+    public WebElement  dataReviewSection;
+    @FindBy(xpath = "(//table)[1]//td[contains(@class, 'cdk-column-executionStatus')]")
+    public WebElement  statusReviewSection;
+    @FindBy(xpath = "//textarea[@formcontrolname='description']")
+    public WebElement  noteInputTicket;
+    @FindBy(xpath = "(//mat-icon[text()='add']/ancestor::button)[2]")
+    public WebElement  percentIncrease;
+    @FindBy(xpath = "//td[contains(@class, 'mat-column-executingPercent')]")
+    public WebElement  ticketReviewPercent;
+    @FindBy(xpath = "(//td[contains(@class, 'mat-column-regDateStr')])[3]")
+    public WebElement  ticketReviewNote;
 
 }

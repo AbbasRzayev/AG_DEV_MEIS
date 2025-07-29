@@ -71,7 +71,7 @@ Feature: Help Desk
     And admin selects new request from table
     When admin selects an executive person for the new request
     Then the status of the application and the name of the IT specialist are displayed in the general table
-    When IT specialist with login "anjelika.huseynova60@mail.ru" and with password "Davud88!!!" logs to the system
+    When IT specialist with login "anjelika.huseynova60@mail.ru" and with password "Davud88!!" logs to the system
     Then the system notification and information about request are displayed
     Then the notice arrived successfully in the mail and the information are displayed
     When IT specialist changes request status to the in process
