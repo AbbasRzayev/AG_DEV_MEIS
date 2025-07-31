@@ -2927,7 +2927,6 @@ public class helpDesk_Steps {
                     Assert.assertEquals(page.comNameNotCheck.getText().trim(), compName);
                     ReusableMethods.wait(1);
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();

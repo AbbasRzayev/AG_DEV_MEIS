@@ -1,7 +1,9 @@
 package stepdefinitions;
 
 import Page.calendar_Page;
+import Page.helpDesk_Page;
 import Page.registration_Page;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,15 +12,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 import static utilities.Driver.getDriver;
@@ -27,7 +35,7 @@ public class calendar_Steps {
     calendar_Page page = new calendar_Page();
     registration_Page page1 = new registration_Page();
     WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
-
+    helpDesk_Page helpDeskPage = new helpDesk_Page();
 
     @And("goes to the calendar tab")
     public void goesToTheCalendarTab() {
@@ -43,116 +51,10 @@ public class calendar_Steps {
         page.newEventBtn.click();
     }
 
-    @And("adds name for new event")
-    public void addsNameForNewEvent() {
-        ReusableMethods.wait(1);
-        page.eventNameInput.sendKeys("AT_TesT");
-    }
-
-    @And("adds start date for new event")
-    public void addsStartdateForNewEvent() {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String formattedDate = today.format(formatter);
-        System.out.println("formattedDate = " + formattedDate);
-        ReusableMethods.wait(1);
-        page.eventStartDateInput.sendKeys(formattedDate);
-    }
-
-    @And("adds end date for new event")
-    public void addsEnddateForNewEvent() {
-        LocalDate tomorrow = LocalDate.now().plusDays(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String formattedDate = tomorrow.format(formatter);
-        System.out.println("formattedDate = " + formattedDate);
-        ReusableMethods.wait(1);
-        page.eventEndDateInput.sendKeys(formattedDate);
-    }
-
-    @And("adds url for new event")
-    public void addsUrlForNewEvent() {
-        ReusableMethods.wait(1);
-        page.eventUrlInput.sendKeys("http://test.meis.competition.gov.az/");
-    }
-
-    @And("selects users for new event notification")
-    public void selectsUsersForNewEventNotification() {
-        ReusableMethods.wait(1);
-        page.notChoose.click();
-        ReusableMethods.wait(1);
-        page.notChooseForPerson.click();
-        ReusableMethods.wait(1);
-        page.ChoosePersonInput.sendKeys("Musa");
-        ReusableMethods.wait(2);
-        page.ChoosePersonAbbas.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("chooses whose calendar the event will appear on")
-    public void choosesWhoseCalendarTheEventWillAppearOn() {
-        page.chooseCalendarWhoWillSee.click();
-        ReusableMethods.wait(1);
-        page.calendarVisabilityForPerson.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("sets the category for the new event")
-    public void setsTheCategoryForTheNewEvent() {
-        page.categoryList.click();
-        ReusableMethods.wait(1);
-        page.categoryPermitList.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("determines where the event will be held")
-    public void determinesWhereTheEventWillBeHeld() {
-        page.eventPlace.click();
-        ReusableMethods.wait(1);
-        page.placeSelect.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("adds the person who organized the new event")
-    public void addsThePersonWhoOrganizedTheNewEvent() {
-        page.eventOrganizer.click();
-        ReusableMethods.wait(1);
-        page.organizerPerson.click();
-        ReusableMethods.wait(1);
-        page.AddNamePersonInput.sendKeys("Fərid İmranov");
-        ReusableMethods.wait(1);
-        page.addFerid.click();
-    }
-
-    @And("adds the picture for the new event")
-    public void addsThePictureForTheNewEvent() {
-        page.addPhoto.click();
-        String path = "C:\\Users\\User\\TestFiles\\Test.png";
-        ReusableMethods.robotClassDosyaYukleme(path);
-    }
-
-    @And("adds the description for the new event")
-    public void addsTheDescriptionForTheNewEvent() {
-        page.addDescription.sendKeys("Bu tədbirin məqsədi layihələrimizin daha keyfiyyətli icra edilməsi üçün səbəblərin müzakirəsidir");
-    }
-
     @And("selects submit button for the new event")
     public void selectsSubmitButtonForTheNewEvent() {
         page.acceptBtn.click();
         ReusableMethods.wait(1);
-    }
-
-    @Then("new event successfully created")
-    public void newEventSuccessfullyCreated() {
-        WebElement calTab = getDriver().findElement(By.xpath("//span[text()='Təqvim']"));
-        calTab.click();
-        ReusableMethods.wait(1);
-        WebElement element = getDriver().findElement(By.xpath("//p[contains(.,'AT_TesT')]"));
-        if (element.isDisplayed()) {
-            WebElement event = getDriver().findElement(By.xpath("(//mat-card[@class='mat-mdc-card mdc-card item-wrapper ng-star-inserted'])[1]"));
-            ReusableMethods.flash(event, getDriver());
-        } else {
-            System.out.println("element gorsenmedi");
-        }
     }
 
     private static boolean isElementVisible(WebElement element, WebDriverWait wait) {
@@ -443,17 +345,6 @@ public class calendar_Steps {
         page.accceptStructure.click();
     }
 
-    @And("adds the person the new event who organized")
-    public void addsThePersonTheNewEventWhoOrganized() {
-        page.eventOrganizer.click();
-        ReusableMethods.wait(1);
-        page.organizerPerson.click();
-        ReusableMethods.wait(1);
-        page.AddNameStrukPersonInput.sendKeys("Fərid İmranov");
-        ReusableMethods.wait(1);
-        page.addFerid.click();
-    }
-
     @Then("the system notification and information about structure event is displayed")
     public void theSystemNotificationAndInformationAboutStructureEventIsDisplayed() {
         try {
@@ -711,6 +602,7 @@ public class calendar_Steps {
         ReusableMethods.wait(1);
         page.eventNameInput.sendKeys("AT_TesT_Structure");
     }
+
     @When("makes a copy of the event")
     public void makesACopyOfTheEvent() {
         page.copyEventBtn.click();
@@ -721,10 +613,10 @@ public class calendar_Steps {
         page.acceptBtn.click();
         ReusableMethods.wait(2);
     }
+
     @Then("the copy of the event is being carried out successfully")
     public void theCopyOfTheEventIsBeingCarriedOutSuccessfully() {
-        if(isElementVisible(page.mainNote, wait))
-        {
+        if (isElementVisible(page.mainNote, wait)) {
             page.closeModal.click();
             ReusableMethods.wait(1);
             page.calTabAdmin.click();
@@ -734,8 +626,7 @@ public class calendar_Steps {
             String text = "AT_TesT_Structure_Copy";
             System.out.println("elem = " + elem.getText());
             Assert.assertEquals(text, elem.getText());
-        }
-        else {
+        } else {
             page.calTabAdmin.click();
             ReusableMethods.wait(1);
             WebElement elem = getDriver().findElement(By.xpath("//p[contains(.,'AT_TesT_Structure_Copy')]"));
@@ -748,19 +639,19 @@ public class calendar_Steps {
 
     @When("user deletes all structure events from calendar tab")
     public void userDeletesAllStructureEventsFromCalendarTab() {
-        if(page.strukCopyText.isDisplayed())
-        {
+        if (page.strukCopyText.isDisplayed()) {
             page.EventDeleteBtn.click();
             ReusableMethods.wait(1);
             page.yesBtn.click();
             ReusableMethods.wait(4);
         }
-        if(page.strukCopy.isDisplayed()) {
+        if (page.strukCopy.isDisplayed()) {
             page.EventDeleteBtn.click();
             ReusableMethods.wait(1);
             page.yesBtn.click();
         }
     }
+
     @Then("all structure events are deleted successfully")
     public void allStructureEventsAreDeletedSuccessfully() {
         ReusableMethods.assertElementNotDisplayed(page.strukCopyText);
@@ -772,5 +663,407 @@ public class calendar_Steps {
         ReusableMethods.flash(page.findEvent1, getDriver());
         page.findEvent1.click();
         ReusableMethods.wait(1);
+    }
+
+    @And("selects category {string} for a new event")
+    public void selectsCategoryForANewEvent(String selection) {
+        if (selection.contains("Elan")) {
+            page.categorySelect.click();
+            ReusableMethods.wait(1);
+            page.categoryAnnouncementSelect.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds name {string} for new event")
+    public void addsNameForNewEvent(String selection) {
+        if (selection.contains("AT_TesT")) {
+            ReusableMethods.wait(1);
+            page.eventNameInput.sendKeys("AT_TesT");
+        }
+    }
+
+        @And("adds reminder {string} notification for the event")
+        public void addsReminderNotificationForTheEvent (String selection){
+            if (selection.contains("14:45")) {
+                page.reminderInput.sendKeys("14:45");
+                ReusableMethods.wait(1);
+            }
+        }
+
+        @And("adds url {string} for new event")
+        public void addsUrlForNewEvent (String selection){
+            if (selection.contains("https://aist.group/")) {
+                ReusableMethods.wait(1);
+                page.eventUrlInput.sendKeys("https://aist.group/");
+            }
+        }
+
+        @And("selects user {string} for new event notification")
+        public void selectsUserForNewEventNotification (String selection){
+            if (selection.contains("Musa")) {
+                page.choosePersonInput.sendKeys("Musa Rza");
+                ReusableMethods.wait(2);
+                page.choosePersonMusa.click();
+                ReusableMethods.wait(1);
+                Actions actions = new Actions(getDriver());
+                actions.moveByOffset(5, 5).click().build().perform();
+            }
+        }
+    @And("adds start date and time {string} for new event")
+    public void addsStartDateAndTimeForNewEvent(String selection) {
+        if (selection.contains("15:00")) {
+            LocalDate today = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String formattedDate = today.format(formatter);
+            System.out.println("formattedDate = " + formattedDate);
+            ReusableMethods.wait(1);
+            page.eventStartDateInput.sendKeys(formattedDate);
+            page.startTimeInput.sendKeys("15:00");
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds end date and time {string} for new event")
+    public void addsEndDateAndTimeForNewEvent(String selection) {
+        if (selection.contains("17:00")) {
+            LocalDate tomorrow = LocalDate.now().plusDays(1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String formattedDate = tomorrow.format(formatter);
+            System.out.println("formattedDate = " + formattedDate);
+            ReusableMethods.wait(1);
+            page.eventEndDateInput.sendKeys(formattedDate);
+            page.endTimeInput.sendKeys("17:00");
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds the person {string} who organized the new event")
+    public void addsThePersonWhoOrganizedTheNewEvent(String selection) {
+        if (selection.contains("Abbas")) {
+            page.eventOrganizer.sendKeys("Abbas Rzayev");
+            ReusableMethods.wait(1);
+            page.addAbbas.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("selects user {string} for status view according to the addressees")
+    public void selectsUserForStatusViewAccordingToTheAddressees(String selection) {
+        if (selection.contains("Musa")) {
+            page.chooseCalendarWhoWillSee.click();
+            ReusableMethods.wait(1);
+            page.calendarVisibilityForPerson.click();
+            ReusableMethods.wait(1);
+            page.statusAccordingToPersonSelect.click();
+            ReusableMethods.wait(1);
+            page.choosePersonInput.sendKeys("Davud");
+            ReusableMethods.wait(2);
+            page.choosePersonDavud.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
+        }
+    }
+
+    @And("adds the description {string} for the new event")
+    public void addsTheDescriptionForTheNewEvent(String selection) {
+        if (selection.contains("Tədbir AT elanı məqsədi ilə əlavə edildi!")) {
+            // page.addDescription.sendKeys("Bu tədbirin məqsədi layihələrimizin daha keyfiyyətli icra edilməsi üçün səbəblərin müzakirəsidir");
+            page.addDescription.sendKeys("Tədbir AT elanı məqsədi ilə əlavə edildi!");
+        }
+    }
+
+    @And("determines where the event {string} will be held")
+    public void determinesWhereTheEventWillBeHeld(String selection) {
+        if (selection.contains("671 nömrəli otaq")) {
+            page.eventPlace.click();
+            ReusableMethods.wait(1);
+            page.placeSelectRoom671.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds the picture {string} for the new event")
+    public void addsThePictureForTheNewEvent(String selection) {
+        if (selection.contains("Test")) {
+            page.addPhoto.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\TestFiles\\Test.png";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        } else if (selection.contains("QAAT")) {
+            page.addPhoto.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
+    }
+
+    @And("adds the file {string} for the new event")
+    public void addsTheFileForTheNewEvent(String selection) {
+        if (selection.contains("QaAutomation")) {
+            page.addFileNew.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        } else if (selection.contains("EndToEnd")) {
+            page.addFileNew.click();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
+    }
+
+    @Then("new event successfully created and all information is displayed in the control panel")
+    public void newEventSuccessfullyCreatedAndAllInformationIsDisplayedInTheControlPanel(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String eventName = row.get("Başlıq");
+            String eventStatus = row.get("Status");
+            ReusableMethods.flash(page.eventName, getDriver());
+            Assert.assertEquals(page.eventName.getText().trim(), eventName);
+            ReusableMethods.wait(1);
+
+            String dateText = page.eventDataTime.getText().trim();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+            try {
+                LocalDateTime parsedDate = LocalDateTime.parse(dateText, formatter);
+                ReusableMethods.flash(page.eventDataTime, getDriver());
+                String reformatted = parsedDate.format(formatter);
+                System.out.println("Tarix formatı düzgündür: " + reformatted);
+                Assert.assertEquals("Tarix formatı səhvdir", dateText, reformatted);
+            } catch (DateTimeParseException e) {
+                throw new AssertionError("XƏTA: Tarix formatı düzgün deyil: " + dateText);
+            }
+
+            ReusableMethods.flash(page.eventStatus, getDriver());
+            Assert.assertEquals(page.eventStatus.getText().trim(), eventStatus);
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("all the information about event is displayed in the notification")
+    public void allTheInformationAboutEventIsDisplayedInTheNotification(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+            if (isElementVisible(helpDeskPage.noteMainCheck, wait)) {
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String eventName = row.get("Tədbirin adı");
+                    String category = row.get("Kateqoriya");
+                    String eventPLace = row.get("Tədbirin keçiriləcəyi yer");
+                    String eventOrganizer = row.get("Tədbiri təşkil edən");
+                    String whoCreate = row.get("Tərtib edən");
+                    String notStatus = row.get("Bildiriş statusu");
+                    String viewStatus = row.get("Baxış statusu");
+                    String persons = row.get("Şəxslər");
+                    String startData = row.get("Başlama tarixi");
+                    String startTime = row.get("Başlama vaxtı");
+                    String endTime = row.get("Bitmə vaxtı");
+                    String url = row.get("Url");
+                    String type = row.get("Tip");
+                    String description = row.get("Təsvir");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.notTextCheck, getDriver());
+                    Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.categoryName, getDriver());
+                    Assert.assertEquals(page.categoryName.getText().trim(), category);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.eventPLace, getDriver());
+                    Assert.assertEquals(page.eventPLace.getText().trim(), eventPLace);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.eventOrganizerName, getDriver());
+                    Assert.assertEquals(page.eventOrganizerName.getText().trim(), eventOrganizer);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoCreate, getDriver());
+                    Assert.assertEquals(page.whoCreate.getText().trim(), whoCreate);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notStatus, getDriver());
+                    Assert.assertEquals(page.notStatus.getText().trim(), notStatus);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.viewStatus, getDriver());
+                    Assert.assertEquals(page.viewStatus.getText().trim(), viewStatus);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.persons, getDriver());
+                    System.out.println("page.persons.getText() = " + page.persons.getText());
+                    Assert.assertEquals(page.persons.getText().trim(), persons);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.startDataInfo);
+                    ReusableMethods.flash(page.startDataInfo, getDriver());
+                    Assert.assertEquals(page.startDataInfo.getText().trim(), startData);
+                    ReusableMethods.wait(1);
+
+
+                    ReusableMethods.scrollToElementByActions(page.startTimeInfo);
+                    ReusableMethods.flash(page.startTimeInfo, getDriver());
+                    Assert.assertEquals(page.startTimeInfo.getText().trim(), startTime);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.endTime);
+                    ReusableMethods.flash(page.endTime, getDriver());
+                    Assert.assertEquals(page.endTime.getText().trim(), endTime);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.urlInfo);
+                    ReusableMethods.flash(page.urlInfo, getDriver());
+                    Assert.assertEquals(page.urlInfo.getText().trim(), url);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.typeInfo, getDriver());
+                    Assert.assertEquals(page.typeInfo.getText().trim(), type);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.descriptionInfo);
+                    ReusableMethods.flash(page.descriptionInfo, getDriver());
+                    Assert.assertEquals(page.descriptionInfo.getText().trim(), description);
+                    ReusableMethods.wait(1);
+
+                    WebElement image = getDriver().findElement(By.xpath("//img[@alt='Şəkil']"));
+                    String srcValue = image.getAttribute("src").trim();
+
+                    ReusableMethods.scrollToElementByActions(image);
+                    ReusableMethods.flash(image, getDriver());
+
+
+                    if (srcValue == null || srcValue.isEmpty() || srcValue.equals("data:")) {
+                        throw new AssertionError("XƏTA: Şəkil src dəyəri mövcud deyil və ya boşdur!");
+                    } else {
+                        System.out.println("Şəkil src dəyəri: " + srcValue);
+                    }
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(1);
+
+                ReusableMethods.wait(3);
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Təqvim yaradıldı')])[1]"));
+//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(2);
+
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String eventName = row.get("Tədbirin adı");
+                    String category = row.get("Kateqoriya");
+                    String eventPLace = row.get("Tədbirin keçiriləcəyi yer");
+                    String eventOrganizer = row.get("Tədbiri təşkil edən");
+                    String whoCreate = row.get("Tərtib edən");
+                    String notStatus = row.get("Bildiriş statusu");
+                    String viewStatus = row.get("Baxış statusu");
+                    String persons = row.get("Şəxslər");
+                    String startData = row.get("Başlama tarixi");
+                    String startTime = row.get("Başlama vaxtı");
+                    String endTime = row.get("Bitmə vaxtı");
+                    String url = row.get("Url");
+                    String type = row.get("Tip");
+                    String description = row.get("Təsvir");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.notTextCheck, getDriver());
+                    Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.categoryName, getDriver());
+                    Assert.assertEquals(page.categoryName.getText().trim(), category);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.eventPLace, getDriver());
+                    Assert.assertEquals(page.eventPLace.getText().trim(), eventPLace);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.eventOrganizerName, getDriver());
+                    Assert.assertEquals(page.eventOrganizerName.getText().trim(), eventOrganizer);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.whoCreate, getDriver());
+                    Assert.assertEquals(page.whoCreate.getText().trim(), whoCreate);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.notStatus, getDriver());
+                    Assert.assertEquals(page.notStatus.getText().trim(), notStatus);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.viewStatus, getDriver());
+                    Assert.assertEquals(page.viewStatus.getText().trim(), viewStatus);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.persons, getDriver());
+                    System.out.println("page.persons.getText() = " + page.persons.getText());
+                    Assert.assertEquals(page.persons.getText().trim(), persons);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.startDataInfo);
+                    ReusableMethods.flash(page.startDataInfo, getDriver());
+                    Assert.assertEquals(page.startDataInfo.getText().trim(), startData);
+                    ReusableMethods.wait(1);
+
+
+                    ReusableMethods.scrollToElementByActions(page.startTimeInfo);
+                    ReusableMethods.flash(page.startTimeInfo, getDriver());
+                    Assert.assertEquals(page.startTimeInfo.getText().trim(), startTime);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.endTime);
+                    ReusableMethods.flash(page.endTime, getDriver());
+                    Assert.assertEquals(page.endTime.getText().trim(), endTime);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.urlInfo);
+                    ReusableMethods.flash(page.urlInfo, getDriver());
+                    Assert.assertEquals(page.urlInfo.getText().trim(), url);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.typeInfo, getDriver());
+                    Assert.assertEquals(page.typeInfo.getText().trim(), type);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.scrollToElementByActions(page.descriptionInfo);
+                    ReusableMethods.flash(page.descriptionInfo, getDriver());
+                    Assert.assertEquals(page.descriptionInfo.getText().trim(), description);
+                    ReusableMethods.wait(1);
+
+                    WebElement image = getDriver().findElement(By.xpath("//img[@alt='Şəkil']"));
+                    String srcValue = image.getAttribute("src").trim();
+
+                    ReusableMethods.scrollToElementByActions(image);
+                    ReusableMethods.flash(image, getDriver());
+
+                    if (srcValue == null || srcValue.isEmpty() || srcValue.equals("data:")) {
+                        throw new AssertionError("XƏTA: Şəkil src dəyəri mövcud deyil və ya boşdur!");
+                    } else {
+                        System.out.println("Şəkil src dəyəri: " + srcValue);
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

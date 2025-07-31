@@ -15,15 +15,15 @@ public class calendar_Page {
     public WebElement calendarPage;
     @FindBy(xpath = "//span[contains(.,' Yeni tədbir ')]")
     public WebElement newEventBtn;
-    @FindBy(id = "mat-input-2")
+    @FindBy(xpath = "//input[@formcontrolname='shortNote']")
     public WebElement eventNameInput;
     @FindBy(id = "mat-input-8")
     public WebElement eventCopyNameInput;
-    @FindBy(id = "mat-input-3")
+    @FindBy(xpath = "//input[@formcontrolname='startDate']")
     public WebElement eventStartDateInput;
-    @FindBy(id = "mat-input-4")
+    @FindBy(xpath = "//input[@formcontrolname='endDate']")
     public WebElement eventEndDateInput;
-    @FindBy(id = "mat-input-8")
+    @FindBy(xpath = "//input[@formcontrolname='url']")
     public WebElement eventUrlInput;
     @FindBy(xpath = "//div[@class='mat-mdc-select-trigger ng-tns-c3393473648-19']")
     public WebElement notChoose;
@@ -31,25 +31,23 @@ public class calendar_Page {
     public WebElement notChooseForPerson;
     @FindBy(xpath = "//span[text()='Struktur bölmə daxilində']")
     public WebElement notChooseStructure;
-    @FindBy(id = "mat-input-10")
-    public WebElement ChoosePersonInput;
-    @FindBy(xpath = "//label[contains(.,'Musa Rzayev')]")
-    public WebElement ChoosePersonAbbas;
-    @FindBy(xpath = "//div[@class='mat-mdc-select-trigger ng-tns-c3393473648-21']")
+    @FindBy(xpath = "(//input[contains(@class, 'search-input')])[1]")
+    public WebElement choosePersonInput;
+    @FindBy(xpath = "//div[contains(normalize-space(.), 'Musa Rzayev')]/span[contains(@class, 'emptyBox')]")
+    public WebElement choosePersonMusa;
+    @FindBy(xpath = "//div[contains(normalize-space(.), 'Davud Zamanov')]/span[contains(@class, 'emptyBox')]")
+    public WebElement choosePersonDavud;
+    @FindBy(xpath = "//div[@id='mat-select-value-11']")
     public WebElement chooseCalendarWhoWillSee;
-    @FindBy(xpath = "//div[@class='cdk-overlay-connected-position-bounding-box']//span[text()='Ünvanlanmış şəxslərə görə']")
-    public WebElement calendarVisabilityForPerson;
+    @FindBy(xpath = "//div[@class='cdk-overlay-connected-position-bounding-box']//span[text()='Ünvanlanmış şəxslərə ']")
+    public WebElement calendarVisibilityForPerson;
     @FindBy(xpath = "//div[@class='cdk-overlay-connected-position-bounding-box']//span[text()='Struktur bölmə daxilində']")
     public WebElement calendarVisabilityStructure;
-    @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-22']")
-    public WebElement categoryList;
-    @FindBy(xpath = "//span[text()='İcazə']")
-    public WebElement categoryPermitList;
-    @FindBy(xpath = "//div[@class='mat-mdc-select-trigger ng-tns-c3393473648-25']")
+    @FindBy(xpath = "//mat-label[text()='Tədbirin keçiriləcəyi yer']/ancestor::div[contains(@class, 'mat-mdc-form-field-infix')]//mat-select")
     public WebElement eventPlace;
-    @FindBy(xpath = "//span[contains(.,'Digər')]")
-    public WebElement placeSelect;
-    @FindBy(xpath = "//div[@class='mat-mdc-select-value ng-tns-c3393473648-27']")
+    @FindBy(xpath = "//span[contains(.,'671 nömrəli otaq')]")
+    public WebElement placeSelectRoom671;
+    @FindBy(xpath = "//input[@placeholder='Şəxs']")
     public WebElement eventOrganizer;
     @FindBy(xpath = "//span[text()=' Şəxs']")
     public WebElement organizerPerson;
@@ -57,11 +55,15 @@ public class calendar_Page {
     public WebElement AddNamePersonInput;
     @FindBy(id = "mat-input-14")
     public WebElement AddNameStrukPersonInput;
-    @FindBy(xpath = "//span[contains(.,' Fərid İmranov ')]")
-    public WebElement addFerid;
-    @FindBy(xpath = "//span[contains(.,'Şəkil əlavə edin')]")
+    @FindBy(xpath = "(//div[contains(.,' Abbas Rzayev ')])[5]")
+    public WebElement addAbbas;
+    @FindBy(xpath = "(//input[contains(@class, 'search-input')])[2]")
+    public WebElement statusAccordingToPersonSelect;
+    @FindBy(xpath = "//p[text()='Şəkil əlavə edin']")
     public WebElement addPhoto;
-    @FindBy(id = "mat-input-9")
+    @FindBy(xpath = "//p[text()='Fayl əlavə edin']")
+    public WebElement addFileNew;
+    @FindBy(xpath= "//textarea[@formcontrolname='description']")
     public WebElement addDescription;
     @FindBy(xpath = "//span[contains(.,'Təsdiq et')]")
     public WebElement acceptBtn;
@@ -109,5 +111,49 @@ public class calendar_Page {
     public WebElement eventNotAppears;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[11]")
     public WebElement closeModal;
+    @FindBy(xpath = "//mat-select[@formcontrolname='eventCategoryId']")
+    public WebElement categorySelect;
+    @FindBy(xpath = "(//span[normalize-space()='Elan'])[1]")
+    public WebElement categoryAnnouncementSelect;
+    @FindBy(xpath = "//input[@formcontrolname='MHour']")
+    public WebElement startTimeInput;
+    @FindBy(xpath = "//input[@formcontrolname='endHour']")
+    public WebElement endTimeInput;
+    @FindBy(xpath = "//input[@formcontrolname='notificationOffsetMinutes']")
+    public WebElement reminderInput;
+    @FindBy(xpath = "//p[@class='shortNote']")
+    public WebElement eventName;
+    @FindBy(xpath = "//p[@class='ng-star-inserted']")
+    public WebElement eventStatus;
+    @FindBy(xpath = "//span[normalize-space(.)='Vaxt']/following-sibling::p[1]")
+    public WebElement eventDataTime;
 
+    @FindBy(xpath = "//h5[contains(text(), 'AT_')]")
+    public WebElement  notTextCheck;
+    @FindBy(xpath = "//div[span[text()='Kateqoriya']]/p")
+    public WebElement categoryName;
+    @FindBy(xpath = "//div[span[text()='Tədbirin keçiriləcəyi yer']]/p")
+    public WebElement eventPLace;
+    @FindBy(xpath = "//div[span[text()='Tədbiri təşkil edən']]/p")
+    public WebElement eventOrganizerName;
+    @FindBy(xpath = "//div[span[text()='Tərtib edən']]/p")
+    public WebElement whoCreate;
+    @FindBy(xpath = "//div[span[text()='Bildiriş statusu']]/p")
+    public WebElement notStatus;
+    @FindBy(xpath = "//div[span[text()='Baxış statusu']]/p")
+    public WebElement viewStatus;
+    @FindBy(xpath = "//div[span[text()='Şəxslər']]/p")
+    public WebElement persons;
+    @FindBy(xpath = "//div[span[text()='Başlama tarixi']]/p")
+    public WebElement startDataInfo;
+    @FindBy(xpath = "//div[span[text()='Başlama vaxtı']]/p")
+    public WebElement startTimeInfo;
+    @FindBy(xpath = "//div[span[text()='Bitmə vaxtı']]/p")
+    public WebElement endTime;
+    @FindBy(xpath = "//div[span[text()='Url']]/p")
+    public WebElement urlInfo;
+    @FindBy(xpath = "//div[span[text()='Tip']]/p")
+    public WebElement typeInfo;
+    @FindBy(xpath = "//div[span[text()='Təsvir']]/p")
+    public WebElement descriptionInfo;
 }

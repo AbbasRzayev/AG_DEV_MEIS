@@ -145,6 +145,14 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("DavudPassword"));
             page.enterToTheSystem.click();
+        }else if(environment.contains("AG-MEIS") && user.equals("rzayevmusa1234@gmail.com")){
+            getDriver().get(ConfigReader.getProperty("AG-MEIS"));
+            getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            ReusableMethods.wait(1);
+            page.emailField.sendKeys(ConfigReader.getProperty("MusaNewLogin"));
+            ReusableMethods.wait(1);
+            page.passwordField.sendKeys(ConfigReader.getProperty("MusaPassword"));
+            page.enterToTheSystem.click();
         }
     }
 
