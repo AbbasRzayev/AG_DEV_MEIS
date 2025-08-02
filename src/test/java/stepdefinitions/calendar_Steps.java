@@ -49,12 +49,14 @@ public class calendar_Steps {
         ReusableMethods.waitForClickability(page.newEventBtn, 1);
         ReusableMethods.wait(1);
         page.newEventBtn.click();
+        ReusableMethods.wait(1);
+        getDriver().navigate().refresh();
     }
 
     @And("selects submit button for the new event")
     public void selectsSubmitButtonForTheNewEvent() {
         page.acceptBtn.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     private static boolean isElementVisible(WebElement element, WebDriverWait wait) {
@@ -683,43 +685,44 @@ public class calendar_Steps {
         }
     }
 
-        @And("adds reminder {string} notification for the event")
-        public void addsReminderNotificationForTheEvent (String selection){
-            if (selection.contains("14:45")) {
-                page.reminderInput.sendKeys("14:45");
-                ReusableMethods.wait(1);
-            }
+    @And("adds reminder {string} notification for the event")
+    public void addsReminderNotificationForTheEvent(String selection) {
+        if (selection.contains("00:15")) {
+            page.reminderInput.sendKeys("00:15");
+            ReusableMethods.wait(1);
         }
+    }
 
-        @And("adds url {string} for new event")
-        public void addsUrlForNewEvent (String selection){
-            if (selection.contains("https://aist.group/")) {
-                ReusableMethods.wait(1);
-                page.eventUrlInput.sendKeys("https://aist.group/");
-            }
+    @And("adds url {string} for new event")
+    public void addsUrlForNewEvent(String selection) {
+        if (selection.contains("https://aist.group/")) {
+            ReusableMethods.wait(1);
+            page.eventUrlInput.sendKeys("https://aist.group/");
         }
+    }
 
-        @And("selects user {string} for new event notification")
-        public void selectsUserForNewEventNotification (String selection){
-            if (selection.contains("Musa")) {
-                page.choosePersonInput.sendKeys("Musa Rza");
-                ReusableMethods.wait(2);
-                page.choosePersonMusa.click();
-                ReusableMethods.wait(1);
-                Actions actions = new Actions(getDriver());
-                actions.moveByOffset(5, 5).click().build().perform();
-            }
+    @And("selects user {string} for new event notification")
+    public void selectsUserForNewEventNotification(String selection) {
+        if (selection.contains("Musa")) {
+            page.choosePersonInput.sendKeys("Musa Rza");
+            ReusableMethods.wait(2);
+            page.choosePersonMusa.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
         }
+    }
+
     @And("adds start date and time {string} for new event")
     public void addsStartDateAndTimeForNewEvent(String selection) {
-        if (selection.contains("15:00")) {
+        if (selection.contains("00:30")) {
             LocalDate today = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             String formattedDate = today.format(formatter);
             System.out.println("formattedDate = " + formattedDate);
             ReusableMethods.wait(1);
             page.eventStartDateInput.sendKeys(formattedDate);
-            page.startTimeInput.sendKeys("15:00");
+            page.startTimeInput.sendKeys("00:30");
             ReusableMethods.wait(1);
         }
     }
@@ -755,14 +758,14 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             page.calendarVisibilityForPerson.click();
             ReusableMethods.wait(1);
-            page.statusAccordingToPersonSelect.click();
-            ReusableMethods.wait(1);
-            page.choosePersonInput.sendKeys("Davud");
-            ReusableMethods.wait(2);
-            page.choosePersonDavud.click();
-            ReusableMethods.wait(1);
-            Actions actions = new Actions(getDriver());
-            actions.moveByOffset(5, 5).click().build().perform();
+//            page.statusAccordingToPersonSelect.click();
+//            ReusableMethods.wait(1);
+//            page.choosePersonInput.sendKeys("Davud");
+//            ReusableMethods.wait(2);
+//            page.choosePersonDavud.click();
+//            ReusableMethods.wait(1);
+//            Actions actions = new Actions(getDriver());
+//            actions.moveByOffset(5, 5).click().build().perform();
         }
     }
 
@@ -857,7 +860,7 @@ public class calendar_Steps {
                     String notStatus = row.get("Bildiriş statusu");
                     String viewStatus = row.get("Baxış statusu");
                     String persons = row.get("Şəxslər");
-                    String startData = row.get("Başlama tarixi");
+                    //String startData = row.get("Başlama tarixi");
                     String startTime = row.get("Başlama vaxtı");
                     String endTime = row.get("Bitmə vaxtı");
                     String url = row.get("Url");
@@ -906,7 +909,10 @@ public class calendar_Steps {
 
                     ReusableMethods.scrollToElementByActions(page.startDataInfo);
                     ReusableMethods.flash(page.startDataInfo, getDriver());
-                    Assert.assertEquals(page.startDataInfo.getText().trim(), startData);
+                    LocalDate today = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    String formattedDate = today.format(formatter);
+                    Assert.assertEquals(page.startDataInfo.getText().trim(), formattedDate);
                     ReusableMethods.wait(1);
 
 
@@ -953,7 +959,7 @@ public class calendar_Steps {
                 button.click();
                 ReusableMethods.wait(1);
 
-                ReusableMethods.wait(3);
+                ReusableMethods.wait(1);
 //                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
 //                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
                 WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Təqvim yaradıldı')])[1]"));
@@ -983,6 +989,7 @@ public class calendar_Steps {
                     wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
 
                     ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.clickByJavaScript(page.notTextCheck);
                     ReusableMethods.flash(page.notTextCheck, getDriver());
                     Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
                     ReusableMethods.wait(1);
@@ -1020,9 +1027,11 @@ public class calendar_Steps {
 
                     ReusableMethods.scrollToElementByActions(page.startDataInfo);
                     ReusableMethods.flash(page.startDataInfo, getDriver());
-                    Assert.assertEquals(page.startDataInfo.getText().trim(), startData);
+                    LocalDate today = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    String formattedDate = today.format(formatter);
+                    Assert.assertEquals(page.startDataInfo.getText().trim(), formattedDate);
                     ReusableMethods.wait(1);
-
 
                     ReusableMethods.scrollToElementByActions(page.startTimeInfo);
                     ReusableMethods.flash(page.startTimeInfo, getDriver());
@@ -1064,6 +1073,131 @@ public class calendar_Steps {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @And("select close button in the notification modal window")
+    public void selectCloseButtonInTheNotificationModalWindow() {
+        page.closeButtonNotificationModal.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("goes to the calendar tab from left side bar")
+    public void goesToTheCalendarTabFromLeftSideBar() {
+        page.calendarLeftSideBar.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("event name {string} is shown in the calendar")
+    public void eventNameIsShownInTheCalendar(String selection) {
+        if (selection.contains("AT_TesT")) {
+            ReusableMethods.flash(page.eventNameCalendar, getDriver());
+            String expected = "AT_TesT";
+            String actual = page.eventNameCalendar.getText().trim();
+            Assert.assertEquals(actual, expected);
+        }
+    }
+
+    @And("select event from calendar")
+    public void selectEventFromCalendar() {
+        page.eventNameCalendar.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("all the information about event is displayed in the event modal window")
+    public void allTheInformationAboutEventIsDisplayedInTheEventModalWindow(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String eventName = row.get("Tədbirin adı");
+            String category = row.get("Kateqoriya");
+            String eventPLace = row.get("Tədbirin keçiriləcəyi yer");
+            String eventOrganizer = row.get("Tədbiri təşkil edən");
+            String whoCreate = row.get("Tərtib edən");
+            String notStatus = row.get("Bildiriş statusu");
+            String viewStatus = row.get("Baxış statusu");
+            String persons = row.get("Şəxslər");
+            String startData = row.get("Başlama tarixi");
+            String startTime = row.get("Başlama vaxtı");
+            String endTime = row.get("Bitmə vaxtı");
+            String url = row.get("Url");
+            String type = row.get("Tip");
+            String description = row.get("Təsvir");
+
+
+            ReusableMethods.waitForOverlayToDisappear(getDriver());
+            ReusableMethods.clickByJavaScript(page.notTextCheck);
+            ReusableMethods.flash(page.notTextCheck, getDriver());
+            Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.waitForOverlayToDisappear(getDriver());
+            ReusableMethods.flash(page.categoryName, getDriver());
+            Assert.assertEquals(page.categoryName.getText().trim(), category);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.waitForOverlayToDisappear(getDriver());
+            ReusableMethods.flash(page.eventPLace, getDriver());
+            Assert.assertEquals(page.eventPLace.getText().trim(), eventPLace);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.eventOrganizerName, getDriver());
+            Assert.assertEquals(page.eventOrganizerName.getText().trim(), eventOrganizer);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.whoCreate, getDriver());
+            Assert.assertEquals(page.whoCreate.getText().trim(), whoCreate);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.notStatus, getDriver());
+            Assert.assertEquals(page.notStatus.getText().trim(), notStatus);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.viewStatus, getDriver());
+            Assert.assertEquals(page.viewStatus.getText().trim(), viewStatus);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.persons, getDriver());
+            System.out.println("page.persons.getText() = " + page.persons.getText());
+            Assert.assertEquals(page.persons.getText().trim(), persons);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.scrollToElementByActions(page.startDataInfo);
+            ReusableMethods.flash(page.startDataInfo, getDriver());
+            LocalDate today = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String formattedDate = today.format(formatter);
+            Assert.assertEquals(page.startDataInfo.getText().trim(), formattedDate);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.scrollToElementByActions(page.startTimeInfo);
+            ReusableMethods.flash(page.startTimeInfo, getDriver());
+            Assert.assertEquals(page.startTimeInfo.getText().trim(), startTime);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.scrollToElementByActions(page.endTime);
+            ReusableMethods.flash(page.endTime, getDriver());
+            Assert.assertEquals(page.endTime.getText().trim(), endTime);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.scrollToElementByActions(page.urlInfo);
+            ReusableMethods.flash(page.urlInfo, getDriver());
+            Assert.assertEquals(page.urlInfo.getText().trim(), url);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.typeInfo, getDriver());
+            Assert.assertEquals(page.typeInfo.getText().trim(), type);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.scrollToElementByActions(page.descriptionInfo);
+            ReusableMethods.flash(page.descriptionInfo, getDriver());
+            Assert.assertEquals(page.descriptionInfo.getText().trim(), description);
+            ReusableMethods.wait(1);
+
+            WebElement image = getDriver().findElement(By.xpath("//img[@alt='Şəkil']"));
+            String srcValue = image.getAttribute("src").trim();
+
+            ReusableMethods.scrollToElementByActions(image);
+            ReusableMethods.flash(image, getDriver());
         }
     }
 }
