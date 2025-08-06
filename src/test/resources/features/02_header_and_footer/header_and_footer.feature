@@ -1,6 +1,7 @@
 @all @new
 Feature: Headers and Footers icons,buttons,texts
 
+
   @header_and_footer
   Scenario: Check headers and footers icons-buttons-text are clickable and visible
     Given user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
@@ -23,5 +24,4 @@ Feature: Headers and Footers icons,buttons,texts
   #5.Header hissəsində şəxsi kabinetimin əks olunması və seçilməsi
   #6.Header hissəsində ad və soyadın əks olunması
   #7.Footer "Bütün hüquqlar qorunur - copyright" əks olunması
-  #8.Footer hissəsində "AISTGroup MMC"- logoC:\Users\User\TestFiles\Test.png
-  # əks olunması əks olunması və klik etdikdə keçid etmə və url yoxlanılması
+  #8.Footer hissəsində "AISTGroup MMC"- logo əks olunması və klik etdikdə keçid etmə və url yoxlanılması

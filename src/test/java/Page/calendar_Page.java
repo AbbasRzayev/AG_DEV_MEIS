@@ -33,9 +33,13 @@ public class calendar_Page {
     public WebElement notChooseStructure;
     @FindBy(xpath = "(//input[contains(@class, 'search-input')])[1]")
     public WebElement choosePersonInput;
+    @FindBy(xpath = "(//input[contains(@class, 'search-input')])[2]")
+    public WebElement choosePersonInputSecond;
     @FindBy(xpath = "//div[contains(normalize-space(.), 'Musa Rzayev')]/span[contains(@class, 'emptyBox')]")
     public WebElement choosePersonMusa;
-    @FindBy(xpath = "//div[contains(normalize-space(.), 'Davud Zamanov')]/span[contains(@class, 'emptyBox')]")
+    @FindBy(xpath = "//div[@class='mat-mdc-tooltip-trigger manual-option ng-star-inserted' and contains(., 'Musa Rzayev')]")
+    public WebElement cancelMusaPerson;
+    @FindBy(xpath = "(//div[contains(normalize-space(.), 'Davud Zamanov')])[5]")
     public WebElement choosePersonDavud;
     @FindBy(xpath = "//span[text()='Ümumi açıq']")
     public WebElement chooseCalendarWhoWillSee;
@@ -47,22 +51,22 @@ public class calendar_Page {
     public WebElement eventPlace;
     @FindBy(xpath = "//span[contains(.,'671 nömrəli otaq')]")
     public WebElement placeSelectRoom671;
+    @FindBy(xpath = "//span[contains(.,'İclas zalı')]")
+    public WebElement placeSelectMeetingRoom;
     @FindBy(xpath = "//input[@placeholder='Şəxs']")
     public WebElement eventOrganizer;
-    @FindBy(xpath = "//span[text()=' Şəxs']")
-    public WebElement organizerPerson;
-    @FindBy(id = "mat-input-13")
-    public WebElement AddNamePersonInput;
-    @FindBy(id = "mat-input-14")
-    public WebElement AddNameStrukPersonInput;
     @FindBy(xpath = "(//div[contains(.,' Abbas Rzayev ')])[5]")
     public WebElement addAbbas;
-    @FindBy(xpath = "(//input[contains(@class, 'search-input')])[2]")
-    public WebElement statusAccordingToPersonSelect;
+    @FindBy(xpath = "(//div[contains(.,' Davud Zamanov ')])[5]")
+    public WebElement addDavud;
     @FindBy(xpath = "//p[text()='Şəkil əlavə edin']")
     public WebElement addPhoto;
+    @FindBy(xpath = "//mat-icon[text()='change_circle']")
+    public WebElement changePhoto;
     @FindBy(xpath = "//p[text()='Fayl əlavə edin']")
     public WebElement addFileNew;
+    @FindBy(xpath = "//mat-icon[text()='add_circle']")
+    public WebElement changeFile;
     @FindBy(xpath= "//textarea[@formcontrolname='description']")
     public WebElement addDescription;
     @FindBy(xpath = "//span[contains(.,'Təsdiq et')]")
@@ -71,8 +75,6 @@ public class calendar_Page {
     public WebElement mainNote;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[2]")
     public WebElement noteBtn;
-    @FindBy(xpath = "//div[@class='notifications_wrapper']")
-    public WebElement findEventList;
     @FindBy(xpath = "(//span[@class='mat-mdc-list-item-unscoped-content'])[8]")
     public WebElement calTab;
     @FindBy(xpath = "//span[contains(.,'AT_TesT')]")
@@ -97,7 +99,7 @@ public class calendar_Page {
     public WebElement copyEventBtn;
     @FindBy(xpath = "(//span[text()='Sil'])[1]")
     public WebElement EventDeleteBtn;
-    @FindBy(xpath = "//a[contains(.,'Təqvim')]")
+    @FindBy(xpath = "//span[contains(.,'Təqvim')]")
     public WebElement calTabAdmin;
     @FindBy(xpath = "//span[contains(.,'Bəli')]")
     public WebElement yesBtn;
@@ -115,13 +117,15 @@ public class calendar_Page {
     public WebElement categorySelect;
     @FindBy(xpath = "(//span[normalize-space()='Elan'])[1]")
     public WebElement categoryAnnouncementSelect;
+    @FindBy(xpath = "(//span[normalize-space()='İcazə'])[1]")
+    public WebElement categoryBusinessTripSelect;
     @FindBy(xpath = "//input[@formcontrolname='MHour']")
     public WebElement startTimeInput;
     @FindBy(xpath = "//input[@formcontrolname='endHour']")
     public WebElement endTimeInput;
     @FindBy(xpath = "//input[@formcontrolname='notificationOffsetMinutes']")
     public WebElement reminderInput;
-    @FindBy(xpath = "//p[@class='shortNote']")
+    @FindBy(xpath = "(//p[@class='shortNote'])[1]")
     public WebElement eventName;
     @FindBy(xpath = "//p[@class='ng-star-inserted']")
     public WebElement eventStatus;
@@ -162,6 +166,8 @@ public class calendar_Page {
     public WebElement calendarLeftSideBar;
     @FindBy(xpath = "(//span[text()='AT_TesT'])[1]")
     public WebElement eventNameCalendar;
+    @FindBy(xpath = "(//span[text()='AT_Edited'])[1]")
+    public WebElement eventEditNameCalendar;
 
     @FindBy(xpath = "//h5[contains(@_ngcontent, '')]")
     public WebElement eventNameCal;
@@ -191,4 +197,6 @@ public class calendar_Page {
     public WebElement typeInfoCal;
     @FindBy(xpath = "(//strong/ancestor::div[1]/p)[16]")
     public WebElement descriptionInfoCal;
+    @FindBy(xpath = "(//span[text()='Düzəliş et'])[1]")
+    public WebElement editBtnEvent;
 }

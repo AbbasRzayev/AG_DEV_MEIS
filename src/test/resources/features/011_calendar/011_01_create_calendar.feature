@@ -1,5 +1,8 @@
 @all @calendar
-Feature: Calendar
+Feature: Create Calendar
+  As a user
+  I want to create a new calendar
+  So that I can schedule and manage events effectively
 
   @newCalendarCreation @new
   Scenario: Check if the user can add a new event
@@ -35,7 +38,7 @@ Feature: Calendar
     When goes to the calendar tab from left side bar
     #Təqvimin üzərində tədbirin əks olunması və məlumatların yoxlanılması
     Then event name "AT_TesT" is shown in the calendar
-    When select event from calendar
+    When select event "AT_TesT" from calendar
     Then all the information about event is displayed in the event modal window
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
       | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |

@@ -675,6 +675,11 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             page.categoryAnnouncementSelect.click();
             ReusableMethods.wait(1);
+        } else if (selection.contains("İcazə")) {
+            page.categorySelect.click();
+            ReusableMethods.wait(1);
+            page.categoryBusinessTripSelect.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -683,6 +688,10 @@ public class calendar_Steps {
         if (selection.contains("AT_TesT")) {
             ReusableMethods.wait(1);
             page.eventNameInput.sendKeys("AT_TesT");
+        } else if (selection.contains("AT_Edited")) {
+            page.eventNameInput.clear();
+            ReusableMethods.wait(1);
+            page.eventNameInput.sendKeys("AT_Edited");
         }
     }
 
@@ -690,6 +699,11 @@ public class calendar_Steps {
     public void addsReminderNotificationForTheEvent(String selection) {
         if (selection.contains("00:15")) {
             page.reminderInput.sendKeys("00:15");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("00:30")) {
+            page.reminderInput.clear();
+            ReusableMethods.wait(1);
+            page.reminderInput.sendKeys("00:30");
             ReusableMethods.wait(1);
         }
     }
@@ -699,6 +713,10 @@ public class calendar_Steps {
         if (selection.contains("https://aist.group/")) {
             ReusableMethods.wait(1);
             page.eventUrlInput.sendKeys("https://aist.group/");
+        } else if (selection.contains("https://dev-meis.aist.group/auth")) {
+            page.eventUrlInput.clear();
+            ReusableMethods.wait(1);
+            page.eventUrlInput.sendKeys("https://dev-meis.aist.group/auth");
         }
     }
 
@@ -708,6 +726,19 @@ public class calendar_Steps {
             page.choosePersonInput.sendKeys("Musa Rza");
             ReusableMethods.wait(2);
             page.choosePersonMusa.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
+        } else if (selection.contains("Davud")) {
+            ReusableMethods.wait(1);
+            page.choosePersonInput.sendKeys("Musa Rza");
+            ReusableMethods.wait(1);
+            page.cancelMusaPerson.click();
+            page.choosePersonInput.clear();
+            ReusableMethods.wait(1);
+            page.choosePersonInput.sendKeys("Davud Zamanov");
+            ReusableMethods.wait(1);
+            page.choosePersonDavud.click();
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveByOffset(5, 5).click().build().perform();
@@ -725,6 +756,11 @@ public class calendar_Steps {
             page.eventStartDateInput.sendKeys(formattedDate);
             page.startTimeInput.sendKeys("00:30");
             ReusableMethods.wait(1);
+        } else if (selection.contains("00:50")) {
+            page.startTimeInput.clear();
+            ReusableMethods.wait(1);
+            page.startTimeInput.sendKeys("00:50");
+            ReusableMethods.wait(1);
         }
     }
 
@@ -739,6 +775,11 @@ public class calendar_Steps {
             page.eventEndDateInput.sendKeys(formattedDate);
             page.endTimeInput.sendKeys("17:00");
             ReusableMethods.wait(1);
+        } else if (selection.contains("19:00")) {
+            page.endTimeInput.clear();
+            ReusableMethods.wait(1);
+            page.endTimeInput.sendKeys("19:00");
+            ReusableMethods.wait(1);
         }
     }
 
@@ -748,6 +789,12 @@ public class calendar_Steps {
             page.eventOrganizer.sendKeys("Abbas Rzayev");
             ReusableMethods.wait(1);
             page.addAbbas.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Davud")) {
+            page.eventOrganizer.clear();
+            page.eventOrganizer.sendKeys("Davud Zamanov");
+            ReusableMethods.wait(1);
+            page.addDavud.click();
             ReusableMethods.wait(1);
         }
     }
@@ -767,6 +814,19 @@ public class calendar_Steps {
 //            ReusableMethods.wait(1);
 //            Actions actions = new Actions(getDriver());
 //            actions.moveByOffset(5, 5).click().build().perform();
+        } else if (selection.contains("Davud")) {
+            page.choosePersonInputSecond.sendKeys("Musa Rza");
+            ReusableMethods.wait(3);
+            page.cancelMusaPerson.click();
+            ReusableMethods.wait(1);
+            page.choosePersonInputSecond.clear();
+            ReusableMethods.wait(1);
+            page.choosePersonInputSecond.sendKeys("Davud Zamanov");
+            ReusableMethods.wait(1);
+            page.choosePersonDavud.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
         }
     }
 
@@ -775,6 +835,10 @@ public class calendar_Steps {
         if (selection.contains("Tədbir AT elanı məqsədi ilə əlavə edildi!")) {
             // page.addDescription.sendKeys("Bu tədbirin məqsədi layihələrimizin daha keyfiyyətli icra edilməsi üçün səbəblərin müzakirəsidir");
             page.addDescription.sendKeys("Tədbir AT elanı məqsədi ilə əlavə edildi!");
+        } else if (selection.contains("Tədbir test məqsədi ilə redaktə edildi.")) {
+            // page.addDescription.sendKeys("Bu tədbirin məqsədi layihələrimizin daha keyfiyyətli icra edilməsi üçün səbəblərin müzakirəsidir");
+            page.addDescription.clear();
+            page.addDescription.sendKeys("Tədbir test məqsədi ilə redaktə edildi.");
         }
     }
 
@@ -784,6 +848,11 @@ public class calendar_Steps {
             page.eventPlace.click();
             ReusableMethods.wait(1);
             page.placeSelectRoom671.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("İclas zalı")) {
+            page.eventPlace.click();
+            ReusableMethods.wait(2);
+            page.placeSelectMeetingRoom.click();
             ReusableMethods.wait(1);
         }
     }
@@ -796,7 +865,7 @@ public class calendar_Steps {
             String path = "C:\\Users\\User\\TestFiles\\Test.png";
             ReusableMethods.robotClassDosyaYukleme(path);
         } else if (selection.contains("QAAT")) {
-            page.addPhoto.click();
+            page.changePhoto.click();
             ReusableMethods.wait(1);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
             ReusableMethods.robotClassDosyaYukleme(path);
@@ -811,7 +880,7 @@ public class calendar_Steps {
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
             ReusableMethods.robotClassDosyaYukleme(path);
         } else if (selection.contains("EndToEnd")) {
-            page.addFileNew.click();
+            page.changeFile.click();
             ReusableMethods.wait(1);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
             ReusableMethods.robotClassDosyaYukleme(path);
@@ -963,9 +1032,9 @@ public class calendar_Steps {
 //                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
 //                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
                 WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
-//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//                js.executeScript("arguments[0].click();", element);
-                element.click();
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript("arguments[0].click();", element);
+//                element.click();
                 ReusableMethods.wait(5);
                 System.out.println("\"Imhere1\" = " + "Imhere1");
                 List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
@@ -1100,13 +1169,23 @@ public class calendar_Steps {
             String expected = "AT_TesT";
             String actual = page.eventNameCalendar.getText().trim();
             Assert.assertEquals(actual, expected);
+        } else if (selection.contains("AT_Edited")) {
+            ReusableMethods.flash(page.eventEditNameCalendar, getDriver());
+            String expected = "AT_Edited";
+            String actual = page.eventEditNameCalendar.getText().trim();
+            Assert.assertEquals(actual, expected);
         }
     }
 
-    @And("select event from calendar")
-    public void selectEventFromCalendar() {
-        page.eventNameCalendar.click();
-        ReusableMethods.wait(1);
+    @And("select event {string} from calendar")
+    public void selectEventFromCalendar(String selection) {
+        if (selection.contains("AT_TesT")) {
+            page.eventNameCalendar.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("AT_Edited")) {
+            page.eventEditNameCalendar.click();
+            ReusableMethods.wait(1);
+        }
     }
 
     @Then("all the information about event is displayed in the event modal window")
@@ -1194,5 +1273,11 @@ public class calendar_Steps {
             Assert.assertEquals(page.descriptionInfoCal.getText().trim(), description);
             ReusableMethods.wait(1);
         }
+    }
+
+    @And("selects edit button for the new event")
+    public void selectsEditButtonForTheNewEvent() {
+        page.editBtnEvent.click();
+        ReusableMethods.wait(1);
     }
 }

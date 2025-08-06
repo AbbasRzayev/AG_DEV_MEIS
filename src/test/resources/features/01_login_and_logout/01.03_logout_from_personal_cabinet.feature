@@ -1,5 +1,8 @@
 @all @login_and_logout @new
 Feature: Login to the MEIS system
+  As a logged-in user,
+  I want to log out from the MEIS system (personal cabinet),
+  So that I can securely end my session and prevent unauthorized access.
 
   @logout_from_personal_cabinet
   Scenario: Check if user can log out from system via the personal cabinet
