@@ -39,6 +39,7 @@ public class calendar_Steps {
 
     @And("goes to the calendar tab")
     public void goesToTheCalendarTab() {
+        ReusableMethods.wait(1);
         ReusableMethods.waitForClickability(page.calendarPage, 1);
         ReusableMethods.wait(1);
         page.calendarPage.click();
@@ -957,17 +958,16 @@ public class calendar_Steps {
                 ReusableMethods.wait(1);
                 WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
                 button.click();
-                ReusableMethods.wait(1);
-
-                ReusableMethods.wait(1);
+                ReusableMethods.wait(3);
+                System.out.println("\"Imhere1\" = " + "Imhere0");
 //                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
 //                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
-                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Təqvim yaradıldı')])[1]"));
+                WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
 //                JavascriptExecutor js = (JavascriptExecutor) getDriver();
 //                js.executeScript("arguments[0].click();", element);
                 element.click();
-                ReusableMethods.wait(2);
-
+                ReusableMethods.wait(5);
+                System.out.println("\"Imhere1\" = " + "Imhere1");
                 List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
                 for (Map<String, String> row : data) {
                     String eventName = row.get("Tədbirin adı");
@@ -987,12 +987,13 @@ public class calendar_Steps {
 
                     WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
                     wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
-
+                    System.out.println("\"Imhere1\" = " + "Imhere2");
                     ReusableMethods.waitForOverlayToDisappear(getDriver());
-                    ReusableMethods.clickByJavaScript(page.notTextCheck);
+                    ReusableMethods.wait(5);
                     ReusableMethods.flash(page.notTextCheck, getDriver());
                     Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
                     ReusableMethods.wait(1);
+                    System.out.println("\"Imhere1\" = " + "Imhere3");
 
                     ReusableMethods.waitForOverlayToDisappear(getDriver());
                     ReusableMethods.flash(page.categoryName, getDriver());
@@ -1067,23 +1068,27 @@ public class calendar_Steps {
                         throw new AssertionError("XƏTA: Şəkil src dəyəri mövcud deyil və ya boşdur!");
                     } else {
                         System.out.println("Şəkil src dəyəri: " + srcValue);
+
                     }
                 }
 
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
         }
     }
 
     @And("select close button in the notification modal window")
     public void selectCloseButtonInTheNotificationModalWindow() {
         page.closeButtonNotificationModal.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @And("goes to the calendar tab from left side bar")
     public void goesToTheCalendarTabFromLeftSideBar() {
+        getDriver().navigate().refresh();
+        ReusableMethods.wait(1);
         page.calendarLeftSideBar.click();
         ReusableMethods.wait(1);
     }
@@ -1116,88 +1121,78 @@ public class calendar_Steps {
             String notStatus = row.get("Bildiriş statusu");
             String viewStatus = row.get("Baxış statusu");
             String persons = row.get("Şəxslər");
-            String startData = row.get("Başlama tarixi");
             String startTime = row.get("Başlama vaxtı");
             String endTime = row.get("Bitmə vaxtı");
             String url = row.get("Url");
             String type = row.get("Tip");
             String description = row.get("Təsvir");
 
-
-            ReusableMethods.waitForOverlayToDisappear(getDriver());
-            ReusableMethods.clickByJavaScript(page.notTextCheck);
-            ReusableMethods.flash(page.notTextCheck, getDriver());
-            Assert.assertEquals(page.notTextCheck.getText().trim(), eventName);
+            ReusableMethods.flash(page.eventNameCal, getDriver());
+            Assert.assertEquals(page.eventNameCal.getText().trim(), eventName);
             ReusableMethods.wait(1);
 
-            ReusableMethods.waitForOverlayToDisappear(getDriver());
-            ReusableMethods.flash(page.categoryName, getDriver());
-            Assert.assertEquals(page.categoryName.getText().trim(), category);
+            ReusableMethods.flash(page.categoryNameCal, getDriver());
+            Assert.assertEquals(page.categoryNameCal.getText().trim(), category);
             ReusableMethods.wait(1);
 
-            ReusableMethods.waitForOverlayToDisappear(getDriver());
-            ReusableMethods.flash(page.eventPLace, getDriver());
-            Assert.assertEquals(page.eventPLace.getText().trim(), eventPLace);
+            ReusableMethods.flash(page.eventPLaceCal, getDriver());
+            Assert.assertEquals(page.eventPLaceCal.getText().trim(), eventPLace);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.eventOrganizerName, getDriver());
-            Assert.assertEquals(page.eventOrganizerName.getText().trim(), eventOrganizer);
+            ReusableMethods.flash(page.eventOrganizerNameCal, getDriver());
+            Assert.assertEquals(page.eventOrganizerNameCal.getText().trim(), eventOrganizer);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.whoCreate, getDriver());
-            Assert.assertEquals(page.whoCreate.getText().trim(), whoCreate);
+            ReusableMethods.flash(page.whoCreateCal, getDriver());
+            Assert.assertEquals(page.whoCreateCal.getText().trim(), whoCreate);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.notStatus, getDriver());
-            Assert.assertEquals(page.notStatus.getText().trim(), notStatus);
+            ReusableMethods.flash(page.notStatusCal, getDriver());
+            Assert.assertEquals(page.notStatusCal.getText().trim(), notStatus);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.viewStatus, getDriver());
-            Assert.assertEquals(page.viewStatus.getText().trim(), viewStatus);
+            ReusableMethods.flash(page.viewStatusCal, getDriver());
+            Assert.assertEquals(page.viewStatusCal.getText().trim(), viewStatus);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.persons, getDriver());
-            System.out.println("page.persons.getText() = " + page.persons.getText());
-            Assert.assertEquals(page.persons.getText().trim(), persons);
+            ReusableMethods.scrollToElementByActions(page.personsCal);
+            ReusableMethods.flash(page.personsCal, getDriver());
+            Assert.assertEquals(page.personsCal.getText().trim(), persons);
             ReusableMethods.wait(1);
 
-            ReusableMethods.scrollToElementByActions(page.startDataInfo);
-            ReusableMethods.flash(page.startDataInfo, getDriver());
+            ReusableMethods.scrollToElementByActions(page.startDataInfoCal);
+            ReusableMethods.scrollToElementByActions(page.startDataInfoCal);
+            ReusableMethods.flash(page.startDataInfoCal, getDriver());
             LocalDate today = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             String formattedDate = today.format(formatter);
-            Assert.assertEquals(page.startDataInfo.getText().trim(), formattedDate);
+            Assert.assertEquals(page.startDataInfoCal.getText().trim(), formattedDate);
             ReusableMethods.wait(1);
 
-            ReusableMethods.scrollToElementByActions(page.startTimeInfo);
-            ReusableMethods.flash(page.startTimeInfo, getDriver());
-            Assert.assertEquals(page.startTimeInfo.getText().trim(), startTime);
+            ReusableMethods.scrollToElementByActions(page.startTimeInfoCal);
+            ReusableMethods.flash(page.startTimeInfoCal, getDriver());
+            Assert.assertEquals(page.startTimeInfoCal.getText().trim(), startTime);
             ReusableMethods.wait(1);
 
-            ReusableMethods.scrollToElementByActions(page.endTime);
-            ReusableMethods.flash(page.endTime, getDriver());
-            Assert.assertEquals(page.endTime.getText().trim(), endTime);
+            ReusableMethods.scrollToElementByActions(page.endTimeCal);
+            ReusableMethods.flash(page.endTimeCal, getDriver());
+            Assert.assertEquals(page.endTimeCal.getText().trim(), endTime);
             ReusableMethods.wait(1);
 
-            ReusableMethods.scrollToElementByActions(page.urlInfo);
-            ReusableMethods.flash(page.urlInfo, getDriver());
-            Assert.assertEquals(page.urlInfo.getText().trim(), url);
+            ReusableMethods.scrollToElementByActions(page.urlInfoCal);
+            ReusableMethods.flash(page.urlInfoCal, getDriver());
+            Assert.assertEquals(page.urlInfoCal.getText().trim(), url);
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.typeInfo, getDriver());
-            Assert.assertEquals(page.typeInfo.getText().trim(), type);
+            ReusableMethods.scrollToElementByActions(page.typeInfoCal);
+            ReusableMethods.flash(page.typeInfoCal, getDriver());
+            Assert.assertEquals(page.typeInfoCal.getText().trim(), type);
             ReusableMethods.wait(1);
 
-            ReusableMethods.scrollToElementByActions(page.descriptionInfo);
-            ReusableMethods.flash(page.descriptionInfo, getDriver());
-            Assert.assertEquals(page.descriptionInfo.getText().trim(), description);
+            ReusableMethods.scrollToElementByActions(page.descriptionInfoCal);
+            ReusableMethods.flash(page.descriptionInfoCal, getDriver());
+            Assert.assertEquals(page.descriptionInfoCal.getText().trim(), description);
             ReusableMethods.wait(1);
-
-            WebElement image = getDriver().findElement(By.xpath("//img[@alt='Şəkil']"));
-            String srcValue = image.getAttribute("src").trim();
-
-            ReusableMethods.scrollToElementByActions(image);
-            ReusableMethods.flash(image, getDriver());
         }
     }
 }

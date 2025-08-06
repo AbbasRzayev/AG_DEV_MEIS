@@ -1622,7 +1622,7 @@ public class helpDesk_Steps {
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             page.primaryRequest.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
@@ -2333,7 +2333,8 @@ public class helpDesk_Steps {
     }
 
     @And("all the information is displayed in the notification sent to the executor")
-    public void allTheInformationIsDisplayedInTheNotificationSentToTheExecutor(DataTable dataTable) {
+    public void
+    allTheInformationIsDisplayedInTheNotificationSentToTheExecutor(DataTable dataTable) {
         try {
             WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
 
@@ -2400,15 +2401,18 @@ public class helpDesk_Steps {
                 ReusableMethods.wait(2);
                 WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
                 button.click();
-                ReusableMethods.wait(1);
 
-                ReusableMethods.wait(3);
-                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
-//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//                js.executeScript("arguments[0].click();", element);
+
+                ReusableMethods.wait(2);
+                WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım')])[1]"));
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                ReusableMethods.wait(1);
+                js.executeScript("arguments[0].click();", element);
+//                ReusableMethods.wait(1);
                 element.click();
                 ReusableMethods.wait(2);
 
+                ReusableMethods.waitForOverlayToDisappear(getDriver());
                 String fullText = page.notIdCheck.getText();
                 ReusableMethods.flash(page.notIdCheck, getDriver());
                 Pattern pattern = Pattern.compile("\\d+");
@@ -2469,6 +2473,7 @@ public class helpDesk_Steps {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
         }
     }
 
@@ -2520,8 +2525,7 @@ public class helpDesk_Steps {
             String expectStatus = "İcraya qəbul edilib";
             ReusableMethods.flash(page.statusReviewSection, getDriver());
             Assert.assertEquals(expectStatus, actualStatus);
-        }
-       else if (selection.contains("İcradan imtina edilib")) {
+        } else if (selection.contains("İcradan imtina edilib")) {
             String actualName = page.executorNameReviewSection.getText().trim();
             String expectName = "Davud Zamanov";
             ReusableMethods.flash(page.executorNameReviewSection, getDriver());
@@ -2625,9 +2629,9 @@ public class helpDesk_Steps {
 
     @Then("{string} percentage and tickets note are displayed in the request review section")
     public void percentageAndTicketsNoteAreDisplayedInTheRequestReviewSection(String selection) {
-        if(selection.contains("100%")){
+        if (selection.contains("100%")) {
             String actualText = page.ticketReviewPercent.getText();
-            ReusableMethods.flash(page.ticketReviewPercent,getDriver());
+            ReusableMethods.flash(page.ticketReviewPercent, getDriver());
             ReusableMethods.wait(1);
             if (!actualText.equals("100%")) {
                 throw new AssertionError("Text '100%' deyil! Əslində: " + actualText);
@@ -2715,9 +2719,9 @@ public class helpDesk_Steps {
 //                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
 //                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
                 WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım masası')])[1]"));
-//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//                js.executeScript("arguments[0].click();", element);
-                element.click();
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript("arguments[0].click();", element);
+//                element.click();
                 ReusableMethods.wait(2);
 
                 String fullText = page.notIdCheck.getText();

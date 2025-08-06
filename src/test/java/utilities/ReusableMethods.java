@@ -541,11 +541,9 @@ public class ReusableMethods {
 
     public static void waitForOverlayToDisappear(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
-        } catch (TimeoutException e) {
-            System.out.println("Overlay vaxtında yox olmadı.");
-        }
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.cssSelector(".cdk-overlay-backdrop")
+        ));
     }
 
     public static String getPathSegment(String targetSegment) {

@@ -31,15 +31,14 @@ Feature: Calendar
     And all the information about event is displayed in the notification
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
       | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |
-#    And select close button in the notification modal window
-#    When goes to the calendar tab from left side bar
-#    Then event name "AT_TesT" is shown in the calendar
-#    When select event from calendar
-#    Then all the information about event is displayed in the event modal window
-#      | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
-#      | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |
-#
-
+    And select close button in the notification modal window
+    When goes to the calendar tab from left side bar
+    #Təqvimin üzərində tədbirin əks olunması və məlumatların yoxlanılması
+    Then event name "AT_TesT" is shown in the calendar
+    When select event from calendar
+    Then all the information about event is displayed in the event modal window
+      | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
+      | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |
     #Test ssenarilər:
     #1.Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi
     #2.İdarəetmənin təqvim hissəsində yeni əlavə edilmiş tədbirin mövcud olmasının yoxlanılması
@@ -58,12 +57,19 @@ Feature: Calendar
     #15.Bildirişin üzərində tədbirin "Tip" məlumatlarının yoxlanılması
     #16.Bildirişin üzərində tədbirin "Təsvir" məlumatlarının yoxlanılması
     #17.Bildirişin üzərində tədbirin "Fayl" məlumatlarının yoxlanılması
-
-    #18.Bildirişin üzərində tədbirin "Fayl" məlumatlarının yoxlanılması
-    #19.Bildirişin üzərində tədbirin "Fayl" məlumatlarının yoxlanılması
-
-
-
-
-
-  #8.Elektron poçt ünvanına tədbir barədə yönəlmiş bildiriş məlumatların yoxlanılması
+    #18.Təqvimin üzərində tədbirin əks olunmasının yoxlanılması
+    #19.Təqvimin üzərində təqvimi seçərək tədbir məlumatlarının əks olunan modal pəncərəyə keçid etməsi
+    #20.Tədbir modal pəncərəsində tədbirin ad məlumatlarının yoxlanılması
+    #21.Tədbir modal pəncərəsində tədbirin "Kateqoriya" məlumatlarının yoxlanılması
+    #22.Tədbir modal pəncərəsində tədbirin "Tədbirin keçiriləcəyi yer" məlumatlarının yoxlanılması
+    #23.Tədbir modal pəncərəsində tədbirin "Tədbiri təşkil edən" məlumatlarının yoxlanılması
+    #24.Tədbir modal pəncərəsində tədbirin "Tərtib edən" məlumatlarının yoxlanılması
+    #25.Tədbir modal pəncərəsində tədbirin "Bildiriş statusu" məlumatlarının yoxlanılması
+    #26.Tədbir modal pəncərəsində tədbirin "Baxış statusu (Təqvimində görünsün)" məlumatlarının yoxlanılması
+    #27.Tədbir modal pəncərəsində tədbirin "Şəxslər" məlumatlarının yoxlanılması
+    #28.Tədbir modal pəncərəsində tədbirin "Başlama tarixi" məlumatlarının yoxlanılması
+    #29.Tədbir modal pəncərəsində tədbirin "Başlama vaxtı" məlumatlarının yoxlanılması
+    #30.Tədbir modal pəncərəsində tədbirin "Bitmə vaxtı" məlumatlarının yoxlanılması
+    #31.Tədbir modal pəncərəsində tədbirin "Url" məlumatlarının yoxlanılması
+    #32.Tədbir modal pəncərəsində tədbirin "Tip" məlumatlarının yoxlanılması
+    #33.Tədbir modal pəncərəsində tədbirin "Təsvir" məlumatlarının yoxlanılması

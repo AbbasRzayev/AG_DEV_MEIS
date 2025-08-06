@@ -317,7 +317,7 @@ public class helpDesk_Page {
     public WebElement  actInputRequest;
     @FindBy(xpath = "//button[.//img[contains(@src, 'delete-colorless.svg')]]")
     public WebElement  deleteBtnExecutor;
-    @FindBy(xpath = "//h5[contains(text(), 'Yardım masası')]")
+    @FindBy(xpath = "//h5[contains(@class, 'dialog__title')]")
     public WebElement  notIdCheck;
     @FindBy(xpath = "//div[span[text()='İstiqamət']]/p")
     public WebElement  directionNotCheck;

@@ -128,7 +128,7 @@ public class calendar_Page {
     @FindBy(xpath = "//span[normalize-space(.)='Vaxt']/following-sibling::p[1]")
     public WebElement eventDataTime;
 
-    @FindBy(xpath = "//h5[contains(., 'AT_TesT')]")
+    @FindBy(xpath = "//h5[contains(@class, 'dialog__title')]")
     public WebElement  notTextCheck;
     @FindBy(xpath = "//div[span[text()='Kateqoriya']]/p")
     public WebElement categoryName;
@@ -163,9 +163,8 @@ public class calendar_Page {
     @FindBy(xpath = "(//span[text()='AT_TesT'])[1]")
     public WebElement eventNameCalendar;
 
-    @FindBy(xpath = "(//h5[text()='AT_TesT'])")
+    @FindBy(xpath = "//h5[contains(@_ngcontent, '')]")
     public WebElement eventNameCal;
-
     @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
     public WebElement categoryNameCal;
     @FindBy(xpath = "(//strong/ancestor::div[1]/p)[2]")
@@ -176,38 +175,20 @@ public class calendar_Page {
     public WebElement whoCreateCal;
     @FindBy(xpath = "(//strong/ancestor::div[1]/p)[5]")
     public WebElement notStatusCal;
-
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[7]")
     public WebElement viewStatusCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[8]")
     public WebElement personsCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[9]")
     public WebElement startDataInfoCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[11]")
     public WebElement startTimeInfoCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[13]")
     public WebElement endTimeCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[14]")
     public WebElement urlInfoCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[15]")
     public WebElement typeInfoCal;
-
-
-    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
+    @FindBy(xpath = "(//strong/ancestor::div[1]/p)[16]")
     public WebElement descriptionInfoCal;
-
 }
