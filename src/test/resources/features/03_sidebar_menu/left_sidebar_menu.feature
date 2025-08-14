@@ -1,5 +1,8 @@
 @all @new
 Feature: Left sidebar menu
+  As a logged-in user,
+  I want to navigate to different sections using the left sidebar menu,
+  So that I can easily access all available functionalities of the system.
 
   @left_sidebar
   Scenario: Check if user can navigate to the tabs from left sidebar menu

@@ -119,7 +119,7 @@ Feature: Search filters in the sent requests section
     When user reset the changes for "note type"
     Then the changes is successfully resets in the sent requests section
     #Bildiriş tipi "Digər"-ə görə axtarışın filterin yoxlanılması
-    When selects "Müraciət" from notification type filter list
+    When selects "Digər" from notification type filter list
     Then search results are displayed by according to search note type "Digər" params
     #Bildiriş tipi "Digər"-ə görə axtarışdan sonra nəticələrin sıfırlanmasının yoxlanılması
     When user reset the changes for "note type"

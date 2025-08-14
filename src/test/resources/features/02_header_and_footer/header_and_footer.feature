@@ -1,6 +1,8 @@
 @all @new
 Feature: Headers and Footers icons,buttons,texts
-
+  As a logged-in user,
+  I want to see and interact with all icons, buttons, and texts in the header and footer,
+  So that I can navigate the system easily and ensure all UI elements are functioning correctly.
 
   @header_and_footer
   Scenario: Check headers and footers icons-buttons-text are clickable and visible

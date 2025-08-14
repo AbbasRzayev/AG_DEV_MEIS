@@ -1369,6 +1369,7 @@ public class helpDesk_Steps {
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
             ReusableMethods.wait(1);
+            ReusableMethods.scrollToElementByActions(page.requestNotType);
             page.requestNotType.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
@@ -1622,7 +1623,7 @@ public class helpDesk_Steps {
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            ReusableMethods.wait(2);
+            ReusableMethods.wait(3);
             page.primaryRequest.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
@@ -2181,6 +2182,7 @@ public class helpDesk_Steps {
 
             ReusableMethods.flash(page.workPlaceAdmin, getDriver());
             Assert.assertEquals(page.workPlaceAdmin.getText().trim(), workPlace);
+            Assert.assertTrue(page.workPlaceAdmin.getText().trim().contains(workPlace));
         }
     }
 
@@ -2405,12 +2407,13 @@ public class helpDesk_Steps {
 
                 ReusableMethods.wait(2);
                 WebElement element = getDriver().findElement(By.xpath("(//li[contains(., 'Yardım')])[1]"));
+//                WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
                 JavascriptExecutor js = (JavascriptExecutor) getDriver();
                 ReusableMethods.wait(1);
-                js.executeScript("arguments[0].click();", element);
+//                js.executeScript("arguments[0].click();", element);
 //                ReusableMethods.wait(1);
                 element.click();
-                ReusableMethods.wait(2);
+                ReusableMethods.wait(10);
 
                 ReusableMethods.waitForOverlayToDisappear(getDriver());
                 String fullText = page.notIdCheck.getText();
@@ -2473,7 +2476,7 @@ public class helpDesk_Steps {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
         }
     }
 

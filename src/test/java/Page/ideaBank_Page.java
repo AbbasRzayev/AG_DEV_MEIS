@@ -10,28 +10,30 @@ public class ideaBank_Page {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "//p[contains(., 'Fikir bankı')]")
+    @FindBy(xpath = "//p[contains(., 'İdea bankı')]")
     public WebElement ideaBankMainPage;
     @FindBy(xpath = "//span[contains(@class, 'mdc-button__label')]")
     public WebElement newIdeaAddBtn;
-    @FindBy(xpath = "//div[@class='mat-mdc-select-trigger ng-tns-c3393473648-11']")
+    @FindBy(xpath = "//mat-select[@formcontrolname='ideaDirectionId']")
     public WebElement directionDropDown;
     @FindBy(xpath = "//span[text()='Digər']")
     public WebElement otherSelectFromList;
-    @FindBy(id = "mat-input-2")
+    @FindBy(xpath = "//textarea[@formcontrolname='text']")
     public WebElement ideaInput;
     @FindBy(xpath = "//span[contains(., 'Yadda saxla')]")
     public WebElement saveBtn;
+    @FindBy(css = "button[mattooltip='Göndərmək']")
+    public WebElement sendComment;
     @FindBy(xpath = "//img[contains(@alt, 'İdarəetmə')]")
     public WebElement adminSidebare;
-    @FindBy(xpath = "//a[@class='mat-ripple ng-star-inserted']//span[text()='Fikir bankı']")
+    @FindBy(xpath = "//span[text()='İdea bankı']")
     public WebElement adminPanelIdeaBankTab;
     @FindBy(xpath = "(//div[@class='header'])[1]")
     public WebElement ideaBankClick;
-    @FindBy(xpath = "//span[text()='Bəyənmə sayına görə']")
+    @FindBy(xpath = "//span[normalize-space()='Cari vəziyyətini dəyişmək']")
     public WebElement openSort;
-    @FindBy(xpath = "//span[text()='Tarixə görə']")
-    public WebElement selectSortByDate;
+    @FindBy(xpath = "(//ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//mat-select)[3]")
+    public WebElement statusList;
     @FindBy(xpath = "//span[contains(., 'Cari vəziyyətini dəyişmək')]")
     public WebElement actualStatusBtn;
     @FindBy(xpath = "//label[.//mat-label[text()='Status']]/following-sibling::mat-select")
@@ -46,46 +48,63 @@ public class ideaBank_Page {
     public WebElement selectStatusAcceptedBtn;
     @FindBy(xpath = "//span[contains(., 'Ləğv edilmiş')]")
     public WebElement selectStatusCanceledBtn;
-    @FindBy(id = "mat-input-11")
+    @FindBy(css = "textarea.text_field")
     public WebElement reasonInput;
     @FindBy(id = "mat-input-20")
     public WebElement reasonInput3;
     @FindBy(id = "mat-input-29")
     public WebElement reasonInput4;
-    @FindBy(xpath = "//img[contains(@alt, 'Fikir bankı')]")
+    @FindBy(xpath = "//img[contains(@alt, 'İdea bankı')]")
     public WebElement ideaBankSidebare;
-    @FindBy(css = "span.green.ng-star-inserted")
-    public WebElement scetcik;
-    @FindBy(css = "span.warn.ng-star-inserted")
-    public WebElement scetcikPending;
-    @FindBy(css = "span.blue.ng-star-inserted")
-    public WebElement scetcikAccepted;
-    @FindBy(css = "span.red.ng-star-inserted")
-    public WebElement scetcikCanceled;
+    @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Bütün fikirlər')]")
+    public WebElement allCounter;
+    @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Gözləmədə olanlar')]")
+    public WebElement pendingCounter;
+    @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Qəbul edilənlər')]")
+    public WebElement acceptedCounter;
+    @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Ləğv edilənlər')]")
+    public WebElement canceledCounter;
     @FindBy(xpath = "(//div[@class='idea ng-star-inserted expanded']//div[contains(.,\" Test message \")])[2]")
     public WebElement ideaTextCheck;
 
-    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[4]")
-    public WebElement likeBtn;
-    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[5]")
-    public WebElement unlikeBtn;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[6]")
-    public WebElement commentBtn;
-    @FindBy(id = "mat-input-30")
-    public WebElement commentIntput;
-    @FindBy(xpath = "/html/body/app-root/div/div/main/ng-component/div/div[1]/div/div[5]/div[1]/button/span[3]")
+    public WebElement likeBtn;
+    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[7]")
+    public WebElement unlikeBtn;
+    @FindBy(xpath = "//span[text()='Ətraflı']")
+    public WebElement detailedBtn;
+    @FindBy(css = "textarea.mat-mdc-input-element[matinput]")
+    public WebElement commentInput;
+    @FindBy(xpath = "(//button[@color='primary']/following-sibling::span)[1]")
     public WebElement flashLike;
-    @FindBy(xpath = "/html/body/app-root/div/div/main/ng-component/div/div[1]/div/div[5]/div[2]/button/span[1]")
+    @FindBy(xpath = "(//button[@color='warn']/following-sibling::span)[1]")
     public WebElement flashUnLike;
-    @FindBy(xpath = "/html/body/app-root/div/div/main/ng-component/div/div[1]/div/div[5]/div[3]/button/span[3]")
+    @FindBy( xpath = "//span[contains(@class,'comment-count')]")
     public WebElement flashCom;
+    @FindBy( xpath = "//button[@mat-dialog-close]")
+    public WebElement closeCommentModal;
 
-   @FindBy(xpath = "(//div[@class='text'])[2]")
+    @FindBy(xpath = "(//div[@class='text'])[2]")
     public WebElement flashComment;
-   @FindBy(xpath = "(//div[@class='text'])[2]")
+    @FindBy(xpath = "(//div[@class='text'])[2]")
     public WebElement commentText;
-   @FindBy(xpath = "//span[text()='Fikri sil']")
+    @FindBy(xpath = "(//span[text()='Fikri sil'])[1]")
     public WebElement ideaDeleteBtn;
-   @FindBy(xpath = "//span[contains(.,'Bəli')]")
+    @FindBy(xpath = "//span[contains(.,'Bəli')]")
     public WebElement confirmDeleteBtn;
+
+    @FindBy(xpath = "//following-sibling::p[1]")
+    public WebElement direction;
+    @FindBy(xpath = "//following-sibling::p[2]")
+    public WebElement whoIsIdea;
+    @FindBy(xpath = "//following-sibling::p[3]")
+    public WebElement structureIdea;
+    @FindBy(xpath = "(//following-sibling::p[4])[1]")
+    public WebElement statusIdea;
+    @FindBy(xpath = "(//div[contains(@class,'text')])[3]")
+    public WebElement noteIdea;
+    @FindBy(xpath = "(//img[contains(@src,'calendar.svg')]/preceding-sibling::span[1])[1]")
+    public WebElement ideaData;
+    @FindBy(css = ".comment-list .comment p")
+    public WebElement commentDisplay;
 }

@@ -82,3 +82,14 @@ Feature: Electronic library
   #18.Elektron jurnal hissəsində file-upload sayğacının(click etdikdə artma) yoxlanılması
   #19.Yeni elektron jurnalın sistemdən silinməsi
   #20.Silinmiş elektron jurnalın sistemdə mövcud olmamasının yoxlanılması
+
+
+
+  #Telimin elave edilmesi unvanlanmish shexslere gore
+  #butun melumatlarin yoxlanilmasi
+  #Redakte ve yoxlanma?
+  #unvanlanmish shexsi girib telimi gormesi
+  #unvanlanmish shexse bildirishin gelmesinin yoxlanilmasi
+  #unvanlanmish shexse gelen telimin melumatlarin yoxlanolmasi
+  #Idaretmede silinmesi ve silidiyinin adminde yoxlanilmasi
+  #Idaretmede silinmesi ve unvanlanmish shexse terefde silinmesinin yoxlanilmasi 

@@ -4,7 +4,7 @@ Feature: Create Calendar
   I want to create a new calendar
   So that I can schedule and manage events effectively
 
-  @newCalendarCreation @new
+  @newEventCreation @new
   Scenario: Check if the user can add a new event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi
@@ -35,7 +35,8 @@ Feature: Create Calendar
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
       | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |
     And select close button in the notification modal window
-    When goes to the calendar tab from left side bar
+    And page is reloaded
+    When user goes to the calendar tab from left side bar
     #Təqvimin üzərində tədbirin əks olunması və məlumatların yoxlanılması
     Then event name "AT_TesT" is shown in the calendar
     When select event "AT_TesT" from calendar

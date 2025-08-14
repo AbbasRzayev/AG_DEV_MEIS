@@ -554,7 +554,7 @@ public class electronLibrary_Steps {
 
     @When("user selects accept button")
     public void userSelectsAcceptButton() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.acceptBtn.click();
         ReusableMethods.wait(1);
     }

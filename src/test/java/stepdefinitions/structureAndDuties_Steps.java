@@ -41,7 +41,9 @@ public class structureAndDuties_Steps {
         if (name.contains("Abbas")) {
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
-            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
+            ReusableMethods.wait(3);
+            searchByUserDataPage.openFilter.click();
+            ReusableMethods.wait(1);
             page.nameField.sendKeys("Abbas");
             ReusableMethods.wait(1);
             page.finField.sendKeys("19HSHLC");

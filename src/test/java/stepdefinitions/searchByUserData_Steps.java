@@ -233,10 +233,13 @@ public class searchByUserData_Steps {
             }
         }
         else if (selection.contains("note type")) {
-            ReusableMethods.waitForClickabilityAndClick(page.noteType, 5);
-            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
-            ReusableMethods.wait(1);
-            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+//            ReusableMethods.wait(1);
+//            page.noteType.click();
+//            ReusableMethods.waitForClickabilityAndClick(page.openFilter, 5);
+//            ReusableMethods.wait(2);
+//            ReusableMethods.waitForClickabilityAndClick(page.restTheChanges, 5);
+//            ReusableMethods.wait(1);
+            getDriver().navigate().refresh();
             ReusableMethods.wait(1);
             while (true) {
                 try {

@@ -1,5 +1,8 @@
 @all @registration @new
 Feature: User registration
+  As an Administrator,
+  I want to register a new user in the AG-MEIS system,
+  So that I can manage their access, update their information, assign permissions, and archive them when needed.
 
   @user_registration
   Scenario: Check if the user can register in the AG-MEIS system then log in and archive the user

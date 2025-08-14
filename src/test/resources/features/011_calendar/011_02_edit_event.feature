@@ -4,7 +4,7 @@ Feature: Edit Calendar
   I want to edit an existing calendar
   So that I can update its information
 
-  @editCalendar @new
+  @editEvent @new
   Scenario: Check if the user can edit a new event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi
@@ -58,7 +58,8 @@ Feature: Edit Calendar
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər       | Başlama vaxtı | Bitmə vaxtı | Url                              | Tip         | Təsvir                                  |
       | AT_Edited    | İcazə      | İclas zalı                | Davud Zamanov       | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Davud Zamanov | 00:50         | 19:00       | https://dev-meis.aist.group/auth | Xəbərdarlıq | Tədbir test məqsədi ilə redaktə edildi. |
     And select close button in the notification modal window
-    When goes to the calendar tab from left side bar
+    And page is reloaded
+    When user goes to the calendar tab from left side bar
     #Redaktə edildikdən sonra Təqvimin üzərində tədbirin əks olunması  və məlumatların yoxlanılması
     Then event name "AT_Edited" is shown in the calendar
     When select event "AT_Edited" from calendar
@@ -66,9 +67,9 @@ Feature: Edit Calendar
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər       | Başlama vaxtı | Bitmə vaxtı | Url                              | Tip         | Təsvir                                  |
       | AT_Edited    | İcazə      | İclas zalı                | Davud Zamanov       | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Davud Zamanov | 00:50         | 19:00       | https://dev-meis.aist.group/auth | Xəbərdarlıq | Tədbir test məqsədi ilə redaktə edildi. |
     #Test ssenarilər:
-    #35.Yeni tədbirin redaktə edilməsi
-    #36.İdarəetmənin təqvim hissəsində redaktə edildikdən sonra tədbirin "Başlıq"-adının, vaxtın və statusun yoxlanılması
-    #37.Ünvanlanmış şəxsə sistem üzrə redaktə edildikdən sonra tədbir haqqında bildirişin yönəlməsi ve məlumatların yoxlanılması
-    #38.Ünvanlanmış şəxsə sistem üzrə redaktə edildikdən sonra tədbir haqqında bildirişin yönəlməsi ve məlumatların yoxlanılması
-    #39.Redaktə edildikdən sonra Təqvimin üzərində tədbirin əks olunması
-    #40.Redaktə edildikdən sonra tədbir modal pəncərəsində məlumatların yoxlanılması
+    #34.Yeni tədbirin redaktə edilməsi
+    #35.İdarəetmənin təqvim hissəsində redaktə edildikdən sonra tədbirin "Başlıq"-adının, vaxtın və statusun yoxlanılması
+    #36.Ünvanlanmış şəxsə sistem üzrə redaktə edildikdən sonra tədbir haqqında bildirişin yönəlməsi
+    #37.Ünvanlanmış şəxsə sistem üzrə redaktə edildikdən bildiriş modal pəncərəsində məlumatların yoxlanılması
+    #38.Redaktə edildikdən sonra Təqvimin üzərində tədbirin əks olunması
+    #39.Redaktə edildikdən sonra tədbir modal pəncərəsində məlumatların yoxlanılması

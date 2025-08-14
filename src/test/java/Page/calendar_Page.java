@@ -168,7 +168,10 @@ public class calendar_Page {
     public WebElement eventNameCalendar;
     @FindBy(xpath = "(//span[text()='AT_Edited'])[1]")
     public WebElement eventEditNameCalendar;
-
+    @FindBy(xpath = "(//span[text()='AT_Delete'])[1]")
+    public WebElement eventEditNameCalendarDelete;
+    @FindBy(xpath = "(//span[text()='AT_Duplicate'])[1]")
+    public WebElement eventNameCalendarDuplicate;
     @FindBy(xpath = "//h5[contains(@_ngcontent, '')]")
     public WebElement eventNameCal;
     @FindBy(xpath = "(//strong/ancestor::div[1]/p)[1]")
@@ -199,4 +202,8 @@ public class calendar_Page {
     public WebElement descriptionInfoCal;
     @FindBy(xpath = "(//span[text()='Düzəliş et'])[1]")
     public WebElement editBtnEvent;
+    @FindBy(xpath = "(//span[text()='Sil'])[1]")
+    public WebElement deleteBtnEvent;
+    @FindBy(xpath = "//span[text()='Surətini çıxar']")
+    public WebElement duplicateBtnEvent;
 }

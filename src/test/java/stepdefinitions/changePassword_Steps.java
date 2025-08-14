@@ -124,9 +124,9 @@ public class changePassword_Steps {
         else if(environment.contains("AG-MEIS") && user.equals("abbas.rzayev@aist.group")){
             getDriver().get(ConfigReader.getProperty("AG-MEIS"));
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             page.emailField.sendKeys(ConfigReader.getProperty("AbbasLogin"));
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             page.passwordField.sendKeys(ConfigReader.getProperty("AbbasPassword"));
             page.enterToTheSystem.click();
         }else if(environment.contains("AG-MEIS") && user.equals("ibrahimzamanov88@proton.me")){

@@ -27,7 +27,7 @@ senaryoyu çalıştırabiliriz
 2- Hooks classin yolunu veririz.
 
                                              */
-        tags = "@editCalendar",
+        tags = "@trainingMaterial",
         dryRun = false,
         monochrome = false //console okunakli hale getirir,false scenario adimlarini renkli gosterir,  true renksiz yapar
 )
@@ -36,6 +36,7 @@ senaryoyu çalıştırabiliriz
 /*
 features ===> features'ların olduğu packega'ın yolunu ver(ContentRoot)
 glue ====> stepDefinition'ların olduğu packega'ın yolunu ver(Source Root), Hooks class yolunu ver
+
 tags ====> çalıştırmak istediğin grubu yaz
 dryRun = true ====> eksik step definition bulup gösterir. calismaz. konsolda eksik stepleri gosterir.
  */

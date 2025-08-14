@@ -2,6 +2,7 @@ package utilities;
 
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -427,8 +428,11 @@ public class ReusableMethods {
 
     public static void assertElementNotDisplayed(WebElement element) {
         try {
-            assertFalse(element.isDisplayed());
-            System.out.println("Element is not displayed as expected.");
+            if (element.isDisplayed()) {
+                Assert.fail("Element görünür, bu xətadır!");
+            } else {
+                System.out.println("Element is not displayed. Test passed.");
+            }
         } catch (NoSuchElementException e) {
             System.out.println("Element is not found. Test passed.");
         }

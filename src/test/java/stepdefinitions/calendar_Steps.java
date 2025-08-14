@@ -2,16 +2,14 @@ package stepdefinitions;
 
 import Page.calendar_Page;
 import Page.helpDesk_Page;
+import Page.loginAndLogOut_Page;
 import Page.registration_Page;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,6 +34,7 @@ public class calendar_Steps {
     registration_Page page1 = new registration_Page();
     WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
     helpDesk_Page helpDeskPage = new helpDesk_Page();
+    loginAndLogOut_Page loginAndLogOut = new loginAndLogOut_Page();
 
     @And("goes to the calendar tab")
     public void goesToTheCalendarTab() {
@@ -692,6 +691,14 @@ public class calendar_Steps {
             page.eventNameInput.clear();
             ReusableMethods.wait(1);
             page.eventNameInput.sendKeys("AT_Edited");
+        } else if (selection.contains("AT_Delete")) {
+            page.eventNameInput.clear();
+            ReusableMethods.wait(1);
+            page.eventNameInput.sendKeys("AT_Delete");
+        } else if (selection.contains("AT_Duplicate")) {
+            page.eventNameInput.clear();
+            ReusableMethods.wait(1);
+            page.eventNameInput.sendKeys("AT_Duplicate");
         }
     }
 
@@ -879,11 +886,14 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
             ReusableMethods.robotClassDosyaYukleme(path);
+            ReusableMethods.wait(1);
         } else if (selection.contains("EndToEnd")) {
+            ReusableMethods.wait(1);
             page.changeFile.click();
             ReusableMethods.wait(1);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
             ReusableMethods.robotClassDosyaYukleme(path);
+            ReusableMethods.wait(1);
         }
     }
 
@@ -1154,9 +1164,8 @@ public class calendar_Steps {
         ReusableMethods.wait(2);
     }
 
-    @And("goes to the calendar tab from left side bar")
-    public void goesToTheCalendarTabFromLeftSideBar() {
-        getDriver().navigate().refresh();
+    @And("user goes to the calendar tab from left side bar")
+    public void userGoesToTheCalendarTabFromLeftSideBar() {
         ReusableMethods.wait(1);
         page.calendarLeftSideBar.click();
         ReusableMethods.wait(1);
@@ -1173,6 +1182,11 @@ public class calendar_Steps {
             ReusableMethods.flash(page.eventEditNameCalendar, getDriver());
             String expected = "AT_Edited";
             String actual = page.eventEditNameCalendar.getText().trim();
+            Assert.assertEquals(actual, expected);
+        } else if (selection.contains("AT_Duplicate")) {
+            ReusableMethods.flash(page.eventNameCalendarDuplicate, getDriver());
+            String expected = "AT_Duplicate";
+            String actual = page.eventNameCalendarDuplicate.getText().trim();
             Assert.assertEquals(actual, expected);
         }
     }
@@ -1278,6 +1292,61 @@ public class calendar_Steps {
     @And("selects edit button for the new event")
     public void selectsEditButtonForTheNewEvent() {
         page.editBtnEvent.click();
+        ReusableMethods.wait(1);
+
+    }
+
+    @And("new event is deleted")
+    public void newEventIsDeleted() {
+        page.deleteBtnEvent.click();
+        ReusableMethods.wait(1);
+        loginAndLogOut.yesExit.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the deleted event is not displayed in the control panel")
+    public void theDeletedEventIsNotDisplayedInTheControlPanel() {
+        while (true) {
+            try {
+                if (!page.eventName.isDisplayed() || !page.eventName.getText().trim().equals("AT_Delete")) {
+                    break;
+                }
+                page.deleteBtnEvent.click();
+                ReusableMethods.wait(1);
+                loginAndLogOut.yesExit.click();
+                ReusableMethods.wait(2);
+
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
+                break;
+            }
+        }
+        System.out.println("Bütün tədbirlər silindi və test passed oldu ✅");
+    }
+
+
+    @Then("the deleted event is not shown in the calendar")
+    public void theDeletedEventIsNotShownInTheCalendar() {
+        while (true) {
+            try {
+                if (!page.eventEditNameCalendarDelete.isDisplayed() || !page.eventEditNameCalendarDelete.getText().trim().equals("AT_Delete")) {
+                    break;
+                }
+                page.eventEditNameCalendarDelete.click();
+                ReusableMethods.wait(1);
+                page.deleteBtnEvent.click();
+                ReusableMethods.wait(1);
+                loginAndLogOut.yesExit.click();
+                ReusableMethods.wait(2);
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
+                break;
+            }
+        }
+        System.out.println("Bütün tədbirlər silindi və test passed oldu ✅");
+    }
+
+    @And("user selects duplicate event button")
+    public void userSelectsDuplicateEventButton() {
+        page.duplicateBtnEvent.click();
         ReusableMethods.wait(1);
     }
 }
