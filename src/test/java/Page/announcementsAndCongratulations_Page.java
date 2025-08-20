@@ -78,9 +78,9 @@ public class announcementsAndCongratulations_Page {
     public WebElement videoUrlPublic;
     @FindBy(xpath = "//span[text()='Təsdiq et']")
     public WebElement acceptVideo;
-    @FindBy(xpath = "//span[text()='Yadda saxla']")
+    @FindBy(xpath = "//span[text()=' Yadda saxla ']")
     public WebElement saveBtn;
-    @FindBy(xpath = "//p[text()='TestElanForPerson']")
+    @FindBy(xpath = "//span[text()='TestElanForPerson']")
     public WebElement announcementCheckPerson;
     @FindBy(xpath = "//p[text()='Congratulations according to the addressees']")
     public WebElement congratsCheckPerson;

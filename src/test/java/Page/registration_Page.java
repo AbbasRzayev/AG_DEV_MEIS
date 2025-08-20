@@ -18,8 +18,6 @@ public class registration_Page {
     public WebElement serialNumField;
     @FindBy(id = "mat-input-4")
     public WebElement emailField;
-    @FindBy(id = "mat-input-17")
-    public WebElement ldapField;
     @FindBy(id = "mat-mdc-checkbox-1-input")
     public WebElement domenCheckboxs;
     @FindBy(xpath = "//span[normalize-space()='Növbəti']")
@@ -66,8 +64,7 @@ public class registration_Page {
     public WebElement confirmButton;
     @FindBy(id = "identifierId")
     public WebElement googleEmail;
-    @FindBy(xpath = "/html/body/table/tbody/tr/td[1]/table[2]/tbody/tr/td[2]/form/table/tbody/tr[3]/td[2]/input")
-    public WebElement mailAz;
+
     @FindBy(xpath = "//span[text()='Next']")
     public WebElement googleNextButton;
     @FindBy(xpath = "//input[@type='image']")
@@ -77,24 +74,16 @@ public class registration_Page {
     @FindBy(xpath = "//input[@name='secretkey']")
     public WebElement mailAzPasswordField;
 
-    @FindBy(id = ":2d")
-    public WebElement googleofficeMail;
-
     @FindBy(xpath = "//div[@role='checkbox']")
     public WebElement googleChechboxs;
     @FindBy(xpath = "//div[@act='10']")
     public WebElement googleDeletebutton;
     @FindBy(xpath = "//input[@id='code']")
     public WebElement addCodeInput;
-    @FindBy(xpath = "//span[text()='Təsdiq et']")
-    public WebElement confirmCode;
-    @FindBy(xpath = "//div[@class='wrapper']")
-    //p[@class='text ng-star-inserted']
-    public WebElement regFinished;
+
     @FindBy(xpath = "//button[contains(@type, 'submit')]")
     public WebElement searchButton;
-    @FindBy(xpath = "//div[@class='sidebar-wrapper ng-tns-c2158961782-4']")
-    public WebElement clickOut;
+
     @FindBy(xpath = "//td[normalize-space()='Musab İyad']")
     public WebElement foundedUser;
     @FindBy(xpath = "//h6[text()='Heç bir nəticə tapılmadı.']")
@@ -222,5 +211,4 @@ public class registration_Page {
     public WebElement personalInfoInThePersonalCabinet;
     @FindBy(xpath = "//span[text()='Əlaqə məlumatları']")
     public WebElement connectInfoInThePersonalCabinet;
-
 }

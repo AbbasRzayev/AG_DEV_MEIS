@@ -29,9 +29,9 @@ public class structureAndDuties_Steps {
 
     @And("goes to the control panel")
     public void goesToTheControlPanel() {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         page.controlPanel.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(5);
     }
 
     @And("adds name {string} and fin to the name and fin fields")
@@ -39,8 +39,8 @@ public class structureAndDuties_Steps {
         String fakePinuu = "7732248";
 //        String fakeSerialNumuu ="AZ5679968";
         if (name.contains("Abbas")) {
-            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
-            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
+            ReusableMethods.wait(1);
+            searchByUserDataPage.nameFilter.click();
             ReusableMethods.wait(3);
             searchByUserDataPage.openFilter.click();
             ReusableMethods.wait(1);
@@ -50,7 +50,6 @@ public class structureAndDuties_Steps {
             ReusableMethods.wait(1);
         }
         else if (name.contains("Zamanov")) {
-            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
             page.nameField.sendKeys("Abbas");
@@ -60,7 +59,6 @@ public class structureAndDuties_Steps {
             ReusableMethods.wait(1);
 
         }    else if (name.contains("Musab")) {
-            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 10);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
             page.nameField.sendKeys("Musab");

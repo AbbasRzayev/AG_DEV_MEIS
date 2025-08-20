@@ -133,14 +133,14 @@ public class graduation_Steps {
     @And("page is down")
     public void pageIsDown() {
         ReusableMethods.pageDown();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
 
     @And("page is up")
     public void pageIsUp() {
         ReusableMethods.pageUp();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
     @And("graduation note is added")

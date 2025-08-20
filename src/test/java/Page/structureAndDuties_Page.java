@@ -38,9 +38,6 @@ public class structureAndDuties_Page {
     @FindBy(xpath = "//h6[contains(text(),'AISTGroup MMC')]")
     public WebElement openAISTMMCStructureParentList;
 
-    @FindBy(xpath = "//button[.//mat-icon[text()='expand_more']]")
-    public WebElement dutiesSearchField;
-
     @FindBy(xpath = "//div[contains(text(),' Şöbə Müdiri ')]")
     public WebElement selectSectionDirector;
 
@@ -69,10 +66,6 @@ public class structureAndDuties_Page {
     @FindBy(xpath = "//label[@class='item_title active no_child']")
     public WebElement sturckCheck;
 
-    @FindBy(xpath = "//label[text()='İnformasiya texnologiyaları və elektron idarəetmə sektoru']")
-    public WebElement informationStruck;
-    @FindBy(xpath = "//span[text()=' Sektor müdiri ']")
-    public WebElement sectorDirector;
     @FindBy(xpath = "//div[text()=' QA_AT ']")
     public WebElement qaAtPosition;
     @FindBy(xpath = "//div[normalize-space(text())='IT Mühəndis(QA)']")
@@ -104,22 +97,6 @@ public class structureAndDuties_Page {
     @FindBy(xpath = "//span[text()=' Yadda saxla ']")
     public WebElement saveButton;
 
-    @FindBy(xpath = "//label[text()='Problemli sınaq şöbələr(test)']")
-    public WebElement newStructure;
-    @FindBy(xpath = "/html/body/app-root/div/div/main/app-control/div/ng-component/app-structure-tab/mat-card/app-recursive-structure/div/div[6]/div/mat-icon")
-    public WebElement openMenu;
-
-    @FindBy(xpath = "//span[text()='Sil']")
-    public WebElement deleteButton;
-
-    @FindBy(id = "mat-input-16")
-    public WebElement addReason;
-
-    @FindBy(xpath = "(//span[@class='mdc-button__label'])[2]")
-    public WebElement acceptDelete;
-
-    @FindBy(xpath = "//a[@class='mat-ripple ng-star-inserted active']")
-    public WebElement programsPanel;
     @FindBy(xpath = "//span[text()='Vəzifə']")
     public WebElement dutyTab;
     @FindBy(xpath = "//span[text()='+ Yeni Vəzifə']")
@@ -140,9 +117,7 @@ public class structureAndDuties_Page {
     public WebElement dutySearchButton;
     @FindBy(xpath = "//span[normalize-space(text())='Əlavə et']")
     public WebElement dutyAdd;
-    @FindBy(xpath = "//td[text()=\"Keyfiyyətə nəzarət(test)\"]")
-    public WebElement dutyBackground;
-    //label[contains(@class,'QA')] - elementin icinde element axtarishi
+
     @FindBy(xpath = "//span[text()=' Bəli ']")
     public WebElement yesButton;
     @FindBy(xpath = "//button[descendant::img[contains(@src, 'delete-colorless.svg')]]")
@@ -240,6 +215,5 @@ public class structureAndDuties_Page {
 
     @FindBy(xpath = "//span[text()='Aktiv']")
     public WebElement selectActiveDuty;
-
 
 }

@@ -72,18 +72,4 @@ public class questionnaires_Page {
     @FindBy(xpath = "//td[text()='Never give up']")
     public WebElement checkEditCong;
 
-
-
-
-
-
-
-
-
-//    @FindBy(xpath = " ")
-//    public WebElement ;
-//    @FindBy(xpath = " ")
-//    public WebElement ;
-//    @FindBy(xpath = " ")
-//    public WebElement ;
 }

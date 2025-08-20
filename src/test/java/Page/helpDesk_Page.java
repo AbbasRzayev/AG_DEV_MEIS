@@ -91,8 +91,6 @@ public class helpDesk_Page {
     public WebElement secondNoteCheck;
     @FindBy(xpath = "//p[contains(., 'İcra edilib')]")
     public WebElement doneNoteCheck;
-    @FindBy(xpath = "//p[contains(., 'Müvəffəqiyyətlə icra edildi')]")
-    public WebElement NoteCheck;
     @FindBy(xpath = "//p[contains(., 'Akt-8888')]")
     public WebElement actNoteCheck;
     @FindBy(xpath = "//p[contains(., 'İlkin')]")
@@ -357,7 +355,5 @@ public class helpDesk_Page {
     public WebElement  percentIncrease;
     @FindBy(xpath = "//td[contains(@class, 'mat-column-executingPercent')]")
     public WebElement  ticketReviewPercent;
-    @FindBy(xpath = "(//td[contains(@class, 'mat-column-regDateStr')])[3]")
-    public WebElement  ticketReviewNote;
 
 }

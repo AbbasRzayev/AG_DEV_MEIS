@@ -28,32 +28,16 @@ public class ideaBank_Page {
     public WebElement adminSidebare;
     @FindBy(xpath = "//span[text()='İdea bankı']")
     public WebElement adminPanelIdeaBankTab;
-    @FindBy(xpath = "(//div[@class='header'])[1]")
-    public WebElement ideaBankClick;
     @FindBy(xpath = "//span[normalize-space()='Cari vəziyyətini dəyişmək']")
     public WebElement openSort;
     @FindBy(xpath = "(//ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//mat-select)[3]")
     public WebElement statusList;
-    @FindBy(xpath = "//span[contains(., 'Cari vəziyyətini dəyişmək')]")
-    public WebElement actualStatusBtn;
-    @FindBy(xpath = "//label[.//mat-label[text()='Status']]/following-sibling::mat-select")
-    public WebElement changeStatusBtn;
-    @FindBy(xpath = "//label[.//mat-label[text()='Status']]/following-sibling::mat-select")
-    public WebElement changeStatusBtn3;
-    @FindBy(xpath = "//label[.//mat-label[text()='Status']]/following-sibling::mat-select")
-    public WebElement changeStatusBtn4;
-    @FindBy(xpath = "(//span[contains(., 'Gözləmədə olan')])[2]")
-    public WebElement selectStatusBtn;
     @FindBy(xpath = "//span[contains(., 'Təsdiqlənmiş')]")
     public WebElement selectStatusAcceptedBtn;
     @FindBy(xpath = "//span[contains(., 'Ləğv edilmiş')]")
     public WebElement selectStatusCanceledBtn;
     @FindBy(css = "textarea.text_field")
     public WebElement reasonInput;
-    @FindBy(id = "mat-input-20")
-    public WebElement reasonInput3;
-    @FindBy(id = "mat-input-29")
-    public WebElement reasonInput4;
     @FindBy(xpath = "//img[contains(@alt, 'İdea bankı')]")
     public WebElement ideaBankSidebare;
     @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Bütün fikirlər')]")
@@ -64,9 +48,6 @@ public class ideaBank_Page {
     public WebElement acceptedCounter;
     @FindBy(xpath = "//h6[starts-with(normalize-space(.), 'Ləğv edilənlər')]")
     public WebElement canceledCounter;
-    @FindBy(xpath = "(//div[@class='idea ng-star-inserted expanded']//div[contains(.,\" Test message \")])[2]")
-    public WebElement ideaTextCheck;
-
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[6]")
     public WebElement likeBtn;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[7]")
@@ -83,16 +64,10 @@ public class ideaBank_Page {
     public WebElement flashCom;
     @FindBy( xpath = "//button[@mat-dialog-close]")
     public WebElement closeCommentModal;
-
-    @FindBy(xpath = "(//div[@class='text'])[2]")
-    public WebElement flashComment;
-    @FindBy(xpath = "(//div[@class='text'])[2]")
-    public WebElement commentText;
     @FindBy(xpath = "(//span[text()='Fikri sil'])[1]")
     public WebElement ideaDeleteBtn;
     @FindBy(xpath = "//span[contains(.,'Bəli')]")
     public WebElement confirmDeleteBtn;
-
     @FindBy(xpath = "//following-sibling::p[1]")
     public WebElement direction;
     @FindBy(xpath = "//following-sibling::p[2]")

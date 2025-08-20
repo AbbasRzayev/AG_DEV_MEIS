@@ -777,6 +777,7 @@ public class helpDesk_Steps {
         ReusableMethods.wait(1);
         getRequestID = page.idReview.getText().trim();
         System.out.println("getRequestID = " + getRequestID);
+        ReusableMethods.wait(1);
     }
 
     @And("selects edit button in the request review section")
@@ -2236,7 +2237,7 @@ public class helpDesk_Steps {
             page.noteCurrent.sendKeys("Icraçı əvəz edilir");
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(7);
         } else if (selection.contains("İcraya qəbul edilib")) {
             page.currentResultAdmin.click();
             ReusableMethods.wait(1);
@@ -2247,7 +2248,7 @@ public class helpDesk_Steps {
             page.noteCurrent.sendKeys("Tezliklə nəticə barədə sizə məlumat veriləcək.");
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(7);
         } else if (selection.contains("İcra edilib")) {
             page.currentResultAdmin.click();
             ReusableMethods.wait(1);
@@ -2260,7 +2261,7 @@ public class helpDesk_Steps {
             page.actInputRequest.sendKeys("AG-88");
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(7);
         } else if (selection.contains("Müddəti bitib")) {
             page.currentResultAdmin.click();
             ReusableMethods.wait(1);
@@ -2271,7 +2272,7 @@ public class helpDesk_Steps {
             page.noteCurrent.sendKeys("İcra tarixi bitmişdir");
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(7);
         } else if (selection.contains("İcradan imtina edilib")) {
             page.currentResultAdmin.click();
             ReusableMethods.wait(1);
@@ -2282,12 +2283,13 @@ public class helpDesk_Steps {
             page.noteCurrent.sendKeys("Bu task fix olduğuna görə icrası imtina edilib");
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(7);
         }
     }
 
     @And("admin removed the executor")
     public void adminRemovedTheExecutor() {
+        ReusableMethods.wait(3);
         page.deleteBtnExecutor.click();
         ReusableMethods.wait(1);
         structureAndDuties.yesButton.click();
@@ -2482,6 +2484,7 @@ public class helpDesk_Steps {
 
     @And("the executor navigates to the request review section using the detailed button")
     public void theExecutorNavigatesToTheRequestReviewSectionUsingTheDetailedButton() {
+        ReusableMethods.wait(2);
         page.detailedBtn.click();
         ReusableMethods.wait(1);
     }

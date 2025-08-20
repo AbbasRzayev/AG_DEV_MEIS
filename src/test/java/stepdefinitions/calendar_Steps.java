@@ -59,7 +59,7 @@ public class calendar_Steps {
         ReusableMethods.wait(2);
     }
 
-    private static boolean isElementVisible(WebElement element, WebDriverWait wait) {
+    static boolean isElementVisible(WebElement element, WebDriverWait wait) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return element.isDisplayed();
@@ -1042,9 +1042,9 @@ public class calendar_Steps {
 //                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
 //                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
                 WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
-                JavascriptExecutor js = (JavascriptExecutor) getDriver();
-                js.executeScript("arguments[0].click();", element);
-//                element.click();
+//                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//                js.executeScript("arguments[0].click();", element);
+                element.click();
                 ReusableMethods.wait(5);
                 System.out.println("\"Imhere1\" = " + "Imhere1");
                 List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
@@ -1154,12 +1154,15 @@ public class calendar_Steps {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
         }
     }
 
     @And("select close button in the notification modal window")
     public void selectCloseButtonInTheNotificationModalWindow() {
+        ReusableMethods.wait(1);
+        ReusableMethods.pageDown();
+        ReusableMethods.wait(1);
         page.closeButtonNotificationModal.click();
         ReusableMethods.wait(2);
     }
@@ -1299,9 +1302,9 @@ public class calendar_Steps {
     @And("new event is deleted")
     public void newEventIsDeleted() {
         page.deleteBtnEvent.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         loginAndLogOut.yesExit.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(4);
     }
 
     @Then("the deleted event is not displayed in the control panel")

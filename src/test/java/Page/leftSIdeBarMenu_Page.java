@@ -37,22 +37,16 @@ public class leftSIdeBarMenu_Page {
     public WebElement mainLogo;
     @FindBy(xpath = "//h5[text()='Proqramlarım']")
     public WebElement progLogo;
-    @FindBy(xpath = "//h5[text()='Elan və təbriklər']")
-    public WebElement congLogo;
     @FindBy(xpath = "//h5[text()='İdea bankı']")
     public WebElement ideaLogo;
     @FindBy(xpath = "//h5[text()='Hüquqi baza']")
     public WebElement baseLogo;
     @FindBy(xpath = "//h5[text()=\"Təlim materialları\"]")
     public WebElement libaryLogo;
-    @FindBy(xpath = "//h5[text()='Təqvim']")
-    public WebElement calendarLogo;
     @FindBy(xpath = "//h5[text()='İdarəetmə - İstifadəçilər']")
     public WebElement adminLogo;
     @FindBy(xpath = "//h5[text()='Yardım masası - Yeni müraciət']")
     public WebElement helpDeskLogo;
     @FindBy(xpath = "//span[text()=\" Bəli \"]")
     public WebElement yesBtn;
-    @FindBy(xpath = "//h1[text()='MƏRKƏZLƏŞDİRİLMİŞ ELEKTRON İNFORMASİYA SİSTEMİ']")
-    public WebElement tittleText;
 }

@@ -37,12 +37,8 @@ public class searchByUserData_Page {
     public WebElement pinText;
     @FindBy(id = "mat-input-19")
     public WebElement workPlaceInput;
-    @FindBy(xpath = "(//td[text()='Azərbaycan Metrologiya İnstitutu'])[1]")
-    public WebElement workPlace;
     @FindBy(xpath = "//span[text()=' Axtar ']")
     public WebElement searchBtn;
-    @FindBy(css = "tbody.mat-mdc-row")
-    public WebElement workClass;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[1]")
     public WebElement nameFilter;
     @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and @aria-haspopup='menu'])[2]")
@@ -89,8 +85,4 @@ public class searchByUserData_Page {
     public WebElement selectNotApprovedStatus;
     @FindBy(xpath = "//span[contains(., 'Aktiv')]")
     public WebElement selectApprovedStatus;
-    @FindBy(xpath = "(//div[@class='mat-ripple mat-mdc-menu-trigger custom--icon-button' and .//mat-icon[text()='more_vert']])[1]")
-    public WebElement idFilter;
-
-
 }

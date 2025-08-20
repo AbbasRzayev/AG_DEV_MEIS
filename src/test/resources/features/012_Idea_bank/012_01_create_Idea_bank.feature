@@ -54,7 +54,7 @@ Feature:Idea Bank
   #11.Istifadçi hissəsində yeni idea statusunun təstiqlənmiş olduğunun yoxlanılması
   #12.Istifadçi hissəsində qəbul edilənlər (təstiqlənmiş) sayğacının yenilənməsinin yoxlanılması
   #13.Istifadəçi yeni ideanın üzərində like düyməsi seçilməsi
-  #14.Like düyməsi seçildikdən sonra like sayğacının yenilənməsinin yoxlanılmasl
+  #14.Like düyməsi seçildikdən sonra like sayğacının yenilənməsinin yoxlanılması
   #15.Istifadəçi yeni ideanın üzərində unlike düyməsi seçilməsi
   #16.Unlike düyməsi seçildikdən sonra unlike sayğacının yenilənməsinin yoxlanılmasl
   #17.Istifadəçi yeni idea üçün rəy bildirməsi

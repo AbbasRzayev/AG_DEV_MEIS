@@ -39,6 +39,8 @@ public class calendar_Page {
     public WebElement choosePersonMusa;
     @FindBy(xpath = "//div[@class='mat-mdc-tooltip-trigger manual-option ng-star-inserted' and contains(., 'Musa Rzayev')]")
     public WebElement cancelMusaPerson;
+    @FindBy(xpath = "//div[@class='mat-mdc-tooltip-trigger manual-option ng-star-inserted' and contains(., 'İbrahim Rzayev')]")
+    public WebElement cancelIbrahimPerson;
     @FindBy(xpath = "(//div[contains(normalize-space(.), 'Davud Zamanov')])[5]")
     public WebElement choosePersonDavud;
     @FindBy(xpath = "//span[text()='Ümumi açıq']")
@@ -109,8 +111,6 @@ public class calendar_Page {
     public WebElement strukCopy;
     @FindBy(xpath = "//p[text()='AT_TesT']")
     public WebElement personEventCheck;
-    @FindBy(xpath = "//div[@class='mdc-dialog__container']")
-    public WebElement eventNotAppears;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[11]")
     public WebElement closeModal;
     @FindBy(xpath = "//mat-select[@formcontrolname='eventCategoryId']")

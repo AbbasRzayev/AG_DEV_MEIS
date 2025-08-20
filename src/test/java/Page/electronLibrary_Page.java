@@ -10,67 +10,42 @@ public class electronLibrary_Page {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-//    @FindBy(xpath = "//p[text()='Elektron kitabxana']")
-//    public WebElement electronicLibTab;
-    @FindBy(xpath = "/html/body/app-root/div/div/main/app-home/div[2]/app-menu-item[7]/div")
-    public WebElement electronicLibTab;
+
     @FindBy(xpath = "//span[text()=' Yeni təlim ']")
-    public WebElement newTraningBtn;
+    public WebElement newTrainingBtn;
     @FindBy(id = "mat-input-2")
     public WebElement traningName;
-    @FindBy(id = "mat-input-6")
-    public WebElement traningEditName;
-    @FindBy(xpath = "//label[text()='Daxili təlimçi']")
-    public WebElement checkBoxesInnerTraniner;
-    @FindBy(xpath = "//label[text()='Kənardan təlimçi']")
-    public WebElement checkBoxesExternalTrainer;
-    @FindBy(xpath = "//mat-label[text()='Təlimçi axtar']")
-    public WebElement trainSearch;
-    @FindBy(xpath = "//label[contains(text(),'Abbas')]")
-    public WebElement chooseFromList;
-    @FindBy(xpath = "//label[text()='Fərid İmranov - PHŞ: Mühafizə ']")
-    public WebElement chooseEditFromList;
-    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[4]")
-    public WebElement closeList;
-    @FindBy(id = "mat-input-3")
+    @FindBy(xpath = "//input[@formcontrolname='trainingDate']")
     public WebElement dateInput;
     @FindBy(id = "mat-input-4")
     public WebElement dateInputEJ;
-    @FindBy(id = "mat-input-7")
-    public WebElement dateEditInput;
+    @FindBy(xpath = "(//button[./mat-icon[text()='delete']])[1]")
+    public WebElement fileDelete;
     @FindBy(xpath = "//span[text()='Fayl əlavə edin']")
     public WebElement addFileBtn;
-    @FindBy(xpath = "//span[text()='Daxili təlim']")
-    public WebElement addEditFileBtn;
-    @FindBy(id = "mat-input-4")
+    @FindBy(xpath = "//textarea[@formcontrolname ='description']")
     public WebElement noteInput;
-    @FindBy(xpath = "(//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-24']//input)[1]")
-    public WebElement selectNotPersomForTrain;
     @FindBy(xpath = "(//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-23']//input)[1]")
     public WebElement selectNotPersomForElectronJournal;
     @FindBy(xpath = "//span[text()='Ümumi açıq']")
     public WebElement selectPersomForWhoSees;
-    @FindBy(xpath = "//span[text()='Yadda saxla']")
-    public WebElement saveBtn;
     @FindBy(xpath = "//span[text()='Təsdiq et']")
     public WebElement acceptBtn;
-    @FindBy(xpath = "//span[text()='Redaktə et']")
-    public WebElement editYesBtn;
-    @FindBy(xpath = "//td[text()='Daxili təlim']")
-    public WebElement checkİnnerName;
-    @FindBy(xpath = "//span[text()='Bəli']")
+    @FindBy(xpath = "//span[normalize-space()='Bəli']")
     public WebElement deleteYes;
+    @FindBy(xpath = "//span[text()='Elektron kitabxana']")
+    public WebElement electronicLibraryTabAdmin;
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
     public WebElement inner;
     @FindBy(xpath = "//input[@id='mat-radio-3-input']")
     public WebElement foregin;
-    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[3]")
+    @FindBy(className = "add-button")
     public WebElement plusBtn;
-    @FindBy(id = "mat-input-7")
+    @FindBy(xpath = "//input[@formcontrolname='externalTrainerName']")
     public WebElement instructorNameInput;
-    @FindBy(xpath = "//td[text()='Kənardan təlim']")
-    public WebElement checkForein;
+    @FindBy(xpath = "(//input[@name='mat-radio-group-0'])[2]")
+    public WebElement checkboxTraining;
     @FindBy(xpath = "//span[contains(@class, 'tab-title') and contains(., 'Faydalı məlumatlar')]")
     public WebElement usefulInformation;
     @FindBy(xpath = "//span[contains(@class, 'tab-title') and contains(., 'Elektron jurnal')]")
@@ -87,11 +62,32 @@ public class electronLibrary_Page {
     public WebElement usefulSaveBtn;
     @FindBy(xpath = "//td[contains(., 'Grow uP')]")
     public WebElement checkUseful;
-    @FindBy(xpath = "//span[contains(., 'Bəli')]")
-    public WebElement usefulYesBtn;
+
     @FindBy(xpath = "//input[@formcontrolname='name']")
     public WebElement nameEJ;
     @FindBy(xpath = "//input[@formcontrolname='number']")
     public WebElement numberEJ;
 
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-title')]//span[contains(@class,'mat-mdc-tooltip-trigger')])[1]")
+    public WebElement trainingNameTable;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-executors')])[1]")
+    public WebElement trainingTeachersNameTable;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-trainingDate')])[1]")
+    public WebElement trainingTimeTable;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-pdfUrl')])[1]")
+    public WebElement trainingMaterialsTable;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-viewCount')])[1]")
+    public WebElement viewCountsTable;
+    @FindBy(xpath = "//div[contains(@class,'mat-mdc-dialog-surface')]")
+    public WebElement trainingNoteModal;
+    @FindBy(xpath = "//h5[contains(@class,'mat-mdc-dialog-title')]")
+    public WebElement trainingNameModal;
+    @FindBy(xpath = "//p[text()='Elektron kitabxana']")
+    public WebElement electronicMainPage;
+    @FindBy(xpath = "//a[text()=' Fayl ']")
+    public WebElement fileDocumentModal;
+    @FindBy(xpath = "(//button[@mattooltip='Redaktə et' and @mat-icon-button])[1]")
+    public WebElement editButton;
+    @FindBy(xpath = "//span[normalize-space()='Redaktə et']")
+    public WebElement editBtn;
 }

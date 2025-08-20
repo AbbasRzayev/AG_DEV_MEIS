@@ -269,7 +269,7 @@ public class ideaBank_Steps {
             String comment = row.get("Rəy");
             ReusableMethods.flash(page.commentDisplay, getDriver());
             Assert.assertEquals(page.commentDisplay.getText().trim(), comment);
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(3);
         }
     }
 

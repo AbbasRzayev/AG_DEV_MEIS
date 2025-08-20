@@ -85,11 +85,4 @@ Feature: Electronic library
 
 
 
-  #Telimin elave edilmesi unvanlanmish shexslere gore
-  #butun melumatlarin yoxlanilmasi
-  #Redakte ve yoxlanma?
-  #unvanlanmish shexsi girib telimi gormesi
-  #unvanlanmish shexse bildirishin gelmesinin yoxlanilmasi
-  #unvanlanmish shexse gelen telimin melumatlarin yoxlanolmasi
-  #Idaretmede silinmesi ve silidiyinin adminde yoxlanilmasi
-  #Idaretmede silinmesi ve unvanlanmish shexse terefde silinmesinin yoxlanilmasi 
+

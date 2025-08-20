@@ -28,7 +28,7 @@ public class programs_Steps {
     public void switchesToTheMyProgramsTab() {
         ReusableMethods.wait(1);
         page.programTab.click();
-        ReusableMethods.wait(7);
+        ReusableMethods.wait(10);
     }
 
     contactInformationEditing_Page userPer = new contactInformationEditing_Page();
@@ -103,7 +103,7 @@ public class programs_Steps {
 
     @When("selects the save button to create a new program")
     public void userSelectsTheSaveButtonToCreateANewProgram() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
         page.saveButton.click();
         ReusableMethods.wait(20);
         //ReusableMethods.clickByJavaScript(page.saveButton);
@@ -393,7 +393,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconAnotherFileBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(5);
     }
 
     @Then("all information is displayed in the review section of the program")

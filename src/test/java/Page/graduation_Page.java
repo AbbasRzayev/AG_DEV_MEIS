@@ -23,5 +23,4 @@ public class graduation_Page {
     public  WebElement currentAccountResultTable;
     @FindBy(xpath = "//textarea[@formcontrolname='deactivationNote']")
     public  WebElement graduationNote;
-
 }

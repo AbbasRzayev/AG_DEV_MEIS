@@ -84,10 +84,6 @@ public class announcementsAndCongratulations_Steps {
         ReusableMethods.robotClassDosyaYukleme(path);
     }
 
-    @And("adds additional photo for announcement")
-    public void addsAdditionalPhotoForAnnouncement() {
-
-    }
 
     @And("adds video for announcement")
     public void addsVideoForAnnouncement() {
@@ -104,6 +100,7 @@ public class announcementsAndCongratulations_Steps {
         ReusableMethods.wait(2);
         page.saveBtn.click();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        ReusableMethods.wait(15);
     }
 
     @Then("new announcement according to the addressees successfully added")

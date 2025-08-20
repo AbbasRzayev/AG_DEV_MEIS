@@ -84,7 +84,7 @@ public class registration_Steps {
     public void selectsNextButton() {
         ReusableMethods.wait(2);
         page.firstNextButton.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(7);
     }
 
     @And("adds picture and information to the field on the second registration stage")

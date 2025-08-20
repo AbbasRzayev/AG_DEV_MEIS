@@ -80,11 +80,11 @@ public class loginAndLogOut_Steps {
 
     @When("user selects exit button")
     public void userSelectsExitButton() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.exitBtn.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.yesExit.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @Then("user has been successfully logged out from system")

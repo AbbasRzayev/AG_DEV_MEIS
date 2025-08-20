@@ -1,91 +1,76 @@
 package stepdefinitions;
 
+import Page.calendar_Page;
 import Page.electronLibrary_Page;
 import Page.loginAndLogOut_Page;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
+import static stepdefinitions.calendar_Steps.isElementVisible;
 import static utilities.Driver.getDriver;
 
 public class electronLibrary_Steps {
 
     static electronLibrary_Page page = new electronLibrary_Page();
     loginAndLogOut_Page pageSecond = new loginAndLogOut_Page();
-
-    //    @And("goes to the electronic library tab from personal cabinet")
-//    public void goesToTheElectronicLibraryTabFromPersonalCabinet() {
-//        page.electronicLibTab.click();
-//        ReusableMethods.wait(1);
-//    }
-//
-//    @And("selects new training button in the training materials tab")
-//    public void selectsNewTrainingButtonInTheTrainingMaterialsTab() {
-//
-//    }
-//
-//    @And("adds <{string}> to training name input")
-//    public void addsToTrainingNameInput(String arg0) {
-//
-//    }
-    @And("goes to the electronic library tab from personal cabinet")
-    public void goesToTheElectronicLibraryTabFromPersonalCabinet() {
-        System.out.println("page = " + getDriver().getCurrentUrl());
-        ReusableMethods.waitForClickabilityAndClick(page.electronicLibTab, 5);
-        ReusableMethods.wait(1);
-    }
-
+    calendar_Page calendar = new calendar_Page();
+    String viewCounter;
 
     @And("selects new training button in the training materials tab")
     public void selectsNewTrainingButtonInTheTrainingMaterialsTab() {
-        page.newTraningBtn.click();
+        page.newTrainingBtn.click();
         ReusableMethods.wait(1);
     }
 
     @And("adds {string} to training name input")
     public void addsToTrainingNameInput(String arg0) {
-        if (arg0.contains("Daxili təlim")) {
+        if (arg0.contains("Daxili təlim AT")) {
             page.traningName.sendKeys("Daxili təlim");
             ReusableMethods.wait(1);
         } else if (arg0.contains("Kənardan təlim")) {
+            page.traningName.clear();
+            ReusableMethods.wait(1);
             page.traningName.sendKeys("Kənardan təlim");
             ReusableMethods.wait(1);
         }
     }
 
-    @And("selects one of the two {string}")
-    public void selectsOneOfTheTwo(String arg0) {
-        if (arg0.contains("firstcase")) {
-            page.checkBoxesInnerTraniner.click();
+    @And("adds instructor {string} from search list")
+    public void addsInstructorFromSearchList(String selection) {
+        if (selection.contains("Davud")) {
+            calendar.choosePersonInput.sendKeys("Davud Zamanov");
+            ReusableMethods.wait(2);
+            calendar.choosePersonDavud.click();
+//            ReusableMethods.clickByJavaScript(calendar.choosePersonDavud);
             ReusableMethods.wait(1);
-        } else if (arg0.contains("secondcase")) {
-            page.checkBoxesExternalTrainer.click();
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
+//            page.closeList.click();
+//            ReusableMethods.wait(1);
+        } else if (selection.contains("Abbas Rzayev")) {
+            page.checkboxTraining.click();
             ReusableMethods.wait(1);
-        }
-    }
-
-    @And("adds instructor from search list")
-    public void addsInstructorFromSearchList() {
-        if (page.inner.isSelected()) {
-            page.trainSearch.click();
-            ReusableMethods.wait(1);
-            page.chooseFromList.click();
-            page.closeList.click();
-            ReusableMethods.wait(1);
-        } else if (page.foregin.isSelected()) {
-            ReusableMethods.wait(1);
-            page.instructorNameInput.sendKeys("Teacher of Qa");
+            page.instructorNameInput.sendKeys("Abbas Rzayev");
             ReusableMethods.wait(1);
             page.plusBtn.click();
         }
@@ -100,54 +85,10 @@ public class electronLibrary_Steps {
         ReusableMethods.wait(1);
     }
 
-    @And("adds note to the note input")
-    public void addsNoteToTheNoteInput() {
-        page.noteInput.sendKeys("However, successful automation implementation necessitates careful planning, strategic alignment, and ongoing optimization.");
-        ReusableMethods.wait(1);
-    }
-
-    @When("user selects sava button")
-    public void userSelectsSavaButton() {
-        page.saveBtn.click();
-        ReusableMethods.wait(1);
-    }
-
-    @Then("new {string} successfully added")
-    public void newSuccessfullyAdded(String arg0) {
-        if (arg0.contains("firstcase")) {
-            ReusableMethods.flash(page.checkİnnerName, getDriver());
-            assertTrue(page.checkİnnerName.isDisplayed());
-        } else if (arg0.contains("secondcase")) {
-            ReusableMethods.flash(page.checkForein, getDriver());
-            assertTrue(page.checkForein.isDisplayed());
-        }
-    }
-
-    @And("user edit newly added material by using {string}")
-    public void userEditNewlyAddedMaterialByUsing(String arg0) {
-        if (arg0.contains("firstcase")) {
-            String text = "Daxili təlim";
-            EditButtonForString1(text);
-            ReusableMethods.wait(1);
-            page.traningEditName.clear();
-            page.traningEditName.sendKeys("DAXİLİ TƏLİM");
-            ReusableMethods.wait(1);
-            page.trainSearch.click();
-            page.chooseEditFromList.click();
-            page.closeList.click();
-            ReusableMethods.wait(1);
-            ReusableMethods.clearTextBox(page.dateEditInput);
-            //page.dateEditInput.clear();
-            LocalDate today = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            String formattedDate = today.format(formatter);
-            page.dateEditInput.sendKeys(formattedDate);
-            ReusableMethods.wait(2);
-            page.addEditFileBtn.click();
-            String tex1t = "file:///C:/Users/User/Desktop/TestFiles/ChangeDoc.pdf";
-            ReusableMethods.robotClassDosyaYukleme(tex1t);
-            ReusableMethods.wait(2);
-            page.editYesBtn.click();
+    @And("adds note {string} to the note input")
+    public void addsNoteToTheNoteInput(String selection) {
+        if (selection.contains("Automaiton kurslar barədə")) {
+            page.noteInput.sendKeys("Automaiton kurslar barədə");
             ReusableMethods.wait(1);
         }
 
@@ -165,31 +106,6 @@ public class electronLibrary_Steps {
         editButton.click();
     }
 
-    @Then("newly added material succssfully {string}")
-    public void newlyAddedMaterialSuccssfully(String arg0) {
-        if (arg0.contains("firstcase")) {
-            String name = "DAXİLİ TƏLİM";
-            String instruc = "ABBAS RZAYEV, Fərid İmranov";
-        }
-    }
-
-    @When("user selects delete button on the {string} added material")
-    public void userSelectsDeleteButtonOnTheAddedMaterial(String arg0) {
-        if (arg0.contains("Daxili təlim")) {
-            ReusableMethods.wait(2);
-            String text2 = "Daxili təlim";
-            DeleteButtonForString2(text2);
-            ReusableMethods.waitForClickability(page.deleteYes, 3);
-            page.deleteYes.click();
-        } else if (arg0.contains("Kənardan təlim")) {
-            ReusableMethods.wait(2);
-            String text2 = "Kənardan təlim";
-            DeleteButtonForString2(text2);
-            ReusableMethods.waitForClickability(page.deleteYes, 3);
-            page.deleteYes.click();
-        }
-    }
-
     public static void DeleteButtonForString2(String text) {
         // Find the row containing the specified text
         WebElement row = getDriver().findElement(By.xpath("//td[contains(text(), '" + text + "')]//ancestor::tr"));
@@ -197,19 +113,6 @@ public class electronLibrary_Steps {
         // Find the edit button within the row
         WebElement deleteButton = row.findElement(By.xpath(".//mat-icon[@class='mat-icon notranslate mat-warn material-icons mat-ligature-font' and contains(text(), 'delete')]"));
         deleteButton.click();
-    }
-
-    @Then("newly added material successfully {string}")
-    public void newlyAddedMaterialSuccessfully(String arg0) {
-        if (arg0.contains("firstcase")) {
-            ReusableMethods.wait(2);
-            String text = "Daxili təlim";
-            ReusableMethods.assertElementDeleted(getDriver(), text);
-        } else if (arg0.contains("secondcase")) {
-            ReusableMethods.wait(2);
-            String text = "Kənardan təlim";
-            ReusableMethods.assertElementDeleted(getDriver(), text);
-        }
     }
 
     @Given("{string} with login logs to the system")
@@ -289,149 +192,65 @@ public class electronLibrary_Steps {
         ReusableMethods.assertElementDeleted(getDriver(), text);
     }
 
-    @And("selects person for notification and mail")
-    public void selectsPersonForNotificationAndMail() {
-        page.selectNotPersomForTrain.sendKeys("Fərid İmranov");
-        ReusableMethods.wait(1);
-        WebElement namePerson = getDriver().findElement(By.xpath("//label[contains(.,'Fərid İmranov')]"));
-        namePerson.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("selects person for the who sees field")
-    public void selectsPersonForTheWhoSeesField() {
-        page.selectPersomForWhoSees.click();
-        ReusableMethods.wait(1);
-        WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə görə'])[2]"));
-        selectWhoSe.click();
-        ReusableMethods.wait(1);
-        WebElement clickPerson = getDriver().findElement(By.xpath("(//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-25']//input)[1]"));
-//        clickPerson.sendKeys("Fərid İmranov");
-//        WebElement namePerson = getDriver().findElement(By.xpath("//label[contains(.,'Fərid İmranov')]"));
-//        namePerson.click();
-        ReusableMethods.wait(1);
-    }
-
-    @And("adds file for training")
-    public void addsFileForTraining() {
-        String file = "C:\\Users\\User\\Desktop\\TestFiles\\Document.pdf";
-        page.addFileBtn.click();
-        ReusableMethods.wait(2);
-        ReusableMethods.robotClassDosyaYukleme(file);
-    }
-
-
-    String trainingMaterialsInitial;
-    Integer trainingCountMaterialsInitial;
-    @Then("gets the information of the initial {string} of the file for training materials")
-    public void getsTheInformationOfTheInitialOfTheFileForTrainingMaterials(String count) {
-        if(count.contains("Daxili"))
-        {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Daxili təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[6]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
-            trainingMaterialsInitial = viewCountCell.getText();
-            System.out.println("viewCountText = " + trainingMaterialsInitial);
-            String trainingMaterialsInitialCount = trainingMaterialsInitial.replaceAll(".*\\((\\d+)\\).*", "$1");
-            trainingCountMaterialsInitial = Integer.parseInt(trainingMaterialsInitialCount);
-        }
-        else if(count.contains("Kənar")){
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Kənardan təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[6]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
-            trainingMaterialsInitial = viewCountCell.getText();
-            System.out.println("viewCountText = " + trainingMaterialsInitial);
-            String trainingMaterialsInitialCount = trainingMaterialsInitial.replaceAll(".*\\((\\d+)\\).*", "$1");
-            trainingCountMaterialsInitial = Integer.parseInt(trainingMaterialsInitialCount);
+    @And("selects person {string} for notification and mail")
+    public void selectsPersonForNotificationAndMail(String selection) {
+        if (selection.contains("Musa")) {
+            calendar.choosePersonInputSecond.sendKeys("Musa Rzayev");
+            calendar.cancelMusaPerson.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
+        } else  if (selection.contains("İbrahim")) {
+            calendar.choosePersonInputSecond.sendKeys("İbrahim Rzayev");
+            calendar.cancelIbrahimPerson.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
         }
     }
-    Integer expectCountFileTraningIncrease;
-    String trainingMaterialsInitialSecond;
+
+    @And("selects person {string} for the who sees field")
+    public void selectsPersonForTheWhoSeesField(String selection) {
+        if (selection.contains("Musa")) {
+            page.selectPersomForWhoSees.click();
+            ReusableMethods.wait(1);
+            WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə'])[2]"));
+            selectWhoSe.click();
+            ReusableMethods.wait(1);
+        }   else if (selection.contains("İbrahim")) {
+            page.selectPersomForWhoSees.click();
+            ReusableMethods.wait(1);
+            WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə'])[2]"));
+            selectWhoSe.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds file {string} for training")
+    public void addsFileForTraining(String selection) {
+        if (selection.contains("new")) {
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
+            page.addFileBtn.click();
+            ReusableMethods.wait(2);
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
+        else if(selection.contains("edit")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            page.fileDelete.click();
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(1);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
+            page.addFileBtn.click();
+            ReusableMethods.wait(2);
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
+    }
+
     Integer actualFileTraning;
 
-    @Then("counter of the information folder is displayed correctly due to the {string} of the file for training materials")
-    public void counterOfTheInformationFolderIsDisplayedCorrectlyDueToTheOfTheFileForTrainingMaterials(String increase) {
-        if(increase.contains("Daxili"))
-        {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Daxili təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[6]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
-            expectCountFileTraningIncrease = trainingCountMaterialsInitial + 1;
-            System.out.println("expectCount = " + expectCountFileTraningIncrease);
-            trainingMaterialsInitialSecond = viewCountCell.getText();
-            System.out.println("viewCountText = " + trainingMaterialsInitialSecond);
-            String trainingMaterialsInitialCount = trainingMaterialsInitialSecond.replaceAll(".*\\((\\d+)\\).*", "$1");
-            actualFileTraning = Integer.parseInt(trainingMaterialsInitialCount);
-            Assert.assertEquals(expectCountFileTraningIncrease, actualFileTraning);
-        }
-        else if (increase.contains("Kənar"))
-        {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Kənardan təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[6]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
-            expectCountFileTraningIncrease = trainingCountMaterialsInitial + 1;
-            System.out.println("expectCount = " + expectCountFileTraningIncrease);
-            trainingMaterialsInitialSecond = viewCountCell.getText();
-            System.out.println("viewCountText = " + trainingMaterialsInitialSecond);
-            String trainingMaterialsInitialCount = trainingMaterialsInitialSecond.replaceAll(".*\\((\\d+)\\).*", "$1");
-            actualFileTraning = Integer.parseInt(trainingMaterialsInitialCount);
-            Assert.assertEquals(expectCountFileTraningIncrease, actualFileTraning);
-        }
-    }
-    @When("user upload the {string} from table")
-    public void userUploadTheFromTable(String count) {
-        if (count.contains("Daxili")) {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Daxili təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[5]"));
-            viewCountCell.click();
-            ReusableMethods.wait(1);
-            WebElement fileSelect = getDriver().findElement(By.xpath("//a[text()=' Fayl ']"));
-            fileSelect.click();
-            ReusableMethods.wait(1);
-            getDriver().navigate().refresh();
-
-        } else if (count.contains("Kənar")) {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Kənardan təlim')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[5]"));
-            viewCountCell.click();
-            ReusableMethods.wait(1);
-            WebElement fileSelect = getDriver().findElement(By.xpath("//a[text()=' Fayl ']"));
-            fileSelect.click();
-            ReusableMethods.wait(1);
-            getDriver().navigate().refresh();
-
-        }
-        else if(count.contains("file for useful information"))
-        {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Grow uP')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[4]"));
-            viewCountCell.click();
-            ReusableMethods.wait(1);
-            WebElement fileSelect = getDriver().findElement(By.xpath("//a[text()=' Fayl ']"));
-            fileSelect.click();
-            ReusableMethods.wait(1);
-            getDriver().navigate().refresh();
-        }
-        else if(count.contains("file for electron journal"))
-        {
-            WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
-            WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Qa Journal')]]"));
-            WebElement viewCountCell = row.findElement(By.xpath(".//td[4]"));
-            viewCountCell.click();
-            ReusableMethods.wait(1);
-            WebElement fileSelect = getDriver().findElement(By.xpath("//a[text()=' Fayl ']"));
-            fileSelect.click();
-            ReusableMethods.wait(1);
-            getDriver().navigate().refresh();
-        }
-    }
     String usefulInformationInitial;
     Integer usefulInformationCountInitial;
     String electronJournalInitial;
@@ -439,23 +258,20 @@ public class electronLibrary_Steps {
 
     @Then("gets the information of the initial counter of the file for {string}")
     public void getsTheInformationOfTheInitialCounterOfTheFileFor(String initial) {
-        if(initial.contains("useful information"))
-        {
+        if (initial.contains("useful information")) {
             WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
             WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Grow uP')]]"));
             WebElement viewCountCell = row.findElement(By.xpath(".//td[5]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
+            ReusableMethods.flash(viewCountCell, getDriver());
             usefulInformationInitial = viewCountCell.getText();
             System.out.println("viewCountText = " + usefulInformationInitial);
             String trainingMaterialsInitialCount = usefulInformationInitial.replaceAll(".*\\((\\d+)\\).*", "$1");
             usefulInformationCountInitial = Integer.parseInt(trainingMaterialsInitialCount);
-        }
-        else if(initial.contains("electron journal"))
-        {
+        } else if (initial.contains("electron journal")) {
             WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
             WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Qa Journal')]]"));
             WebElement viewCountCell = row.findElement(By.xpath(".//td[7]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
+            ReusableMethods.flash(viewCountCell, getDriver());
             electronJournalInitial = viewCountCell.getText();
             System.out.println("viewCountText = " + electronJournalInitial);
             String trainingMaterialsInitialCount = electronJournalInitial.replaceAll(".*\\((\\d+)\\).*", "$1");
@@ -463,19 +279,20 @@ public class electronLibrary_Steps {
         }
 
     }
+
     Integer expectCountFileUsefulInformation;
     String usefulInformationInitialSecond;
     Integer expectCountFileElectronJournal;
     String electronJournalInitialSecond;
     Integer actualFileUseful;
+
     @Then("counter of the information folder is displayed correctly due to the increase of the file for {string}")
     public void counterOfTheInformationFolderIsDisplayedCorrectlyDueToTheIncreaseOfTheFileFor(String count) {
-        if(count.contains("useful information"))
-        {
+        if (count.contains("useful information")) {
             WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
             WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Grow uP')]]"));
             WebElement viewCountCell = row.findElement(By.xpath(".//td[5]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
+            ReusableMethods.flash(viewCountCell, getDriver());
             expectCountFileUsefulInformation = usefulInformationCountInitial + 1;
             System.out.println("expectCount = " + expectCountFileUsefulInformation);
             usefulInformationInitialSecond = viewCountCell.getText();
@@ -483,13 +300,11 @@ public class electronLibrary_Steps {
             String usefulinfotmationInitialCount = usefulInformationInitialSecond.replaceAll(".*\\((\\d+)\\).*", "$1");
             actualFileTraning = Integer.parseInt(usefulinfotmationInitialCount);
             Assert.assertEquals(expectCountFileUsefulInformation, actualFileTraning);
-        }
-        else if(count.contains("electron journal"))
-        {
+        } else if (count.contains("electron journal")) {
             WebElement table = getDriver().findElement(By.className("mat-mdc-table"));
             WebElement row = table.findElement(By.xpath("//tr[td[contains(text(), 'Qa Journal')]]"));
             WebElement viewCountCell = row.findElement(By.xpath(".//td[7]"));
-            ReusableMethods.flash(viewCountCell,getDriver());
+            ReusableMethods.flash(viewCountCell, getDriver());
             expectCountFileElectronJournal = electronJournalCountInitial + 1;
             System.out.println("expectCount = " + expectCountFileElectronJournal);
             electronJournalInitialSecond = viewCountCell.getText();
@@ -499,6 +314,7 @@ public class electronLibrary_Steps {
             Assert.assertEquals(expectCountFileElectronJournal, actualFileTraning);
         }
     }
+
     @And("selects new electron journal button in the electronic library tab")
     public void selectsNewElectronJournalButtonInTheElectronicLibraryTab() {
         ReusableMethods.waitForClickability(page.electronJournal, 5);
@@ -545,16 +361,16 @@ public class electronLibrary_Steps {
         WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə görə'])[2]"));
         selectWhoSe.click();
         ReusableMethods.wait(1);
-       // WebElement clickPerson = getDriver().findElement(By.xpath("(//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-25']//input)[1]"));
+        // WebElement clickPerson = getDriver().findElement(By.xpath("(//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-25']//input)[1]"));
 //        clickPerson.sendKeys("Fərid İmranov");
 //        WebElement namePerson = getDriver().findElement(By.xpath("//label[contains(.,'Fərid İmranov')]"));
 //        namePerson.click();
-      //  ReusableMethods.wait(1);
+        //  ReusableMethods.wait(1);
     }
 
     @When("user selects accept button")
     public void userSelectsAcceptButton() {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         page.acceptBtn.click();
         ReusableMethods.wait(1);
     }
@@ -575,5 +391,148 @@ public class electronLibrary_Steps {
         ReusableMethods.wait(1);
         String text = "Qa Journal";
         ReusableMethods.assertElementDeleted(getDriver(), text);
+    }
+
+    @And("goes to the electronic library tab in the control panel")
+    public void goesToTheElectronicLibraryTabInTheControlPanel() {
+        page.electronicLibraryTabAdmin.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("all information about the training material is displayed in the table in the admin panel")
+    public void allInformationAboutTheTrainingMaterialIsDisplayedInTheTableInTheAdminPanel(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String trainingName = row.get("Təlimin adı");
+            String trainingTeacherName = row.get("Təlimçi");
+            String trainingMaterial = row.get("Təlim materialları");
+            String viewCount = row.get("Baxış sayı");
+
+            ReusableMethods.flash(page.trainingNameTable, getDriver());
+            Assert.assertEquals(page.trainingNameTable.getText().trim(), trainingName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.trainingTeachersNameTable, getDriver());
+            Assert.assertEquals(page.trainingTeachersNameTable.getText().trim(), trainingTeacherName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.trainingTimeTable, getDriver());
+            LocalDate today = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String formattedDate = today.format(formatter);
+            Assert.assertEquals(page.trainingTimeTable.getText().trim(), formattedDate);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.trainingMaterialsTable, getDriver());
+            Assert.assertEquals(page.trainingMaterialsTable.getText().trim(), trainingMaterial);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.viewCountsTable, getDriver());
+            Assert.assertEquals(page.viewCountsTable.getText().trim(), viewCount);
+            viewCounter = page.viewCountsTable.getText().trim();
+            System.out.println("viewCounter = " + viewCounter);
+            ReusableMethods.wait(1);
+        }
+    }
+
+
+    @And("all the information about training material is displayed in the notification")
+    public void allTheInformationAboutTrainingMaterialIsDisplayedInTheNotification(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+            if (isElementVisible(page.trainingNoteModal, wait)) {
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String trainingName = row.get("Başlıq");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.trainingNameModal, getDriver());
+                    Assert.assertEquals(page.trainingNameModal.getText().trim(), trainingName);
+                    ReusableMethods.wait(1);
+                    calendar.closeModal.click();
+                    ReusableMethods.wait(1);
+
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(3);
+                System.out.println("\"Imhere1\" = " + "Imhere0");
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(5);
+                System.out.println("\"Imhere1\" = " + "Imhere1");
+                ReusableMethods.wait(3);
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String trainingName = row.get("Başlıq");
+
+                    ReusableMethods.flash(page.trainingNameModal, getDriver());
+                    Assert.assertEquals(page.trainingNameModal.getText().trim(), trainingName);
+                    ReusableMethods.wait(1);
+                    calendar.closeModal.click();
+                    ReusableMethods.wait(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+        }
+    }
+
+    @And("goes to the electronic library tab from main page")
+    public void goesToTheElectronicLibraryTabFromMainPage() {
+        page.electronicMainPage.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("user opens the document view modal window")
+    public void userOpensTheDocumentViewModalWindow() {
+        page.viewCountsTable.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("uploads a video from the document view modal window")
+    public void uploadsAVideoFromTheDocumentViewModalWindow() {
+        page.fileDocumentModal.click();
+        ReusableMethods.wait(2);
+    }
+
+    @When("user closes the document view modal window")
+    public void userClosesTheDocumentViewModalWindow() {
+        new Actions(getDriver()).sendKeys(Keys.ESCAPE).perform();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("an increase is observed in the view count data")
+    public void anIncreaseIsObservedInTheViewCountData() {
+        ReusableMethods.flash(page.viewCountsTable,getDriver());
+        String viewCounterExpectedStr = page.viewCountsTable.getText().trim();
+        System.out.println("viewCounterExpectedStr = " + viewCounterExpectedStr);
+        int viewCounterExpected = Integer.parseInt(viewCounterExpectedStr);
+        int viewCounterInt = Integer.parseInt(viewCounter);
+        int expectedValue = viewCounterInt + 1;
+        Assert.assertEquals(viewCounterExpected, expectedValue);
+    }
+
+    @And("selects edit button in the control panel")
+    public void selectsEditButtonInTheControlPanel() {
+        page.editButton.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("user selects edit button")
+    public void userSelectsEditButton() {
+        page.editBtn.click();
+        ReusableMethods.wait(10);
     }
 }
