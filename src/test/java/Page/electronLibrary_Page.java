@@ -88,6 +88,27 @@ public class electronLibrary_Page {
     public WebElement fileDocumentModal;
     @FindBy(xpath = "(//button[@mattooltip='Redaktə et' and @mat-icon-button])[1]")
     public WebElement editButton;
+    @FindBy(xpath = "(//button[@mattooltip='Sil' and @mat-icon-button])[1]")
+    public WebElement deleteButton;
     @FindBy(xpath = "//span[normalize-space()='Redaktə et']")
     public WebElement editBtn;
+    @FindBy(xpath = "//input[@autocomplete='username']")
+    public WebElement emailUsername;
+    @FindBy(xpath = "//input[@autocomplete='current-password']")
+    public WebElement emailPassword;
+    @FindBy(xpath = "//button[text()='Sign in']")
+    public WebElement enterEmail;
+    @FindBy(xpath = "(//span[contains(.,'Daxili təlim')])[1]")
+    public WebElement selectsTrainingMaterialEmailNot;
+    @FindBy(xpath = "(//span[contains(.,'Təqvim: AT_TesT')])[1]")
+    public WebElement selectsEventEmailNot;
+    @FindBy(xpath = "(//span[contains(.,'Hesab Təsdiqi')])[1]")
+    public WebElement selectsOTTPNot;
+    @FindBy(xpath = "(//div[contains(.,'Qeydiyyat üçün təsdiq kodunuz aşağıdakıdır:')]/b)[1]")
+    public WebElement OTTPCode;
+    @FindBy(xpath = "//strong[contains(text(),'Təsvir:')]/parent::*")
+    public WebElement headingElement;
+    @FindBy(xpath = "(//span[contains(text(), '.pdf')])[1]")
+    public WebElement trainingMaterialFile;
+
 }

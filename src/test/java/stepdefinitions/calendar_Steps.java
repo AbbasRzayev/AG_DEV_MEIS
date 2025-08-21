@@ -749,6 +749,13 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveByOffset(5, 5).click().build().perform();
+        }else if (selection.contains("İbrahim")) {
+            page.choosePersonInput.sendKeys("İbrahim Rzayev");
+            ReusableMethods.wait(2);
+            page.choosePersonIbrahim.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveByOffset(5, 5).click().build().perform();
         }
     }
 
@@ -834,6 +841,11 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveByOffset(5, 5).click().build().perform();
+        } else if (selection.contains("İbrahim")) {
+            page.chooseCalendarWhoWillSee.click();
+            ReusableMethods.wait(1);
+            page.calendarVisibilityForPerson.click();
+            ReusableMethods.wait(1);
         }
     }
 

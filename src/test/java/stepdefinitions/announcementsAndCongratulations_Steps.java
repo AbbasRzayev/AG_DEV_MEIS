@@ -97,7 +97,7 @@ public class announcementsAndCongratulations_Steps {
 
     @When("user selects save button")
     public void userSelectsSaveButton() {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(4);
         page.saveBtn.click();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         ReusableMethods.wait(15);

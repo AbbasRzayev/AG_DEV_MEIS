@@ -37,6 +37,8 @@ public class calendar_Page {
     public WebElement choosePersonInputSecond;
     @FindBy(xpath = "//div[contains(normalize-space(.), 'Musa Rzayev')]/span[contains(@class, 'emptyBox')]")
     public WebElement choosePersonMusa;
+    @FindBy(xpath = "//div[contains(normalize-space(.), 'İbrahim Rzayev')]/span[contains(@class, 'emptyBox')]")
+    public WebElement choosePersonIbrahim;
     @FindBy(xpath = "//div[@class='mat-mdc-tooltip-trigger manual-option ng-star-inserted' and contains(., 'Musa Rzayev')]")
     public WebElement cancelMusaPerson;
     @FindBy(xpath = "//div[@class='mat-mdc-tooltip-trigger manual-option ng-star-inserted' and contains(., 'İbrahim Rzayev')]")

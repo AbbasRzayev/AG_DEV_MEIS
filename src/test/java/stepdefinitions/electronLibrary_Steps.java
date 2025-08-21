@@ -9,10 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -200,7 +197,7 @@ public class electronLibrary_Steps {
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveByOffset(5, 5).click().build().perform();
-        } else  if (selection.contains("İbrahim")) {
+        } else if (selection.contains("İbrahim")) {
             calendar.choosePersonInputSecond.sendKeys("İbrahim Rzayev");
             calendar.cancelIbrahimPerson.click();
             ReusableMethods.wait(1);
@@ -217,7 +214,7 @@ public class electronLibrary_Steps {
             WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə'])[2]"));
             selectWhoSe.click();
             ReusableMethods.wait(1);
-        }   else if (selection.contains("İbrahim")) {
+        } else if (selection.contains("İbrahim")) {
             page.selectPersomForWhoSees.click();
             ReusableMethods.wait(1);
             WebElement selectWhoSe = getDriver().findElement(By.xpath("(//span[text()='Ünvanlanmış şəxslərə'])[2]"));
@@ -233,8 +230,7 @@ public class electronLibrary_Steps {
             page.addFileBtn.click();
             ReusableMethods.wait(2);
             ReusableMethods.robotClassDosyaYukleme(path);
-        }
-        else if(selection.contains("edit")) {
+        } else if (selection.contains("edit")) {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             page.fileDelete.click();
@@ -515,7 +511,7 @@ public class electronLibrary_Steps {
 
     @Then("an increase is observed in the view count data")
     public void anIncreaseIsObservedInTheViewCountData() {
-        ReusableMethods.flash(page.viewCountsTable,getDriver());
+        ReusableMethods.flash(page.viewCountsTable, getDriver());
         String viewCounterExpectedStr = page.viewCountsTable.getText().trim();
         System.out.println("viewCounterExpectedStr = " + viewCounterExpectedStr);
         int viewCounterExpected = Integer.parseInt(viewCounterExpectedStr);
@@ -534,5 +530,181 @@ public class electronLibrary_Steps {
     public void userSelectsEditButton() {
         page.editBtn.click();
         ReusableMethods.wait(10);
+    }
+
+    @When("selects delete button in the control panel")
+    public void selectsDeleteButtonInTheControlPanel() {
+        page.deleteButton.click();
+        ReusableMethods.wait(1);
+        page.deleteYes.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the deleted training material is not displayed in the control panel")
+    public void theDeletedTrainingMaterialIsNotDisplayedInTheControlPanel() {
+        while (true) {
+            try {
+                if (!page.deleteButton.isDisplayed()) {
+                    break;
+                }
+                page.deleteButton.click();
+                ReusableMethods.wait(1);
+                page.deleteYes.click();
+                ReusableMethods.wait(2);
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
+                break;
+            }
+        }
+        System.out.println("Bütün təlim materialları silindi və test passed oldu ✅");
+    }
+
+    @And("the user {string} enters to the e-mail address")
+    public void theUserEntersToTheEMailAddress(String person) {
+        if (person.contains("İbrahim")) {
+            getDriver().get("https://account.proton.me/mail");
+            ReusableMethods.wait(3);
+            page.emailUsername.sendKeys("ibrahimzamanov88@proton.me");
+            ReusableMethods.wait(1);
+            page.emailPassword.sendKeys("Ibrahimibrahim88!!");
+            ReusableMethods.wait(1);
+            page.enterEmail.click();
+            ReusableMethods.wait(5);
+        }
+    }
+
+    @And("opens notification about {string} in the email")
+    public void opensNotificationAboutInTheEmail(String about) {
+        if (about.contains("Training material")) {
+            ReusableMethods.flash(page.selectsTrainingMaterialEmailNot, getDriver());
+            page.selectsTrainingMaterialEmailNot.click();
+            ReusableMethods.wait(2);
+        }  else if (about.contains("event")) {
+            ReusableMethods.flash(page.selectsEventEmailNot, getDriver());
+            page.selectsEventEmailNot.click();
+            ReusableMethods.wait(2);
+        }
+    }
+
+    @Then("all information about the {string} is displayed in the email notification")
+    public void allInformationAboutTheIsDisplayedInTheEmailNotification(String selection, DataTable dataTable) {
+        if (selection.contains("Training material")) {
+            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            for (Map<String, String> row : data) {
+                String trainingStatus = row.get("Təlim status");
+                String description = row.get("Təsvir");
+                String innerTeachers = row.get("Daxili təlimçilər");
+                String title = row.get("Başlığı");
+                String whoSent = row.get("Tərtib edən");
+                String status = row.get("Status");
+                String whomSent = row.get("Şəxslər");
+
+                ReusableMethods.wait(1);
+                List<WebElement> iframes = getDriver().findElements(By.tagName("iframe"));
+                System.out.println("Iframe sayı: " + iframes.size());
+
+                boolean found = false;
+                for (int i = 0; i < iframes.size(); i++) {
+                    getDriver().switchTo().defaultContent(); // hər dəfə sıfırdan başla
+                    getDriver().switchTo().frame(i);
+
+                    List<WebElement> elements = getDriver().findElements(By.xpath("//strong[contains(text(),'Yeni daxili təlim yaradıldı!')]"));
+                    if (!elements.isEmpty()) {
+                        System.out.println("Tapıldı iframe index: " + i);
+                        found = true;
+
+                        String firstLine = page.headingElement.getText();
+                        String headLine = firstLine.split("\n")[0].trim();
+                        System.out.println("Training Status = " + headLine);
+                        Assert.assertEquals(headLine, trainingStatus);
+                        ReusableMethods.wait(1);
+
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        String desc = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Təsvir:')]"))
+                        );
+                        String descriptionLion = desc.split("\n")[0].trim();
+                        System.out.println("descriptionLion = " + descriptionLion);
+                        Assert.assertEquals(descriptionLion, description);
+
+                        String trainingDate = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Təlimin tarixi:')]"))
+                        );
+                        String trainingDateMail = trainingDate.split("\n")[0].trim();
+                        System.out.println("trainingDateMail = " + trainingDateMail);
+                        LocalDate today = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                        String formattedDate = today.format(formatter);
+                        Assert.assertEquals(formattedDate, trainingDateMail);
+
+                        String trainingTeachers = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Daxili təlimçilər:')]"))
+                        );
+                        String trainingTeachersMail = trainingTeachers.split("\n")[0].trim();
+                        System.out.println("descriptionLion = " + descriptionLion);
+                        Assert.assertEquals(trainingTeachersMail, innerTeachers);
+
+                        String titleText = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Başlığı:')]"))
+                        );
+                        String titleTextMail = titleText.split("\n")[0].trim();
+                        System.out.println("titleTextMail = " + titleTextMail);
+                        Assert.assertEquals(titleTextMail, title);
+
+                        String whoSentText = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Tərtib edən:')]"))
+                        );
+                        String whoSentTextMail = whoSentText.split("\n")[0].trim();
+                        System.out.println("descriptionLion = " + whoSent);
+                        Assert.assertEquals(whoSentTextMail, whoSent);
+
+                        String addDate = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Təlimin yaradılma tarixi:')]"))
+                        );
+                        String actualDate = addDate.split(" ")[0];
+                        LocalDate todayActual = LocalDate.now();
+                        DateTimeFormatter formatterActual = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String expectedDate = todayActual.format(formatterActual);
+                        Assert.assertEquals(expectedDate, actualDate);
+
+                        String statusText = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Status:')]"))
+                        );
+                        String statusTextMail = statusText.split("\n")[0].trim();
+                        System.out.println("statusTextMail = " + statusTextMail);
+                        Assert.assertEquals(statusTextMail, status);
+
+                        String whomSentText = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Şəxslər:')]"))
+                        );
+                        String whomSentTextMail = whomSentText.split("\n")[0].trim();
+                        System.out.println("whomSentTextMail = " + whomSentTextMail);
+                        Assert.assertEquals(whomSentTextMail, whomSent);
+
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("Element heç bir iframe-də tapılmadı!");
+                }
+                getDriver().switchTo().defaultContent();
+            }
+        }
+    }
+
+    @Then("file for {string} is displayed in the email notification")
+    public void fileForIsDisplayedInTheEmailNotification(String selection) {
+        if (selection.contains("Training material")) {
+            Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
+            ReusableMethods.wait(1);
+        }
     }
 }

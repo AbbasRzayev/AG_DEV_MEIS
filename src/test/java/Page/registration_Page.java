@@ -76,10 +76,14 @@ public class registration_Page {
 
     @FindBy(xpath = "//div[@role='checkbox']")
     public WebElement googleChechboxs;
-    @FindBy(xpath = "//div[@act='10']")
+    @FindBy(xpath = "(//button[@data-testid='toolbar:movetotrash'])[1]")
     public WebElement googleDeletebutton;
-    @FindBy(xpath = "//input[@id='code']")
+    @FindBy(xpath = "//input[@formcontrolname='code']")
     public WebElement addCodeInput;
+    @FindBy(xpath = "//span[normalize-space()='Qeydiyyatı tamamla']")
+    public WebElement confirmBtn;
+    @FindBy(xpath = "(//button[@mat-dialog-close])[2]")
+    public WebElement closeTheModal;
 
     @FindBy(xpath = "//button[contains(@type, 'submit')]")
     public WebElement searchButton;

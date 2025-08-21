@@ -1,9 +1,6 @@
 package stepdefinitions;
 
-import Page.changePassword_Page;
-import Page.loginAndLogOut_Page;
-import Page.registration_Page;
-import Page.structureAndDuties_Page;
+import Page.*;
 import com.github.javafaker.Faker;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -35,6 +32,7 @@ public class registration_Steps {
     registration_Page page = new registration_Page();
     loginAndLogOut_Page enter = new loginAndLogOut_Page();
     structureAndDuties_Page search = new structureAndDuties_Page();
+    electronLibrary_Page electronLibraryPage = new electronLibrary_Page();
 
     static public String fakeEmail;
     static public String fakePin;
@@ -62,13 +60,14 @@ public class registration_Steps {
         for (Map<String, String> row : data) {
 //            String fin = row.get("FIN");
 //            String seria = row.get("Sənədin seriya və nömrəsi");
-//            String email = row.get("Elektron poçt");
+            String email = row.get("Elektron poçt");
             String ldap = row.get("LDAP istifadəçi adı");
             page.finRegField.sendKeys(fakePin);
             ReusableMethods.wait(1);
             page.serialNumField.sendKeys(serialNumber);
             ReusableMethods.wait(1);
-            page.emailField.sendKeys(fakeEmail);
+//            page.emailField.sendKeys(fakeEmail);
+            page.emailField.sendKeys(email);
             ReusableMethods.wait(1);
 //            page.ldapField.sendKeys(ldap);
         }
@@ -192,47 +191,43 @@ public class registration_Steps {
             }
         }
 
-//        getDriver().get("https://mail.google.com/");
-        getDriver().get("https://mail.az/");
+        getDriver().get("https://account.proton.me/mail");
+        ReusableMethods.wait(3);
+        electronLibraryPage.emailUsername.sendKeys("abbaszamanov88@proton.me");
         ReusableMethods.wait(1);
-//        page.googleEmail.sendKeys("zamanovabbasqa@gmail.com");
-        System.out.println(getDriver().getCurrentUrl());
-//        page.mailAz.sendKeys("zamanovabbasqa@mail.az");
+        electronLibraryPage.emailPassword.sendKeys("Rabbas8888!!");
+        ReusableMethods.wait(1);
+        electronLibraryPage.enterEmail.click();
+        ReusableMethods.wait(5);
 
-
-        ReusableMethods.wait(3);
-//        page.googleNextButton.click();
-//        ReusableMethods.wait(5);
-//        page.googlepasswordField.sendKeys("abbasabbas88");
-        page.mailAzPasswordField.sendKeys("abbasabbas88");
-        ReusableMethods.wait(3);
-//        page.googleNextButton.click();
-        page.enterToTheMail.click();
+//        ReusableMethods.flash(electronLibraryPage.selectsOTTPNot,getDriver());
+        electronLibraryPage.selectsOTTPNot.click();
         ReusableMethods.wait(2);
+
+        ReusableMethods.pageDown();
+        ReusableMethods.wait(4);
+//        String code = electronLibraryPage.OTTPCode.getText();
+        getDriver().switchTo().frame(0);
 
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//table[@role='grid']")));
-        WebElement emailRowElement = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//tr[@role='row' and contains(., 'Qeydiyyat üçün təsdiq kodunuz aşağıdakıdır:')]")));
+        WebElement codeElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[contains(.,'Qeydiyyat üçün təsdiq kodunuz')]/b")
+        ));
+        String confirmCode = codeElement.getText().trim();
+        System.out.println("Kod: " + confirmCode);
+//        System.out.println("code = " + code);
 
-        // Extract the specific text containing the code
-        String code = emailRowElement.getText();
+//        String[] parts = confirmCode.split(":");
+//        String code1 = parts[1].trim();
 
-//        String text = page.googleofficeMail.getText();
-        String[] parts = code.split(":");
-        String code1 = parts[1].trim();
-
-        System.out.println("code = " + code1);
-        page.googleChechboxs.click();
-        ReusableMethods.flash(page.googleDeletebutton, getDriver());
-        page.googleDeletebutton.click();
+        System.out.println("code = " + confirmCode);
+//        ReusableMethods.flash(page.googleDeletebutton, getDriver());
+//        page.googleDeletebutton.click();
+//        ReusableMethods.wait(1);
         getDriver().switchTo().window(currentWindowHandle);
         ReusableMethods.wait(3);
-        page.addCodeInput.sendKeys(code1);
+        page.addCodeInput.sendKeys(confirmCode);
         ReusableMethods.wait(2);
-        //page.confirmCode.click();
-
-
     }
 
     @When("user selects confirm button")
@@ -243,6 +238,10 @@ public class registration_Steps {
 //        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));WebElement confirmButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Təsdiq et']")));
 //        confirmButton.click();
         //page.confirmCode.click();
+        page.confirmBtn.click();
+        ReusableMethods.wait(2);
+        page.closeTheModal.click();
+        ReusableMethods.wait(1);
     }
 
     @And("admin logs to the system to give the necessary permissions to the use")
@@ -489,6 +488,7 @@ public class registration_Steps {
                 String ip = row.get("IP telefon nömrəsi");
                 String statNum = row.get("Stasinonar nömrə");
                 String mobileNum = row.get("Mobil nömrə");
+                String email = row.get("Elektron poçt");
 
                 ReusableMethods.flash(page.checkPersonalRoom, getDriver());
                 Assert.assertEquals(page.checkPersonalRoom.getText().trim(), room);
@@ -503,7 +503,7 @@ public class registration_Steps {
                 Assert.assertEquals(page.checkPersonalMobileNumber.getText().trim(), mobileNum);
 
                 ReusableMethods.flash(page.checkPersonalEMAIL, getDriver());
-                Assert.assertEquals(page.checkPersonalEMAIL.getText().trim(), fakeEmail);
+                Assert.assertEquals(page.checkPersonalEMAIL.getText().trim(), email);
 
             }
         }
@@ -683,7 +683,7 @@ public class registration_Steps {
         ReusableMethods.wait(1);
         ReusableMethods.pageDown();
         page.saveRights.click();
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(7);
         page.savePermission.click();
         ReusableMethods.wait(2);
     }
