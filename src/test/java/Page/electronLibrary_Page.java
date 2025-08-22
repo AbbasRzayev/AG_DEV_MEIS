@@ -102,6 +102,8 @@ public class electronLibrary_Page {
     public WebElement selectsTrainingMaterialEmailNot;
     @FindBy(xpath = "(//span[contains(.,'Təqvim: AT_TesT')])[1]")
     public WebElement selectsEventEmailNot;
+    @FindBy(xpath = "(//span[contains(.,'Yardım masası')])[1]")
+    public WebElement helpDeskRedirect;
     @FindBy(xpath = "(//span[contains(.,'Hesab Təsdiqi')])[1]")
     public WebElement selectsOTTPNot;
     @FindBy(xpath = "(//div[contains(.,'Qeydiyyat üçün təsdiq kodunuz aşağıdakıdır:')]/b)[1]")
@@ -114,5 +116,7 @@ public class electronLibrary_Page {
     public WebElement secondFileEvent;
     @FindBy(xpath = "//div[@class='h3 mb-1 text-bold']")
     public WebElement notName;
+    @FindBy(xpath = "(//span[contains(.,'Yardım masası ')])[9]")
+    public WebElement helpDeskHeader;
 
 }

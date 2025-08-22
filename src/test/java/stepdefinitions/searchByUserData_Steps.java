@@ -175,7 +175,7 @@ public class searchByUserData_Steps {
     @When("user selects enter in the users tab")
     public void userSelectsEnterInTheUsersTab() {
         getDriver().switchTo().activeElement().sendKeys(Keys.ENTER);
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(5);
     }
 
     @When("user reset the changes")

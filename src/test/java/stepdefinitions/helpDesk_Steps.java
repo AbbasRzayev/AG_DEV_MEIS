@@ -253,7 +253,7 @@ public class helpDesk_Steps {
 
     @When("selects the last appeal from the table")
     public void selectsTheLastAppealFromTheTable() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         ReusableMethods.flash(page.firstAppealFromTable, getDriver());
         page.firstAppealFromTable.click();
         ReusableMethods.wait(1);
@@ -1679,7 +1679,7 @@ public class helpDesk_Steps {
             page.davudExecutorSelect.click();
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(5);
         } else if (selection.contains("Fərid")) {
             page.addExecutorToTheRequest.click();
             ReusableMethods.wait(1);
@@ -1688,7 +1688,7 @@ public class helpDesk_Steps {
             page.faridExecutorSelect.click();
             ReusableMethods.wait(1);
             page.acceptBtn.click();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(3);
         }
     }
 
