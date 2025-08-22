@@ -110,5 +110,9 @@ public class electronLibrary_Page {
     public WebElement headingElement;
     @FindBy(xpath = "(//span[contains(text(), '.pdf')])[1]")
     public WebElement trainingMaterialFile;
+    @FindBy(xpath = "(//span[contains(text(), 'st.png')])[1]")
+    public WebElement secondFileEvent;
+    @FindBy(xpath = "//div[@class='h3 mb-1 text-bold']")
+    public WebElement notName;
 
 }

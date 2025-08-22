@@ -1,5 +1,8 @@
 @all @helpDesk
-Feature: Help Desk
+Feature: Request deadline
+  As a system,
+  I want to automatically mark a request as expired when its execution deadline passes without resolution,
+  So that administrators and executors are notified, and overdue requests can be tracked and escalated.
 
   @executionDeadlineOfTheRequestExpired @new
   Scenario: Check if the executor can declines the execution of the request

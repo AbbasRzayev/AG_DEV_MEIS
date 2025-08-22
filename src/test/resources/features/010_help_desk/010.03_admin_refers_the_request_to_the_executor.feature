@@ -1,5 +1,8 @@
 @all @helpDesk
-Feature: Help Desk
+Feature: Request refers to the executor
+  As a Help Desk administrator,
+  I want to be able to refer a request to a specific executor or responsible person,
+  So that the request is assigned correctly, tracked efficiently, and resolved by the right executor within the system.
 
   @referRequestToTheExecutor @new
   Scenario: Check if admin can refer the request to the executor

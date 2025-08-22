@@ -1,5 +1,8 @@
 @all @helpDesk
-Feature: Help Desk
+Feature: Executor accepts request
+  As an executor,
+  I want to be able to accept a request that has been referred to me,
+  So that I can confirm responsibility and start working on resolving the request.
 
   @executorAcceptsTheRequest @new
   Scenario: Check if the executor accepts the request for execution

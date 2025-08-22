@@ -1,5 +1,8 @@
 @all @helpDesk @new
 Feature: Search filters in the sent requests section
+  As a user of the Help Desk system,
+  I want to use search filters in the Sent Requests section (such as direction, program, priority, notification type, status, and date),
+  So that I can quickly find and review specific requests I have submitted without scrolling through the entire list.
 
   Background:
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system

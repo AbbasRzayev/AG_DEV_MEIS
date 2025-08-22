@@ -27,9 +27,25 @@ Feature: Even email notification
     And selects submit button for the new event
     #Ünvanlanmış şəxs elektron poçt ünvanına daxil olur
     And the user "İbrahim" enters to the e-mail address
-    When opens notification about "Training material" in the email
-
+    When opens notification about "event" in the email
+    Then all information about the "event" is displayed in the email notification
+      | Bildiriş Adı   | Tədbir status     | Kateqoriya | Başlığı | Tərtib edən  | Təsvir                                    | Tədbirin keçiriləcəyi yer | Status                    | Şəxslər             | Başlama Saatı | Bitmə Saatı | Url                 |
+      | AT_TesT (Elan) | Təqvim yaradıldı! | Elan       | AT_TesT | Abbas Rzayev | Tədbir AT elanı məqsədi ilə əlavə edildi! | 671 nömrəli otaq          | Ünvanlanmış şəxslərə görə | İbrahim Rzayev Fuad | 00:30         | 17:00       | https://aist.group/ |
+    Then file for "event" is displayed in the email notification
     #Test ssenarilər:
-    #46.
-    #47.
-    #48.
+    #46.Tədbir(təqvim) bildirişinin istifadəçinin elektron poçtuna yönləndirilməsi
+    #47.E-poçt bildirişində tədbirin bildiriş adı məlumatının yoxlanılması
+    #48.E-poçt bildirişində tədbir status məlumatının yoxlanılması
+    #49.E-poçt bildirişində tədbirin kateqoriya məlumatının yoxlanılması
+    #50.E-poçt bildirişində tədbirin başlığı məlumatının yoxlanılması
+    #51.E-poçt bildirişində tədbiri tərtib edən məlumatının yoxlanılması
+    #52.E-poçt bildirişində tədbirin başlama tarix məlumatının yoxlanılması
+    #53.E-poçt bildirişində tədbirin bitmə tarix məlumatının yoxlanılması
+    #54.E-poçt bildirişində tədbirin təsvir məlumatının yoxlanılması
+    #55.E-poçt bildirişində tədbirin keçirələcəyi yer məlumatının yoxlanılması
+    #56.E-poçt bildirişində status məlumatının yoxlanılması
+    #57.E-poçt bildirişində ünvanlanmış şəxs məlumatının yoxlanılması
+    #58.E-poçt bildirişində tədbirin başlama saatı məlumatının yoxlanılması
+    #59.E-poçt bildirişində tədbirin bitmə saatı məlumatının yoxlanılması
+    #60.E-poçt bildirişində tədbirin url məlumatının yoxlanılması
+    #61.E-poçt bildirişində əlavə edilmiş faylların mövcudluğunun yoxlanılması

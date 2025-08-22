@@ -1,5 +1,8 @@
 @all @helpDesk
-Feature: Help Desk
+Feature: Executor decline the execution
+  As an executor,
+  I want to decline the execution of a request with a reason,
+  So that the Help Desk administrator can reassign or take necessary action to ensure the request is handled properly.
 
   @executorDeclinesTheExecutionOfTheRequest @new
   Scenario: Check if the executor can declines the execution of the request

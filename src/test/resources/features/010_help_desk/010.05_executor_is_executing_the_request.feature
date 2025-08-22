@@ -1,5 +1,8 @@
 @all @helpDesk
-Feature: Help Desk
+Feature: Executor executed the request
+  As an executor,
+  I want to mark a request as executed after completing the necessary work,
+  So that the Help Desk system reflects the request as resolved and the requester is informed.
 
   @executorExecuteTheRequest @new
   Scenario: Check if the executor can execute the request
