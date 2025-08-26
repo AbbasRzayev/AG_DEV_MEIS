@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Request refers to the executor
   As a Help Desk administrator,
   I want to be able to refer a request to a specific executor or responsible person,

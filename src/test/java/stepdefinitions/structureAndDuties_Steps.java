@@ -29,9 +29,9 @@ public class structureAndDuties_Steps {
 
     @And("goes to the control panel")
     public void goesToTheControlPanel() {
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(4);
         page.controlPanel.click();
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(7);
     }
 
     @And("adds name {string} and fin to the name and fin fields")

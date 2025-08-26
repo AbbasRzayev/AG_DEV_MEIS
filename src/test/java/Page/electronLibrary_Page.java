@@ -33,8 +33,10 @@ public class electronLibrary_Page {
     public WebElement acceptBtn;
     @FindBy(xpath = "//span[normalize-space()='Bəli']")
     public WebElement deleteYes;
-    @FindBy(xpath = "//span[text()='Elektron kitabxana']")
+    @FindBy(xpath = "//span[normalize-space()='Elektron kitabxana']")
     public WebElement electronicLibraryTabAdmin;
+    @FindBy(xpath = "//span[normalize-space()='Elanlar']")
+    public WebElement electronicLibraryTabAdminSecond;
 
     @FindBy(xpath = "//input[@id='mat-radio-2-input']")
     public WebElement inner;
@@ -102,7 +104,7 @@ public class electronLibrary_Page {
     public WebElement selectsTrainingMaterialEmailNot;
     @FindBy(xpath = "(//span[contains(.,'Təqvim: AT_TesT')])[1]")
     public WebElement selectsEventEmailNot;
-    @FindBy(xpath = "(//span[contains(.,'Yardım masası')])[1]")
+    @FindBy(xpath = "(//span[contains(.,'Yardım')])[1]")
     public WebElement helpDeskRedirect;
     @FindBy(xpath = "(//span[contains(.,'Hesab Təsdiqi')])[1]")
     public WebElement selectsOTTPNot;

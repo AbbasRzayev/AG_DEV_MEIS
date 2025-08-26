@@ -120,6 +120,7 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("FaridPassword"));
             page.enterToTheSystem.click();
+            ReusableMethods.wait(2);
         }
         else if(environment.contains("AG-MEIS") && user.equals("abbas.rzayev@aist.group")){
             getDriver().get(ConfigReader.getProperty("AG-MEIS"));
@@ -129,6 +130,7 @@ public class changePassword_Steps {
             ReusableMethods.wait(2);
             page.passwordField.sendKeys(ConfigReader.getProperty("AbbasPassword"));
             page.enterToTheSystem.click();
+            ReusableMethods.wait(2);
         }else if(environment.contains("AG-MEIS") && user.equals("ibrahimzamanov88@proton.me")){
             getDriver().get(ConfigReader.getProperty("AG-MEIS"));
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -137,6 +139,7 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("IbrahimPassword"));
             page.enterToTheSystem.click();
+            ReusableMethods.wait(2);
         }else if(environment.contains("AG-MEIS") && user.equals("davudzamanov88@proton.me")){
             getDriver().get(ConfigReader.getProperty("AG-MEIS"));
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -145,6 +148,7 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("DavudPassword"));
             page.enterToTheSystem.click();
+            ReusableMethods.wait(2);
         }else if(environment.contains("AG-MEIS") && user.equals("rzayevmusa1234@gmail.com")){
             getDriver().get(ConfigReader.getProperty("AG-MEIS"));
             getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -153,6 +157,7 @@ public class changePassword_Steps {
             ReusableMethods.wait(1);
             page.passwordField.sendKeys(ConfigReader.getProperty("MusaPassword"));
             page.enterToTheSystem.click();
+            ReusableMethods.wait(2);
         }
     }
 

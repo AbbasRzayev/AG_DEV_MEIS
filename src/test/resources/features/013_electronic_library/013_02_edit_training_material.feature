@@ -1,4 +1,4 @@
-@electronicLibrary
+@electronicLibrary @test
 Feature:Edit training material
   As a registered user with the necessary permissions,
   I want to edit an existing training material by updating its title, content, attachments, and relevant metadata,
@@ -9,7 +9,8 @@ Feature:Edit training material
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Təlim materialın əlavə edilməsi
     And goes to the control panel
-    And goes to the electronic library tab in the control panel
+#    And goes to the electronic library tab in the control panel
+    And goes to the electronic library in the control panel
     And selects new training button in the training materials tab
     And adds "Daxili təlim AT" to training name input
     And adds training date

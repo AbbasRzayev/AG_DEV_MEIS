@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Executor decline the execution
   As an executor,
   I want to decline the execution of a request with a reason,

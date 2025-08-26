@@ -22,7 +22,40 @@ public class Hooks {
 ////                       ekran goruntusu    file tipi                  ekran goruntusunun adi
 //            scenario.attach(failedScreenshot, "image/png", "failed_scenario_" + scenario.getName());
 
- Driver.closeDriver(); // Burasi tarayici kapatir
+ Driver.quitDriver(); // Burasi tarayici kapatir
         }
     }
+//}
+
+//package hooks;
+//
+//import io.cucumber.java.After;
+//import io.cucumber.java.Before;
+//import io.cucumber.java.Scenario;
+//import org.openqa.selenium.OutputType;
+//import org.openqa.selenium.TakesScreenshot;
+//import utilities.Driver;
+//
+//public class Hooks {
+//
+//    @Before
+//    public void setUpScenarios() {
+//        System.out.println("🔹 Before: Yeni driver açılır");
+//        Driver.getDriver(); // Hər scenario öncəsi driver initialize edilir
+//    }
+//
+//    @After
+//    public void tearDownScenarios(Scenario scenario) {
+//        System.out.println("🔹 After: Scenario bitdi");
+//
+//        // Fail olduqda screenshot əlavə et
+//        if (scenario.isFailed() && Driver.getDriver() != null) {
+//            final byte[] failedScreenshot = ((TakesScreenshot) Driver.getDriver())
+//                    .getScreenshotAs(OutputType.BYTES);
+//            scenario.attach(failedScreenshot, "image/png", "failed_scenario_" + scenario.getName());
+//        }
+//
+//        // Hər scenariodan sonra driver tam bağlanır
+//        Driver.quitDriver();
+//    }
 //}

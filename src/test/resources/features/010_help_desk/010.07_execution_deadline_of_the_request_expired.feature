@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Request deadline
   As a system,
   I want to automatically mark a request as expired when its execution deadline passes without resolution,

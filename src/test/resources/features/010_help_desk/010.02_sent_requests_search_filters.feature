@@ -1,4 +1,4 @@
-@all @helpDesk @new
+@all @helpDesk @new @test
 Feature: Search filters in the sent requests section
   As a user of the Help Desk system,
   I want to use search filters in the Sent Requests section (such as direction, program, priority, notification type, status, and date),

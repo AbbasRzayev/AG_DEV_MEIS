@@ -1,5 +1,5 @@
-@all @calendar
-Feature: Even email notification
+@all @calendar @test
+Feature: Event email notification
   As a user,
   I want the scheduled event details to be automatically sent via email to the assigned participants,
   So that they are informed in a timely manner and can effectively follow the planned event.

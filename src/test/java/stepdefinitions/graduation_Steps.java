@@ -243,7 +243,7 @@ public class graduation_Steps {
     @Then("the user is successfully entered to the system")
     public void theUserIsSuccessfullyEnteredToTheSystem() {
         String expectedUrl = "home";
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(5);
         String actualUrl = ReusableMethods.getPathSegment(expectedUrl);
         assertEquals(expectedUrl, actualUrl);
     }

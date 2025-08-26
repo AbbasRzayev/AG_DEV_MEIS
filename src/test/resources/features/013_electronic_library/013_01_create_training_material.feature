@@ -1,4 +1,4 @@
-@electronicLibrary
+@electronicLibrary @test
 Feature:Create training material
   As a registered user with the necessary permissions,
   I want to create a new training material by adding its title, content, attachments, and relevant metadata,
@@ -44,6 +44,10 @@ Feature:Create training material
     And uploads a video from the document view modal window
     When user closes the document view modal window
     Then an increase is observed in the view count data
+    And goes to the control panel
+    When goes to the electronic library tab in the control panel
+    And selects delete button in the control panel
+    Then the deleted training material is not displayed in the control panel
   #Test ssenarilər:
   #1.Yeni təlim materialın əlavə edilməsi
   #2.İdarəetmə panelində əlavə edilən təlimin mövcud olmasının yoxlanılması

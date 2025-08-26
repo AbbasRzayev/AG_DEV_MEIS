@@ -1,11 +1,11 @@
-@electronicLibrary
+@electronicLibrary @test
 Feature:Delete training material
   As a registered user with the necessary permissions,
   I want to delete an existing training material from the system,
   So that outdated, irrelevant, or incorrect content is removed and employees or participants only access valid and useful training resources.
 
   @deleteTrainingMaterial @new
-  Scenario: Check if user can edit new training materials
+  Scenario: Check if user can delete new training materials
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Təlim materialın əlavə edilməsi
     And goes to the control panel

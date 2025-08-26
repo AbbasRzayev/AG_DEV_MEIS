@@ -14,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
+import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static stepdefinitions.calendar_Steps.isElementVisible;
@@ -28,13 +30,18 @@ import static utilities.Driver.getDriver;
 
 public class electronLibrary_Steps {
 
-    static electronLibrary_Page page = new electronLibrary_Page();
+//    static electronLibrary_Page page = new electronLibrary_Page();
+    electronLibrary_Page page;
+    public electronLibrary_Steps() {
+        this.page = new electronLibrary_Page();
+    }
     loginAndLogOut_Page pageSecond = new loginAndLogOut_Page();
     calendar_Page calendar = new calendar_Page();
     String viewCounter;
 
     @And("selects new training button in the training materials tab")
     public void selectsNewTrainingButtonInTheTrainingMaterialsTab() {
+        ReusableMethods.wait(1);
         page.newTrainingBtn.click();
         ReusableMethods.wait(1);
     }
@@ -86,7 +93,7 @@ public class electronLibrary_Steps {
     public void addsNoteToTheNoteInput(String selection) {
         if (selection.contains("Automaiton kurslar barədə")) {
             page.noteInput.sendKeys("Automaiton kurslar barədə");
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
         }
 
     }
@@ -228,7 +235,7 @@ public class electronLibrary_Steps {
         if (selection.contains("new")) {
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
             page.addFileBtn.click();
-            ReusableMethods.wait(2);
+            ReusableMethods.wait(3);
             ReusableMethods.robotClassDosyaYukleme(path);
         } else if (selection.contains("edit")) {
             ReusableMethods.pageDown();
@@ -237,7 +244,7 @@ public class electronLibrary_Steps {
             ReusableMethods.wait(1);
             page.deleteYes.click();
             ReusableMethods.pageDown();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(3);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
             page.addFileBtn.click();
             ReusableMethods.wait(2);
@@ -391,7 +398,10 @@ public class electronLibrary_Steps {
 
     @And("goes to the electronic library tab in the control panel")
     public void goesToTheElectronicLibraryTabInTheControlPanel() {
-        page.electronicLibraryTabAdmin.click();
+        ReusableMethods.wait(2);
+        System.out.println("im here and url:" + getDriver().getCurrentUrl());
+//        page.electronicLibraryTabAdmin.click();
+        ReusableMethods.clickByJavaScript(page.electronicLibraryTabAdmin);
         ReusableMethods.wait(1);
     }
 
@@ -500,13 +510,13 @@ public class electronLibrary_Steps {
     @And("uploads a video from the document view modal window")
     public void uploadsAVideoFromTheDocumentViewModalWindow() {
         page.fileDocumentModal.click();
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(7);
     }
 
     @When("user closes the document view modal window")
     public void userClosesTheDocumentViewModalWindow() {
         new Actions(getDriver()).sendKeys(Keys.ESCAPE).perform();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
     @Then("an increase is observed in the view count data")
@@ -584,20 +594,22 @@ public class electronLibrary_Steps {
     @And("opens notification about {string} in the email")
     public void opensNotificationAboutInTheEmail(String about) {
         if (about.contains("Training material")) {
-            ReusableMethods.wait(4);
+            ReusableMethods.wait(7);
             ReusableMethods.flash(page.selectsTrainingMaterialEmailNot, getDriver());
             page.selectsTrainingMaterialEmailNot.click();
-            ReusableMethods.wait(4);
+            ReusableMethods.wait(7);
         } else if (about.contains("event")) {
-            ReusableMethods.wait(4);
+            ReusableMethods.wait(7);
             ReusableMethods.flash(page.selectsEventEmailNot, getDriver());
             page.selectsEventEmailNot.click();
-            ReusableMethods.wait(4);
+            ReusableMethods.wait(7);
         }else if (about.contains("help-desk-redirect")) {
-            ReusableMethods.wait(4);
-            ReusableMethods.flash(page.helpDeskRedirect, getDriver());
-            page.helpDeskRedirect.click();
-            ReusableMethods.wait(4);
+            ReusableMethods.wait(7);
+//            ReusableMethods.flash(page.helpDeskRedirect, getDriver());
+//            page.helpDeskRedirect.click();
+            System.out.println("im here");
+            ReusableMethods.clickByJavaScript(page.helpDeskRedirect);
+            ReusableMethods.wait(7);
         }
     }
 
@@ -703,6 +715,8 @@ public class electronLibrary_Steps {
                         String whomSentTextMail = whomSentText.split("\n")[0].trim();
                         System.out.println("whomSentTextMail = " + whomSentTextMail);
                         Assert.assertEquals(whomSentTextMail, whomSent);
+
+
 
                         break;
                     }
@@ -878,6 +892,7 @@ public class electronLibrary_Steps {
                 String executor = row.get("İcraçı");
                 String pc = row.get("İstifadəçi kompüterinin adı");
                 String requestStatus = row.get("Cari nəticə");
+                String note = row.get("Qeyd");
 
 //                Assert.assertTrue(page.helpDeskHeader.isDisplayed());
 //                ReusableMethods.wait(1);
@@ -972,6 +987,14 @@ public class electronLibrary_Steps {
                         System.out.println("requestStatusMail = " + requestStatusMail);
                         Assert.assertEquals(requestStatusMail, requestStatus);
 
+                        String noteType = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Qeyd:')]"))
+                        );
+                        String noteTypeMail = noteType.split("\n")[0].trim();
+                        System.out.println("noteTypeMail = " + noteTypeMail);
+                        Assert.assertEquals(noteTypeMail, note);
+
                         break;
                     }
                 }
@@ -998,5 +1021,17 @@ public class electronLibrary_Steps {
             Assert.assertTrue(page.secondFileEvent.isDisplayed());
             ReusableMethods.wait(1);
         }
+    }
+
+    @And("goes to the electronic library in the control panel")
+    public void goesToTheElectronicLibraryInTheControlPanel() {
+        System.out.println(" Im here " + getDriver().getCurrentUrl());
+        Set<String> windowHandles = getDriver().getWindowHandles();
+        for (String handle : windowHandles) {
+            getDriver().switchTo().window(handle);
+        }
+        ReusableMethods.wait(1);
+        getDriver().findElement(By.xpath("//span[normalize-space()='Elektron kitabxana']")).click();
+        ReusableMethods.wait(1);
     }
 }

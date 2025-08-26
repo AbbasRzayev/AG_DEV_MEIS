@@ -38,9 +38,9 @@ public class helpDesk_Steps {
 
     @And("goes to the help desk tab from main page")
     public void goesToTheHelpDeskTabFromMainPage() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.helpDeskBtnFromMainPage.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
     @And("selects software {string} selection from the direction dropdown list")
@@ -1106,7 +1106,7 @@ public class helpDesk_Steps {
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(4);
             page.primaryRequest.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
@@ -1966,9 +1966,9 @@ public class helpDesk_Steps {
 
     @And("the executor navigates to the request review section using the detailed button")
     public void theExecutorNavigatesToTheRequestReviewSectionUsingTheDetailedButton() {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(3);
         page.detailedBtn.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @And("selects notification in the header section")

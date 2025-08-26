@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Create new request
   As a registered user,
   I want to create, edit, and manage requests in the Help Desk section by providing details such as direction, program, priority, notification type, description, and attachments,

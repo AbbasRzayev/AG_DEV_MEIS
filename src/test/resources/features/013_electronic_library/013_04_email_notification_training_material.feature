@@ -1,4 +1,4 @@
-@electronicLibrary
+@electronicLibrary @test
 Feature:Training material email notification
   As a registered user with the necessary permissions,
   I want to send the created training material to the assigned person’s email address,

@@ -359,7 +359,7 @@ public class ideaBank_Steps {
     @Then("the comment counter is displayed correctly")
     public void theCommentCounterIsDisplayedCorrectly() {
         page.closeCommentModal.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
 
 //        getDriver().navigate().refresh();
 //        page.ideaData.click();

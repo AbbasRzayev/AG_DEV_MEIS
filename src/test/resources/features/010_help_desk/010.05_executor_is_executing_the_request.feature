@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Executor executed the request
   As an executor,
   I want to mark a request as executed after completing the necessary work,

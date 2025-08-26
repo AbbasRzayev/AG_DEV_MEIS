@@ -1,4 +1,4 @@
-@all @helpDesk
+@all @helpDesk @test
 Feature: Executor accepts request
   As an executor,
   I want to be able to accept a request that has been referred to me,
