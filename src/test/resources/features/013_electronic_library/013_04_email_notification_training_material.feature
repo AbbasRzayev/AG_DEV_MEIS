@@ -10,7 +10,7 @@ Feature:Training material email notification
   #Təlim materialın əlavə edilməsi
     And goes to the control panel
     And goes to the electronic library tab in the control panel
-    And selects new training button in the training materials tab
+    And selects new "training" button in the training materials tab
     And adds "Daxili təlim AT" to training name input
     And adds training date
     And adds instructor "Davud" from search list

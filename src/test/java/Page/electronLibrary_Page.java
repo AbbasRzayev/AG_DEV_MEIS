@@ -13,6 +13,10 @@ public class electronLibrary_Page {
 
     @FindBy(xpath = "//span[text()=' Yeni təlim ']")
     public WebElement newTrainingBtn;
+    @FindBy(xpath = "//span[text()=' Yeni məlumat ']")
+    public WebElement newInformationBtn;
+    @FindBy(xpath = "//span[text()=' Yeni jurnal ']")
+    public WebElement newJournalBtn;
     @FindBy(id = "mat-input-2")
     public WebElement traningName;
     @FindBy(xpath = "//input[@formcontrolname='trainingDate']")
@@ -76,6 +80,10 @@ public class electronLibrary_Page {
     public WebElement trainingTeachersNameTable;
     @FindBy(xpath = "(//td[contains(@class,'mat-column-trainingDate')])[1]")
     public WebElement trainingTimeTable;
+    @FindBy(xpath = "(//td[contains(@class,'cdk-column-regDate')])[1]")
+    public WebElement usefulDateTable;
+    @FindBy(xpath = "(//td[contains(@class,'cdk-column-fileUrl')])[1]")
+    public WebElement filePathMaterialTable;
     @FindBy(xpath = "(//td[contains(@class,'mat-column-pdfUrl')])[1]")
     public WebElement trainingMaterialsTable;
     @FindBy(xpath = "(//td[contains(@class,'mat-column-viewCount')])[1]")
@@ -106,6 +114,8 @@ public class electronLibrary_Page {
     public WebElement selectsEventEmailNot;
     @FindBy(xpath = "(//span[contains(.,'Yardım')])[1]")
     public WebElement helpDeskRedirect;
+    @FindBy(xpath = "(//span[contains(.,'Useful Manual')])[1]")
+    public WebElement usefulInformationTitleMail;
     @FindBy(xpath = "(//span[contains(.,'Hesab Təsdiqi')])[1]")
     public WebElement selectsOTTPNot;
     @FindBy(xpath = "(//div[contains(.,'Qeydiyyat üçün təsdiq kodunuz aşağıdakıdır:')]/b)[1]")
@@ -118,7 +128,13 @@ public class electronLibrary_Page {
     public WebElement secondFileEvent;
     @FindBy(xpath = "//div[@class='h3 mb-1 text-bold']")
     public WebElement notName;
-    @FindBy(xpath = "(//span[contains(.,'Yardım masası ')])[9]")
-    public WebElement helpDeskHeader;
+    @FindBy(xpath = "//span[text()='Təlim materialları']")
+    public WebElement trainingMaterialTab;
+    @FindBy(xpath = "//span[text()='Faydalı məlumatlar']")
+    public WebElement usefulInformationTab;
+    @FindBy(xpath = "//span[text()='Elektron jurnal']")
+    public WebElement electronicJournalTab;
+    @FindBy(xpath = "//input[@formcontrolname='title']")
+    public WebElement usefulNameInput;
 
 }

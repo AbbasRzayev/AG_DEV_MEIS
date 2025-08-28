@@ -106,6 +106,6 @@ public class programs_Page {
     public WebElement programsControlPanel;
     @FindBy(xpath = "//span[contains(., 'Proqramı sil')]")
     public WebElement progDelete;
-    @FindBy(xpath = "//span[contains(., 'Bəli')]")
+    @FindBy(xpath = "//span[contains(., ' Bəli ')]")
     public WebElement progDeleteAccept;
 }

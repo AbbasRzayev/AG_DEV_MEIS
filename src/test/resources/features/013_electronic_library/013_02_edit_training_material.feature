@@ -11,7 +11,7 @@ Feature:Edit training material
     And goes to the control panel
 #    And goes to the electronic library tab in the control panel
     And goes to the electronic library in the control panel
-    And selects new training button in the training materials tab
+    And selects new "training" button in the training materials tab
     And adds "Daxili təlim AT" to training name input
     And adds training date
     And adds instructor "Davud" from search list
@@ -35,6 +35,8 @@ Feature:Edit training material
     Then all information about the training material is displayed in the table in the admin panel
       | Təlimin adı    | Təlimçi      | Təlim materialları | Baxış sayı |
       | Kənardan təlim | Abbas Rzayev | EndToEnd.pdf       | 0          |
+    And selects delete button in the control panel
+    Then the deleted training material is not displayed in the control panel
     #Test ssenarilər:
     #12.Yeni təlim materialın redakə edilməsi
     #13.Redaktə edildikdən sonra məlumatların yoxlanılması

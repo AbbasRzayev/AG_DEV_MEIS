@@ -30,20 +30,32 @@ import static utilities.Driver.getDriver;
 
 public class electronLibrary_Steps {
 
-//    static electronLibrary_Page page = new electronLibrary_Page();
+    //    static electronLibrary_Page page = new electronLibrary_Page();
     electronLibrary_Page page;
+
     public electronLibrary_Steps() {
         this.page = new electronLibrary_Page();
     }
+
     loginAndLogOut_Page pageSecond = new loginAndLogOut_Page();
     calendar_Page calendar = new calendar_Page();
     String viewCounter;
 
-    @And("selects new training button in the training materials tab")
-    public void selectsNewTrainingButtonInTheTrainingMaterialsTab() {
-        ReusableMethods.wait(1);
-        page.newTrainingBtn.click();
-        ReusableMethods.wait(1);
+    @And("selects new {string} button in the training materials tab")
+    public void selectsNewButtonInTheTrainingMaterialsTab(String selection) {
+        if (selection.contains("training")) {
+            ReusableMethods.wait(1);
+            page.newTrainingBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("information")) {
+            ReusableMethods.wait(1);
+            page.newInformationBtn.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("journal")) {
+            ReusableMethods.wait(1);
+            page.newJournalBtn.click();
+            ReusableMethods.wait(1);
+        }
     }
 
     @And("adds {string} to training name input")
@@ -51,6 +63,7 @@ public class electronLibrary_Steps {
         if (arg0.contains("Daxili təlim AT")) {
             page.traningName.sendKeys("Daxili təlim");
             ReusableMethods.wait(1);
+
         } else if (arg0.contains("Kənardan təlim")) {
             page.traningName.clear();
             ReusableMethods.wait(1);
@@ -579,7 +592,7 @@ public class electronLibrary_Steps {
             ReusableMethods.wait(1);
             page.enterEmail.click();
             ReusableMethods.wait(5);
-        }    else if (person.contains("Davud")) {
+        } else if (person.contains("Davud")) {
             getDriver().get("https://account.proton.me/mail");
             ReusableMethods.wait(3);
             page.emailUsername.sendKeys("davudzamanov88@proton.me");
@@ -603,12 +616,19 @@ public class electronLibrary_Steps {
             ReusableMethods.flash(page.selectsEventEmailNot, getDriver());
             page.selectsEventEmailNot.click();
             ReusableMethods.wait(7);
-        }else if (about.contains("help-desk-redirect")) {
+        } else if (about.contains("help-desk-redirect")) {
             ReusableMethods.wait(7);
 //            ReusableMethods.flash(page.helpDeskRedirect, getDriver());
 //            page.helpDeskRedirect.click();
             System.out.println("im here");
             ReusableMethods.clickByJavaScript(page.helpDeskRedirect);
+            ReusableMethods.wait(7);
+        } else if (about.contains("useful information")) {
+            ReusableMethods.wait(7);
+//            ReusableMethods.flash(page.helpDeskRedirect, getDriver());
+//            page.helpDeskRedirect.click();
+            System.out.println("im here");
+            ReusableMethods.clickByJavaScript(page.usefulInformationTitleMail);
             ReusableMethods.wait(7);
         }
     }
@@ -715,7 +735,6 @@ public class electronLibrary_Steps {
                         String whomSentTextMail = whomSentText.split("\n")[0].trim();
                         System.out.println("whomSentTextMail = " + whomSentTextMail);
                         Assert.assertEquals(whomSentTextMail, whomSent);
-
 
 
                         break;
@@ -880,7 +899,7 @@ public class electronLibrary_Steps {
                 }
                 getDriver().switchTo().defaultContent();
             }
-        }else if (selection.contains("help-desk-redirect")) {
+        } else if (selection.contains("help-desk-redirect")) {
             List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
             for (Map<String, String> row : data) {
 
@@ -1004,34 +1023,243 @@ public class electronLibrary_Steps {
                 }
                 getDriver().switchTo().defaultContent();
             }
+        } else if (selection.contains("useful information")) {
+            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            for (Map<String, String> row : data) {
+
+                String usefulName = row.get("Başlığı");
+                String usefulCreated = row.get("Tərtib edən");
+                String usefulStatus = row.get("Status");
+                String usefulWhomSent = row.get("Şəxslər");
+
+                ReusableMethods.wait(1);
+                List<WebElement> iframes = getDriver().findElements(By.tagName("iframe"));
+                System.out.println("Iframe sayı: " + iframes.size());
+
+                boolean found = false;
+                for (int i = 0; i < iframes.size(); i++) {
+                    getDriver().switchTo().defaultContent(); // hər dəfə sıfırdan başla
+                    getDriver().switchTo().frame(i);
+
+                    List<WebElement> elements = getDriver().findElements(By.xpath("//strong[contains(text(),'Yeni useful manual qa yaradıldı!')]"));
+                    if (!elements.isEmpty()) {
+                        System.out.println("Tapıldı iframe index: " + i);
+                        found = true;
+
+
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        String usefulNameNot = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Başlığı:')]"))
+                        );
+                        String usefulNameNotMail = usefulNameNot.split("\n")[0].trim();
+                        System.out.println("usefulNameNotMail = " + usefulNameNotMail);
+                        Assert.assertEquals(usefulNameNotMail, usefulName);
+
+                        String usefulCreat = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Tərtib edən:')]"))
+                        );
+                        String usefulCreatMail = usefulCreat.split("\n")[0].trim();
+                        System.out.println("usefulCreatMail = " + usefulCreatMail);
+                        Assert.assertEquals(usefulCreatMail, usefulCreated);
+
+
+                        String noteDate = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Yaradılma tarixi:')]"))
+                        );
+                        String noteDateMail = noteDate.split(" ")[0].trim();
+                        System.out.println("noteDateMail = " + noteDateMail);
+                        LocalDate today = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String formattedDate = today.format(formatter);
+                        Assert.assertEquals(formattedDate, noteDateMail);
+
+                        String usefulPerson = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Şəxslər:')]"))
+                        );
+                        String usefulPersonMail = usefulPerson.split("\n")[0].trim();
+                        System.out.println("usefulPersonMail = " + usefulPersonMail);
+                        Assert.assertEquals(usefulPersonMail, usefulWhomSent);
+
+                        String statusNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Status:')]"))
+                        );
+                        String statusNoteMail = statusNote.split("\n")[0].trim();
+                        System.out.println("statusNoteMail = " + statusNoteMail);
+                        Assert.assertEquals(statusNoteMail, usefulStatus);
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("Element heç bir iframe-də tapılmadı!");
+                }
+                getDriver().switchTo().defaultContent();
+            }
         }
     }
 
-    @Then("file for {string} is displayed in the email notification")
-    public void fileForIsDisplayedInTheEmailNotification(String selection) {
-        if (selection.contains("Training material")) {
-            Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
-            ReusableMethods.wait(1);
-        } else if (selection.contains("event")) {
-            Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
-            ReusableMethods.wait(1);
-            Assert.assertTrue(page.secondFileEvent.isDisplayed());
-            ReusableMethods.wait(1);
-        } else if (selection.contains("help-desk")) {
-            Assert.assertTrue(page.secondFileEvent.isDisplayed());
-            ReusableMethods.wait(1);
-        }
-    }
+            @Then("file for {string} is displayed in the email notification")
+            public void fileForIsDisplayedInTheEmailNotification (String selection){
+                if (selection.contains("Training material")) {
+                    Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("event")) {
+                    Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
+                    ReusableMethods.wait(1);
+                    Assert.assertTrue(page.secondFileEvent.isDisplayed());
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("help-desk")) {
+                    Assert.assertTrue(page.secondFileEvent.isDisplayed());
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("useful information")) {
+                    Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
+                    ReusableMethods.wait(1);
+                }
+            }
 
-    @And("goes to the electronic library in the control panel")
-    public void goesToTheElectronicLibraryInTheControlPanel() {
-        System.out.println(" Im here " + getDriver().getCurrentUrl());
-        Set<String> windowHandles = getDriver().getWindowHandles();
-        for (String handle : windowHandles) {
-            getDriver().switchTo().window(handle);
+            @And("goes to the electronic library in the control panel")
+            public void goesToTheElectronicLibraryInTheControlPanel () {
+                System.out.println(" Im here " + getDriver().getCurrentUrl());
+                Set<String> windowHandles = getDriver().getWindowHandles();
+                for (String handle : windowHandles) {
+                    getDriver().switchTo().window(handle);
+                }
+                ReusableMethods.wait(1);
+                getDriver().findElement(By.xpath("//span[normalize-space()='Elektron kitabxana']")).click();
+                ReusableMethods.wait(1);
+            }
+
+            @And("switches to the {string} tab in electronic library")
+            public void switchesToTheTabInElectronicLibrary (String selection){
+                if (selection.contains("Training material")) {
+                    page.trainingMaterialTab.click();
+                    ReusableMethods.wait(1);
+
+                } else if (selection.contains("Useful information")) {
+                    page.usefulInformationTab.click();
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("Electronic journal")) {
+                    page.electronicJournalTab.click();
+                    ReusableMethods.wait(1);
+                }
+            }
+
+            @And("adds {string} to useful information name input")
+            public void addsToUsefulInformationNameInput (String selection){
+                if (selection.contains("Manual Qa")) {
+                    page.usefulNameInput.sendKeys("Useful Manual QA");
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("Automation QA")) {
+                    page.usefulNameInput.clear();
+                    ReusableMethods.wait(1);
+                    page.usefulNameInput.sendKeys("Useful Autmaion QA");
+                    ReusableMethods.wait(1);
+                }
+            }
+
+            @And("selects person {string} for notification and mail for electronic library")
+            public void selectsPersonForNotificationAndMailForElectronicLibrary (String selection){
+                if (selection.contains("Musa")) {
+                    calendar.choosePersonInput.sendKeys("Musa Rzayev");
+                    calendar.cancelMusaPerson.click();
+                    ReusableMethods.wait(1);
+                    Actions actions = new Actions(getDriver());
+                    actions.moveByOffset(5, 5).click().build().perform();
+                } else if (selection.contains("İbrahim")) {
+                    calendar.choosePersonInput.sendKeys("İbrahim Rzayev");
+                    calendar.cancelIbrahimPerson.click();
+                    ReusableMethods.wait(1);
+                    Actions actions = new Actions(getDriver());
+                    actions.moveByOffset(5, 5).click().build().perform();
+                }
+            }
+
+            @Then("all information about the useful information is displayed in the table in the admin panel")
+            public void allInformationAboutTheUsefulInformationIsDisplayedInTheTableInTheAdminPanel (DataTable dataTable)
+            {
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String materialName = row.get("Məlumatın adı");
+                    String material = row.get("Materiallar");
+                    String viewCount = row.get("Baxış sayı");
+
+                    ReusableMethods.flash(page.trainingNameTable, getDriver());
+                    Assert.assertEquals(page.trainingNameTable.getText().trim(), materialName);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.filePathMaterialTable, getDriver());
+                    Assert.assertEquals(page.filePathMaterialTable.getText().trim(), material);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.usefulDateTable, getDriver());
+                    LocalDate today = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                    String formattedDate = today.format(formatter);
+                    Assert.assertEquals(page.usefulDateTable.getText().trim(), formattedDate);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.viewCountsTable, getDriver());
+                    Assert.assertEquals(page.viewCountsTable.getText().trim(), viewCount);
+                    viewCounter = page.viewCountsTable.getText().trim();
+                    System.out.println("viewCounter = " + viewCounter);
+                    ReusableMethods.wait(1);
+                }
+            }
+
+            @And("all the information about useful information is displayed in the notification")
+            public void allTheInformationAboutUsefulInformationIsDisplayedInTheNotification (DataTable dataTable){
+                try {
+                    WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+                    if (isElementVisible(page.trainingNoteModal, wait)) {
+                        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                        for (Map<String, String> row : data) {
+                            String trainingName = row.get("Başlıq");
+
+                            WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                            wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                            ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                            ReusableMethods.waitForOverlayToDisappear(getDriver());
+                            ReusableMethods.flash(page.trainingNameModal, getDriver());
+                            Assert.assertEquals(page.trainingNameModal.getText().trim(), trainingName);
+                            ReusableMethods.wait(1);
+                            calendar.closeModal.click();
+                            ReusableMethods.wait(1);
+
+                        }
+                    } else {
+                        ReusableMethods.wait(1);
+                        WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                        button.click();
+                        ReusableMethods.wait(3);
+                        System.out.println("\"Imhere1\" = " + "Imhere0");
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                        WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        js.executeScript("arguments[0].click();", element);
+                        element.click();
+                        ReusableMethods.wait(5);
+                        System.out.println("\"Imhere1\" = " + "Imhere1");
+                        ReusableMethods.wait(3);
+                        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                        for (Map<String, String> row : data) {
+                            String trainingName = row.get("Başlıq");
+
+                            ReusableMethods.flash(page.trainingNameModal, getDriver());
+                            Assert.assertEquals(page.trainingNameModal.getText().trim(), trainingName);
+                            ReusableMethods.wait(1);
+                            calendar.closeModal.click();
+                            ReusableMethods.wait(1);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+                }
+            }
         }
-        ReusableMethods.wait(1);
-        getDriver().findElement(By.xpath("//span[normalize-space()='Elektron kitabxana']")).click();
-        ReusableMethods.wait(1);
-    }
-}

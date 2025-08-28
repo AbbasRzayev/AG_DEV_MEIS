@@ -1,5 +1,8 @@
 @programs @all
 Feature: User creat program
+  As a registered user with the necessary permissions,
+  I want to create a new program by adding its name, keyword, address, notes, API integration URL, logo, and instruction files (video/PDF),
+  So that the program can be successfully stored in the system and all related information is clearly available for review and future use.
 
   @create_program @new
   Scenario: Check if user can create program
@@ -31,6 +34,27 @@ Feature: User creat program
     Then video instruction file is displayed in the review section of the program
     Then instruction file is displayed in the review section of the program
     Then the another instruction file is displayed in the review section of the program
+    #Proqramın silinməsi və yoxlanılması
+    When user selects delete button to delete the program
+    Then the program is successfully deleted
+  #Test ssenarilər:
+  #1.Yeni proqramın əlavə edilməsi
+  #2.Yeni yaradılan proqarmın mövcud olmasının yoxlanılması
+  #3.Yeni yaradılan proqarmın baxış hissəsində proqramən adının yoxlanılması
+  #4.Yeni yaradılan proqarmın baxış hissəsində açar sözün yoxlanılması
+  #5.Yeni yaradılan proqarmın baxış hissəsində proqramın ünvanının yoxlanılması
+  #6.Yeni yaradılan proqarmın baxış hissəsində api inteqrasiya üçün url-ın yoxlanılması
+  #7.Yeni yaradılan proqarmın baxış hissəsində proqram haqqında qeydlərin yoxlanılması
+  #8.Yeni yaradılan proqarmın baxış hissəsində proqram loqosunun yoxlanılması
+  #9.Yeni yaradılan proqarmın baxış hissəsində video təlimatın yoxlanılması
+  #10.Yeni yaradılan proqarmın baxış hissəsində təlimat faylın yoxlanılması
+  #11.Yeni yaradılan proqarmın baxış hissəsində digər faylın yoxlanılması
+  #12.Yeni proqarmın silinməsi
+  #13.Silindikdən sonra sistemdə mövcud olmadığının yoxlanılması
+
+
+
+
 
 
 #    And selects operation on modules button
@@ -71,18 +95,7 @@ Feature: User creat program
 #    When user selects delete button to delete the program
 #    Then the program is successfully deleted
 
-#Scenariyoda yoxlanlır:
-#1.Yeni proqramın əlavə edilməsi
-#2.Yeni yaradılan proqarmın mövcud olmasının yoxlanılması
-#3.Yeni yaradılan proqarmın baxış hissəsində proqramən adının yoxlanılması
-#4.Yeni yaradılan proqarmın baxış hissəsində açar sözün yoxlanılması
-#5.Yeni yaradılan proqarmın baxış hissəsində proqramın ünvanının yoxlanılması
-#6.Yeni yaradılan proqarmın baxış hissəsində api inteqrasiya üçün url-ın yoxlanılması
-#7.Yeni yaradılan proqarmın baxış hissəsində proqram haqqında qeydlərin yoxlanılması
-#8.Yeni yaradılan proqarmın baxış hissəsində proqram loqosunun yoxlanılması
-#9.Yeni yaradılan proqarmın baxış hissəsində video təlimatın yoxlanılması
-#10.Yeni yaradılan proqarmın baxış hissəsində təlimat faylın yoxlanılması
-#11.Yeni yaradılan proqarmın baxış hissəsində digər faylın yoxlanılması
+
 
 
 #  2. Proqrama modul və katepqriyaların əlavə edilməsi

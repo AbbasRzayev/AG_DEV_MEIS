@@ -355,15 +355,15 @@ public class programs_Steps {
     @When("user selects delete button to delete the program")
     public void userSelectsDeleteButtonToDeleteTheProgram() {
         page.progDelete.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         page.progDeleteAccept.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
     @Then("the program is successfully deleted")
     public void theProgramIsSuccessfullyDeleted() {
-        page.searchInput.sendKeys("AistGroup");
-        ReusableMethods.wait(1);
-        ReusableMethods.assertElementNotDisplayed(page.createdProqNew);
+        page.searchInput.sendKeys("Bright Future");
+        ReusableMethods.wait(3);
+        ReusableMethods.assertElementNotDisplayed(page.createdProq);
     }
 
     @And("selects founded user from table")

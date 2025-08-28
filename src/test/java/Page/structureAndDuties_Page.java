@@ -12,7 +12,7 @@ public class structureAndDuties_Page {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(xpath = "(//span[@class='mat-mdc-list-item-unscoped-content'])[9]")
+    @FindBy(xpath = "//img[@alt='İdarəetmə']")
     public WebElement controlPanel;
     @FindBy(xpath = "//a[@class='mat-ripple ng-star-inserted active']")
     public WebElement userTab;
