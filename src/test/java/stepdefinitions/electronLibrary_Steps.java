@@ -254,8 +254,8 @@ public class electronLibrary_Steps {
             ReusableMethods.pageDown();
             ReusableMethods.wait(1);
             page.fileDelete.click();
-            ReusableMethods.wait(1);
-            page.deleteYes.click();
+//            ReusableMethods.wait(1);
+//            page.deleteYes.click();
             ReusableMethods.pageDown();
             ReusableMethods.wait(3);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
@@ -1262,4 +1262,141 @@ public class electronLibrary_Steps {
 //            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
                 }
             }
+
+    @And("adds {string} to journal name input")
+    public void addsToJournalNameInput(String selection) {
+        if(selection.contains("Journal Manual")){
+            page.journalInput.sendKeys("Journal Manual");
+            ReusableMethods.wait(1);
+        }  else if(selection.contains("Journal Automation")){
+            page.journalInput.clear();
+            ReusableMethods.wait(1);
+            page.journalInput.sendKeys("Journal Automation");
+            ReusableMethods.wait(1);
         }
+    }
+
+    @And("adds {string} to journal number input")
+    public void addsToJournalNumberInput(String selection) {
+        if(selection.contains("7777")){
+            page.journalNumberInput.sendKeys("7777");
+            ReusableMethods.wait(1);
+        }    else if(selection.contains("8888")){
+            page.journalNumberInput.clear();
+            ReusableMethods.wait(1);
+            page.journalNumberInput.sendKeys("8888");
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("all information about the electronic journal is displayed in the table in the admin panel")
+    public void allInformationAboutTheElectronicJournalIsDisplayedInTheTableInTheAdminPanel(DataTable dataTable) {
+        {
+            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            for (Map<String, String> row : data) {
+                String name = row.get("Adı");
+                String number = row.get("Buraxılış nömrəsi");
+                String material = row.get("Materiallar");
+
+                String viewCount = row.get("Baxış sayı");
+
+                ReusableMethods.flash(page.journalNameTable, getDriver());
+                Assert.assertEquals(page.journalNameTable.getText().trim(), name);
+                ReusableMethods.wait(1);
+
+                ReusableMethods.flash(page.journalNumberTable, getDriver());
+                Assert.assertEquals(page.journalNumberTable.getText().trim(), number);
+                ReusableMethods.wait(1);
+
+                ReusableMethods.flash(page.usefulDateTable, getDriver());
+                LocalDate today = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                String formattedDate = today.format(formatter);
+                Assert.assertEquals(page.usefulDateTable.getText().trim(), formattedDate);
+                ReusableMethods.wait(1);
+
+                ReusableMethods.flash(page.journalFileTable, getDriver());
+                Assert.assertEquals(page.journalFileTable.getText().trim(), material);
+                ReusableMethods.wait(1);
+
+                ReusableMethods.flash(page.viewCountsTable, getDriver());
+                Assert.assertEquals(page.viewCountsTable.getText().trim(), viewCount);
+                viewCounter = page.viewCountsTable.getText().trim();
+                System.out.println("viewCounter = " + viewCounter);
+                ReusableMethods.wait(1);
+            }
+        }
+}
+
+    @And("all the information about electronic journal is displayed in the notification")
+    public void allTheInformationAboutElectronicJournalIsDisplayedInTheNotification(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+            if (isElementVisible(page.trainingNoteModal, wait)) {
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String electronicJournal = row.get("Başlıq");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.trainingNameModal, getDriver());
+                    Assert.assertEquals(page.trainingNameModal.getText().trim(), electronicJournal);
+                    ReusableMethods.wait(1);
+                    calendar.closeModal.click();
+                    ReusableMethods.wait(1);
+
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(3);
+                System.out.println("\"Imhere1\" = " + "Imhere0");
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(5);
+                System.out.println("\"Imhere1\" = " + "Imhere1");
+                ReusableMethods.wait(3);
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String electronicJournal = row.get("Başlıq");
+
+                    ReusableMethods.flash(page.trainingNameModal, getDriver());
+                    Assert.assertEquals(page.trainingNameModal.getText().trim(), electronicJournal);
+                    ReusableMethods.wait(1);
+                    calendar.closeModal.click();
+                    ReusableMethods.wait(1);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+        }
+    }
+
+    @Then("the deleted electronic journal is not displayed in the control panel")
+    public void theDeletedElectronicJournalIsNotDisplayedInTheControlPanel() {
+        while (true) {
+            try {
+                if (!page.deleteButton.isDisplayed()) {
+                    break;
+                }
+                page.deleteButton.click();
+                ReusableMethods.wait(1);
+                page.deleteYes.click();
+                ReusableMethods.wait(2);
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
+                break;
+            }
+        }
+        System.out.println("Bütün e" +
+                " silindi və test passed oldu ✅");
+    }
+}

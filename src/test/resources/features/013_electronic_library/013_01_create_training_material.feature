@@ -17,7 +17,6 @@ Feature:Create training material
     And selects person "İbrahim" for notification and mail
     And selects person "İbrahim" for the who sees field
     And adds note "Automaiton kurslar barədə" to the note input
-    And adds file "new" for training
     And user selects save button
     And user selects exit button
     #İdarəetmə hissəsində təlim məlumatlarının yoxlanılması

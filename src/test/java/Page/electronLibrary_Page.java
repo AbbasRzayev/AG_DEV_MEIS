@@ -15,13 +15,13 @@ public class electronLibrary_Page {
     public WebElement newTrainingBtn;
     @FindBy(xpath = "//span[text()=' Yeni məlumat ']")
     public WebElement newInformationBtn;
-    @FindBy(xpath = "//span[text()=' Yeni jurnal ']")
+    @FindBy(xpath = "//span[normalize-space()='Yeni jurnal']")
     public WebElement newJournalBtn;
     @FindBy(id = "mat-input-2")
     public WebElement traningName;
     @FindBy(xpath = "//input[@formcontrolname='trainingDate']")
     public WebElement dateInput;
-    @FindBy(id = "mat-input-4")
+    @FindBy(xpath = "//input[@formcontrolname='date']")
     public WebElement dateInputEJ;
     @FindBy(xpath = "(//button[./mat-icon[text()='delete']])[1]")
     public WebElement fileDelete;
@@ -92,6 +92,10 @@ public class electronLibrary_Page {
     public WebElement trainingNoteModal;
     @FindBy(xpath = "//h5[contains(@class,'mat-mdc-dialog-title')]")
     public WebElement trainingNameModal;
+    @FindBy(xpath = "//input[@formcontrolname='name']")
+    public WebElement journalInput;
+    @FindBy(xpath = "//input[@formcontrolname='number'] ")
+    public WebElement journalNumberInput;
     @FindBy(xpath = "//p[text()='Elektron kitabxana']")
     public WebElement electronicMainPage;
     @FindBy(xpath = "//a[text()=' Fayl ']")
@@ -136,5 +140,12 @@ public class electronLibrary_Page {
     public WebElement electronicJournalTab;
     @FindBy(xpath = "//input[@formcontrolname='title']")
     public WebElement usefulNameInput;
+    @FindBy(xpath = "(//td[contains(@class,'cdk-column-name')])[1]")
+    public WebElement journalNameTable;
+    @FindBy(xpath = "(//td[contains(@class,'cdk-column-number')])[1]")
+    public WebElement journalNumberTable;
+    @FindBy(xpath = "(//td[contains(@class,'cdk-column-fileUrl')])[1]")
+    public WebElement journalFileTable;
+
 
 }
