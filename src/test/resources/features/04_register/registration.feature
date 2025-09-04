@@ -131,8 +131,3 @@ Feature: User registration
   #25.Adminin yeni istifadəçini arxivləşdirməsi
   #26.Arxivləşdirdikdən sonra istifadəçinin sistemdə olmamasının yoxlanılması
   #27.Arxivləşdirdikdən sonra istifadəçinin sistemdə daxil ola bilməməsinin yoxlanılması
-
-
-#  Scenario: Deleting the confirmation letter from meis
-#    Given user goes to the gmail
-#    Then deletes confirmation letter

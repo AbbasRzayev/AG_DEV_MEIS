@@ -396,31 +396,6 @@ public class registration_Steps {
         ReusableMethods.wait(1);
     }
 
-    @Given("user goes to the gmail")
-    public void userGoesToTheGmail() {
-        getDriver().get("https://mail.google.com/");
-        ReusableMethods.wait(3);
-        page.googleEmail.sendKeys("zamanovabbasqa@gmail.com");
-        ReusableMethods.wait(2);
-        page.googleNextButton.click();
-        ReusableMethods.wait(3);
-        page.googlepasswordField.sendKeys("abbasabbas88");
-        ReusableMethods.wait(3);
-        page.googleNextButton.click();
-        ReusableMethods.wait(2);
-    }
-
-    @Then("deletes confirmation letter")
-    public void deletesConfirmationLetter() {
-        page.googleChechboxs.click();
-        ReusableMethods.flash(page.googleDeletebutton, getDriver());
-        ReusableMethods.wait(1);
-        page.googleDeletebutton.click();
-        ReusableMethods.wait(3);
-        assertFalse(page.googleDeletebutton.isDisplayed());
-    }
-
-
     @Then("new user {string} successfully registered")
     public void newUserSuccessfullyRegistered(String user) {
         if (user.contains("Zamanov")) {

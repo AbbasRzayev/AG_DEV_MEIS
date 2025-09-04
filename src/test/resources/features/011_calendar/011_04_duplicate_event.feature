@@ -1,7 +1,7 @@
 @all @calendar
 Feature: Duplicate event
   As a system user,
-  I want to select an existing event from the calendar and use the “Sürətini çıxar” button
+  I want to select an existing event from the calendar and use the “Duplicate” button
   So that I can duplicate the event data quickly without re-entering all the details manually.
 
   @duplicateEvent @new @test

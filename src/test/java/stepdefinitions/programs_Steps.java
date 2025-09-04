@@ -634,19 +634,19 @@ public class programs_Steps {
     @And("the user selects the {string} button")
     public void theUserSelectsTheButton(String selection) {
         if (selection.contains("Operations on Modules")) {
-          page.operationModuleButton.click();
-          ReusableMethods.wait(1);
-        }   else if(selection.contains("User category")) {
-          page.userCategoryButton.click();
-          ReusableMethods.wait(1);
-        } else if(selection.contains("Edit Module")) {
-          page.editModuleButton.click();
-          ReusableMethods.wait(1);
-        }else if(selection.contains("Delete Module")) {
-          page.deleteModuleButton.click();
-          ReusableMethods.wait(1);
-          page.progDeleteAccept.click();
-          ReusableMethods.wait(1);
+            page.operationModuleButton.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("User category")) {
+            page.userCategoryButton.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Edit")) {
+            page.editModuleButton.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Delete")) {
+            page.deleteModuleButton.click();
+            ReusableMethods.wait(1);
+            page.progDeleteAccept.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -658,6 +658,13 @@ public class programs_Steps {
             page.inputNameModule.clear();
             ReusableMethods.wait(1);
             page.inputNameModule.sendKeys("Second Module");
+        } else if (selection.contains("First Category")) {
+            page.inputNameModule.sendKeys("First Category");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Second Category")) {
+            page.inputNameModule.clear();
+            ReusableMethods.wait(1);
+            page.inputNameModule.sendKeys("Second Category");
         }
     }
 
@@ -670,6 +677,14 @@ public class programs_Steps {
             page.inputKeyword.clear();
             ReusableMethods.wait(1);
             page.inputKeyword.sendKeys("Second Key");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("First Key for Category")) {
+            page.inputKeyword.sendKeys("First Key for Category");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Second Key for Category")) {
+            page.inputKeyword.clear();
+            ReusableMethods.wait(1);
+            page.inputKeyword.sendKeys("Second Key for Category");
             ReusableMethods.wait(1);
         }
     }
@@ -692,6 +707,22 @@ public class programs_Steps {
             ReusableMethods.wait(1);
             page.saveChangesModule.click();
             ReusableMethods.wait(1);
+        } else if (selection.contains("First Category information")) {
+            page.infoButton.click();
+            ReusableMethods.wait(1);
+            page.infoInput.sendKeys("First Category information");
+            ReusableMethods.wait(1);
+            page.saveChangesModule.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Second Category information")) {
+            page.infoButton.click();
+            ReusableMethods.wait(1);
+            page.infoInput.clear();
+            ReusableMethods.wait(1);
+            page.infoInput.sendKeys("Second Category information");
+            ReusableMethods.wait(1);
+            page.saveChangesModule.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -705,37 +736,57 @@ public class programs_Steps {
     @Then("the module {string} name details are displayed in the module modal window")
     public void theModuleNameDetailsAreDisplayedInTheModuleModalWindow(String selection) {
         if (selection.contains("First Module")) {
-            ReusableMethods.flash(page.moduleNameColumnTable,getDriver());
+            ReusableMethods.flash(page.moduleNameColumnTable, getDriver());
             ReusableMethods.wait(1);
             String expected = "First Module";
-            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(),expected);
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(), expected);
         } else if (selection.contains("Second Module")) {
-            ReusableMethods.flash(page.moduleNameColumnTable,getDriver());
+            ReusableMethods.flash(page.moduleNameColumnTable, getDriver());
             ReusableMethods.wait(1);
             String expected = "Second Module";
-            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(),expected);
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(), expected);
+        } else if (selection.contains("First Category")) {
+            ReusableMethods.flash(page.moduleNameColumnTable, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "First Category";
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(), expected);
+        } else if (selection.contains("Second Category")) {
+            ReusableMethods.flash(page.moduleNameColumnTable, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Second Category";
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(), expected);
         }
     }
 
     @Then("the module {string} keyword details are displayed in the module modal window")
     public void theModuleKeywordDetailsAreDisplayedInTheModuleModalWindow(String selection) {
         if (selection.contains("First Key")) {
-            ReusableMethods.flash(page.moduleKeywordColumnTable,getDriver());
+            ReusableMethods.flash(page.moduleKeywordColumnTable, getDriver());
             ReusableMethods.wait(1);
             String expected = "First Key";
-            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(),expected);
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(), expected);
         } else if (selection.contains("Second Key")) {
-            ReusableMethods.flash(page.moduleKeywordColumnTable,getDriver());
+            ReusableMethods.flash(page.moduleKeywordColumnTable, getDriver());
             ReusableMethods.wait(1);
             String expected = "Second Key";
-            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(),expected);
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(), expected);
+        } else if (selection.contains("First Key for Category")) {
+            ReusableMethods.flash(page.moduleKeywordColumnTable, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "First Key for Category";
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(), expected);
+        } else if (selection.contains("Second Key for Category")) {
+            ReusableMethods.flash(page.moduleKeywordColumnTable, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Second Key for Category";
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(), expected);
         }
     }
 
     @Then("the module {string} information details are displayed in the module modal window")
     public void theModuleInformationDetailsAreDisplayedInTheModuleModalWindow(String selection) {
         if (selection.contains("First module information")) {
-            ReusableMethods.flash(page.infoHover,getDriver());
+            ReusableMethods.flash(page.infoHover, getDriver());
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveToElement(page.infoHover).perform();
@@ -750,7 +801,7 @@ public class programs_Steps {
             Assert.assertEquals(tooltipText, "First module information");
 
         } else if (selection.contains("Second module information")) {
-            ReusableMethods.flash(page.infoHover,getDriver());
+            ReusableMethods.flash(page.infoHover, getDriver());
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveToElement(page.infoHover).perform();
@@ -762,6 +813,34 @@ public class programs_Steps {
             );
             String tooltipText = tooltip.getText().trim();
             Assert.assertEquals(tooltipText, "Second module information");
+        } else if (selection.contains("First Category information")) {
+            ReusableMethods.flash(page.infoHover, getDriver());
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(page.infoHover).perform();
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+            WebElement tooltip = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector("div.mat-mdc-tooltip") // və ya "div.mat-tooltip" layihədən asılıdır
+                    )
+            );
+
+            String tooltipText = tooltip.getText().trim();
+            Assert.assertEquals(tooltipText, "First Category information");
+
+        } else if (selection.contains("Second Category information")) {
+            ReusableMethods.flash(page.infoHover, getDriver());
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(page.infoHover).perform();
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+            WebElement tooltip = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector("div.mat-mdc-tooltip") // və ya "div.mat-tooltip" layihədən asılıdır
+                    )
+            );
+            String tooltipText = tooltip.getText().trim();
+            Assert.assertEquals(tooltipText, "Second Category information");
         }
     }
 
@@ -779,6 +858,36 @@ public class programs_Steps {
             }
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             System.out.println("✅ Silinən modul səhifədə yoxdur – gözlənilən vəziyyət.");
+        }
+    }
+
+    @And("the {string} module is assigned to the category")
+    public void theModuleIsAssignedToTheCategory(String selection) {
+        if (selection.contains("First Module")) {
+            page.modalSelectCategory.click();
+            ReusableMethods.wait(1);
+            page.selectFirstModule.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.sendKeys(Keys.ESCAPE).perform();
+        } else if (selection.contains("Second Module")) {
+            page.modalSelectCategory.click();
+            ReusableMethods.wait(1);
+            page.selectSecondModule.click();
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.sendKeys(Keys.ESCAPE).perform();
+        }
+    }
+
+    @Then("the category has been successfully deleted")
+    public void theCategoryHasBeenSuccessfullyDeleted() {
+        try {
+            if (page.moduleNameColumnTable.isDisplayed()) {
+                throw new AssertionError("❌ Xəta:Silinən kategoriya görünür");
+            }
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            System.out.println("✅ Silinən kategoriya səhifədə yoxdur – gözlənilən vəziyyət.");
         }
     }
 }

@@ -152,4 +152,10 @@ public class programs_Page {
     public WebElement infoHover;
     @FindBy(xpath = "//span[normalize-space()='Bağla']")
     public WebElement closeModelWindow;
+    @FindBy(xpath = "//mat-label[normalize-space(.)='Modullar']/ancestor::label/following-sibling::mat-select")
+    public WebElement modalSelectCategory;
+    @FindBy(xpath = "//span[normalize-space()='First Module']")
+    public WebElement selectFirstModule;
+    @FindBy(xpath = "//span[normalize-space()='Second Module']")
+    public WebElement selectSecondModule;
 }

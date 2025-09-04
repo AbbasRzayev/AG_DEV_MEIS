@@ -38,7 +38,7 @@ Feature: Add program modules
     Then the module "First Key" keyword details are displayed in the module modal window
     Then the module "First module information" information details are displayed in the module modal window
     #Modulun redaktə edilməsi
-    And the user selects the "Edit Module" button
+    And the user selects the "Edit" button
     And the module "Second Module" name is entered
     And the keyword "Second Key" is entered
     And the information "Second module information" details are entered
@@ -47,13 +47,11 @@ Feature: Add program modules
     Then the module "Second Key" keyword details are displayed in the module modal window
     Then the module "Second module information" information details are displayed in the module modal window
     #Modulun silinəsi
-    When the user selects the "Delete Module" button
+    When the user selects the "Delete" button
     Then the module has been successfully deleted
-
     And the module modal window is closed
     When user selects delete button to delete the program
     Then the "new" program is successfully deleted
-
    #Test ssenarilər:
    #18.Modul adının əlavə edilməsinin yoxlanılması
    #19.Modul açar sözünün əlavə edilməsinin yoxlanılması
