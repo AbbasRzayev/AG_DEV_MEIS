@@ -13,7 +13,7 @@ Feature: User creat program
     And added data to the program name and to the keyword field
       | PROGRAM NAME  | KEYWORD       |
       | Bright Future | Never Give Up |
-    And added data to the program adress field
+    And added data to the program address field
       | https://aist.group/ |
     And added data to the notes about programs field
       | Avtomatlaşdırılmış İnformasiya Sistemləri və Texnologiyaları |
@@ -25,7 +25,7 @@ Feature: User creat program
     And added one more pdf file to the another file
     #Yeni proqarmın mövcud olmasının yoxlanılması
     When selects the save button to create a new program
-    Then the program successfully created
+    Then the program "Bright Future" is successfully created
     #Proqram məlumatlarının yoxlanılması
     Then all information is displayed in the review section of the program
       | PROGRAM NAME  | KEYWORD       | PROGRAM ADDRESS     | API URL               | NOTE                                                         |

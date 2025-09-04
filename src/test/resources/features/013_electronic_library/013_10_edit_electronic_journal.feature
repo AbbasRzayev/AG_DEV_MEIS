@@ -31,5 +31,5 @@ Feature:Edit electronic journal
     And selects delete button in the control panel
     Then the deleted electronic journal is not displayed in the control panel
     #Test ssenarilər:
-    #61.Yeni faydalı məlumatın redakə edilməsi
-    #62.Redaktə edildikdən sonra faydalı məlumatların yoxlanılması
+    #61.Yeni elektron jurnalın redaktə edilməsi
+    #62.Redaktə edildikdən sonra elektron jurnal məlumatların yoxlanılması

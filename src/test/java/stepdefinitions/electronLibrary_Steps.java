@@ -164,12 +164,6 @@ public class electronLibrary_Steps {
         ReusableMethods.wait(1);
     }
 
-    @And("adds tittle name to tittle name input")
-    public void addsTittleNameToTittleNameInput() {
-        page.tittleInput.sendKeys("Grow uP");
-        ReusableMethods.wait(1);
-    }
-
     @And("adds file in the new useful information tab")
     public void addsFileInTheNewUsefulInformationTab() {
         String file = "file:///C:/Users/User/Desktop/TestFiles/ChangeDoc.pdf";
@@ -188,25 +182,6 @@ public class electronLibrary_Steps {
         ReusableMethods.flash(page.checkUseful, getDriver());
         assertTrue(page.checkUseful.isDisplayed());
         ReusableMethods.wait(1);
-    }
-
-    @When("user selects delete button in the new useful information tab")
-    public void userSelectsDeleteButtonInTheNewUsefulInformationTab() {
-        WebElement itemRow = getDriver().findElement(By.xpath("//td[contains(text(),'Grow uP')]/ancestor::tr"));
-        WebElement deleteButton = itemRow.findElement(By.cssSelector(".mat-icon.mat-warn"));
-        deleteButton.click();
-        ReusableMethods.wait(1);
-        page.deleteYes.click();
-//        deleteButton.click();
-//        ReusableMethods.wait(1);
-    }
-
-    @Then("newly added useful successfully deleted")
-    public void newlyAddedUsefulSuccessfullyDeleted() {
-        getDriver().navigate().refresh();
-        ReusableMethods.wait(1);
-        String text = "Grow Up";
-        ReusableMethods.assertElementDeleted(getDriver(), text);
     }
 
     @And("selects person {string} for notification and mail")
@@ -629,6 +604,13 @@ public class electronLibrary_Steps {
 //            page.helpDeskRedirect.click();
             System.out.println("im here");
             ReusableMethods.clickByJavaScript(page.usefulInformationTitleMail);
+            ReusableMethods.wait(7);
+        }else if (about.contains("Journal Manual")) {
+            ReusableMethods.wait(7);
+//            ReusableMethods.flash(page.helpDeskRedirect, getDriver());
+//            page.helpDeskRedirect.click();
+            System.out.println("im here");
+            ReusableMethods.clickByJavaScript(page.electronicJournalTitleMail);
             ReusableMethods.wait(7);
         }
     }
@@ -1099,6 +1081,91 @@ public class electronLibrary_Steps {
                 }
                 getDriver().switchTo().defaultContent();
             }
+        }else if (selection.contains("Journal Manual")) {
+            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            for (Map<String, String> row : data) {
+
+                String usefulName = row.get("Başlığı");
+                String usefulCreated = row.get("Tərtib edən");
+                String journalNumber = row.get("Jurnalın buraxılış nömrəsi");
+                String usefulStatus = row.get("Status");
+                String usefulWhomSent = row.get("Şəxslər");
+
+                ReusableMethods.wait(1);
+                List<WebElement> iframes = getDriver().findElements(By.tagName("iframe"));
+                System.out.println("Iframe sayı: " + iframes.size());
+
+                boolean found = false;
+                for (int i = 0; i < iframes.size(); i++) {
+                    getDriver().switchTo().defaultContent(); // hər dəfə sıfırdan başla
+                    getDriver().switchTo().frame(i);
+
+                    List<WebElement> elements = getDriver().findElements(By.xpath("//strong[contains(text(),'Yeni useful manual qa yaradıldı!')]"));
+                    if (!elements.isEmpty()) {
+                        System.out.println("Tapıldı iframe index: " + i);
+                        found = true;
+
+
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        String usefulNameNot = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Adı:')]"))
+                        );
+                        String usefulNameNotMail = usefulNameNot.split("\n")[0].trim();
+                        System.out.println("usefulNameNotMail = " + usefulNameNotMail);
+                        Assert.assertEquals(usefulNameNotMail, usefulName);
+
+                        String usefulCreat = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Tərtib edən:')]"))
+                        );
+                        String usefulCreatMail = usefulCreat.split("\n")[0].trim();
+                        System.out.println("usefulCreatMail = " + usefulCreatMail);
+                        Assert.assertEquals(usefulCreatMail, usefulCreated);
+
+
+                        String noteDate = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Yaradılma tarixi:')]"))
+                        );
+                        String noteDateMail = noteDate.split(" ")[0].trim();
+                        System.out.println("noteDateMail = " + noteDateMail);
+                        LocalDate today = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String formattedDate = today.format(formatter);
+                        Assert.assertEquals(formattedDate, noteDateMail);
+
+                        String journalNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Jurnalın buraxılış nömrəsi:')]"))
+                        );
+                        String journalNoteMail = journalNote.split("\n")[0].trim();
+                        System.out.println("usefulPersonMail = " + journalNoteMail);
+                        Assert.assertEquals(journalNoteMail, journalNumber);
+
+                        String usefulPerson = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Şəxslər:')]"))
+                        );
+                        String usefulPersonMail = usefulPerson.split("\n")[0].trim();
+                        System.out.println("usefulPersonMail = " + usefulPersonMail);
+                        Assert.assertEquals(usefulPersonMail, usefulWhomSent);
+
+                        String statusNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Status:')]"))
+                        );
+                        String statusNoteMail = statusNote.split("\n")[0].trim();
+                        System.out.println("statusNoteMail = " + statusNoteMail);
+                        Assert.assertEquals(statusNoteMail, usefulStatus);
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("Element heç bir iframe-də tapılmadı!");
+                }
+                getDriver().switchTo().defaultContent();
+            }
         }
     }
 
@@ -1116,6 +1183,9 @@ public class electronLibrary_Steps {
                     Assert.assertTrue(page.secondFileEvent.isDisplayed());
                     ReusableMethods.wait(1);
                 } else if (selection.contains("useful information")) {
+                    Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
+                    ReusableMethods.wait(1);
+                } else if (selection.contains("Journal Manual")) {
                     Assert.assertTrue(page.trainingMaterialFile.isDisplayed());
                     ReusableMethods.wait(1);
                 }

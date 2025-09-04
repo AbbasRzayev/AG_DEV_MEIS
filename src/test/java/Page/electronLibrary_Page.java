@@ -60,8 +60,6 @@ public class electronLibrary_Page {
     public WebElement usefulPlusBtn;
     @FindBy(xpath = "//span[contains(@class, 'mdc-button__label') and contains(., ' Elektron jurnal əlavə et ')]")
     public WebElement electronJournalPlusBtn;
-    @FindBy(id = "mat-input-2")
-    public WebElement tittleInput;
     @FindBy(xpath = "//span[contains(., 'Fayl əlavə edin')]")
     public WebElement addUsefulFile;
     @FindBy(xpath = "//span[contains(., 'Yadda saxla')]")
@@ -120,6 +118,8 @@ public class electronLibrary_Page {
     public WebElement helpDeskRedirect;
     @FindBy(xpath = "(//span[contains(.,'Useful Manual')])[1]")
     public WebElement usefulInformationTitleMail;
+    @FindBy(xpath = "(//span[contains(.,'Journal Manual')])[1]")
+    public WebElement electronicJournalTitleMail;
     @FindBy(xpath = "(//span[contains(.,'Hesab Təsdiqi')])[1]")
     public WebElement selectsOTTPNot;
     @FindBy(xpath = "(//div[contains(.,'Qeydiyyat üçün təsdiq kodunuz aşağıdakıdır:')]/b)[1]")

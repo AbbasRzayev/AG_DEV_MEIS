@@ -54,8 +54,8 @@ public class programs_Steps {
         }
     }
 
-    @And("added data to the program adress field")
-    public void addedDataToTheProgramAdressField(DataTable dataTable) {
+    @And("added data to the program address field")
+    public void addedDataToTheProgramAddressField(DataTable dataTable) {
         String programAddress = dataTable.cell(0, 0);
         page.programAdressField.sendKeys(programAddress);
         ReusableMethods.wait(2);
@@ -66,9 +66,10 @@ public class programs_Steps {
         String notes = dataTable.cell(0, 0);
         page.noteAboutProgramField.sendKeys(notes);
     }
+
     @And("added data to the url for api integration field")
     public void addedDataToTheUrlForApiIntegrationField(DataTable table) {
-        String notes = table.cell(0,0);
+        String notes = table.cell(0, 0);
         page.apiIntegrationField.sendKeys(notes);
     }
 
@@ -105,25 +106,36 @@ public class programs_Steps {
     public void userSelectsTheSaveButtonToCreateANewProgram() {
         ReusableMethods.wait(3);
         page.saveButton.click();
-        ReusableMethods.wait(20);
+        ReusableMethods.wait(5);
         //ReusableMethods.clickByJavaScript(page.saveButton);
         //ReusableMethods.waitForClickabilityAndClick(page.saveButton,2);
         //ReusableMethods.clickJSElementWithJavaScript(String.valueOf(page.saveButton));
     }
 
-    @Then("the program successfully created")
-    public void theProgramSuccessfullyCreated() {
-        ReusableMethods.wait(1);
-        page.searchInput.sendKeys("Bright Future");
-        ReusableMethods.wait(17);
-        ReusableMethods.flash(page.createdProq, getDriver());
-        Assert.assertTrue("Test.png şəkli DOM-da görünmür!", page.programName.isDisplayed());
-        Assert.assertTrue("Bright Future", page.createdProq.isDisplayed());
-        ReusableMethods.wait(1);
-        page.createdProq.click();
-        ReusableMethods.wait(55);
+    @Then("the program {string} is successfully created")
+    public void theProgramIsSuccessfullyCreated(String selection) {
+        if(selection.contains("Bright Future")){
+            ReusableMethods.wait(1);
+            page.searchInput.sendKeys("Bright Future");
+            ReusableMethods.wait(3);
+            ReusableMethods.flash(page.createdProq, getDriver());
+            Assert.assertTrue("Test.png şəkli DOM-da görünmür!", page.programName.isDisplayed());
+            Assert.assertTrue("Bright Future", page.createdProq.isDisplayed());
+            ReusableMethods.wait(1);
+            page.createdProq.click();
+            ReusableMethods.wait(3);
+        }   else if(selection.contains("Light Future")){
+            ReusableMethods.wait(1);
+            page.searchInput.sendKeys("Bright Future");
+            ReusableMethods.wait(3);
+            ReusableMethods.flash(page.createdProq, getDriver());
+            Assert.assertTrue("Test.png şəkli DOM-da görünmür!", page.programName.isDisplayed());
+            Assert.assertTrue("Light Future", page.createdProq.isDisplayed());
+            ReusableMethods.wait(1);
+            page.createdProq.click();
+            ReusableMethods.wait(3);
+        }
     }
-
 
 
     @And("selects operation on modules button")
@@ -284,8 +296,8 @@ public class programs_Steps {
 
     @And("user goes programs tab in the control panel")
     public void userGoesProgramsTabInTheControlPanel() {
-    page.programsControlPanel.click();
-    ReusableMethods.wait(1);
+        page.programsControlPanel.click();
+        ReusableMethods.wait(1);
     }
 
     @And("finds added program by using search input in the programs tab")
@@ -295,6 +307,7 @@ public class programs_Steps {
         page.activetedProgramNew.click();
         ReusableMethods.wait(1);
     }
+
     @And("user edits program fields")
     public void userEditsProgramFields(DataTable dataTable) {
         page.programNameField.clear();
@@ -326,6 +339,7 @@ public class programs_Steps {
             ReusableMethods.robotClassDosyaYukleme(progIcon);
         }
     }
+
     @And("user selects save button in the program page")
     public void userSelectsSaveButtonInTheProgramPage() {
         page.saveProg.click();
@@ -343,13 +357,13 @@ public class programs_Steps {
         String exproqName = "AistGroup";
         String exproqdesc = "Saytların yaradılması";
         String exproqAdress = "https://aist.group/az/programming";
-        String exproqApi="https://aist.group/az/about-us";
-        ReusableMethods.flash(page.programNameField,getDriver());
-        ReusableMethods.flash(page.kewwordField,getDriver());
-        ReusableMethods.flash(page.programAdressField,getDriver());
-        ReusableMethods.flash(page.noteAboutProgramField,getDriver());
-        ReusableMethods.flash(page.apiIntegrationField,getDriver());
-        ReusableMethods.flash(page.iconButton,getDriver());
+        String exproqApi = "https://aist.group/az/about-us";
+        ReusableMethods.flash(page.programNameField, getDriver());
+        ReusableMethods.flash(page.kewwordField, getDriver());
+        ReusableMethods.flash(page.programAdressField, getDriver());
+        ReusableMethods.flash(page.noteAboutProgramField, getDriver());
+        ReusableMethods.flash(page.apiIntegrationField, getDriver());
+        ReusableMethods.flash(page.iconButton, getDriver());
     }
 
     @When("user selects delete button to delete the program")
@@ -359,6 +373,7 @@ public class programs_Steps {
         page.progDeleteAccept.click();
         ReusableMethods.wait(2);
     }
+
     @Then("the program is successfully deleted")
     public void theProgramIsSuccessfullyDeleted() {
         page.searchInput.sendKeys("Bright Future");
@@ -407,48 +422,48 @@ public class programs_Steps {
             String note = row.get("NOTE");
 
 
-            ReusableMethods.flash(page.programNameField,getDriver());
+            ReusableMethods.flash(page.programNameField, getDriver());
             WebElement inputValue = getDriver().findElement(By.xpath("//label[contains(., 'Proqramın adı')]/following::input[1]"));
             String progNameEx = inputValue.getAttribute("value");
             System.out.println("actual = " + progNameEx);
-            Assert.assertEquals(progNameEx,programName);
+            Assert.assertEquals(progNameEx, programName);
 
-            ReusableMethods.flash(page.kewwordField,getDriver());
+            ReusableMethods.flash(page.kewwordField, getDriver());
             WebElement inputValue2 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[2]"));
             String progKWEx = inputValue2.getAttribute("value");
             System.out.println("actual = " + progKWEx);
-            Assert.assertEquals(progKWEx,keyword);
+            Assert.assertEquals(progKWEx, keyword);
 
-            ReusableMethods.flash(page.programAdressField,getDriver());
+            ReusableMethods.flash(page.programAdressField, getDriver());
             WebElement inputValue3 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[3]"));
             String progAddress = inputValue3.getAttribute("value");
             System.out.println("actual = " + progAddress);
-            Assert.assertEquals(progAddress,programAddress);
+            Assert.assertEquals(progAddress, programAddress);
 
-            ReusableMethods.flash(page.apiIntegrationField,getDriver());
+            ReusableMethods.flash(page.apiIntegrationField, getDriver());
             WebElement inputValue4 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[4]"));
             String progApi = inputValue4.getAttribute("value");
             System.out.println("actual = " + progApi);
-            Assert.assertEquals(apiUrl,progApi);
+            Assert.assertEquals(apiUrl, progApi);
 
-            ReusableMethods.flash(page.noteAboutProgramField,getDriver());
+            ReusableMethods.flash(page.noteAboutProgramField, getDriver());
             WebElement inputValue5 = getDriver().findElement(By.xpath(" //following::textarea[1]"));
             String progNote = inputValue5.getAttribute("value");
             System.out.println("actual = " + progNote);
-            Assert.assertEquals(progNote,note);
+            Assert.assertEquals(progNote, note);
         }
     }
 
     @Then("logo is displayed in the review section of the program")
     public void logoIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.iconButton,getDriver());
+        ReusableMethods.flash(page.iconButton, getDriver());
         Assert.assertTrue("Logo görünmür", page.programIconCheck.isDisplayed());
         Assert.assertTrue("Test.png yazısı yoxdur", page.iconText.isDisplayed());
     }
 
     @Then("video instruction file is displayed in the review section of the program")
     public void videoInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.VideoButton,getDriver());
+        ReusableMethods.flash(page.VideoButton, getDriver());
         Assert.assertTrue("Logo görünmür", page.videoIcon.isDisplayed());
         Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
 
@@ -456,15 +471,69 @@ public class programs_Steps {
 
     @Then("instruction file is displayed in the review section of the program")
     public void instructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.fileButton,getDriver());
+        ReusableMethods.flash(page.fileButton, getDriver());
         Assert.assertTrue("Logo görünmür", page.fileIcon.isDisplayed());
         Assert.assertTrue("Test.png yazısı yoxdur", page.videoText.isDisplayed());
     }
 
     @Then("the another instruction file is displayed in the review section of the program")
     public void theAnotherInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.otherFile,getDriver());
+        ReusableMethods.flash(page.otherFile, getDriver());
         Assert.assertTrue("Logo görünmür", page.otherIcon.isDisplayed());
         Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
+    }
+
+    @And("edited all information in the review section of the program")
+    public void editedAllInformationInTheReviewSectionOfTheProgram(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String programName = row.get("PROGRAM NAME");
+            String keyword = row.get("KEYWORD");
+            String programAddress = row.get("PROGRAM ADDRESS");
+            String apiUrl = row.get("API URL");
+            String note = row.get("NOTE");
+
+            page.programNameField.clear();
+            ReusableMethods.wait(1);
+            page.programNameField.sendKeys(programName);
+            ReusableMethods.wait(1);
+
+            page.kewwordField.clear();
+            ReusableMethods.wait(1);
+            page.kewwordField.sendKeys(keyword);
+            ReusableMethods.wait(1);
+
+            page.programAdressField.clear();
+            ReusableMethods.wait(1);
+            page.programAdressField.sendKeys(programAddress);
+            ReusableMethods.wait(1);
+
+            page.apiIntegrationField.clear();
+            ReusableMethods.wait(1);
+            page.apiIntegrationField.sendKeys(apiUrl);
+            ReusableMethods.wait(1);
+
+            page.noteAboutProgramField.clear();
+            ReusableMethods.wait(1);
+            page.noteAboutProgramField.sendKeys(note);
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("edited all files in the review section of the program")
+    public void editedAllFilesInTheReviewSectionOfTheProgram(DataTable dataTable) {
+        String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String  programIcon = row.get("Program Icon");
+            String firstFile = row.get("First File");
+            String secondFile = row.get("Second File");
+            String videoFile = row.get("Video File");
+
+
+
+
+        }
     }
 }

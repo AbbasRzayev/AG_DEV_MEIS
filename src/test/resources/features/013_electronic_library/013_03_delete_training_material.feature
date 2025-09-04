@@ -27,5 +27,5 @@ Feature:Delete training material
     And selects delete button in the control panel
     Then the deleted training material is not displayed in the control panel
     #Test ssenarilər:
-    #14.Adminin idarəetmə hissəsindən təlim materialının silməsi
+    #14.Adminin idarəetmə hissəsindən təlim materialının silinməsi
     #15.Silinən təlimin idarəetmə hissəsində mövcud olmamasının yoxlanılması
