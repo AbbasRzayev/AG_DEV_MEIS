@@ -4,7 +4,7 @@ Feature:Create useful information
   I want to create a new useful information by adding its title, content, attachments, and relevant metadata,
   So that employees or participants can easily access and benefit from the training content in the system
 
-  @usefulInformation @new
+  @usefulInformation @new @test
   Scenario: Check if user can add new useful information
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Faydalı məlumatın əlavə edilməsi

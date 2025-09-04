@@ -30,13 +30,13 @@ Feature: User creat program
     Then all information is displayed in the review section of the program
       | PROGRAM NAME  | KEYWORD       | PROGRAM ADDRESS     | API URL               | NOTE                                                         |
       | Bright Future | Never Give Up | https://aist.group/ | https://aist.group/az | Avtomatlaşdırılmış İnformasiya Sistemləri və Texnologiyaları |
-    Then logo is displayed in the review section of the program
-    Then video instruction file is displayed in the review section of the program
-    Then instruction file is displayed in the review section of the program
-    Then the another instruction file is displayed in the review section of the program
+    Then the "new" logo is displayed in the review section of the program
+    Then the "new" video instruction file is displayed in the review section of the program
+    Then the "new" instruction file is displayed in the review section of the program
+    Then the "new" another instruction file is displayed in the review section of the program
     #Proqramın silinməsi və yoxlanılması
     When user selects delete button to delete the program
-    Then the program is successfully deleted
+    Then the "new" program is successfully deleted
   #Test ssenarilər:
   #1.Yeni proqramın əlavə edilməsi
   #2.Yeni yaradılan proqarmın mövcud olmasının yoxlanılması
@@ -51,9 +51,6 @@ Feature: User creat program
   #11.Yeni yaradılan proqarmın baxış hissəsində digər faylın yoxlanılması
   #12.Yeni proqarmın silinməsi
   #13.Silindikdən sonra sistemdə mövcud olmadığının yoxlanılması
-
-
-
 
 
 
@@ -94,13 +91,3 @@ Feature: User creat program
 #    Then program data has been successfully changed
 #    When user selects delete button to delete the program
 #    Then the program is successfully deleted
-
-
-
-
-#  2. Proqrama modul və katepqriyaların əlavə edilməsi
-#  3. Əlavə edilmiş proqramın sistemdə mövcud olmasının təstiqi
-#  4. Adminin userin proqrama daxil olması üçün idarəetmə panlindən proqramın aktivləşdirilməsi (+ modul/kateqproiya) və təstiqləməsi
-#  5. Userin proqrama daxil olması
-#  6. Proqramın redaktə edilməsi
-#  7. Proqramın silinməsi

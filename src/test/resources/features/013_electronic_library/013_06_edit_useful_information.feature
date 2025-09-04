@@ -4,7 +4,7 @@ Feature:Edit useful information
   I want to edit an existing useful information by updating its title, content, attachments, and relevant metadata,
   So that the training content remains accurate, up-to-date, and useful for employees or participants in the system.
 
-  @editUsefulInformation @new
+  @editUsefulInformation @new @test
   Scenario: Check if user can edit new useful information
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the control panel

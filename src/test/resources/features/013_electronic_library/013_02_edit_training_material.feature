@@ -4,7 +4,7 @@ Feature:Edit training material
   I want to edit an existing training material by updating its title, content, attachments, and relevant metadata,
   So that the training content remains accurate, up-to-date, and useful for employees or participants in the system.
 
-  @editTrainingMaterial @new
+  @editTrainingMaterial @new @test
   Scenario: Check if user can edit new training materials
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Təlim materialın əlavə edilməsi

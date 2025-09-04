@@ -4,7 +4,7 @@ Feature:Delete electronic journal
   I want to delete an existing electronic journal from the system,
   So that outdated, irrelevant, or incorrect content is removed and employees or participants only access valid and electronic journal resources.
 
-  @deleteElectronicJournal @new
+  @deleteElectronicJournal @new @test
   Scenario: Check if user can delete new electronic journal
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Elektron jurnalın əlavə edilməsi

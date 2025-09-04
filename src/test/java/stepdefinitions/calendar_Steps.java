@@ -1175,7 +1175,8 @@ public class calendar_Steps {
         ReusableMethods.wait(1);
         ReusableMethods.pageDown();
         ReusableMethods.wait(1);
-        page.closeButtonNotificationModal.click();
+//        page.closeButtonNotificationModal.click();
+        ReusableMethods.clickByJavaScript(page.closeButtonNotificationModal);
         ReusableMethods.wait(2);
     }
 

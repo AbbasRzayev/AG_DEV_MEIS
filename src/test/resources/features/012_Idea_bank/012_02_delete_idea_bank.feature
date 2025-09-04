@@ -4,7 +4,7 @@ Feature:Idea Bank
   I want to add new ideas to the Idea Bank, view them, track their status, and delete them if needed,
   So that I can efficiently share suggestions, see their current status, and keep the Idea Bank up-to-date.
 
-  @new @deleteIdea
+  @new @deleteIdea @test
   Scenario: Check if user can add or change status then delete idea bank
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the idea bank tab from main page

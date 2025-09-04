@@ -4,7 +4,7 @@ Feature:Edit electronic journal
   I want to edit an existing electronic journal by updating its title, content, attachments, and relevant metadata,
   So that the training content remains accurate, up-to-date, and useful for employees or participants in the system.
 
-  @editElectronicJournal @new
+  @editElectronicJournal @new @test
   Scenario: Check if user can edit electronic journal
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Elektron jurnalın əlavə edilməsi

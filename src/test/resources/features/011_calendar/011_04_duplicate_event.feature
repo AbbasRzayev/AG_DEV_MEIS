@@ -4,7 +4,7 @@ Feature: Duplicate event
   I want to select an existing event from the calendar and use the “Sürətini çıxar” button
   So that I can duplicate the event data quickly without re-entering all the details manually.
 
-  @duplicateEvent @new
+  @duplicateEvent @new @test
   Scenario: Check if the user can duplicate event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the calendar tab

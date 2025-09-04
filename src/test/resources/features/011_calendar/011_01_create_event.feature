@@ -4,7 +4,7 @@ Feature: Create Calendar
   I want to create a new calendar
   So that I can schedule and manage events effectively
 
-  @newEventCreation @new
+  @newEventCreation @new @test
   Scenario: Check if the user can add a new event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi

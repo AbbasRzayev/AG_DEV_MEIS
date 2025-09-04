@@ -4,7 +4,7 @@ Feature: Event email notification
   I want the scheduled event details to be automatically sent via email to the assigned participants,
   So that they are informed in a timely manner and can effectively follow the planned event.
 
-  @eventEmail @new
+  @eventEmail @new @test
   Scenario: Check if the scheduled event automatically sent via email to the assigned participants
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi

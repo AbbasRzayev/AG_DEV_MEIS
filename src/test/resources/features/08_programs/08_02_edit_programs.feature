@@ -1,8 +1,16 @@
 @programs @all
-Feature: User edit programs
-  As a registered user with the necessary permissions,
-  I want to edit an existing program by updating its name, keyword, address, notes, API integration URL, logo, and instruction files (video/PDF),
-  So that the program information remains accurate, relevant, and up to date for users who access and use it in the system.
+Feature: Edit existing programs
+  As a registered user with appropriate permissions
+  I want to edit an existing program by updating its details, including:
+  - Program name
+  - Keyword
+  - Address
+  - Notes
+  - API integration URL
+  - Logo
+  - Instruction files (Video/PDF)
+  So that the program information stays accurate, relevant, and up to date
+  for all users who access and use it within the system.
 
   @edit_program @new
   Scenario: Check if user can create program
@@ -33,15 +41,20 @@ Feature: User edit programs
     And edited all information in the review section of the program
       | PROGRAM NAME | KEYWORD           | PROGRAM ADDRESS              | API URL                      | NOTE                                           |
       | Light Future | Keep your head up | https://dev-meis.aist.group/ | https://dev-meis.aist.group/ | Mərkəzləşdirilmiş Elektron İnformasiya Sistemi |
-
     And edited all files in the review section of the program
-      | Program Icon | First File   | Second File  | Video File   |
-      | QAAT.png     | EndToEnd.pdf | EndToEnd.pdf | programs.mp4 |
     When selects the save button to create a new program
     Then the program "Light Future" is successfully created
-
-
-    #Butun melumatlarin ve fayllarin redakte edilmesi
-    #Axtarish hissesinde program adi ve melumatin yenilemesini yoxlanilmasi
-    #Redakte edildikden sonra melumatlarin yoxlanilmasi
-    #Redakte edildikden sonra faylarin yoxlanilmasi
+    And all edited information is displayed in the review section of the program
+      | PROGRAM NAME | KEYWORD           | PROGRAM ADDRESS              | API URL                      | NOTE                                           |
+      | Light Future | Keep your head up | https://dev-meis.aist.group/ | https://dev-meis.aist.group/ | Mərkəzləşdirilmiş Elektron İnformasiya Sistemi |
+    Then the "edited" logo is displayed in the review section of the program
+    Then the "edited" video instruction file is displayed in the review section of the program
+    Then the "edited" instruction file is displayed in the review section of the program
+    Then the "edited" another instruction file is displayed in the review section of the program
+    When user selects delete button to delete the program
+    Then the "edited" program is successfully deleted
+    #Test ssenarilər:
+    #14.Proqram daxilində bütün məlumatların və faylların redaktə olunması
+    #15.Axtarış modulunda proqram adının və məlumatların yenilənməsinin test edilməsi
+    #16.Redaktə əməliyyatından sonra məlumatların düzgünlüyünün yoxlanılması
+    #17.Redaktə əməliyyatından sonra faylların düzgünlüyünün yoxlanılması

@@ -8,12 +8,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -114,7 +115,7 @@ public class programs_Steps {
 
     @Then("the program {string} is successfully created")
     public void theProgramIsSuccessfullyCreated(String selection) {
-        if(selection.contains("Bright Future")){
+        if (selection.contains("Bright Future")) {
             ReusableMethods.wait(1);
             page.searchInput.sendKeys("Bright Future");
             ReusableMethods.wait(3);
@@ -124,15 +125,15 @@ public class programs_Steps {
             ReusableMethods.wait(1);
             page.createdProq.click();
             ReusableMethods.wait(3);
-        }   else if(selection.contains("Light Future")){
+        } else if (selection.contains("Light Future")) {
             ReusableMethods.wait(1);
-            page.searchInput.sendKeys("Bright Future");
+            page.searchInput.sendKeys("Light Future");
             ReusableMethods.wait(3);
-            ReusableMethods.flash(page.createdProq, getDriver());
-            Assert.assertTrue("Test.png şəkli DOM-da görünmür!", page.programName.isDisplayed());
-            Assert.assertTrue("Light Future", page.createdProq.isDisplayed());
+            ReusableMethods.flash(page.createdProgSecond, getDriver());
+            Assert.assertTrue("QAAT.png şəkli DOM-da görünmür!", page.programNameSecond.isDisplayed());
+            Assert.assertTrue("Light Future", page.createdProgSecond.isDisplayed());
             ReusableMethods.wait(1);
-            page.createdProq.click();
+            page.createdProgSecond.click();
             ReusableMethods.wait(3);
         }
     }
@@ -374,11 +375,17 @@ public class programs_Steps {
         ReusableMethods.wait(2);
     }
 
-    @Then("the program is successfully deleted")
-    public void theProgramIsSuccessfullyDeleted() {
-        page.searchInput.sendKeys("Bright Future");
-        ReusableMethods.wait(3);
-        ReusableMethods.assertElementNotDisplayed(page.createdProq);
+    @Then("the {string} program is successfully deleted")
+    public void theProgramIsSuccessfullyDeleted(String selection) {
+        if (selection.contains("new")) {
+            page.searchInput.sendKeys("Bright Future");
+            ReusableMethods.wait(3);
+            ReusableMethods.assertElementNotDisplayed(page.createdProq);
+        } else if (selection.contains("edited")) {
+            page.searchInput.sendKeys("Light Future");
+            ReusableMethods.wait(3);
+            ReusableMethods.assertElementNotDisplayed(page.createdProgSecond);
+        }
     }
 
     @And("selects founded user from table")
@@ -408,7 +415,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconAnotherFileBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(2);
     }
 
     @Then("all information is displayed in the review section of the program")
@@ -454,33 +461,56 @@ public class programs_Steps {
         }
     }
 
-    @Then("logo is displayed in the review section of the program")
-    public void logoIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.iconButton, getDriver());
-        Assert.assertTrue("Logo görünmür", page.programIconCheck.isDisplayed());
-        Assert.assertTrue("Test.png yazısı yoxdur", page.iconText.isDisplayed());
+    @Then("the {string} logo is displayed in the review section of the program")
+    public void theLogoIsDisplayedInTheReviewSectionOfTheProgram(String selection) {
+        if (selection.contains("new")) {
+            ReusableMethods.flash(page.iconButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.programIconCheck.isDisplayed());
+            Assert.assertTrue("Test.png yazısı yoxdur", page.iconText.isDisplayed());
+        } else if (selection.contains("edited")) {
+            ReusableMethods.flash(page.iconButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.programIconCheck.isDisplayed());
+            Assert.assertTrue("QAAT.png yazısı yoxdur", page.iconTextSecond.isDisplayed());
+        }
     }
 
-    @Then("video instruction file is displayed in the review section of the program")
-    public void videoInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.VideoButton, getDriver());
-        Assert.assertTrue("Logo görünmür", page.videoIcon.isDisplayed());
-        Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
-
+    @Then("the {string} video instruction file is displayed in the review section of the program")
+    public void theVideoInstructionFileIsDisplayedInTheReviewSectionOfTheProgram(String selection) {
+        if (selection.contains("new")) {
+            ReusableMethods.flash(page.VideoButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.videoIcon.isDisplayed());
+            Assert.assertTrue("Video yazısı yoxdur", page.fileText.isDisplayed());
+        } else if (selection.contains("edited")) {
+            ReusableMethods.flash(page.VideoButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.videoIcon.isDisplayed());
+            Assert.assertTrue("Video yazısı yoxdur", page.fileTextSecond.isDisplayed());
+        }
     }
 
-    @Then("instruction file is displayed in the review section of the program")
-    public void instructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.fileButton, getDriver());
-        Assert.assertTrue("Logo görünmür", page.fileIcon.isDisplayed());
-        Assert.assertTrue("Test.png yazısı yoxdur", page.videoText.isDisplayed());
+    @Then("the {string} instruction file is displayed in the review section of the program")
+    public void theInstructionFileIsDisplayedInTheReviewSectionOfTheProgram(String selection) {
+        if (selection.contains("new")) {
+            ReusableMethods.flash(page.fileButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.fileIcon.isDisplayed());
+            Assert.assertTrue("Pdf yoxdur", page.videoText.isDisplayed());
+        } else if (selection.contains("edited")) {
+            ReusableMethods.flash(page.fileButton, getDriver());
+            Assert.assertTrue("Logo görünmür", page.fileIcon.isDisplayed());
+            Assert.assertTrue("Test.png yazısı yoxdur", page.videoTextSecond.isDisplayed());
+        }
     }
 
-    @Then("the another instruction file is displayed in the review section of the program")
-    public void theAnotherInstructionFileIsDisplayedInTheReviewSectionOfTheProgram() {
-        ReusableMethods.flash(page.otherFile, getDriver());
-        Assert.assertTrue("Logo görünmür", page.otherIcon.isDisplayed());
-        Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
+    @Then("the {string} another instruction file is displayed in the review section of the program")
+    public void theAnotherInstructionFileIsDisplayedInTheReviewSectionOfTheProgram(String selection) {
+        if (selection.contains("new")) {
+            ReusableMethods.flash(page.otherFile, getDriver());
+            Assert.assertTrue("Logo görünmür", page.otherIcon.isDisplayed());
+            Assert.assertTrue("Test.png yazısı yoxdur", page.fileText.isDisplayed());
+        } else if (selection.contains("edited")) {
+            ReusableMethods.flash(page.otherFile, getDriver());
+            Assert.assertTrue("Logo görünmür", page.otherIcon.isDisplayed());
+            Assert.assertTrue("Test.png yazısı yoxdur", page.fileTextSecond.isDisplayed());
+        }
     }
 
     @And("edited all information in the review section of the program")
@@ -521,19 +551,234 @@ public class programs_Steps {
     }
 
     @And("edited all files in the review section of the program")
-    public void editedAllFilesInTheReviewSectionOfTheProgram(DataTable dataTable) {
-        String path = "C:\\Users\\User\\Desktop\\TestFiles\\QaAutomation.pdf";
+    public void editedAllFilesInTheReviewSectionOfTheProgram() {
+        String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
+        page.changeIcon.click();
+        ReusableMethods.robotClassDosyaYukleme(path);
+        ReusableMethods.wait(1);
+        page.progDeleteAccept.click();
+        ReusableMethods.wait(1);
 
+        page.deleteFileFirst.click();
+        ReusableMethods.wait(1);
+        page.progDeleteAccept.click();
+
+        page.deleteFileSecond.click();
+        ReusableMethods.wait(1);
+        page.progDeleteAccept.click();
+
+        ReusableMethods.wait(1);
+        page.deleteFileFirst.click();
+        ReusableMethods.wait(1);
+        page.progDeleteAccept.click();
+
+        String photoPath1 = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
+        page.iconInstructionBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath1);
+        ReusableMethods.wait(3);
+
+        String photoPath = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
+        page.iconAnotherFileBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath);
+        ReusableMethods.wait(2);
+
+        String photoPath2 = "C:\\Users\\User\\Desktop\\TestFiles\\programs.mp4";
+        page.iconVideoBtn.click();
+        ReusableMethods.robotClassDosyaYukleme(photoPath2);
+        ReusableMethods.wait(3);
+    }
+
+    @And("all edited information is displayed in the review section of the program")
+    public void allEditedInformationIsDisplayedInTheReviewSectionOfTheProgram(DataTable dataTable) {
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> row : data) {
-            String  programIcon = row.get("Program Icon");
-            String firstFile = row.get("First File");
-            String secondFile = row.get("Second File");
-            String videoFile = row.get("Video File");
+            String programName = row.get("PROGRAM NAME");
+            String keyword = row.get("KEYWORD");
+            String programAddress = row.get("PROGRAM ADDRESS");
+            String apiUrl = row.get("API URL");
+            String note = row.get("NOTE");
 
 
+            ReusableMethods.flash(page.programNameField, getDriver());
+            WebElement inputValue = getDriver().findElement(By.xpath("//label[contains(., 'Proqramın adı')]/following::input[1]"));
+            String progNameEx = inputValue.getAttribute("value");
+            System.out.println("actual = " + progNameEx);
+            Assert.assertEquals(progNameEx, programName);
 
+            ReusableMethods.flash(page.kewwordField, getDriver());
+            WebElement inputValue2 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[2]"));
+            String progKWEx = inputValue2.getAttribute("value");
+            System.out.println("actual = " + progKWEx);
+            Assert.assertEquals(progKWEx, keyword);
 
+            ReusableMethods.flash(page.programAdressField, getDriver());
+            WebElement inputValue3 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[3]"));
+            String progAddress = inputValue3.getAttribute("value");
+            System.out.println("actual = " + progAddress);
+            Assert.assertEquals(progAddress, programAddress);
+
+            ReusableMethods.flash(page.apiIntegrationField, getDriver());
+            WebElement inputValue4 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[4]"));
+            String progApi = inputValue4.getAttribute("value");
+            System.out.println("actual = " + progApi);
+            Assert.assertEquals(apiUrl, progApi);
+
+            ReusableMethods.flash(page.noteAboutProgramField, getDriver());
+            WebElement inputValue5 = getDriver().findElement(By.xpath(" //following::textarea[1]"));
+            String progNote = inputValue5.getAttribute("value");
+            System.out.println("actual = " + progNote);
+            Assert.assertEquals(progNote, note);
+        }
+    }
+
+    @And("the user selects the {string} button")
+    public void theUserSelectsTheButton(String selection) {
+        if (selection.contains("Operations on Modules")) {
+          page.operationModuleButton.click();
+          ReusableMethods.wait(1);
+        }   else if(selection.contains("User category")) {
+          page.userCategoryButton.click();
+          ReusableMethods.wait(1);
+        } else if(selection.contains("Edit Module")) {
+          page.editModuleButton.click();
+          ReusableMethods.wait(1);
+        }else if(selection.contains("Delete Module")) {
+          page.deleteModuleButton.click();
+          ReusableMethods.wait(1);
+          page.progDeleteAccept.click();
+          ReusableMethods.wait(1);
+        }
+    }
+
+    @And("the module {string} name is entered")
+    public void theModuleNameIsEntered(String selection) {
+        if (selection.contains("First Module")) {
+            page.inputNameModule.sendKeys("First Module");
+        } else if (selection.contains("Second Module")) {
+            page.inputNameModule.clear();
+            ReusableMethods.wait(1);
+            page.inputNameModule.sendKeys("Second Module");
+        }
+    }
+
+    @And("the keyword {string} is entered")
+    public void theKeywordIsEntered(String selection) {
+        if (selection.contains("First Key")) {
+            page.inputKeyword.sendKeys("First Key");
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Second Key")) {
+            page.inputKeyword.clear();
+            ReusableMethods.wait(1);
+            page.inputKeyword.sendKeys("Second Key");
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("the information {string} details are entered")
+    public void theInformationDetailsAreEntered(String selection) {
+        if (selection.contains("First module information")) {
+            page.infoButton.click();
+            ReusableMethods.wait(1);
+            page.infoInput.sendKeys("First module information");
+            ReusableMethods.wait(1);
+            page.saveChangesModule.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("Second module information")) {
+            page.infoButton.click();
+            ReusableMethods.wait(1);
+            page.infoInput.clear();
+            ReusableMethods.wait(1);
+            page.infoInput.sendKeys("Second module information");
+            ReusableMethods.wait(1);
+            page.saveChangesModule.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("the new module is confirmed")
+    public void theNewModuleIsConfirmed() {
+        ReusableMethods.wait(1);
+        page.acceptModule.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the module {string} name details are displayed in the module modal window")
+    public void theModuleNameDetailsAreDisplayedInTheModuleModalWindow(String selection) {
+        if (selection.contains("First Module")) {
+            ReusableMethods.flash(page.moduleNameColumnTable,getDriver());
+            ReusableMethods.wait(1);
+            String expected = "First Module";
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(),expected);
+        } else if (selection.contains("Second Module")) {
+            ReusableMethods.flash(page.moduleNameColumnTable,getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Second Module";
+            Assert.assertEquals(page.moduleNameColumnTable.getText().trim(),expected);
+        }
+    }
+
+    @Then("the module {string} keyword details are displayed in the module modal window")
+    public void theModuleKeywordDetailsAreDisplayedInTheModuleModalWindow(String selection) {
+        if (selection.contains("First Key")) {
+            ReusableMethods.flash(page.moduleKeywordColumnTable,getDriver());
+            ReusableMethods.wait(1);
+            String expected = "First Key";
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(),expected);
+        } else if (selection.contains("Second Key")) {
+            ReusableMethods.flash(page.moduleKeywordColumnTable,getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Second Key";
+            Assert.assertEquals(page.moduleKeywordColumnTable.getText().trim(),expected);
+        }
+    }
+
+    @Then("the module {string} information details are displayed in the module modal window")
+    public void theModuleInformationDetailsAreDisplayedInTheModuleModalWindow(String selection) {
+        if (selection.contains("First module information")) {
+            ReusableMethods.flash(page.infoHover,getDriver());
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(page.infoHover).perform();
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+            WebElement tooltip = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector("div.mat-mdc-tooltip") // və ya "div.mat-tooltip" layihədən asılıdır
+                    )
+            );
+
+            String tooltipText = tooltip.getText().trim();
+            Assert.assertEquals(tooltipText, "First module information");
+
+        } else if (selection.contains("Second module information")) {
+            ReusableMethods.flash(page.infoHover,getDriver());
+            ReusableMethods.wait(1);
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(page.infoHover).perform();
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+            WebElement tooltip = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector("div.mat-mdc-tooltip") // və ya "div.mat-tooltip" layihədən asılıdır
+                    )
+            );
+            String tooltipText = tooltip.getText().trim();
+            Assert.assertEquals(tooltipText, "Second module information");
+        }
+    }
+
+    @And("the module modal window is closed")
+    public void theModuleModalWindowIsClosed() {
+        page.closeModelWindow.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the module has been successfully deleted")
+    public void theModuleHasBeenSuccessfullyDeleted() {
+        try {
+            if (page.moduleNameColumnTable.isDisplayed()) {
+                throw new AssertionError("❌ Xəta:Silinən modul görünür");
+            }
+        } catch (NoSuchElementException | StaleElementReferenceException e) {
+            System.out.println("✅ Silinən modul səhifədə yoxdur – gözlənilən vəziyyət.");
         }
     }
 }

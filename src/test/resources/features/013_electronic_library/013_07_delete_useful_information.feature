@@ -4,7 +4,7 @@ Feature:Delete useful information
   I want to delete an existing useful information from the system,
   So that outdated, irrelevant, or incorrect content is removed and employees or participants only access valid and useful training resources.
 
-  @deleteUsefulInformation @new
+  @deleteUsefulInformation @new @test
   Scenario: Check if user can delete new useful information
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the control panel

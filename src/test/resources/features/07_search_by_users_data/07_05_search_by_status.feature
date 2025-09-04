@@ -1,7 +1,7 @@
 @all  @SearchParams @new
 Feature: Search by user data
 
-  @search_by_status
+  @search_by_status @test
   Scenario Outline: Check users search parameters by administrator approval
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "AG-MEIS" system
     And goes to the control panel

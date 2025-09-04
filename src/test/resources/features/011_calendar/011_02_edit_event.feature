@@ -4,7 +4,7 @@ Feature: Edit Calendar
   I want to edit an existing calendar
   So that I can update its information
 
-  @editEvent @new
+  @editEvent @new @test
   Scenario: Check if the user can edit a new event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi

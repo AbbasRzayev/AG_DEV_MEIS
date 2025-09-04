@@ -4,7 +4,7 @@ Feature:Useful information email notification
   I want to send the created useful information to the assigned person’s email address,
   So that the recipient is immediately informed and can conveniently access the training content directly from their inbox.
 
-  @usefulInformationEmailNotification @new
+  @usefulInformationEmailNotification @new @test
   Scenario: Check if user can sent useful information notification to the assigned persons email address
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the control panel

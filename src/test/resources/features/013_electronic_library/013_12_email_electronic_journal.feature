@@ -4,7 +4,7 @@ Feature:Electronic journal notification
   I want to send the created electronic journal to the assigned person’s email address,
   So that the recipient is immediately informed and can conveniently access the training content directly from their inbox.
 
-  @electronicJournalEmailNotification @new
+  @electronicJournalEmailNotification @new @test
   Scenario: Check if user can sent electronic journal notification to the assigned persons email address
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Elektron jurnalın əlavə edilməsi

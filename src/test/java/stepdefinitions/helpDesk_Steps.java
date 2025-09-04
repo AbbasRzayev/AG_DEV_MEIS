@@ -1967,7 +1967,8 @@ public class helpDesk_Steps {
     @And("the executor navigates to the request review section using the detailed button")
     public void theExecutorNavigatesToTheRequestReviewSectionUsingTheDetailedButton() {
         ReusableMethods.wait(3);
-        page.detailedBtn.click();
+//        page.detailedBtn.click();
+        ReusableMethods.clickByJavaScript(page.detailedBtn);
         ReusableMethods.wait(2);
     }
 

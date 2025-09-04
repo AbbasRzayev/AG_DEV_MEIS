@@ -4,7 +4,7 @@ Feature:Create electronic journal
   I want to create a new electronic journal by adding its title, content, attachments,
   So that employees or participants can easily access and benefit from the electronic journal in the system
 
-  @electronicJournal @new
+  @electronicJournal @new @test
   Scenario: Check if user can add new electronic journal
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Elektron jurnalın əlavə edilməsi

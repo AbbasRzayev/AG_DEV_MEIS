@@ -24,6 +24,8 @@ public class programs_Page {
     public WebElement apiIntegrationField;
     @FindBy(xpath = "(//following::p)[1]")
     public WebElement iconButton;
+    @FindBy(xpath = "//mat-icon[normalize-space(text())='change_circle']")
+    public WebElement changeIcon;
     @FindBy(xpath = "(//following::p)[2]")
     public WebElement fileButton;
     @FindBy(xpath = "(//following::p)[3]")
@@ -32,10 +34,16 @@ public class programs_Page {
     public WebElement otherFile;
     @FindBy(xpath = "//p[text()='Test.png']")
     public WebElement iconText;
+    @FindBy(xpath = "//p[text()='QAAT.png']")
+    public WebElement iconTextSecond;
     @FindBy(xpath = "//p[text()='QA.pdf']")
     public WebElement fileText;
+    @FindBy(xpath = "//p[text()='EndToEnd.pdf']")
+    public WebElement fileTextSecond;
     @FindBy(xpath = "//p[text()='AutomatedTesting.mp4']")
     public WebElement videoText;
+    @FindBy(xpath = "//p[text()='programs.mp4']")
+    public WebElement videoTextSecond;
     @FindBy(css = "img.file-thumbnail")
     public WebElement programIconCheck;
     @FindBy(xpath = "(//div[contains(@class, 'img-wrap')]//img[@alt='File Type Icon'])[1]")
@@ -56,8 +64,12 @@ public class programs_Page {
     public WebElement searchInput;
     @FindBy(xpath = "//p[text()='Bright Future']")
     public WebElement createdProq;
+    @FindBy(xpath = "//p[text()='Light Future']")
+    public WebElement createdProgSecond;
     @FindBy(xpath = "//img[@alt='Test.png']")
     public WebElement programName;
+    @FindBy(xpath = "//img[@alt='QAAT.png']")
+    public WebElement programNameSecond;
     @FindBy(xpath = "//p[text()='AistGroup']")
     public WebElement createdProqNew;
     @FindBy(xpath = "//span[contains(., 'Modullar üzərində əməliyyatlar')]")
@@ -108,4 +120,36 @@ public class programs_Page {
     public WebElement progDelete;
     @FindBy(xpath = "//span[contains(., ' Bəli ')]")
     public WebElement progDeleteAccept;
+    @FindBy(xpath = "(//div[contains(@class,'action-icon') and contains(@class,'delete')])[1]")
+    public WebElement deleteFileFirst;
+    @FindBy(xpath = "(//div[contains(@class,'action-icon') and contains(@class,'delete')])[2]")
+    public WebElement deleteFileSecond;
+    @FindBy(xpath = "(//input[@formcontrolname='name'])[2]")
+    public WebElement inputNameModule;
+    @FindBy(xpath = "//input[@formcontrolname='keyWord']")
+    public WebElement inputKeyword;
+    @FindBy(xpath = "//span[normalize-space()='Modullar üzərində əməliyyatlar']")
+    public WebElement operationModuleButton;
+    @FindBy(xpath = "//span[normalize-space()='İstifadəçi kateqoriyaları əməliyyatlar']")
+    public WebElement userCategoryButton;
+    @FindBy(xpath = "//button[.//img[contains(@src,'edit-colorless.svg')]]")
+    public WebElement editModuleButton;
+    @FindBy(xpath = "//button[.//img[contains(@src,'delete-colorless.svg')]]")
+    public WebElement deleteModuleButton;
+    @FindBy(xpath = "//button[@mattooltip='Məlumat']")
+    public WebElement infoButton;
+    @FindBy(xpath = "//textarea[@rows='4']")
+    public WebElement infoInput;
+    @FindBy(xpath = "//span[normalize-space()='Saxla']")
+    public WebElement saveChangesModule;
+    @FindBy(xpath = "//button[@mattooltip='Təsdiq']")
+    public WebElement acceptModule;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-name')])[1]")
+    public WebElement moduleNameColumnTable;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-keyWord')])[1]")
+    public WebElement moduleKeywordColumnTable;
+    @FindBy(xpath = "(//button[.//mat-icon[normalize-space(.)='info_fill']])[1]")
+    public WebElement infoHover;
+    @FindBy(xpath = "//span[normalize-space()='Bağla']")
+    public WebElement closeModelWindow;
 }

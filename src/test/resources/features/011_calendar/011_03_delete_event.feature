@@ -4,7 +4,7 @@ Feature: Delete Calendar
   I want to delete an existing calendar
   So that I can remove calendars that are no longer needed
 
-  @deleteEvent @new
+  @deleteEvent @new @test
   Scenario: Check if the user can edit a new event
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And goes to the calendar tab

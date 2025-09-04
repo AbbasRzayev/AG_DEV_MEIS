@@ -4,7 +4,7 @@ Feature:Training material email notification
   I want to send the created training material to the assigned person’s email address,
   So that the recipient is immediately informed and can conveniently access the training content directly from their inbox.
 
-  @trainingMaterialEmailNotification
+  @trainingMaterialEmailNotification @test
   Scenario: Check if user can sent training materials notification to the assigned persons email address
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
   #Təlim materialın əlavə edilməsi

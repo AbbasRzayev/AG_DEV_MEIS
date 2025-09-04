@@ -1005,6 +1005,122 @@ public class electronLibrary_Steps {
                 }
                 getDriver().switchTo().defaultContent();
             }
+        }else if (selection.contains("help-desk-assigned")) {
+            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            for (Map<String, String> row : data) {
+
+                String direction = row.get("İstiqamət");
+                String type = row.get("Növü");
+                String description = row.get("Təsvir");
+                String priority = row.get("Prioritet");
+                String requester = row.get("Müraciət edən");
+                String executor = row.get("İcraçı");
+                String pc = row.get("İstifadəçi kompüterinin adı");
+                String requestStatus = row.get("Cari nəticə");
+                String note = row.get("Qeyd");
+
+//                Assert.assertTrue(page.helpDeskHeader.isDisplayed());
+//                ReusableMethods.wait(1);
+
+                ReusableMethods.wait(1);
+                List<WebElement> iframes = getDriver().findElements(By.tagName("iframe"));
+                System.out.println("Iframe sayı: " + iframes.size());
+
+                boolean found = false;
+                for (int i = 0; i < iframes.size(); i++) {
+                    getDriver().switchTo().defaultContent();
+                    getDriver().switchTo().frame(i);
+
+                    List<WebElement> elements = getDriver().findElements(By.xpath("//strong"));
+                    if (!elements.isEmpty()) {
+                        System.out.println("Tapıldı iframe index: " + i);
+                        found = true;
+
+                        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                        String directionNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'İstiqamət:')]"))
+                        );
+                        String directionNoteMail = directionNote.split("\n")[0].trim();
+                        System.out.println("directionNoteMail = " + directionNoteMail);
+                        Assert.assertEquals(directionNoteMail, direction);
+
+                        String noteDate = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Tarix:')]"))
+                        );
+                        String noteDateMail = noteDate.split("\n")[0].trim();
+                        System.out.println("noteDateMail = " + noteDateMail);
+                        LocalDate today = LocalDate.now();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                        String formattedDate = today.format(formatter);
+                        Assert.assertEquals(formattedDate, noteDateMail);
+
+                        String typeNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Növü:')]"))
+                        );
+                        String typeNoteMail = typeNote.split("\n")[0].trim();
+                        System.out.println("typeNoteMail = " + typeNoteMail);
+                        Assert.assertEquals(typeNoteMail, type);
+
+                        String descriptionNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Təsvir:')]"))
+                        );
+                        String descriptionNoteMail = descriptionNote.split("\n")[0].trim();
+                        System.out.println("descriptionNoteMail = " + descriptionNoteMail);
+                        Assert.assertEquals(descriptionNoteMail, description);
+
+                        String priorityNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Prioritet:')]"))
+                        );
+                        String priorityNoteMail = priorityNote.split("\n")[0].trim();
+                        System.out.println("priorityNoteMail = " + priorityNoteMail);
+                        Assert.assertEquals(priorityNoteMail, priority);
+
+                        String requesterNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Müraciət edən:')]"))
+                        );
+                        String requesterNoteMail = requesterNote.split("\n")[0].trim();
+                        System.out.println("requesterNoteMail = " + requesterNoteMail);
+                        Assert.assertEquals(requesterNoteMail, requester);
+
+                        String executorNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'İcraçı:')]"))
+                        );
+                        String executorNoteMail = executorNote.split("\n")[0].trim();
+                        System.out.println("executorNoteMail = " + executorNoteMail);
+                        Assert.assertEquals(executorNoteMail, executor);
+
+                        String pcNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'İstifadəçi kompüterinin adı:')]"))
+                        );
+                        String pcNoteMail = pcNote.split("\n")[0].trim();
+                        System.out.println("pcNoteMail = " + pcNoteMail);
+                        Assert.assertEquals(pcNoteMail, pc);
+
+                        String requestStatusNote = (String) js.executeScript(
+                                "return arguments[0].nextSibling.textContent.trim();",
+                                getDriver().findElement(By.xpath("//strong[contains(text(),'Cari nəticə:')]"))
+                        );
+                        String requestStatusMail = requestStatus.split("\n")[0].trim();
+                        System.out.println("requestStatusMail = " + requestStatusMail);
+                        Assert.assertEquals(requestStatusMail, requestStatus);
+
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("Element heç bir iframe-də tapılmadı!");
+                }
+                getDriver().switchTo().defaultContent();
+            }
         } else if (selection.contains("useful information")) {
             List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
             for (Map<String, String> row : data) {

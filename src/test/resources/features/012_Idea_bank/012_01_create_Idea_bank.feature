@@ -4,7 +4,7 @@ Feature:Idea Bank
   I want to create, update the status, like/unlike, comment, and delete ideas in the Idea Bank
   So that I can share my ideas, get feedback, and manage their lifecycle effectively.
 
-  @new @createIdea
+  @new @createIdea @test
   Scenario: Check if user can add or change status then delete idea bank
     Given user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     #Statusların sayğac dəyərlərinin götürülməsi

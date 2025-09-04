@@ -28,7 +28,7 @@ Feature: Email notifications for Help Desk events
   Scenario: Check if the notification about the assigned request reaches the requesters email
     And the user "Davud" enters to the e-mail address
     When opens notification about "help-desk-redirect" in the email
-    Then all information about the "help-desk-redirect" is displayed in the email notification
+    Then all information about the "help-desk-assigned" is displayed in the email notification
       | İstiqamət        | Növü | Təsvir                                       | Prioritet | Müraciət edən  | İcraçı        | İstifadəçi kompüterinin adı | Cari nəticə |
       | Digər problemlər | Xəta | Xahiş olunur ki müraciətimə təcili baxılsın! | Yüksək    | İbrahim Rzayev | Davud Zamanov | PC_7788                     | Yeni        |
     Then file for "help-desk" is displayed in the email notification
