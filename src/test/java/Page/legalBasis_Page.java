@@ -41,7 +41,7 @@ public class legalBasis_Page {
     public WebElement statusSelect;
     @FindBy(xpath = "//span[text()='Fayl əlavə edin']")
     public WebElement addFile;
-    @FindBy(xpath = "//span[text()='Yadda saxla']")
+    @FindBy(xpath = "//span[contains(.,'Yadda saxla')]")
     public WebElement yestBtn;
     @FindBy(xpath = "(//span[@class='mdc-list-item__content'])[6]")
     public WebElement legalBasisSIdeBar;

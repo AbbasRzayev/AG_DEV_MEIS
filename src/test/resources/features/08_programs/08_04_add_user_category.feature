@@ -58,13 +58,13 @@ Feature: Add user categories for programs
     Then the "new" program is successfully deleted
    #Test Ssenariləri:
    #28.İstifadəçi kateqoriya adının əlavə edilməsinin yoxlanılması
-   #29.Modul açar sözünün əlavə edilməsinin yoxlanılması
-   #30.Modul məlumatının əlavə edilməsinin yoxlanılması
+   #29.Kateqoriya açar sözünün əlavə edilməsinin yoxlanılması
+   #30.Kateqoriya məlumatının əlavə edilməsinin yoxlanılması
    #31.İstifadəçi kateqoriyaya modulun təyin edilməsinin yoxlanılması
-   #32.Əlavə edilmiş modul adının "Modul üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
-   #33.Əlavə edilmiş modul açar sözünün "Modul üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
-   #34.Əlavə edilmiş modul məlumatının "Modul üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
-   #35.Modul məlumatlarının redaktə olunmasının yoxlanılması
-   #36.Redaktə əməliyyatından sonra modul məlumatlarının düzgün yenilənməsinin yoxlanılması
-   #37.Modul məlumatının silinməsinin yoxlanılması
-   #38.Silinmə əməliyyatından sonra modul məlumatlarının tam silindiyinin yoxlanılması
+   #32.Əlavə edilmiş kateqoriya adının "Kateqoriya üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
+   #33.Əlavə edilmiş kateqoriya açar sözünün "Kateqoriya üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
+   #34.Əlavə edilmiş kateqoriya məlumatının "Kateqoriya üzərində əməliyyatlar" modal pəncərəsində əks olunmasının yoxlanılması
+   #35.Kateqoriya məlumatlarının redaktə olunmasının yoxlanılması
+   #36.Redaktə əməliyyatından sonra kateqoriya məlumatlarının düzgün yenilənməsinin yoxlanılması
+   #37.Kateqoriya məlumatının silinməsinin yoxlanılması
+   #38.Silinmə əməliyyatından sonra kateqoriya məlumatlarının tam silindiyinin yoxlanılması

@@ -1,0 +1,13 @@
+file:src/test/resources/features/08_programs/08_01_programs.feature:8
+file:src/test/resources/features/013_electronic_library/013_06_edit_useful_information.feature:8
+file:src/test/resources/features/013_electronic_library/013_01_create_training_material.feature:8
+file:src/test/resources/features/06_structure_and_duties/06_03_duty_add_and_delete.feature:5
+file:src/test/resources/features/08_programs/08_03_add_program_modules.feature:14
+file:src/test/resources/features/010_help_desk/010_01_create_new_request.feature:8
+file:src/test/resources/features/08_programs/08_04_add_user_category.feature:14
+file:src/test/resources/features/010_help_desk/010_04_executor_accepts_the_request.feature:8
+file:src/test/resources/features/010_help_desk/010_02_sent_requests_search_filters.feature:147
+file:src/test/resources/features/08_programs/08_02_edit_programs.feature:16
+file:src/test/resources/features/012_Idea_bank/012_01_create_Idea_bank.feature:8
+file:src/test/resources/features/013_electronic_library/013_10_edit_electronic_journal.feature:8
+file:src/test/resources/features/013_electronic_library/013_02_edit_training_material.feature:8

@@ -233,8 +233,11 @@ public class programs_Steps {
 
     @And("switches to the user programs tab")
     public void switchesToTheUserProgramsTab() {
+        ReusableMethods.wait(2);
+        structure.foundedUser.click();
+        ReusableMethods.wait(2);
         page.switchProgramTab.click();
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(7);
     }
 
     @And("finds the newly added program by using search input in the programs tab")
@@ -889,5 +892,73 @@ public class programs_Steps {
         } catch (NoSuchElementException | StaleElementReferenceException e) {
             System.out.println("✅ Silinən kategoriya səhifədə yoxdur – gözlənilən vəziyyət.");
         }
+    }
+
+    @And("the program {string} is searched")
+    public void theProgramIsSearched(String selection) {
+        if (selection.contains("Bright Future")) {
+            page.searchInputProgram.sendKeys("Bright Future");
+            ReusableMethods.wait(3);
+        }
+    }
+
+    @And("the user {string} the program")
+    public void theUserTheProgram(String selection) {
+        if (selection.contains("activates")) {
+            page.switcherToggle.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("the program is selected for assigning user categories and modules")
+    public void theProgramIsSelectedForAssigningUserCategoriesAndModules() {
+        page.createdProq.click();
+        ReusableMethods.wait(2);
+    }
+
+    @And("the {string} module is selected for the program")
+    public void theModuleIsSelectedForTheProgram(String selection) {
+        if (selection.contains("First Module")) {
+            page.selectFirstModule.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @And("the {string} category is selected for the program")
+    public void theCategoryIsSelectedForTheProgram(String selection) {
+        if (selection.contains("First Category")) {
+            page.selectFirstCategory.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("the navigation to the program has been successful")
+    public void theNavigationToTheProgramHasBeenSuccessful() {
+        String originalWindow = getDriver().getWindowHandle();
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.createdProg,getDriver());
+        page.createdProg.click();
+        for (String windowHandle : getDriver().getWindowHandles()) {
+            if (!windowHandle.equals(originalWindow)) {
+                getDriver().switchTo().window(windowHandle);
+                break;
+            }
+        }
+        ReusableMethods.wait(3);
+        String actualUrl = getDriver().getCurrentUrl();
+        Assert.assertEquals(actualUrl, getDriver().getCurrentUrl());
+        getDriver().switchTo().window(originalWindow);
+    }
+
+    @And("switches to the programs tab from control panel")
+    public void switchesToTheProgramsTabFromControlPanel() {
+        page.programTabControlPanel.click();
+        ReusableMethods.wait(1);
+    }
+
+    @And("the program is selected")
+    public void theProgramIsSelected() {
+        page.createdProq.click();
+        ReusableMethods.wait(1);
     }
 }

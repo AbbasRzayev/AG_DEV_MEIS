@@ -64,6 +64,8 @@ public class programs_Page {
     public WebElement searchInput;
     @FindBy(xpath = "//p[text()='Bright Future']")
     public WebElement createdProq;
+    @FindBy(xpath = "//h6[text()='Bright Future']")
+    public WebElement createdProg;
     @FindBy(xpath = "//p[text()='Light Future']")
     public WebElement createdProgSecond;
     @FindBy(xpath = "//img[@alt='Test.png']")
@@ -88,7 +90,7 @@ public class programs_Page {
     public WebElement modulList;
     @FindBy(xpath = "//span[contains(.,'Proqramlaşdırma')]")
     public WebElement modulSelect;
-    @FindBy(xpath = "//span//span[contains(.,'Proqramları')]")
+    @FindBy(xpath = "//span[contains(.,'Proqramları')]")
     public WebElement switchProgramTab;
     @FindBy(xpath = "//*[@id=\"mat-input-29\"]")
     public WebElement progTabSearchField;
@@ -156,6 +158,15 @@ public class programs_Page {
     public WebElement modalSelectCategory;
     @FindBy(xpath = "//span[normalize-space()='First Module']")
     public WebElement selectFirstModule;
+    @FindBy(xpath = "//span[normalize-space()='First Category']")
+    public WebElement selectFirstCategory;
     @FindBy(xpath = "//span[normalize-space()='Second Module']")
     public WebElement selectSecondModule;
+    @FindBy(xpath = "//mat-label[normalize-space(.)='Axtarış']/ancestor::label/following-sibling::input")
+    public WebElement searchInputProgram;
+    @FindBy(xpath = "//div[@class='toggle-switch']")
+    public WebElement switcherToggle;
+    @FindBy(xpath = "//li[contains(.,'Proqramlar')]")
+    public WebElement programTabControlPanel;
+
 }
