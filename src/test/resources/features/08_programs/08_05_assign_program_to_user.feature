@@ -49,7 +49,7 @@ So that the user can access, manage, and utilize the assigned program within the
     And user with login "abbas.rzayev@aist.group" and password "Rabbas8888!!" logs into the "AG-MEIS" system
     And switches to the my programs tab
     And the program "Bright Future" is searched
-    Then the navigation to the program has been successful
+    Then the navigation to the "Bright Future" program has been successful
     And goes to the control panel
     And switches to the programs tab from control panel
     And the program "Bright Future" is searched

@@ -39,7 +39,6 @@ public class programs_Steps {
     public void selectNewProgramButton() {
         ReusableMethods.wait(2);
         page.newProgramButton.click();
-
     }
 
     @And("added data to the program name and to the keyword field")
@@ -899,6 +898,9 @@ public class programs_Steps {
         if (selection.contains("Bright Future")) {
             page.searchInputProgram.sendKeys("Bright Future");
             ReusableMethods.wait(3);
+        }     else if (selection.contains("E-Sened")) {
+            page.searchInputProgram.sendKeys("Elektron Sənəd Dövriyyəsi");
+            ReusableMethods.wait(3);
         }
     }
 
@@ -932,22 +934,41 @@ public class programs_Steps {
         }
     }
 
-    @Then("the navigation to the program has been successful")
-    public void theNavigationToTheProgramHasBeenSuccessful() {
-        String originalWindow = getDriver().getWindowHandle();
-        ReusableMethods.wait(1);
-        ReusableMethods.flash(page.createdProg,getDriver());
-        page.createdProg.click();
-        for (String windowHandle : getDriver().getWindowHandles()) {
-            if (!windowHandle.equals(originalWindow)) {
-                getDriver().switchTo().window(windowHandle);
-                break;
+    @Then("the navigation to the {string} program has been successful")
+    public void theNavigationToTheProgramHasBeenSuccessful(String program) {
+        if(program.contains("Bright Future")) {
+            String originalWindow = getDriver().getWindowHandle();
+            ReusableMethods.wait(1);
+            ReusableMethods.flash(page.createdProg, getDriver());
+            page.createdProg.click();
+            for (String windowHandle : getDriver().getWindowHandles()) {
+                if (!windowHandle.equals(originalWindow)) {
+                    getDriver().switchTo().window(windowHandle);
+                    break;
+                }
+
             }
+            ReusableMethods.wait(7);
+            String actualUrl = getDriver().getCurrentUrl();
+            Assert.assertEquals(actualUrl, getDriver().getCurrentUrl());
+            getDriver().switchTo().window(originalWindow);
+        }else if(program.contains("E-Sened")) {
+            String originalWindow = getDriver().getWindowHandle();
+            ReusableMethods.wait(3);
+            ReusableMethods.flash(page.createdProgEDocument, getDriver());
+            page.createdProgEDocument.click();
+            for (String windowHandle : getDriver().getWindowHandles()) {
+                if (!windowHandle.equals(originalWindow)) {
+                    getDriver().switchTo().window(windowHandle);
+                    break;
+                }
+
+            }
+            ReusableMethods.wait(15);
+            String actualUrl = getDriver().getCurrentUrl();
+            Assert.assertEquals(actualUrl, getDriver().getCurrentUrl());
+            getDriver().switchTo().window(originalWindow);
         }
-        ReusableMethods.wait(3);
-        String actualUrl = getDriver().getCurrentUrl();
-        Assert.assertEquals(actualUrl, getDriver().getCurrentUrl());
-        getDriver().switchTo().window(originalWindow);
     }
 
     @And("switches to the programs tab from control panel")

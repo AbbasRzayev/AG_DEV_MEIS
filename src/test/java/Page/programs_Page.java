@@ -66,6 +66,8 @@ public class programs_Page {
     public WebElement createdProq;
     @FindBy(xpath = "//h6[text()='Bright Future']")
     public WebElement createdProg;
+    @FindBy(xpath = "//h6[text()='Elektron Sənəd Dövriyyəsi']")
+    public WebElement createdProgEDocument;
     @FindBy(xpath = "//p[text()='Light Future']")
     public WebElement createdProgSecond;
     @FindBy(xpath = "//img[@alt='Test.png']")
