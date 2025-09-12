@@ -1,25 +1,35 @@
 pipeline {
-    agent any
+  agent any
+  options { timestamps(); ansiColor('xterm'); disableConcurrentBuilds() }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                // Jenkins repodan kodu çəkəcək
-                git 'https://github.com/AbbasRzayev/MEIS.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                // Maven ilə build/test
-                sh './mvnw clean test'
-            }
-        }
+  stages {
+    stage('Checkout') {
+      steps {
+        // bu job-un açıldığı repodan kodu çəkir
+        checkout scm
+        sh 'git rev-parse --short HEAD'
+      }
     }
 
-    post {
+    stage('Build & Test') {
+      steps {
+        // mvnw-yə icazə ver
+        sh 'chmod +x mvnw || true'
+        // Maven Wrapper ilə build+test
+        sh './mvnw -B -U clean test'
+      }
+      post {
         always {
-            junit '**/target/surefire-reports/*.xml'
+          // TestNG/JUnit reportları (sənin layihənə görə yolu saxlayıram)
+          junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml,target/failsafe-reports/*.xml'
         }
+      }
     }
+  }
+
+  post {
+    success { echo '✔ Build PASSED' }
+    failure { echo '❌ Build FAILED' }
+    always  { echo "Done: ${currentBuild.currentResult}" }
+  }
 }

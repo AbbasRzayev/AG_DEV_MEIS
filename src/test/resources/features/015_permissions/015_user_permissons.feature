@@ -16,28 +16,28 @@ Feature: User Permissions
     When admin selects Log in with user name button
     Then user can realize his "<opportunities>" in the MEIS system according to the permissions given to him
     Examples:
-      | permissions                                   | opportunities   |
-#      | Bütün istifadəçilərlə əməliyyatların aparılması | firstCase     |
-#      | Elanlar modulunun idarə edilməsi | secondCase    |
-#      | Elektron jurnallara baxış | thirdCase     |
-#      | Elektron jurnalların idarə edilməsi         | fourthCase    |
-#      | Faydalı məlumatlar moduluna baxış           | fifthCase    |
-#      | Faydalı məlumatlar modulunun idarə edilməsi | sixthCase    |
-#      | Fikir bankı modulunun idarə edilməsi | seventhCase    |
-#      | Hüquqi baza modulunun idarə edilməsi            | eighthCase    |
-#      | Proqramçı IT mütəxəssis                         | ninthCase      |
-#      | Proqramlar modulunun idarə edilməsi | tenthCase     |
-#      | Strukturda əməliyyatların aparılması | eleventhCase  |
-#      | Şəxsin adından sistemə giriş etmək | twelfthCase  |
-#      | Təbriklər modulunun idarə edilməsi | thirteenthCase  |
-#      | Təlimlər moduluna baxış           | fourteenthCase |
-#      | Təlimlər modulunun idarə edilməsi | fifteenCase   |
-#      | Təqvimə baxış imkanı              | sixteenCase   |
-#      | Təqvim modulunun idarəedilməsi       | seventeenCase |
-#      | Təyin edilmiş proqramlardan istifadə | eighteenCase  |
-#      | Yardım masası modulunun idarəedilməsi         | nineteenCase    |
-      | Yardım masasına göndərilən müraciətlərə baxış | twentyFirstCase |
-#      | Bütün əməliyyatların aparılması                 | twentySecondCase |
+      | permissions                                     | opportunities    |
+      | Bütün istifadəçilərlə əməliyyatların aparılması | firstCase        |
+      | Elanlar modulunun idarə edilməsi                | secondCase       |
+      | Elektron jurnallara baxış                       | thirdCase        |
+      | Elektron jurnalların idarə edilməsi             | fourthCase       |
+      | Faydalı məlumatlar moduluna baxış               | fifthCase        |
+      | Faydalı məlumatlar modulunun idarə edilməsi     | sixthCase        |
+      | Fikir bankı modulunun idarə edilməsi            | seventhCase      |
+      | Hüquqi baza modulunun idarə edilməsi            | eighthCase       |
+      | Proqramçı IT mütəxəssis                         | ninthCase        |
+      | Proqramlar modulunun idarə edilməsi             | tenthCase        |
+      | Strukturda əməliyyatların aparılması            | eleventhCase     |
+      | Şəxsin adından sistemə giriş etmək              | twelfthCase      |
+      | Təbriklər modulunun idarə edilməsi              | thirteenthCase   |
+      | Təlimlər moduluna baxış                         | fourteenthCase   |
+      | Təlimlər modulunun idarə edilməsi               | fifteenCase      |
+      | Təqvimə baxış imkanı                            | sixteenCase      |
+      | Təqvim modulunun idarəedilməsi                  | seventeenCase    |
+      | Təyin edilmiş proqramlardan istifadə            | eighteenCase     |
+      | Yardım masası modulunun idarəedilməsi           | nineteenCase     |
+      | Yardım masasına göndərilən müraciətlərə baxış   | twentyFirstCase  |
+      | Bütün əməliyyatların aparılması                 | twentySecondCase |
     #Test ssenarilər:
     #1."Bütün istifadəçilərlə əməliyyatların aparılması" icazəsi verildikdə sol sidebarda İdarəetmə bölməsinin və admin paneldə İstifadəçilər tabının əks olunmasının yoxlanılması
     #2."Elanlar modulunun idarə edilməsi" icazəsi verildikdə sol sidebarda Elanlar bölməsinin və admin panel hissəsində Elanlar tabının əks olunmasının yoxlanılması
