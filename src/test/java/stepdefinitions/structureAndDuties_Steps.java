@@ -65,6 +65,13 @@ public class structureAndDuties_Steps {
             ReusableMethods.wait(1);
             page.finField.sendKeys("19HLOII");
             ReusableMethods.wait(1);
+        } else if (name.contains("AT")) {
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.nameFilter, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserDataPage.openFilter, 5);
+            page.nameField.sendKeys("Abbas");
+            ReusableMethods.wait(1);
+            page.finField.sendKeys("3569367");
+            ReusableMethods.wait(1);
         }
 
     }

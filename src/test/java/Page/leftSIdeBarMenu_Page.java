@@ -41,7 +41,7 @@ public class leftSIdeBarMenu_Page {
     public WebElement ideaLogo;
     @FindBy(xpath = "//h5[text()='Hüquqi baza']")
     public WebElement baseLogo;
-    @FindBy(xpath = "//h5[text()=\"Təlim materialları\"]")
+    @FindBy(xpath = "//h5[text()='Təlim materialları']")
     public WebElement libaryLogo;
     @FindBy(xpath = "//h5[text()='İdarəetmə - İstifadəçilər']")
     public WebElement adminLogo;

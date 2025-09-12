@@ -36,7 +36,7 @@ public class meisAndProgramLogs_Steps {
     @And("select founded user in the users tab in the admin panel")
     public void selectFoundedUserInTheUsersTabInTheAdminPanel() {
         structure.foundedUser.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
     @Then("the users MEIS access log information is displayed correctly")

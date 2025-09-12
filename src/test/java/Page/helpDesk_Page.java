@@ -305,6 +305,10 @@ public class helpDesk_Page {
     public WebElement  acceptBtn;
     @FindBy(xpath = "//span[normalize-space()='Davud Zamanov']")
     public WebElement  davudExecutorSelect;
+    @FindBy(xpath = "(//span[normalize-space()='Abbas Zamanov'])[2]")
+    public WebElement  abbasExecutorSelect;
+    @FindBy(xpath = "(//span[normalize-space()='Abbas Zamanov'])[1]")
+    public WebElement  abbasUserNameCheck;
     @FindBy(xpath = "//span[normalize-space()='Fərid İmranov']")
     public WebElement  faridExecutorSelect;
     @FindBy(xpath = "//span[normalize-space()='Geri']")
