@@ -22,7 +22,7 @@ public class Driver {
 
             // Konfiqurasiya oxunuşu
             String browser = ConfigReader.getProperty("browser");         // chrome / edge / chrome-headless ...
-            String remoteUrl = System.getProperty("SELENIUM_REMOTE_URL", "").trim(); // Jenkins-dən gələcək
+            String remoteUrl = System.getProperty("SELENIUM_REMOTE_URL", "http://selenium:4444/wd/hub");
             boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
             switch (browser) {
