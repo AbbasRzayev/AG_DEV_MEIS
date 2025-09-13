@@ -7,7 +7,7 @@ pipeline {
   }
 
   environment {
-    MAVEN_OPTS = '-Dmaven.test.failure.ignore=false'
+    SELENIUM_REMOTE_URL = 'http://selenium:4444'
   }
 
   stages {
@@ -19,10 +19,13 @@ pipeline {
 
     stage('Build & Test') {
       steps {
-        sh '''
-          chmod +x mvnw || true
-          ./mvnw -B clean test verify -Dheadless=true
-        '''
+           sh '''
+              chmod +x mvnw || true
+              ./mvnw -B clean test verify \
+                -Dheadless=true \
+                -DSELENIUM_REMOTE_URL=${SELENIUM_REMOTE_URL} \
+                -Dwebdriver.http.factory=jdk-http-client
+            '''
       }
     }
   }
