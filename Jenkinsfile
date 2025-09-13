@@ -21,9 +21,17 @@ pipeline {
       }
       post {
         always {
-          junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml,target/failsafe-reports/*.xml'
+          junit testResults: 'target/surefire-reports/*.xml,target/failsafe-reports/*.xml', allowEmptyResults: true
+          archiveArtifacts artifacts: 'target/**/cucumber*.json,target/**/cucumber-html-report/**,**/screenshots/**/*.*', allowEmptyArchive: true, fingerprint: true
+          // Cucumber HTML reportunu brauzerdə görmək üçün (əgər yaradırsa):
+          publishHTML(target: [
+            reportDir: 'target/cucumber-html-report',
+            reportFiles: 'index.html',
+            reportName: 'Cucumber HTML',
+            keepAll: true,
+            alwaysLinkToLastBuild: true
+          ])
         }
-      }
     }
   }
 }

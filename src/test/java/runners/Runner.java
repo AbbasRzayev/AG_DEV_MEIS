@@ -27,7 +27,7 @@ senaryoyu çalıştırabiliriz
 2- Hooks classin yolunu veririz.
 
                                              */
-        tags = "@userPermissions",
+        tags = "@login_and_logout",
         dryRun = false,
         monochrome = false //console okunakli hale getirir,false scenario adimlarini renkli gosterir,  true renksiz yapar
 )
