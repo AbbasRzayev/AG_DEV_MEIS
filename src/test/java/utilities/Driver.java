@@ -21,27 +21,27 @@ public class Driver {
         if (driver == null) {
 
             // Konfiqurasiya oxunuşu
-            String browser = ConfigReader.getProperty("browser");         // chrome / edge / chrome-headless ...
-            String remoteUrl = System.getProperty("SELENIUM_REMOTE_URL", "http://selenium:4444/wd/hub");
+            String browser   = ConfigReader.getProperty("browser");      // chrome / edge / chrome-headless ...
+            String remoteUrl = System.getProperty("SELENIUM_REMOTE_URL", ""); // boşdursa lokal işləyəcək
             boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
 
-            switch (browser) {
-                case "chrome": {
-                    ChromeOptions options = defaultChromeOptions(headless);
-                    driver = createChrome(remoteUrl, options);
-                    break;
-                }
-                case "chrome-headless": {
-                    ChromeOptions options = defaultChromeOptions(true);     // məcburi headless
-                    driver = createChrome(remoteUrl, options);
-                    break;
-                }
+            switch (browser == null ? "chrome" : browser) {
+
                 case "edge": {
-                    // Edge üçün hazırda remote istifadə etmirik (Selenium Chrome image-də Edge yoxdur)
+                    // Grid-də Edge node yoxdur — lokal EdgeDriver ilə açırıq
                     EdgeOptions options = new EdgeOptions().addArguments("--remote-allow-origins=*");
+                    log("[Driver] Using local EdgeDriver");
                     driver = new EdgeDriver(options);
                     break;
                 }
+
+                case "chrome-headless": {
+                    ChromeOptions options = defaultChromeOptions(true);
+                    driver = createChrome(remoteUrl, options);
+                    break;
+                }
+
+                case "chrome":
                 default: {
                     ChromeOptions options = defaultChromeOptions(headless);
                     driver = createChrome(remoteUrl, options);
@@ -51,7 +51,9 @@ public class Driver {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
             try {
                 driver.manage().window().maximize();
-            } catch (Exception ignored) { /* headless vəziyyətdə problem olmaması üçün */ }
+            } catch (Exception ignored) {
+                // headless və ya bəzi mühitlərdə maximize dəstəklənməyə bilər
+            }
         }
         return driver;
     }
@@ -59,6 +61,8 @@ public class Driver {
     private static ChromeOptions defaultChromeOptions(boolean headless) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
+        // stabil işləməsi üçün faydalı əlavə arqumentlər
+        options.addArguments("--disable-dev-shm-usage", "--no-sandbox");
         if (headless) {
             options.addArguments("--headless=new", "--disable-gpu", "--window-size=1920,1080");
         }
@@ -67,32 +71,32 @@ public class Driver {
 
     /** remoteUrl boş deyilsə RemoteWebDriver, yoxdursa lokal ChromeDriver qaytarır */
     private static WebDriver createChrome(String remoteUrl, ChromeOptions options) {
-        try {
-            if (!remoteUrl.isEmpty()) {
-                // Jenkins/Selenium konteyneri üçün (məs: http://selenium:4444/wd/hub)
-                return new RemoteWebDriver(new URL(remoteUrl), options);
-            } else {
-                // Lokal işlətmə (Windows-da öz ChromeDriver-ın)
-                // İSTƏYƏ GÖRƏ XƏTTİ saxla / sil: lokal path verirsənsə
-                // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\WebDrivers\\chromedriver.exe");
-                return new ChromeDriver(options);
+        if (remoteUrl != null && !remoteUrl.isEmpty()) {
+            try {
+                // Grid 4 üçün /wd/hub tələb olunmur; hər ikisini dəstəkləyirik
+                URL url = new URL(remoteUrl);
+                log("[Driver] Using RemoteWebDriver -> " + url);
+                return new RemoteWebDriver(url, options);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("SELENIUM_REMOTE_URL düzgün deyil: " + remoteUrl, e);
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("SELENIUM_REMOTE_URL düzgün deyil: " + remoteUrl, e);
+        } else {
+            log("[Driver] Using local ChromeDriver");
+            // Lazım olsa lokal driver path-i aç:
+            // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\WebDrivers\\chromedriver.exe");
+            return new ChromeDriver(options);
         }
     }
 
     public static void closeDriver() {
         if (driver != null) {
-            driver.close();
-            driver = null;
+            try { driver.close(); } finally { driver = null; }
         }
     }
 
     public static void quitDriver() {
         if (driver != null) {
-            driver.quit();
-            driver = null;
+            try { driver.quit(); } finally { driver = null; }
         }
     }
 
@@ -101,7 +105,12 @@ public class Driver {
             getDriver().switchTo().window(handle);
         }
     }
+
+    private static void log(String msg) {
+        System.out.println(msg);
+    }
 }
+
 
 
 
