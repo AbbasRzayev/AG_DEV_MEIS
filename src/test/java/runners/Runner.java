@@ -15,9 +15,13 @@ senaryoyu çalıştırabiliriz
 //Seneryoların nerede ve nasıl çalışacağı, hangi raporu kullanacağıyla alakalı seçenekleri ayarlarız
 @CucumberOptions(  //plugin kismi raporlar icin
         plugin = {
-                "pretty", //console renkli yazdirmak icin
-                "html:src/test/resources/features/htmlReport/cucumberHooks.html", //html report için
-                "rerun:TestOutput/failed_Scenario.txt"
+//                "pretty", //console renkli yazdirmak icin
+//                "html:src/test/resources/features/htmlReport/cucumberHooks.html", //html report için
+//                "rerun:TestOutput/failed_Scenario.txt"
+                "pretty",
+                "json:target/cucumber.json",
+                "html:target/cucumber-html-report",
+                "rerun:target/failed_Scenario.txt"
                 },
        // monochrome = true, //console okunakli hale getirir, renksiz yapar
         features = "src/test/resources/features", //testcase'lerimizin olduğu directory yolu verilir

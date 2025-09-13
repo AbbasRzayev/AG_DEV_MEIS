@@ -139,49 +139,52 @@
                 </configuration>
             </plugin>
 
+
+
+            <!-- cucumber report icin  -->
+<!--            <plugin>-->
+<!--                <groupId>net.masterthought</groupId>-->
+<!--                <artifactId>maven-cucumber-reporting</artifactId>-->
+<!--                <version>5.7.5</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>execution</id>-->
+<!--                        <phase>test</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <projectName>Cucumber_HTML_Report-</projectName>-->
+<!--                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>-->
+<!--                            <inputDirectory>${project.build.directory}/</inputDirectory>-->
+<!--                            <jsonFiles>-->
+<!--                                <param>**/json-reports/*.json</param>&lt;!&ndash; rapor formati json olacak  &ndash;&gt;-->
+<!--                            </jsonFiles>-->
+<!--                            <classificationFiles>-->
+<!--                                <param>sample.properties</param>-->
+<!--                                <param>other.properties</param>-->
+<!--                            </classificationFiles>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
                 <version>5.7.5</version>
                 <executions>
                     <execution>
-                        <id>execution</id>
+                        <id>cucumber-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <skip>true</skip> <!-- bunu əlavə et -->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-
-
-            <!-- cucumber report icin  -->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.5</version>
-                <executions>
-                    <execution>
-                        <id>execution</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>Cucumber_HTML_Report-</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <inputDirectory>${project.build.directory}/</inputDirectory>
+                            <projectName>AGMEIS</projectName>
                             <jsonFiles>
-                                <param>**/json-reports/*.json</param><!-- rapor formati json olacak  -->
+                                <param>target/cucumber.json</param>
                             </jsonFiles>
-                            <classificationFiles>
-                                <param>sample.properties</param>
-                                <param>other.properties</param>
-                            </classificationFiles>
+                            <outputDirectory>${project.build.directory}/cucumber-html-report</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
