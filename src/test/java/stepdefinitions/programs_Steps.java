@@ -401,7 +401,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\AutomatedTesting.mp4";
         page.iconVideoBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(8);
+        ReusableMethods.wait(35);
     }
 
     @And("added pdf file to the instruction file")
@@ -409,7 +409,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconInstructionBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(35);
     }
 
     @And("added one more pdf file to the another file")
@@ -417,7 +417,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconAnotherFileBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(35);
     }
 
     @Then("all information is displayed in the review section of the program")
@@ -430,7 +430,7 @@ public class programs_Steps {
             String apiUrl = row.get("API URL");
             String note = row.get("NOTE");
 
-
+            ReusableMethods.wait(10);
             ReusableMethods.flash(page.programNameField, getDriver());
             WebElement inputValue = getDriver().findElement(By.xpath("//label[contains(., 'Proqramın adı')]/following::input[1]"));
             String progNameEx = inputValue.getAttribute("value");

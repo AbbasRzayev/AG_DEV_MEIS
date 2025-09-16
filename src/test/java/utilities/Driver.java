@@ -5,181 +5,64 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 public class Driver {
 
-    private Driver() {}
+    private Driver() {
+        // Singleton Pattern: obyekt yaradılmasının qarşısını alır
+    }
 
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
         if (driver == null) {
-
-            // Konfiqurasiya oxunuşu
-            String browser   = ConfigReader.getProperty("browser");      // chrome / edge / chrome-headless ...
-            String remoteUrl = System.getProperty("SELENIUM_REMOTE_URL", ""); // boşdursa lokal işləyəcək
-            boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-
-            switch (browser == null ? "chrome" : browser) {
-
-                case "edge": {
-                    // Grid-də Edge node yoxdur — lokal EdgeDriver ilə açırıq
-                    EdgeOptions options = new EdgeOptions().addArguments("--remote-allow-origins=*");
-                    log("[Driver] Using local EdgeDriver");
-                    driver = new EdgeDriver(options);
-                    break;
-                }
-
-                case "chrome-headless": {
-                    ChromeOptions options = defaultChromeOptions(true);
-                    driver = createChrome(remoteUrl, options);
-                    break;
-                }
-
+            switch (ConfigReader.getProperty("browser")) {
                 case "chrome":
-                default: {
-                    ChromeOptions options = defaultChromeOptions(headless);
-                    driver = createChrome(remoteUrl, options);
-                }
+                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
+                    break;
+                case "edge":
+                    driver = new EdgeDriver(new EdgeOptions().addArguments("--remote-allow-origins=*"));
+                    break;
+                case "chrome-headless":
+                    ChromeOptions headless = new ChromeOptions();
+                    headless.addArguments("--headless", "--disable-gpu");
+                    driver = new ChromeDriver(headless);
+                    break;
+                default:
+                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
             }
 
+            driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-            try {
-                driver.manage().window().maximize();
-            } catch (Exception ignored) {
-                // headless və ya bəzi mühitlərdə maximize dəstəklənməyə bilər
-            }
         }
         return driver;
     }
 
-    private static ChromeOptions defaultChromeOptions(boolean headless) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        // stabil işləməsi üçün faydalı əlavə arqumentlər
-        options.addArguments("--disable-dev-shm-usage", "--no-sandbox");
-        if (headless) {
-            options.addArguments("--headless=new", "--disable-gpu", "--window-size=1920,1080");
-        }
-        return options;
-    }
-
-    /** remoteUrl boş deyilsə RemoteWebDriver, yoxdursa lokal ChromeDriver qaytarır */
-    private static WebDriver createChrome(String remoteUrl, ChromeOptions options) {
-        if (remoteUrl != null && !remoteUrl.isEmpty()) {
-            try {
-                // Grid 4 üçün /wd/hub tələb olunmur; hər ikisini dəstəkləyirik
-                URL url = new URL(remoteUrl);
-                log("[Driver] Using RemoteWebDriver -> " + url);
-                return new RemoteWebDriver(url, options);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException("SELENIUM_REMOTE_URL düzgün deyil: " + remoteUrl, e);
-            }
-        } else {
-            log("[Driver] Using local ChromeDriver");
-            // Lazım olsa lokal driver path-i aç:
-            // System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\WebDrivers\\chromedriver.exe");
-            return new ChromeDriver(options);
-        }
-    }
-
     public static void closeDriver() {
         if (driver != null) {
-            try { driver.close(); } finally { driver = null; }
+            driver.close();
+            driver = null;
         }
     }
 
     public static void quitDriver() {
         if (driver != null) {
-            try { driver.quit(); } finally { driver = null; }
+            driver.quit();
+            driver = null;
         }
     }
 
+    // Yeni tab və ya window keçid üçün helper
     public static void switchToLastTab() {
         for (String handle : getDriver().getWindowHandles()) {
             getDriver().switchTo().window(handle);
         }
     }
-
-    private static void log(String msg) {
-        System.out.println(msg);
-    }
 }
 
 
-
-
-
-////package utilities;
-////
-////import org.openqa.selenium.WebDriver;
-////import org.openqa.selenium.chrome.ChromeDriver;
-////import org.openqa.selenium.chrome.ChromeOptions;
-////import org.openqa.selenium.edge.EdgeDriver;
-////import org.openqa.selenium.edge.EdgeOptions;
-////
-////import java.time.Duration;
-////
-////public class Driver {
-////
-////    private Driver() {
-////        // Singleton Pattern: obyekt yaradılmasının qarşısını alır
-////    }
-////
-////    private static WebDriver driver;
-////
-////    public static WebDriver getDriver() {
-////        if (driver == null) {
-////            switch (ConfigReader.getProperty("browser")) {
-////                case "chrome":
-////                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
-////                    break;
-////                case "edge":
-////                    driver = new EdgeDriver(new EdgeOptions().addArguments("--remote-allow-origins=*"));
-////                    break;
-////                case "chrome-headless":
-////                    ChromeOptions headless = new ChromeOptions();
-////                    headless.addArguments("--headless", "--disable-gpu");
-////                    driver = new ChromeDriver(headless);
-////                    break;
-////                default:
-////                    driver = new ChromeDriver(new ChromeOptions().addArguments("--remote-allow-origins=*"));
-////            }
-////
-////            driver.manage().window().maximize();
-////            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-////        }
-////        return driver;
-////    }
-////
-////    public static void closeDriver() {
-////        if (driver != null) {
-////            driver.close();
-////            driver = null;
-////        }
-////    }
-////
-////    public static void quitDriver() {
-////        if (driver != null) {
-////            driver.quit();
-////            driver = null;
-////        }
-////    }
-////
-////    // Yeni tab və ya window keçid üçün helper
-////    public static void switchToLastTab() {
-////        for (String handle : getDriver().getWindowHandles()) {
-////            getDriver().switchTo().window(handle);
-////        }
-////    }
-////}
-//
-//
 //package utilities;
 //
 //import org.openqa.selenium.WebDriver;
