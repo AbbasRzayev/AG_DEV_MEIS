@@ -166,7 +166,7 @@ public class registration_Steps {
     public void selectsInstructorOnTheSixthStage() {
 //        page.instructorSelect.click();
 //        ReusableMethods.wait(1);
-        page.regSearchInstructor.sendKeys("Abbas Rzayev");
+        page.instructorSelect.sendKeys("Abbas Rzayev");
         ReusableMethods.wait(1);
         page.addInsttructor.click();
         ReusableMethods.wait(1);

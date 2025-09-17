@@ -12,43 +12,43 @@ public class registration_Page {
 
     @FindBy(xpath = "//span[text()=' Yeni istifadəçi ']")
     public WebElement newUserButton;
-    @FindBy(id = "mat-input-2")
+    @FindBy(xpath = "//input[@formcontrolname='pin']")
     public WebElement finRegField;
-    @FindBy(id = "mat-input-3")
+    @FindBy(xpath = "//input[@formcontrolname='docNumber']")
     public WebElement serialNumField;
-    @FindBy(id = "mat-input-4")
+    @FindBy(xpath = "//input[@formcontrolname='username']")
     public WebElement emailField;
-    @FindBy(id = "mat-mdc-checkbox-1-input")
+    @FindBy(css = "input.mdc-checkbox__native-control[type='checkbox']")
     public WebElement domenCheckboxs;
     @FindBy(xpath = "//span[normalize-space()='Növbəti']")
     public WebElement firstNextButton;
-    @FindBy(id = "mat-input-5")
+    @FindBy(xpath = "//input[@formcontrolname='name']")
     public WebElement regNameField;
-    @FindBy(id = "mat-input-7")
+    @FindBy(xpath = "//input[@formcontrolname='patronymic']")
     public WebElement regFatherName;
-    @FindBy(id = "mat-input-6")
+    @FindBy(xpath = "//input[@formcontrolname='surname']")
     public WebElement regSurnameField;
-    @FindBy(id = "mat-input-8")
+    @FindBy(xpath = "//input[@formcontrolname='birthDate']")
     public WebElement regBirthData;
-    @FindBy(id = "mat-input-9")
+    @FindBy(xpath = "//input[@formcontrolname='expiryDate']")
     public WebElement regLastData;
-    @FindBy(id = "mat-input-10")
+    @FindBy(xpath = "//input[@formcontrolname='address']")
     public WebElement regAddress;
-    @FindBy(id = "mat-input-18")
+    @FindBy(xpath = "//input[@formcontrolname='password']")
     public WebElement regNewPass;
-    @FindBy(id = "mat-input-19")
+    @FindBy(xpath = "//input[@formcontrolname='repeatPassword']")
     public WebElement regRepPass;
-    @FindBy(id = "mat-input-11")
+    @FindBy(xpath = "//input[@formcontrolname='innerPhone']")
     public WebElement regRoom;
-    @FindBy(id = "mat-input-12")
+    @FindBy(xpath = "//input[@formcontrolname='ipPhone']")
     public WebElement regIp;
-    @FindBy(id = "mat-input-13")
+    @FindBy(xpath = "//input[@formcontrolname='mobile']")
     public WebElement regMob;
-    @FindBy(id = "mat-input-14")
+    @FindBy(xpath = "//input[@formcontrolname='stationar']")
     public WebElement regStasNum;
     @FindBy(xpath = "//span[text()=' Növbəti ']")
     public WebElement fourthNext;
-    @FindBy(id = "mat-input-16")
+    @FindBy(xpath = "//input[@placeholder='Vəzifə']")
     public WebElement regDuty;
     @FindBy(xpath = "//div[text()=' QA_AT ']")
     public WebElement regQA;

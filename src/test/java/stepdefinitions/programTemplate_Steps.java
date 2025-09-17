@@ -7,10 +7,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ReusableMethods;
@@ -49,6 +47,11 @@ public class programTemplate_Steps {
         if (selection.equals("new")) {
             page.programTemplateNameInput.sendKeys("Automation Template");
             ReusableMethods.wait(1);
+        } else if (selection.equals("edit")) {
+            page.programTemplateNameInput.clear();
+            ReusableMethods.wait(1);
+            page.programTemplateNameInput.sendKeys("Manual Template");
+            ReusableMethods.wait(1);
         }
     }
 
@@ -59,6 +62,11 @@ public class programTemplate_Steps {
             ReusableMethods.wait(1);
             page.qaDuty.click();
             ReusableMethods.wait(1);
+        } else if (selection.equals("edit")) {
+            page.dutySelection.click();
+            ReusableMethods.wait(1);
+            page.programmerDuty.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -66,6 +74,9 @@ public class programTemplate_Steps {
     public void theUserSelectsStructureForTheTemplate(String selection) {
         if (selection.equals("new")) {
             page.aistStructure.click();
+            ReusableMethods.wait(1);
+        } else if (selection.equals("edit")) {
+            page.qualityStructure.click();
             ReusableMethods.wait(1);
         }
     }
@@ -77,6 +88,13 @@ public class programTemplate_Steps {
             ReusableMethods.wait(1);
             programNameFirst = page.programFirstProgramTemplate.getText().trim();
             System.out.println("programNameFirst = " + programNameFirst);
+            page.acceptTemplate.click();
+            ReusableMethods.wait(2);
+            programCount = page.checkTempCount.getText().trim();
+            System.out.println("programCount = " + programCount);
+        } else if (selection.equals("edit")) {
+            page.programSecondSwitcherTemplate.click();
+            ReusableMethods.wait(1);
             page.acceptTemplate.click();
             ReusableMethods.wait(2);
             programCount = page.checkTempCount.getText().trim();
@@ -135,5 +153,27 @@ public class programTemplate_Steps {
             }
         }
         System.out.println("Bütün şablonlar silindi və test passed oldu ✅");
+    }
+
+    @When("selects edit button in the template tab")
+    public void selectsEditButtonInTheTemplateTab() {
+        page.editTemplate.click();
+        ReusableMethods.wait(10);
+    }
+
+    @And("the added program template is displayed in the registration stage")
+    public void theAddedProgramTemplateIsDisplayedInTheRegistrationStage() {
+        page.regProgramTemplate.click();
+        ReusableMethods.wait(1);
+        Assert.assertEquals(page.regProgramTemplateCheck.getText().trim(), programNameFirst);
+        ReusableMethods.wait(1);
+        ReusableMethods.flash(page.regProgramTemplateCheck,getDriver());
+        ReusableMethods.wait(1);
+    }
+
+    @And("user select escape button")
+    public void userSelectEscapeButton() {
+        new Actions(getDriver()).sendKeys(Keys.ESCAPE).perform();
+        ReusableMethods.wait(2);
     }
 }

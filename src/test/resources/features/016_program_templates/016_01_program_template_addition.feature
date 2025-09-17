@@ -20,7 +20,6 @@ Feature: Program template addition
       | Automation Template | IT Mühəndis(QA) | AISTGroup MMC | 1          |
     When selects delete button in the template tab
     Then the deleted template is not displayed in the template tab
-
     #Test ssenarilər:
     #1.Proqram şablonunun əlavə edilməsinin yoxlanılması
     #2.Yeni proqram şablonunun idarəetmə panelində mövcud olmasının yoxlanılması

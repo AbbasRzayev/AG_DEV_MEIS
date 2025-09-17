@@ -30,6 +30,8 @@ public class programTemplate_Page {
     public WebElement programTemplateElectronDocument;
     @FindBy(xpath = "(//div[@class='toggle-switch'])[1]")
     public WebElement programFirstSwitcherTemplate;
+    @FindBy(xpath = "(//div[@class='toggle-switch'])[2]")
+    public WebElement programSecondSwitcherTemplate;
     @FindBy(xpath = "(//p[contains(@class,'name')])[1]")
     public WebElement programFirstProgramTemplate;
     @FindBy(xpath = "//span[normalize-space()='Təsdiq']")
@@ -46,4 +48,10 @@ public class programTemplate_Page {
     public WebElement deleteTemplate;
     @FindBy(xpath = "//span[normalize-space()='Bəli']")
     public WebElement deleteYesTemplate;
+    @FindBy(xpath = "//button[.//img[contains(@src,'edit-colorless.svg')]]")
+    public WebElement editTemplate;
+    @FindBy(xpath = "//h6[text()='Proqramların şablonu']")
+    public WebElement regProgramTemplate;
+    @FindBy(xpath = "//div[@class='templates_body']//p")
+    public WebElement regProgramTemplateCheck;
 }
