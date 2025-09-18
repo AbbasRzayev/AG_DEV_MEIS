@@ -399,10 +399,11 @@ public class ReusableMethods {
 
     public static void clickEditButtonForItem(String itemName) {
         // Find the table row containing the specified item name
-        WebElement itemRow = getDriver().findElement(By.xpath("//td[text()='" + itemName + "']/.."));
+        WebElement itemRow = getDriver().findElement(By.xpath("//td[normalize-space()='" + itemName + "']/.."));
         // Find the "edit" button within the row
-        WebElement editButton = itemRow.findElement(By.cssSelector("td.mat-column-edit button"));
-        // Click the "edit" button
+        WebElement editButton = itemRow.findElement(
+                By.xpath(".//td[contains(@class,'mat-column-actions')]//button[.//img[contains(@src,'edit-colorless.svg')]]")
+        );
         editButton.click();
     }
 
@@ -418,12 +419,16 @@ public class ReusableMethods {
     }
 
     public static void clickDeleteButtonForItem(String itemName) {
-        // Find the table row containing the specified item name
-        WebElement itemRow = getDriver().findElement(By.xpath("//td[text()='" + itemName + "']/.."));
-        // Find the "edit" button within the row
-        WebElement editButton = itemRow.findElement(By.cssSelector("td.mat-column-delete button"));
-        // Click the "edit" button
-        editButton.click();
+// Find the table row containing the specified item name
+        WebElement itemRow = getDriver().findElement(
+                By.xpath("//td[normalize-space()='" + itemName + "']/.."));
+
+// Find the "delete" button within the row (second button inside actions column)
+        WebElement deleteButton = itemRow.findElement(
+                By.xpath(".//td[contains(@class,'mat-column-actions')]//button[img[contains(@src,'delete-colorless.svg')]]"));
+
+// Click the "delete" button
+        deleteButton.click();
     }
 
     public static void assertElementNotDisplayed(WebElement element) {

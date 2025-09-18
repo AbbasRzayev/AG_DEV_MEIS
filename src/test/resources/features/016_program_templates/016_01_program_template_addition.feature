@@ -26,4 +26,4 @@ Feature: Program template addition
     #3.Yeni proqram şablonunun ad məlumatının əks olunmasının yoxlanılması
     #4.Yeni proqram şablonunun vəzifə məlumatının əks olunmasının yoxlanılması
     #5.Yeni proqram şablonunun struktur məlumatının əks olunmasının yoxlanılması
-    #6.Yeni proqra-m şablonuna təyin olunan proqram sayında yenilənmənin əks olunmasının yoxlanılması
+    #6.Yeni proqram şablonuna təyin olunan proqram sayında yenilənmənin əks olunmasının yoxlanılması

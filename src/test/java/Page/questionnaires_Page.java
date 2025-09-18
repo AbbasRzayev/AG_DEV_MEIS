@@ -11,19 +11,29 @@ public class questionnaires_Page {
 
     @FindBy(xpath = "//span[text()='Soraqçalar']")
     public WebElement questionnairesTab;
-    @FindBy(xpath = "//span[text()='Elan tipləri']")
-    public WebElement adType;
+    @FindBy(xpath = "//span[text()='Elanlar']")
+    public WebElement announceTabAdmin;
+    @FindBy(xpath = "//span[normalize-space()='+ Elan tipi əlavə et']")
+    public WebElement adAnnounceType;
+    @FindBy(xpath = "//span[normalize-space()='+ Təbrik tipi əlavə et']")
+    public WebElement congratsType;
     @FindBy(xpath = "//span[text()='Elan tipi əlavə et']")
     public WebElement addAdType;
-    @FindBy(id = "mat-input-8")
+    @FindBy(xpath = "//input[@formcontrolname='name']")
     public WebElement adTypeInput;
-    @FindBy(xpath = "//span[text()='Yadda saxla']")
+    @FindBy(xpath = "//span[normalize-space()='Yadda saxla']")
     public WebElement saveBtn;
-    @FindBy(xpath = "//td[text()='AutomationTest']")
+    @FindBy(xpath = "(//td[normalize-space()='ManualQA news'])[1]")
     public WebElement checkNewAd;
+    @FindBy(xpath = "(//td[normalize-space()='Manual progress'])[1]")
+    public WebElement checkNewCong;
+    @FindBy(xpath = "(//td[normalize-space()='AutomationQA news'])[1]")
+    public WebElement checkNewSecond;
+    @FindBy(xpath = "(//td[normalize-space()='Automation progress'])[1]")
+    public WebElement checkSecondCong;
     @FindBy(xpath = "//td[text()='GoodQuality']")
     public WebElement checkEditAd;
-    @FindBy(xpath = "//span[text()='Bəli']")
+    @FindBy(xpath = "//span[normalize-space()='Bəli']")
     public WebElement deleteYes;
     @FindBy(id = "mat-input-9")
     public WebElement adTypeInputTwo;
@@ -57,7 +67,7 @@ public class questionnaires_Page {
     public WebElement checkCatSecond;
     @FindBy(xpath = "//td[text()='9999 room']")
     public WebElement checkEditPlace;
-    @FindBy(xpath = "(//span[text()='Təbriklər'])[2]")
+    @FindBy(xpath = "//button[normalize-space()='Təbriklər']")
     public WebElement congTab;
     @FindBy(xpath = "//span[text()='Təbrik tipləri']")
     public WebElement congOption;

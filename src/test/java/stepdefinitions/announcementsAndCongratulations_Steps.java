@@ -18,6 +18,7 @@ import utilities.ReusableMethods;
 import java.time.Duration;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utilities.Driver.getDriver;
 
@@ -28,13 +29,18 @@ public class announcementsAndCongratulations_Steps {
     @And("goes to the announcements tab from admin panel")
     public void goesToTheAnnouncementsTabFromAdminPanel() {
         page.announcementTabAdminPanel.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(15);
     }
 
-    @And("selects plus button for adding new announcement")
-    public void selectsPlusButtonForAddingNewAnnouncement() {
-        page.newAnnouncementAndCongratsBtn.click();
-        ReusableMethods.wait(1);
+    @And("selects plus button for adding new {string}")
+    public void selectsPlusButtonForAddingNewAnnouncement(String scenario) {
+        if (scenario.equalsIgnoreCase("announcement")) {
+            page.newAnnouncement.click();
+            ReusableMethods.wait(10);
+        } else if (scenario.equalsIgnoreCase("congratulation")) {
+            page.newCongratulation.click();
+            ReusableMethods.wait(10);
+        }
     }
 
     @And("adds {string} name")
@@ -56,12 +62,19 @@ public class announcementsAndCongratulations_Steps {
         ReusableMethods.wait(1);
     }
 
-    @And("selects announcement type")
-    public void selectsAnnouncementType() {
-        page.announcementType.click();
-        ReusableMethods.wait(1);
-        page.announcementTypeSelect.click();
-        ReusableMethods.wait(1);
+    @And("selects announcement type {string}")
+    public void selectsAnnouncementType(String choose) {
+        if (choose.contains("edited-announcement")) {
+            page.announcementType.click();
+            ReusableMethods.wait(1);
+            page.announcementEditedTypeSelect.click();
+            ReusableMethods.wait(1);
+        } else if (choose.contains("edited-congratulation")) {
+            page.announcementType.click();
+            ReusableMethods.wait(1);
+            page.congratsEditedTypeSelect.click();
+            ReusableMethods.wait(1);
+        }
     }
 
     @And("selects the status of the announcement according to the addressees")
@@ -786,7 +799,7 @@ public class announcementsAndCongratulations_Steps {
 
     @And("selects plus button for adding new congratulations")
     public void selectsPlusButtonForAddingNewCongratulations() {
-        page.newAnnouncementAndCongratsBtn.click();
+        page.newCongrats.click();
         ReusableMethods.wait(1);
     }
 
@@ -965,13 +978,13 @@ public class announcementsAndCongratulations_Steps {
 
             ReusableMethods.flash(page.congratsNotCheck, getDriver());
 
-           // Assert.assertTrue(page.congratPublicOpenNotSelect.isDisplayed());
+            // Assert.assertTrue(page.congratPublicOpenNotSelect.isDisplayed());
             page.announCloseNote.click();
         } else {
             page.announcementNotBtn.click();
             page.congratPublicOpenNotSelect.click();
             ReusableMethods.flash(page.congratsNotCheck, getDriver());
-           // Assert.assertTrue(page.congratPublicOpenNotSelect.isDisplayed());
+            // Assert.assertTrue(page.congratPublicOpenNotSelect.isDisplayed());
             page.announCloseNote.click();
         }
     }
@@ -1081,5 +1094,22 @@ public class announcementsAndCongratulations_Steps {
     @Then("congratulations to the public open is deleted successfully")
     public void congratulationsToThePublicOpenIsDeletedSuccessfully() {
         ReusableMethods.assertElementNotDisplayed(page.congratPublicOpenSelect);
+    }
+
+    @Then("new {string} is displayed in the announcement tab")
+    public void newIsDisplayedInTheAnnouncementTab(String choose) {
+        if (choose.contains("edited-announcement")) {
+            ReusableMethods.flash(page.announcementEditedTypeSelect, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "AutomationQA news";
+            assertEquals(page.announcementEditedTypeSelect.getText().trim(), expected);
+            ReusableMethods.wait(1);
+        } else if (choose.contains("edited-congratulation")) {
+            ReusableMethods.flash(page.congratsEditedTypeSelect, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Automation progress";
+            assertEquals(page.congratsEditedTypeSelect.getText().trim(), expected);
+            ReusableMethods.wait(1);
+        }
     }
 }

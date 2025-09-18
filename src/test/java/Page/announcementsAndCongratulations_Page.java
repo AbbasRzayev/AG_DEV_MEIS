@@ -16,8 +16,12 @@ public class announcementsAndCongratulations_Page {
 
     @FindBy(xpath = "//span[text()='Təbriklər']")
     public WebElement congratulationsTabAdminPanel;
-    @FindBy(xpath = "//button[@class='new_news']")
-    public WebElement newAnnouncementAndCongratsBtn;
+    @FindBy(xpath = "//span[normalize-space()='Yeni elan']")
+    public WebElement newAnnouncement;
+    @FindBy(xpath = "//span[normalize-space()='Yeni təbrik']")
+    public WebElement newCongratulation;
+    @FindBy(xpath = "//span[normalize-space()='Yeni təbrik']")
+    public WebElement newCongrats;
     @FindBy(id = "mat-input-8")
     public WebElement announcementName;
     @FindBy(id = "mat-input-52")
@@ -32,10 +36,14 @@ public class announcementsAndCongratulations_Page {
     public WebElement announcementUrlOpenPublic;
     @FindBy(id = "mat-input-53")
     public WebElement congratsUrl;
-    @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-19']")
+    @FindBy(xpath = "//mat-select[@formcontrolname='typeId']")
     public WebElement announcementType;
     @FindBy(xpath = "//span[text()='Maraqlı məlumatlar']")
     public WebElement announcementTypeSelect;
+    @FindBy(xpath = "//span[text()='AutomationQA news']")
+    public WebElement announcementEditedTypeSelect;
+    @FindBy(xpath = "//span[text()='Automation progress']")
+    public WebElement congratsEditedTypeSelect;
     @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-172']")
     public WebElement congratsType;
     @FindBy(xpath = "//span[text()='Maraqlı məlumatlar']")

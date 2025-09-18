@@ -6,11 +6,11 @@ Feature:Announcements and Congratulations
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
     And goes to the control panel
     And goes to the announcements tab from admin panel
-    And selects plus button for adding new announcement
+    And selects plus button for adding new "announcement"
     And adds "TestElanForPerson" name
     And adds "Bu elanın məqsədi automatlaşdırılmış təstlərin keçməsi üçün nəzərdə tutulmuşdur." description
     And adds url for announcement
-    And selects announcement type
+    And selects announcement type "new"
     And selects the status of the announcement according to the addressees
     And adds main picture for announcement
     #And adds additional photo for announcement
@@ -42,7 +42,7 @@ Feature:Announcements and Congratulations
     Given user with login "imranovfarid@gmail.com" and password "Farid1020" logs into the "Meis" system
     And goes to the control panel
     And goes to the announcements tab from admin panel
-    And selects plus button for adding new announcement
+    And selects plus button for adding new "congratulation"
     And adds "TestElanForStructure" name
     And adds "Bu elanın məqsədi automatlaşdırılmış təstlərin keçməsi üçün nəzərdə tutulmuşdur." description
     And adds url for announcement

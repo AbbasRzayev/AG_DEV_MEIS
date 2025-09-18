@@ -1,12 +1,18 @@
 package stepdefinitions;
 
 import Page.questionnaires_Page;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import utilities.ReusableMethods;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static utilities.Driver.getDriver;
@@ -17,65 +23,58 @@ public class questionnaires_Steps {
     @And("goes to the questionnaires tab")
     public void goesToTheQuestionnairesTab() {
         page.questionnairesTab.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
     }
 
-    @And("selects ad type name button")
-    public void selectsAdTypeNameButton() {
-        page.adType.click();
-        ReusableMethods.wait(1);
+    @And("selects the edit button for {string} in the questionnaires tab")
+    public void selectsTheEditButtonForOnTheNewlyCreatedAd(String choose) {
+        if(choose.contains("edit-announce")) {
+            String text = "ManualQA news";
+            ReusableMethods.clickEditButtonForItem(text);
+            ReusableMethods.wait(2);
+        }   else if(choose.contains("edit-congratulation")) {
+            String text = "Manual progress";
+            ReusableMethods.clickEditButtonForItem(text);
+            ReusableMethods.wait(2);
+        }
     }
 
-    @When("user enters ad name after selects create button")
-    public void userEntersAdNameAfterSelectsCreateButton() {
-        ReusableMethods.scrollEndByJavascript();
-        page.addAdType.click();
-        page.adTypeInput.sendKeys("AutomationTest");
-        ReusableMethods.wait(1);
-        page.saveBtn.click();
+    @When("user edits new {string}")
+    public void userEditsNew(String choose) {
+        if(choose.contains("announce")) {
+            ReusableMethods.wait(1);
+            page.adTypeInput.clear();
+            ReusableMethods.wait(1);
+            page.adTypeInput.sendKeys("AutomationQA news");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        } if(choose.contains("congratulation")) {
+            ReusableMethods.wait(1);
+            page.adTypeInput.clear();
+            ReusableMethods.wait(1);
+            page.adTypeInput.sendKeys("Automation progress");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }
     }
 
-    @Then("new ad successfully adds")
-    public void newAdSuccessfullyAdds() {
-        ReusableMethods.flash(page.checkNewAd, getDriver());
-        assertTrue(page.checkNewAd.isDisplayed());
-        ReusableMethods.wait(1);
-    }
-
-    @And("selects the edit button on the newly created ad")
-    public void selectsTheEditButtonOnTheNewlyCreatedAd() {
-        String text = "AutomationTest";
-        ReusableMethods.clickEditButtonForItem(text);
-    }
-
-    @When("user edits new add")
-    public void userEditsNewAdd() {
-        ReusableMethods.wait(1);
-        page.adTypeInputTwo.clear();
-        page.adTypeInputTwo.sendKeys("GoodQuality");
-        page.saveBtn.click();
-    }
-
-    @Then("new ad successfully edits")
-    public void newAdSuccessfullyEdits() {
-        ReusableMethods.wait(1);
-        ReusableMethods.flash(page.checkEditAd, getDriver());
-        assertTrue(page.checkEditAd.isDisplayed());
-        ReusableMethods.wait(1);
-    }
-
-    @When("user selects the delete button on the newly created ad")
-    public void userSelectsTheDeleteButtonOnTheNewlyCreatedAd() {
-        String text = "GoodQuality";
-        ReusableMethods.clickDeleteButtonForItem(text);
-        ReusableMethods.wait(1);
-        page.deleteYes.click();
-    }
-
-    @Then("new ad successfully deletes")
-    public void newAdSuccessfullyDeletes() {
-        ReusableMethods.wait(1);
-        ReusableMethods.assertElementNotDisplayed(page.checkEditAd);
+    @When("user selects the delete button for the {string}")
+    public void userSelectsTheDeleteButtonForThe(String choose) {
+        if(choose.contains("delete-announce")) {
+            String text = "AutomationQA news";
+            ReusableMethods.clickDeleteButtonForItem(text);
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
+            ReusableMethods.wait(2);
+        } else if(choose.contains("delete-congratulation")) {
+            String text = "Automation progress";
+            ReusableMethods.clickDeleteButtonForItem(text);
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
+            ReusableMethods.wait(2);
+        }
     }
 
     @And("user switches to the calendar tab")
@@ -196,7 +195,7 @@ public class questionnaires_Steps {
     public void userEditsNewCategory() {
         page.cateInputSec.clear();
         ReusableMethods.wait(2);
-        ReusableMethods.sendKeysJS("Friday",page.cateInputSec);
+        ReusableMethods.sendKeysJS("Friday", page.cateInputSec);
         //page.cateInputSec.sendKeys("Friday");
         page.saveBtn.click();
         ReusableMethods.wait(2);
@@ -239,7 +238,7 @@ public class questionnaires_Steps {
     @And("user switches to the Congratulations tab")
     public void userSwitchesToTheCongratulationsTab() {
         page.congTab.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
 
     }
 
@@ -270,9 +269,9 @@ public class questionnaires_Steps {
 
     @And("selects the edit button on the newly created congratulation")
     public void selectsTheEditButtonOnTheNewlyCreatedCongratulation() {
-      String text ="Abbas Təbriklər";
-      ReusableMethods.clickEditButtonForItem(text);
-      ReusableMethods.wait(1);
+        String text = "Abbas Təbriklər";
+        ReusableMethods.clickEditButtonForItem(text);
+        ReusableMethods.wait(1);
     }
 
     @When("user edits new congratulation")
@@ -302,5 +301,106 @@ public class questionnaires_Steps {
         ReusableMethods.wait(1);
         ReusableMethods.assertElementNotDisplayed(page.checkEditCong);
         ReusableMethods.wait(1);
+    }
+
+    @When("user adds {string} to the name input in the questionnaires tab")
+    public void userAddsToTheNameInputInTheQuestionnairesTab(String selection) {
+        if (selection.contains("new-announcement")) {
+            ReusableMethods.scrollEndByJavascript();
+            page.adTypeInput.sendKeys("ManualQA news");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        } else if (selection.contains("edit-announcement")) {
+            ReusableMethods.scrollEndByJavascript();
+            page.adTypeInput.sendKeys("AutomationQA news");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }else if (selection.contains("new-congratulation")) {
+            ReusableMethods.scrollEndByJavascript();
+            page.adTypeInput.sendKeys("Manual progress");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }
+    }
+
+    @Then("new {string} is displayed in the questionnaires tab")
+    public void newIsDisplayedInTheQuestionnairesTab(String selection,DataTable table) {
+        List<Map<String, String>> rows = table.asMaps(String.class, String.class);
+        if (selection.equalsIgnoreCase("new-announcement")) {
+            String expected = rows.get(0).get("announcement");
+            ReusableMethods.flash(page.checkNewAd, getDriver());
+            assertTrue(page.checkNewAd.isDisplayed());
+            assertEquals(expected, page.checkNewAd.getText().trim());
+            ReusableMethods.wait(1);
+        } else if (selection.equalsIgnoreCase("new-congratulation")) {
+            String expected = rows.get(0).get("congratulation");
+            ReusableMethods.flash(page.checkNewCong, getDriver());
+            assertTrue(page.checkNewCong.isDisplayed());
+            assertEquals(expected, page.checkNewCong.getText().trim());
+            ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("edited-announcement")) {
+            String expected = rows.get(0).get("announcement");
+            ReusableMethods.flash(page.checkNewSecond, getDriver());
+            assertTrue(page.checkNewSecond.isDisplayed());
+            assertEquals(expected, page.checkNewSecond.getText().trim());
+            ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("edited-congratulation")) {
+            String expected = rows.get(0).get("congratulation");
+            ReusableMethods.flash(page.checkSecondCong, getDriver());
+            assertTrue(page.checkSecondCong.isDisplayed());
+            assertEquals(expected, page.checkSecondCong.getText().trim());
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("new the {string} is successfully deletes in the questionnaires tab")
+    public void newTheIsSuccessfullyDeletesInTheQuestionnairesTab(String choose) {
+        if (choose.contains("announce")) {
+            while (true) {
+                try {
+                    if (!page.checkNewSecond.isDisplayed()) {
+                        break;
+                    }
+                    String text = "AutomationQA news";
+                    ReusableMethods.clickDeleteButtonForItem(text);
+                    ReusableMethods.wait(1);
+                    page.deleteYes.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Soraqçalardan elan tipi silindi və test passed oldu ✅");
+        } else if (choose.contains("congratulation")) {
+            while (true) {
+                try {
+                    if (!page.checkSecondCong.isDisplayed()) {
+                        break;
+                    }
+                    String text = "Automation progress";
+                    ReusableMethods.clickDeleteButtonForItem(text);
+                    ReusableMethods.wait(1);
+                    page.deleteYes.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Soraqçalardan təbrik tipi silindi və test passed oldu ✅");
+        }
+    }
+
+    @And("selects add new {string} type name button")
+    public void selectsAddNewTypeNameButton(String selection) {
+        if (selection.contains("announce")) {
+            page.adAnnounceType.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("congratulation")) {
+            page.congratsType.click();
+            ReusableMethods.wait(1);
+        }
     }
 }

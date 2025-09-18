@@ -44,4 +44,4 @@ Feature: Program template application for new user
     Then the deleted template is not displayed in the template tab
     #Test ssenarilər:
     #9.Yeni istifadəçi yaradılarkən proqram şablonunun tətbiqi
-    #10.Qeydiyyatın bütün mərhələlərində şablon məlumatlarının düzgün göstərilməsi.
+    #10.Qeydiyyatın bütün mərhələlərində şablon məlumatlarının düzgün göstərilməsi
