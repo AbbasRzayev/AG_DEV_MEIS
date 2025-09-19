@@ -679,6 +679,11 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             page.categoryBusinessTripSelect.click();
             ReusableMethods.wait(1);
+        }else if (selection.contains("Automation")) {
+            page.categorySelect.click();
+            ReusableMethods.wait(1);
+            page.categoryAutomation.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -872,6 +877,11 @@ public class calendar_Steps {
             page.eventPlace.click();
             ReusableMethods.wait(2);
             page.placeSelectMeetingRoom.click();
+            ReusableMethods.wait(1);
+        }else if (selection.contains("place")) {
+            page.eventPlace.click();
+            ReusableMethods.wait(2);
+            page.automationEventPlace.click();
             ReusableMethods.wait(1);
         }
     }

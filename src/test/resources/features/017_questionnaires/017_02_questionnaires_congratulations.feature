@@ -24,13 +24,13 @@ Feature: Adding congratulations questionnaires to different tabs
     And goes to the congratulations tab from admin panel
     And selects plus button for adding new "congratulation"
     And selects announcement type "edited-congratulation"
-    Then new "edited-congratulation" is displayed in the announcement tab
+    Then new "edited-congratulation" is displayed in the questionnaires tab
     And goes to the control panel
     And goes to the questionnaires tab
     And user switches to the Congratulations tab
     When user selects the delete button for the "delete-congratulation"
-    Then new the "congratulation" is successfully deletes in the questionnaires tab
-    #Test ssenarilərs:
+    Then the new "congratulation" is successfully deletes in the questionnaires tab
+    #Test ssenarilər:
     #8.Soraqçalar bölməsində Təbriklər hissəsində yeni təbrik tipinin əlavə edilməsinin yoxlanılması
     #9.Əlavə edilmiş yeni təbrik tipinin Soraqçalar bölməsində mövcud olmasının yoxlanılması
     #10.Yeni təbrik tipinin Soraqçalar bölməsindən redaktə olunmasının yoxlanılması

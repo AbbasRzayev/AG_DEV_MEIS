@@ -40,6 +40,9 @@ public class announcementsAndCongratulations_Steps {
         } else if (scenario.equalsIgnoreCase("congratulation")) {
             page.newCongratulation.click();
             ReusableMethods.wait(10);
+        }else if (scenario.equalsIgnoreCase("calendar")) {
+            page.newEventCalendarBtn.click();
+            ReusableMethods.wait(10);
         }
     }
 
@@ -70,6 +73,11 @@ public class announcementsAndCongratulations_Steps {
             page.announcementEditedTypeSelect.click();
             ReusableMethods.wait(1);
         } else if (choose.contains("edited-congratulation")) {
+            page.announcementType.click();
+            ReusableMethods.wait(1);
+            page.congratsEditedTypeSelect.click();
+            ReusableMethods.wait(1);
+        }else if (choose.contains("category")) {
             page.announcementType.click();
             ReusableMethods.wait(1);
             page.congratsEditedTypeSelect.click();
@@ -1108,7 +1116,7 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.flash(page.congratsEditedTypeSelect, getDriver());
             ReusableMethods.wait(1);
             String expected = "Automation progress";
-            assertEquals(page.congratsEditedTypeSelect.getText().trim(), expected);
+            assertEquals(page.calendarAutomation.getText().trim(), expected);
             ReusableMethods.wait(1);
         }
     }

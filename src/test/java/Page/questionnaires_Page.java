@@ -27,6 +27,14 @@ public class questionnaires_Page {
     public WebElement checkNewAd;
     @FindBy(xpath = "(//td[normalize-space()='Manual progress'])[1]")
     public WebElement checkNewCong;
+    @FindBy(xpath = "(//td[normalize-space()='Manual event place'])[1]")
+    public WebElement checkNewEvent;
+    @FindBy(xpath = "(//td[normalize-space()='Manual category'])[1]")
+    public WebElement checkNewCategory;
+    @FindBy(xpath = "(//td[normalize-space()='Automation category'])[1]")
+    public WebElement checkNewCategorySec;
+    @FindBy(xpath = "(//td[normalize-space()='Automation event place'])[1]")
+    public WebElement checkSecondEvent;
     @FindBy(xpath = "(//td[normalize-space()='AutomationQA news'])[1]")
     public WebElement checkNewSecond;
     @FindBy(xpath = "(//td[normalize-space()='Automation progress'])[1]")
@@ -40,8 +48,14 @@ public class questionnaires_Page {
 
     @FindBy(xpath = "(//span[@class='mdc-tab__text-label'])[2]")
     public WebElement calendar;
-    @FindBy(xpath = "//span[text()='Tədbir keçiriləcəyi yerlər']")
-    public WebElement places;@FindBy(xpath = "//span[text()='Tədbir kateqoriyaları']")
+    @FindBy(xpath = "//button[normalize-space()='Təqvim']")
+    public WebElement calendarTab;
+
+    @FindBy(xpath = "//span[normalize-space()='+ Məkan əlavə et']")
+    public WebElement places;
+    @FindBy(xpath = "//span[normalize-space()='+ Kateqoriya əlavə et']")
+    public WebElement categoryBtn;
+    @FindBy(xpath = "//span[text()='Tədbir kateqoriyaları']")
     public WebElement categoria;
     @FindBy(xpath = "//span[text()='Məkan əlavə et']")
     public WebElement addPlaceBtn;

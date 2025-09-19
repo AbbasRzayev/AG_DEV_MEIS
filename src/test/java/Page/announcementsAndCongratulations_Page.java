@@ -20,6 +20,8 @@ public class announcementsAndCongratulations_Page {
     public WebElement newAnnouncement;
     @FindBy(xpath = "//span[normalize-space()='Yeni təbrik']")
     public WebElement newCongratulation;
+    @FindBy(xpath = "//button[@class='new_news']")
+    public WebElement newEventCalendarBtn;
     @FindBy(xpath = "//span[normalize-space()='Yeni təbrik']")
     public WebElement newCongrats;
     @FindBy(id = "mat-input-8")
@@ -44,6 +46,10 @@ public class announcementsAndCongratulations_Page {
     public WebElement announcementEditedTypeSelect;
     @FindBy(xpath = "//span[text()='Automation progress']")
     public WebElement congratsEditedTypeSelect;
+    @FindBy(xpath = "//span[text()='Automation category']")
+    public WebElement calendarAutomation;
+    @FindBy(xpath = "//span[text()='Automation event place']")
+    public WebElement calenderEventCheck;
     @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-172']")
     public WebElement congratsType;
     @FindBy(xpath = "//span[text()='Maraqlı məlumatlar']")

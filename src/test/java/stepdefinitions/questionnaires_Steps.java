@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import Page.announcementsAndCongratulations_Page;
 import Page.questionnaires_Page;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -19,6 +20,7 @@ import static utilities.Driver.getDriver;
 
 public class questionnaires_Steps {
     questionnaires_Page page = new questionnaires_Page();
+    announcementsAndCongratulations_Page announce = new announcementsAndCongratulations_Page();
 
     @And("goes to the questionnaires tab")
     public void goesToTheQuestionnairesTab() {
@@ -36,6 +38,14 @@ public class questionnaires_Steps {
             String text = "Manual progress";
             ReusableMethods.clickEditButtonForItem(text);
             ReusableMethods.wait(2);
+        } else if(choose.contains("edit-event place")) {
+            String text = "Manual event place";
+            ReusableMethods.clickEditButtonForItem(text);
+            ReusableMethods.wait(2);
+        }else if(choose.contains("edit-category")) {
+            String text = "Manual category";
+            ReusableMethods.clickEditButtonForItem(text);
+            ReusableMethods.wait(2);
         }
     }
 
@@ -49,11 +59,27 @@ public class questionnaires_Steps {
             ReusableMethods.wait(1);
             page.saveBtn.click();
             ReusableMethods.wait(2);
-        } if(choose.contains("congratulation")) {
+        } else if(choose.contains("congratulation")) {
             ReusableMethods.wait(1);
             page.adTypeInput.clear();
             ReusableMethods.wait(1);
             page.adTypeInput.sendKeys("Automation progress");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }else if(choose.contains("event")) {
+            ReusableMethods.wait(1);
+            page.adTypeInput.clear();
+            ReusableMethods.wait(1);
+            page.adTypeInput.sendKeys("Automation event place");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }else if(choose.contains("category")) {
+            ReusableMethods.wait(1);
+            page.adTypeInput.clear();
+            ReusableMethods.wait(1);
+            page.adTypeInput.sendKeys("Automation category");
             ReusableMethods.wait(1);
             page.saveBtn.click();
             ReusableMethods.wait(2);
@@ -74,13 +100,25 @@ public class questionnaires_Steps {
             ReusableMethods.wait(1);
             page.deleteYes.click();
             ReusableMethods.wait(2);
+        }else if(choose.contains("delete-event place")) {
+            String text = "Automation event place";
+            ReusableMethods.clickDeleteButtonForItem(text);
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
+            ReusableMethods.wait(2);
+        }else if(choose.contains("delete-category")) {
+            String text = "Automation category";
+            ReusableMethods.clickDeleteButtonForItem(text);
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
+            ReusableMethods.wait(2);
         }
     }
 
     @And("user switches to the calendar tab")
     public void userSwitchesToTheCalendarTab() {
-        page.calendar.click();
-        ReusableMethods.wait(1);
+        page.calendarTab.click();
+        ReusableMethods.wait(2);
     }
 
     @And("opens places where the event will be held option")
@@ -323,6 +361,18 @@ public class questionnaires_Steps {
             ReusableMethods.wait(1);
             page.saveBtn.click();
             ReusableMethods.wait(2);
+        }else if (selection.contains("new-event place")) {
+            ReusableMethods.scrollEndByJavascript();
+            page.adTypeInput.sendKeys("Manual event place");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
+        }else if (selection.contains("new-category")) {
+            ReusableMethods.scrollEndByJavascript();
+            page.adTypeInput.sendKeys("Manual category");
+            ReusableMethods.wait(1);
+            page.saveBtn.click();
+            ReusableMethods.wait(2);
         }
     }
 
@@ -353,11 +403,35 @@ public class questionnaires_Steps {
             assertTrue(page.checkSecondCong.isDisplayed());
             assertEquals(expected, page.checkSecondCong.getText().trim());
             ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("new-event place")) {
+            String expected = rows.get(0).get("event place");
+            ReusableMethods.flash(page.checkNewEvent, getDriver());
+            assertTrue(page.checkNewEvent.isDisplayed());
+            assertEquals(expected, page.checkNewEvent.getText().trim());
+            ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("new-category")) {
+            String expected = rows.get(0).get("category");
+            ReusableMethods.flash(page.checkNewCategory, getDriver());
+            assertTrue(page.checkNewCategory.isDisplayed());
+            assertEquals(expected, page.checkNewCategory.getText().trim());
+            ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("edited-event place")) {
+            String expected = rows.get(0).get("event place");
+            ReusableMethods.flash(page.checkSecondEvent, getDriver());
+            assertTrue(page.checkSecondEvent.isDisplayed());
+            assertEquals(expected, page.checkSecondEvent.getText().trim());
+            ReusableMethods.wait(1);
+        }else if (selection.equalsIgnoreCase("edited-category")) {
+            String expected = rows.get(0).get("category");
+            ReusableMethods.flash(page.checkNewCategorySec, getDriver());
+            assertTrue(page.checkNewCategorySec.isDisplayed());
+            assertEquals(expected, page.checkNewCategorySec.getText().trim());
+            ReusableMethods.wait(1);
         }
     }
 
-    @Then("new the {string} is successfully deletes in the questionnaires tab")
-    public void newTheIsSuccessfullyDeletesInTheQuestionnairesTab(String choose) {
+    @Then("the new {string} is successfully deletes in the questionnaires tab")
+    public void theNewIsSuccessfullyDeletesInTheQuestionnairesTab(String choose) {
         if (choose.contains("announce")) {
             while (true) {
                 try {
@@ -390,6 +464,38 @@ public class questionnaires_Steps {
                 }
             }
             System.out.println("Soraqçalardan təbrik tipi silindi və test passed oldu ✅");
+        }else if (choose.contains("event place")) {
+            while (true) {
+                try {
+                    if (!page.checkSecondEvent.isDisplayed()) {
+                        break;
+                    }
+                    String text = "Automation event place";
+                    ReusableMethods.clickDeleteButtonForItem(text);
+                    ReusableMethods.wait(1);
+                    page.deleteYes.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Soraqçalardan tədbir tipi silindi və test passed oldu ✅");
+        }else if (choose.contains("category")) {
+            while (true) {
+                try {
+                    if (!page.checkNewCategorySec.isDisplayed()) {
+                        break;
+                    }
+                    String text = "Automation category";
+                    ReusableMethods.clickDeleteButtonForItem(text);
+                    ReusableMethods.wait(1);
+                    page.deleteYes.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Soraqçalardan kategoriya tipi silindi və test passed oldu ✅");
         }
     }
 
@@ -400,6 +506,29 @@ public class questionnaires_Steps {
             ReusableMethods.wait(1);
         } else if (selection.contains("congratulation")) {
             page.congratsType.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("event place")) {
+            page.places.click();
+            ReusableMethods.wait(1);
+        } else if (selection.contains("category")) {
+            page.categoryBtn.click();
+            ReusableMethods.wait(1);
+        }
+    }
+
+    @Then("new {string} is displayed in the calendar tab")
+    public void newIsDisplayedInTheCalendarTab(String choose) {
+        if (choose.contains("Automation category")) {
+            ReusableMethods.flash(announce.calendarAutomation, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Automation category";
+            assertEquals(announce.calendarAutomation.getText().trim(), expected);
+            ReusableMethods.wait(1);
+        }else if (choose.contains("event place")) {
+            ReusableMethods.flash(announce.calenderEventCheck, getDriver());
+            ReusableMethods.wait(1);
+            String expected = "Automation event place";
+            assertEquals(announce.calenderEventCheck.getText().trim(), expected);
             ReusableMethods.wait(1);
         }
     }

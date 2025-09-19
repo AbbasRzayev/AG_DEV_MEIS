@@ -57,6 +57,8 @@ public class calendar_Page {
     public WebElement placeSelectRoom671;
     @FindBy(xpath = "//span[contains(.,'İclas zalı')]")
     public WebElement placeSelectMeetingRoom;
+    @FindBy(xpath = "//span[contains(.,'Automation event place')]")
+    public WebElement  automationEventPlace;
     @FindBy(xpath = "//input[@placeholder='Şəxs']")
     public WebElement eventOrganizer;
     @FindBy(xpath = "(//div[contains(.,' Abbas Rzayev ')])[5]")
@@ -121,6 +123,8 @@ public class calendar_Page {
     public WebElement categoryAnnouncementSelect;
     @FindBy(xpath = "(//span[normalize-space()='İcazə'])[1]")
     public WebElement categoryBusinessTripSelect;
+    @FindBy(xpath = "(//span[normalize-space()='Automation category'])[1]")
+    public WebElement categoryAutomation;
     @FindBy(xpath = "//input[@formcontrolname='MHour']")
     public WebElement startTimeInput;
     @FindBy(xpath = "//input[@formcontrolname='endHour']")
