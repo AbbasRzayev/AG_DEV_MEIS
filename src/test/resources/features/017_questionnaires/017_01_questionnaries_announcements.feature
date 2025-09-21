@@ -23,7 +23,7 @@ Feature: Adding announcements questionnaires to different tabs
     And goes to the announcements tab from admin panel
     And selects plus button for adding new "announcement"
     And selects announcement type "edited-announcement"
-    Then new "edited-announcement" is displayed in the questionnaires tab
+    Then new "edited-announcement" is displayed in the announcement tab
     And goes to the control panel
     And goes to the questionnaires tab
     When user selects the delete button for the "delete-announce"

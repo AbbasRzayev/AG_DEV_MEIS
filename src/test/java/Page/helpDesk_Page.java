@@ -256,6 +256,8 @@ public class helpDesk_Page {
     public WebElement urgentSelect;
     @FindBy(xpath = "//span[text()='İcraya qəbul edilib']")
     public WebElement admittedToTheExecution;
+    @FindBy(xpath = "//span[text()='Müddəti bitib']")
+    public WebElement deadlineCrossed;
     @FindBy(xpath = "//span[text()='Yüksək']")
     public WebElement highSelect;
     @FindBy(xpath = "//span[text()='Normal']")

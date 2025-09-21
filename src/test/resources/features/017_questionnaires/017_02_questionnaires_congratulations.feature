@@ -14,17 +14,17 @@ Feature: Adding congratulations questionnaires to different tabs
     And selects add new "congratulation" type name button
     When user adds "new-congratulation" to the name input in the questionnaires tab
     Then new "new-congratulation" is displayed in the questionnaires tab
-      | congratulation |
+      | congratulation  |
       | Manual progress |
     And selects the edit button for "edit-congratulation" in the questionnaires tab
     When user edits new "congratulations"
     Then new "edited-congratulation" is displayed in the questionnaires tab
-      | congratulation     |
+      | congratulation      |
       | Automation progress |
     And goes to the congratulations tab from admin panel
     And selects plus button for adding new "congratulation"
     And selects announcement type "edited-congratulation"
-    Then new "edited-congratulation" is displayed in the questionnaires tab
+    Then new "edited-congratulation" is displayed in the announcement tab
     And goes to the control panel
     And goes to the questionnaires tab
     And user switches to the Congratulations tab

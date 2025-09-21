@@ -123,7 +123,7 @@ public class programs_Steps {
             Assert.assertTrue("Bright Future", page.createdProq.isDisplayed());
             ReusableMethods.wait(1);
             page.createdProq.click();
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(35);
         } else if (selection.contains("Light Future")) {
             ReusableMethods.wait(1);
             page.searchInput.sendKeys("Light Future");
@@ -133,7 +133,7 @@ public class programs_Steps {
             Assert.assertTrue("Light Future", page.createdProgSecond.isDisplayed());
             ReusableMethods.wait(1);
             page.createdProgSecond.click();
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(35);
         }
     }
 
@@ -401,7 +401,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\AutomatedTesting.mp4";
         page.iconVideoBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(35);
+        ReusableMethods.wait(25);
     }
 
     @And("added pdf file to the instruction file")
@@ -409,7 +409,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconInstructionBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(35);
+        ReusableMethods.wait(25);
     }
 
     @And("added one more pdf file to the another file")
@@ -417,7 +417,7 @@ public class programs_Steps {
         String photoPath = "C:\\Users\\User\\TestFiles\\QA.pdf";
         page.iconAnotherFileBtn.click();
         ReusableMethods.robotClassDosyaYukleme(photoPath);
-        ReusableMethods.wait(35);
+        ReusableMethods.wait(25);
     }
 
     @Then("all information is displayed in the review section of the program")

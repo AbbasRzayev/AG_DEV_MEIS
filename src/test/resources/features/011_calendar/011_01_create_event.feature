@@ -43,6 +43,9 @@ Feature: Create Calendar
     Then all the information about event is displayed in the event modal window
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər     | Başlama vaxtı | Bitmə vaxtı | Url                 | Tip         | Təsvir                                    |
       | AT_TesT      | Elan       | 671 nömrəli otaq          | Abbas Rzayev        | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Musa Rzayev | 00:30         | 17:00       | https://aist.group/ | Xəbərdarlıq | Tədbir AT elanı məqsədi ilə əlavə edildi! |
+    And user select escape button
+    When user goes to the calendar tab from left side bar
+    Then the event is "AT_TesT" successfully deleted from calendar
     #Test ssenarilər:
     #1.Bütün vacib xanaları seçərək yeni tədbirin əlavə edilməsi
     #2.İdarəetmənin təqvim hissəsində yeni əlavə edilmiş tədbirin mövcud olmasının yoxlanılması

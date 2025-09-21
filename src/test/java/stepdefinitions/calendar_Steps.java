@@ -679,7 +679,7 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             page.categoryBusinessTripSelect.click();
             ReusableMethods.wait(1);
-        }else if (selection.contains("Automation")) {
+        } else if (selection.contains("Automation")) {
             page.categorySelect.click();
             ReusableMethods.wait(1);
             page.categoryAutomation.click();
@@ -754,7 +754,7 @@ public class calendar_Steps {
             ReusableMethods.wait(1);
             Actions actions = new Actions(getDriver());
             actions.moveByOffset(5, 5).click().build().perform();
-        }else if (selection.contains("İbrahim")) {
+        } else if (selection.contains("İbrahim")) {
             page.choosePersonInput.sendKeys("İbrahim Rzayev");
             ReusableMethods.wait(2);
             page.choosePersonIbrahim.click();
@@ -878,7 +878,7 @@ public class calendar_Steps {
             ReusableMethods.wait(2);
             page.placeSelectMeetingRoom.click();
             ReusableMethods.wait(1);
-        }else if (selection.contains("place")) {
+        } else if (selection.contains("place")) {
             page.eventPlace.click();
             ReusableMethods.wait(2);
             page.automationEventPlace.click();
@@ -1374,5 +1374,85 @@ public class calendar_Steps {
     public void userSelectsDuplicateEventButton() {
         page.duplicateBtnEvent.click();
         ReusableMethods.wait(1);
+    }
+
+    @Then("the event is {string} successfully deleted from calendar")
+    public void theEventIsSuccessfullyDeletedFromCalendar(String event) {
+        if (event.contains("AT_TesT")) {
+            while (true) {
+                try {
+                    if (!page.eventNameCalendar.isDisplayed() || !page.eventNameCalendar.getText().trim().equals("AT_TesT")) {
+                        break;
+                    }
+                    page.eventNameCalendar.click();
+                    ReusableMethods.wait(3);
+                    page.deleteBtnEvent.click();
+                    ReusableMethods.wait(1);
+                    loginAndLogOut.yesExit.click();
+                    ReusableMethods.wait(5);
+
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+        } else if (event.contains("AT_Edited")) {
+            while (true) {
+                try {
+                    if (!page.eventEditNameCalendar.isDisplayed() || !page.eventEditNameCalendar.getText().trim().equals("AT_Edited")) {
+                        break;
+                    }
+                    page.eventEditNameCalendar.click();
+                    ReusableMethods.wait(3);
+                    page.deleteBtnEvent.click();
+                    ReusableMethods.wait(1);
+                    loginAndLogOut.yesExit.click();
+                    ReusableMethods.wait(5);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+        } else if (event.contains("AT_Duplicate")) {
+            while (true) {
+                try {
+                    boolean deletedSomething = false;
+
+                    // 1) AT_Duplicate varsa sil
+                    if (page.eventNameCalendarDuplicate.isDisplayed()
+                            && "AT_Duplicate".equals(page.eventNameCalendarDuplicate.getText().trim())) {
+
+                        page.eventNameCalendarDuplicate.click();
+                        ReusableMethods.wait(1);
+                        page.deleteBtnEvent.click();
+                        ReusableMethods.wait(1);
+                        loginAndLogOut.yesExit.click();
+                        ReusableMethods.wait(2);
+
+                        deletedSomething = true;
+                    }
+
+                    // 2) AT_Test varsa sil
+                    if (page.eventNameCalendar.isDisplayed()
+                            && "AT_TesT".equals(page.eventNameCalendar.getText().trim())) {
+
+                        page.eventNameCalendar.click();
+                        ReusableMethods.wait(1);
+                        page.deleteBtnEvent.click();
+                        ReusableMethods.wait(1);
+                        loginAndLogOut.yesExit.click();
+                        ReusableMethods.wait(2);
+
+                        deletedSomething = true;
+                    }
+
+                    // Hər ikisi də tapılmadısa → çıx
+                    if (!deletedSomething) {
+                        break;
+                    }
+
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+        }
     }
 }

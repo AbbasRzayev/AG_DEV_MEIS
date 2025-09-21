@@ -144,7 +144,7 @@ public class programs_Page {
     public WebElement infoButton;
     @FindBy(xpath = "//textarea[@rows='4']")
     public WebElement infoInput;
-    @FindBy(xpath = "//span[normalize-space()='Saxla']")
+    @FindBy(xpath = "(//span[normalize-space()='Yadda saxla'])[2]")
     public WebElement saveChangesModule;
     @FindBy(xpath = "//button[@mattooltip='Təsdiq']")
     public WebElement acceptModule;

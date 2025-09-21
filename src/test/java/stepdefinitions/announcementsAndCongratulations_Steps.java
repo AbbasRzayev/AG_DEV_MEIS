@@ -118,7 +118,7 @@ public class announcementsAndCongratulations_Steps {
 
     @When("user selects save button")
     public void userSelectsSaveButton() {
-        ReusableMethods.wait(4);
+        ReusableMethods.wait(10);
         page.saveBtn.click();
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         ReusableMethods.wait(15);
@@ -1114,9 +1114,9 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.wait(1);
         } else if (choose.contains("edited-congratulation")) {
             ReusableMethods.flash(page.congratsEditedTypeSelect, getDriver());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             String expected = "Automation progress";
-            assertEquals(page.calendarAutomation.getText().trim(), expected);
+            assertEquals(page.congratsEditedTypeSelect.getText().trim(), expected);
             ReusableMethods.wait(1);
         }
     }

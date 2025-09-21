@@ -192,17 +192,17 @@ public class registration_Steps {
         }
 
         getDriver().get("https://account.proton.me/mail");
-        ReusableMethods.wait(3);
+        ReusableMethods.wait(7);
         electronLibraryPage.emailUsername.sendKeys("abbaszamanov88@proton.me");
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         electronLibraryPage.emailPassword.sendKeys("Rabbas8888!!");
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         electronLibraryPage.enterEmail.click();
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(35);
 
 //        ReusableMethods.flash(electronLibraryPage.selectsOTTPNot,getDriver());
         electronLibraryPage.selectsOTTPNot.click();
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(5);
 
         ReusableMethods.pageDown();
         ReusableMethods.wait(4);
@@ -223,7 +223,7 @@ public class registration_Steps {
         System.out.println("code = " + confirmCode);
 //        ReusableMethods.flash(page.googleDeletebutton, getDriver());
 //        page.googleDeletebutton.click();
-//        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
         getDriver().switchTo().window(currentWindowHandle);
         ReusableMethods.wait(3);
         page.addCodeInput.sendKeys(confirmCode);
@@ -239,9 +239,9 @@ public class registration_Steps {
 //        confirmButton.click();
         //page.confirmCode.click();
         page.confirmBtn.click();
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(5);
         page.closeTheModal.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(2);
     }
 
     @And("admin logs to the system to give the necessary permissions to the use")

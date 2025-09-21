@@ -164,7 +164,7 @@ public class programTemplate_Steps {
     @And("the added program template is displayed in the registration stage")
     public void theAddedProgramTemplateIsDisplayedInTheRegistrationStage() {
         page.regProgramTemplate.click();
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
         Assert.assertEquals(page.regProgramTemplateCheck.getText().trim(), programNameFirst);
         ReusableMethods.wait(1);
         ReusableMethods.flash(page.regProgramTemplateCheck,getDriver());

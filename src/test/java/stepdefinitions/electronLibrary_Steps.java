@@ -227,15 +227,15 @@ public class electronLibrary_Steps {
             ReusableMethods.robotClassDosyaYukleme(path);
         } else if (selection.contains("edit")) {
             ReusableMethods.pageDown();
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(2);
             page.fileDelete.click();
-//            ReusableMethods.wait(1);
-//            page.deleteYes.click();
+            ReusableMethods.wait(1);
+            page.deleteYes.click();
             ReusableMethods.pageDown();
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(5);
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
             page.addFileBtn.click();
-            ReusableMethods.wait(2);
+            ReusableMethods.wait(3);
             ReusableMethods.robotClassDosyaYukleme(path);
         }
     }

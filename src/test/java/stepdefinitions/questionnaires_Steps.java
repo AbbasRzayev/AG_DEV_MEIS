@@ -393,12 +393,14 @@ public class questionnaires_Steps {
             ReusableMethods.wait(1);
         }else if (selection.equalsIgnoreCase("edited-announcement")) {
             String expected = rows.get(0).get("announcement");
+            ReusableMethods.wait(2);
             ReusableMethods.flash(page.checkNewSecond, getDriver());
             assertTrue(page.checkNewSecond.isDisplayed());
             assertEquals(expected, page.checkNewSecond.getText().trim());
             ReusableMethods.wait(1);
         }else if (selection.equalsIgnoreCase("edited-congratulation")) {
             String expected = rows.get(0).get("congratulation");
+            ReusableMethods.wait(2);
             ReusableMethods.flash(page.checkSecondCong, getDriver());
             assertTrue(page.checkSecondCong.isDisplayed());
             assertEquals(expected, page.checkSecondCong.getText().trim());

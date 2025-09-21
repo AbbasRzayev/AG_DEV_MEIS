@@ -36,6 +36,9 @@ Feature: Duplicate event
     And user with login "rzayevmusa1234@gmail.com" and password "Musamusa88!!" logs into the "AG-MEIS" system
     When user goes to the calendar tab from left side bar
     Then event name "AT_Duplicate" is shown in the calendar
+    When user goes to the calendar tab from left side bar
+    Then the event is "AT_Duplicate" successfully deleted from calendar
+
     #Test ssenarilər:
     #43.Tədbirin sürətinin çıxarılması
     #44.Sürəti çıxarılan tədbirin İdarəetmənin təqvim hissəsində mövcud olmamasının yoxlanılması

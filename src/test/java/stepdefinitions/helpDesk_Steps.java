@@ -1101,7 +1101,7 @@ public class helpDesk_Steps {
             ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
-            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.currentResultType, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
@@ -1118,7 +1118,7 @@ public class helpDesk_Steps {
             ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
-            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.currentResultType, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
@@ -1135,13 +1135,13 @@ public class helpDesk_Steps {
             ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
-            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.currentResultType, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
             ReusableMethods.wait(1);
-            page.admittedToTheExecution.click();
+            page.deadlineCrossed.click();
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.closeFilterModal, 10);
             ReusableMethods.wait(3);
         } else if (selection.contains("Icra edilib")) {
@@ -1152,7 +1152,7 @@ public class helpDesk_Steps {
             ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
-            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.currentResultType, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();
@@ -1169,7 +1169,7 @@ public class helpDesk_Steps {
             ReusableMethods.flash(searchByUserData.getTableDataText, getDriver());
             ReusableMethods.wait(1);
             ReusableMethods.pageUp();
-            ReusableMethods.waitForClickabilityAndClick(searchByUserData.noteType, 5);
+            ReusableMethods.waitForClickabilityAndClick(searchByUserData.currentResultType, 5);
             ReusableMethods.waitForClickabilityAndClick(searchByUserData.openFilter, 5);
             page.descriptionList.click();
             JavascriptExecutor js = (JavascriptExecutor) getDriver();

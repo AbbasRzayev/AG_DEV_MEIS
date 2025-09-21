@@ -66,6 +66,9 @@ Feature: Edit Calendar
     Then all the information about event is displayed in the event modal window
       | Tədbirin adı | Kateqoriya | Tədbirin keçiriləcəyi yer | Tədbiri təşkil edən | Tərtib edən  | Bildiriş statusu     | Baxış statusu        | Şəxslər       | Başlama vaxtı | Bitmə vaxtı | Url                              | Tip         | Təsvir                                  |
       | AT_Edited    | İcazə      | İclas zalı                | Davud Zamanov       | Abbas Rzayev | Ünvanlanmış şəxslərə | Ünvanlanmış şəxslərə | Davud Zamanov | 00:50         | 19:00       | https://dev-meis.aist.group/auth | Xəbərdarlıq | Tədbir test məqsədi ilə redaktə edildi. |
+    And user select escape button
+    When user goes to the calendar tab from left side bar
+    Then the event is "AT_Edited" successfully deleted from calendar
     #Test ssenarilər:
     #34.Yeni tədbirin redaktə edilməsi
     #35.İdarəetmənin təqvim hissəsində redaktə edildikdən sonra tədbirin "Başlıq"-adının, vaxtın və statusun yoxlanılması
