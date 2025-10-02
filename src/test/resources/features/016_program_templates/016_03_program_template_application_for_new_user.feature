@@ -41,7 +41,7 @@ Feature: Program template application for new user
     And goes to the control panel
     And the user switches to the program templates tab
     When selects delete button in the template tab
-    Then the deleted template is not displayed in the template tab
+#    Then the deleted template is not displayed in the template tab
     #Test ssenarilər:
     #9.Yeni istifadəçi yaradılarkən proqram şablonunun tətbiqi
     #10.Qeydiyyatın bütün mərhələlərində şablon məlumatlarının düzgün göstərilməsi

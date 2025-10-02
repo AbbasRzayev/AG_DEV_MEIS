@@ -56,14 +56,14 @@ leftSIdeBarMenu_Page page =new leftSIdeBarMenu_Page();
     public void userSuccessfullySwitchesToTheProgramTab() {
         ReusableMethods.flash(page.progLogo,getDriver());
         String tittle = "Proqramlarım | MEIS";
-        ReusableMethods.wait(5);
+        ReusableMethods.wait(30);
         assertEquals(tittle,getDriver().getTitle());
     }
 
     @When("user selects announcement and congratulations from left sidebar")
     public void userSelectsAnnouncementAndCongratulationsFromLeftSidebar() {
         page.congrats.click();
-        ReusableMethods.wait(50);
+        ReusableMethods.wait(60);
 
     }
 

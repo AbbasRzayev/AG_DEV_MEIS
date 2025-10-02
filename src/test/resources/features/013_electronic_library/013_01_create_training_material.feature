@@ -47,6 +47,7 @@ Feature:Create training material
     When goes to the electronic library tab in the control panel
     And selects delete button in the control panel
     Then the deleted training material is not displayed in the control panel
+
   #Test ssenarilər:
   #1.Yeni təlim materialın əlavə edilməsi
   #2.İdarəetmə panelində əlavə edilən təlimin mövcud olmasının yoxlanılması

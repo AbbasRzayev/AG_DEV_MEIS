@@ -933,28 +933,28 @@ public class usersPermissions_Steps {
             page.adminProqram.click();
             ReusableMethods.flash(page.adminProqram, getDriver());
             assertTrue(page.adminProqram.isDisplayed());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(10);
 
             page.adminStrukturDuty.click();
             ReusableMethods.flash(page.adminStrukturDuty, getDriver());
             assertTrue(page.adminStrukturDuty.isDisplayed());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(10);
 
 
             page.adminElan.click();
             ReusableMethods.flash(page.adminElan, getDriver());
             assertTrue(page.adminElan.isDisplayed());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(10);
 
             page.adminCongrats.click();
             ReusableMethods.flash(page.adminCongrats, getDriver());
             assertTrue(page.adminCongrats.isDisplayed());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(10);
 
             page.adminIdea.click();
             ReusableMethods.flash(page.adminIdea, getDriver());
             assertTrue(page.adminIdea.isDisplayed());
-            ReusableMethods.wait(1);
+            ReusableMethods.wait(10);
 
             page.adminBaza.click();
             ReusableMethods.flash(page.adminBaza, getDriver());

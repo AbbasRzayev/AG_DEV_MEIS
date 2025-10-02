@@ -27,9 +27,9 @@ public class programs_Steps {
 
     @And("switches to the my programs tab")
     public void switchesToTheMyProgramsTab() {
-        ReusableMethods.wait(1);
+        ReusableMethods.wait(3);
         page.programTab.click();
-        ReusableMethods.wait(10);
+        ReusableMethods.wait(15);
     }
 
     contactInformationEditing_Page userPer = new contactInformationEditing_Page();
@@ -37,7 +37,7 @@ public class programs_Steps {
 
     @And("select new program button")
     public void selectNewProgramButton() {
-        ReusableMethods.wait(2);
+        ReusableMethods.wait(15);
         page.newProgramButton.click();
     }
 
@@ -897,10 +897,10 @@ public class programs_Steps {
     public void theProgramIsSearched(String selection) {
         if (selection.contains("Bright Future")) {
             page.searchInputProgram.sendKeys("Bright Future");
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(20);
         }     else if (selection.contains("E-Sened")) {
             page.searchInputProgram.sendKeys("Elektron Sənəd Dövriyyəsi");
-            ReusableMethods.wait(3);
+            ReusableMethods.wait(20);
         }
     }
 

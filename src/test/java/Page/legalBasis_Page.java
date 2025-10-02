@@ -14,28 +14,27 @@ public class legalBasis_Page {
     public WebElement lagalBasis;
     @FindBy(xpath = "//span[text()=' Yeni sənəd ']")
     public WebElement plusBtnNewDocument;
-    @FindBy(id = "mat-input-17")
+    @FindBy(xpath = "//input[@formcontrolname='title']")
     public WebElement nameForFirstDocument;
-    @FindBy(id = "mat-input-18")
+    @FindBy(xpath = "//input[@formcontrolname='legislationNumber']")
     public WebElement numberField;
-    @FindBy(id = "mat-input-19")
+    @FindBy(xpath = "//input[@formcontrolname='orgRegNumber']")
     public WebElement stateNumber;
-    @FindBy(id = "mat-input-21")
+    @FindBy(xpath = "//input[@formcontrolname='startDate']")
     public WebElement effectiveDate;
-    @FindBy(id = "mat-input-22")
+    @FindBy(xpath = "//input[@formcontrolname='endDate']")
     public WebElement expirationDate;
-    @FindBy(id = "mat-input-23")
+    @FindBy(xpath = "//input[@formcontrolname='agreementAcceptanceDateStr']")
     public WebElement admissonDate;
-    @FindBy(id = "mat-input-20")
+    @FindBy(xpath = "//input[@formcontrolname='recipient']")
     public WebElement acceptedOrgan;
-    @FindBy(id = "mat-input-24")
+    @FindBy(xpath = "//input[@formcontrolname='url']")
     public WebElement linkField;
-    @FindBy(xpath = "//div[@class='mat-mdc-select-arrow ng-tns-c3393473648-36']")
+    @FindBy(xpath = "//mat-select[@formcontrolname='legislationTypeId']")
     public WebElement docTypeBtn;
     @FindBy(xpath = "//span[text()='Əsasnamə']")
     public WebElement docType;
-
-    @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-41']")
+    @FindBy(xpath = "//mat-select[@formcontrolname='statusType']")
     public WebElement status;
     @FindBy(xpath = "//span[text()='Qüvvədə olan']")
     public WebElement statusSelect;
@@ -83,4 +82,46 @@ public class legalBasis_Page {
     public WebElement statusByStructureSelect;
     @FindBy(xpath = "//span[text()='Təsdiq et']")
     public WebElement acceptStructure;
+    @FindBy(xpath = "//mat-select[@formcontrolname='appointmentStatusType']")
+    public WebElement statusView;
+    @FindBy(xpath = "//span[text()='Ünvanlanmış şəxslərə görə']")
+    public WebElement addressedPerson;
+    @FindBy(css = "input.search-input")
+    public WebElement addressedPersonInput;
+    @FindBy(xpath = "//div[text()=' Musa Rzayev - AT|TestUser(!) ']")
+    public WebElement selectMusaPerson;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-title')]//span)[1]")
+    public WebElement legalNameCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-legislationNumber')])[1]")
+    public WebElement legalNumberCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-legislationTypeName')])[1]")
+    public WebElement legalTypeCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-recipient')])[1]")
+    public WebElement legalAcceptOrganCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-startDateStr')])[1]")
+    public WebElement legalStartDateCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-endDateStr')])[1]")
+    public WebElement legalEndCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-agreementAcceptanceDateStr')])[1]")
+    public WebElement legalAcceptDateCheck;
+    @FindBy(xpath = "(//td[contains(@class,'mat-column-statusType')])[1]")
+    public WebElement legalStatusCheck;
+
+    @FindBy(xpath = "(//div[@class='info']//p)[2]")
+    public WebElement nameModal;
+    @FindBy(xpath = "(//div[@class='info']//p)[4]")
+    public WebElement numberModal;
+    @FindBy(xpath = "(//div[@class='info']//p)[6]")
+    public WebElement docTypeModal;
+    @FindBy(xpath = "(//div[@class='info']//p)[8]")
+    public WebElement acceptOrganModal;
+    @FindBy(xpath = "(//div[@class='info']//p)[10]")
+    public WebElement acceptDateModal;
+    @FindBy(xpath = "(//div[@class='info']//p)[12]")
+    public WebElement statusModal;
+    @FindBy(xpath = "//span[text()='URL']")
+    public WebElement urlModal;
+
+
+
 }

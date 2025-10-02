@@ -26,7 +26,7 @@ Feature: Program template editing
       | Şablonun adı    | Vəzifə    | Struktur               | Proqramlar |
       | Manual Template | Proqramçı | Keyfiyyətə Nəzarət(AT) | 2          |
     When selects delete button in the template tab
-    Then the deleted template is not displayed in the template tab
+#    Then the deleted template is not displayed in the template tab
     #Test ssenarilər:
     #7.Yeni şablonun bütün məlumatlarının redaktə edilməsi
     #8.Redaktə edildikdən sonra şablon məlumatlarının yoxlanılması

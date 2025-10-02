@@ -23,7 +23,7 @@ Feature:Edit electronic journal
     And selects edit button in the control panel
     And adds "Journal Automation" to journal name input
     And adds "8888" to journal number input
-    And adds file "edit" for training
+    And adds file "edit" for electronic journal
     And user selects save button
     Then all information about the electronic journal is displayed in the table in the admin panel
       | Adı                | Buraxılış nömrəsi | Materiallar  | Baxış sayı |

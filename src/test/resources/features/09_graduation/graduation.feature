@@ -29,6 +29,7 @@ Feature: Graduation
     Then A user on vacation is unable to enter the system
     #Istifadəçidən məzuniyyətin ləğv edilməsi
     And user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
+    And user with login "imranovfarid@gmail.com" and password "Farid1020@@@" logs into the "AG-MEIS" system
     And goes to the control panel
     And adds name "Abbas" and fin to the name and fin fields
     And user selects enter in the users tab

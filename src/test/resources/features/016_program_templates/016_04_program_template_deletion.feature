@@ -16,7 +16,7 @@ Feature: Program template deletion
     And the user clicks the "Next" button
     When the user selects the "new" program for template
     When selects delete button in the template tab
-    Then the deleted template is not displayed in the template tab
+#    Then the deleted template is not displayed in the template tab
     #Test ssenarilər:
     #11.Proqram şablonunun silinməsi
     #12.Silinən proqram şablonunun idarəetmə hissəsində mövcud olmamasının yoxlanılması

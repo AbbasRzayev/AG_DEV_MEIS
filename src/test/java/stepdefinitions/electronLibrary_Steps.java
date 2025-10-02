@@ -1585,4 +1585,21 @@ public class electronLibrary_Steps {
         System.out.println("Bütün e" +
                 " silindi və test passed oldu ✅");
     }
+
+    @And("adds file {string} for electronic journal")
+    public void addsFileForElectronicJournal(String selection) {
+      if (selection.contains("edit")) {
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(2);
+            page.fileDelete.click();
+            ReusableMethods.wait(1);
+//            page.deleteYes.click();
+            ReusableMethods.pageDown();
+            ReusableMethods.wait(5);
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\EndToEnd.pdf";
+            page.addFileBtn.click();
+            ReusableMethods.wait(3);
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
+    }
 }
