@@ -17,25 +17,25 @@ Feature: User Permissions
     Then user can realize his "<opportunities>" in the MEIS system according to the permissions given to him
     Examples:
       | permissions                                     | opportunities    |
-#      | Bütün istifadəçilərlə əməliyyatların aparılması | firstCase        |
-#      | Elanlar modulunun idarə edilməsi                | secondCase       |
-#      | Elektron jurnallara baxış                       | thirdCase        |
-#      | Elektron jurnalların idarə edilməsi             | fourthCase       |
-#      | Faydalı məlumatlar moduluna baxış               | fifthCase        |
-#      | Faydalı məlumatlar modulunun idarə edilməsi     | sixthCase        |
-#      | Fikir bankı modulunun idarə edilməsi            | seventhCase      |
-#      | Hüquqi baza modulunun idarə edilməsi            | eighthCase       |
-#      | Proqramçı IT mütəxəssis                         | ninthCase        |
-#      | Proqramlar modulunun idarə edilməsi             | tenthCase        |
-#      | Strukturda əməliyyatların aparılması            | eleventhCase     |
-#      | Şəxsin adından sistemə giriş etmək              | twelfthCase      |
-#      | Təbriklər modulunun idarə edilməsi              | thirteenthCase   |
-#      | Təlimlər moduluna baxış                         | fourteenthCase   |
-#      | Təlimlər modulunun idarə edilməsi               | fifteenCase      |
-#      | Təqvimə baxış imkanı                            | sixteenCase      |
-#      | Təqvim modulunun idarəedilməsi                  | seventeenCase    |
-#      | Təyin edilmiş proqramlardan istifadə            | eighteenCase     |
-#      | Yardım masası modulunun idarəedilməsi           | nineteenCase     |
+      | Bütün istifadəçilərlə əməliyyatların aparılması | firstCase        |
+      | Elanlar modulunun idarə edilməsi                | secondCase       |
+      | Elektron jurnallara baxış                       | thirdCase        |
+      | Elektron jurnalların idarə edilməsi             | fourthCase       |
+      | Faydalı məlumatlar moduluna baxış               | fifthCase        |
+      | Faydalı məlumatlar modulunun idarə edilməsi     | sixthCase        |
+      | Fikir bankı modulunun idarə edilməsi            | seventhCase      |
+      | Hüquqi baza modulunun idarə edilməsi            | eighthCase       |
+      | Proqramçı IT mütəxəssis                         | ninthCase        |
+      | Proqramlar modulunun idarə edilməsi             | tenthCase        |
+      | Strukturda əməliyyatların aparılması            | eleventhCase     |
+      | Şəxsin adından sistemə giriş etmək              | twelfthCase      |
+      | Təbriklər modulunun idarə edilməsi              | thirteenthCase   |
+      | Təlimlər moduluna baxış                         | fourteenthCase   |
+      | Təlimlər modulunun idarə edilməsi               | fifteenCase      |
+      | Təqvimə baxış imkanı                            | sixteenCase      |
+      | Təqvim modulunun idarəedilməsi                  | seventeenCase    |
+      | Təyin edilmiş proqramlardan istifadə            | eighteenCase     |
+      | Yardım masası modulunun idarəedilməsi           | nineteenCase     |
       | Yardım masasına göndərilən müraciətlərə baxış   | twentyFirstCase  |
       | Bütün əməliyyatların aparılması                 | twentySecondCase |
     #Test ssenarilər:

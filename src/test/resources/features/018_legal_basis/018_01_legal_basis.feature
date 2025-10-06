@@ -51,7 +51,9 @@ Feature: Legal basis
     #5.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində sənədin növü məlumatının düzgün əks olunmasının yoxlanılması
     #6.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində qəbul edən orqan məlumatının düzgün əks olunmasının yoxlanılması
     #7.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində qüvvəyə minmə tarixi məlumatının düzgün əks olunmasının yoxlanılması
-    #8.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində status məlumatının düzgün əks olunmasının yoxlanılması
-    #9.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində URL məlumatının və URL-ə keçidin düzgün işləməsinin yoxlanılması
-    #10.Ünvanlanmış şəxsin adından sistemə daxil olaraq sənədin sistemdə mövcud olmasının və məlumatlarının düzgün əks olunmasının yoxlanılması
-    #11.Ünvanlanmış şəxsin adından sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində bütün məlumatların düzgün əks olunmasının yoxlanılması
+    #8.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində qüvvədən düşmə tarixi məlumatının düzgün əks olunmasının yoxlanılması
+    #9.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində qəbul tarixi məlumatının düzgün əks olunmasının yoxlanılması
+    #10.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində status məlumatının düzgün əks olunmasının yoxlanılması
+    #11.Yeni sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində URL məlumatının və URL-ə keçidin düzgün işləməsinin yoxlanılması
+    #12.Ünvanlanmış şəxsin adından sistemə daxil olaraq sənədin sistemdə mövcud olmasının və məlumatlarının düzgün əks olunmasının yoxlanılması
+    #13.Ünvanlanmış şəxsin adından sənədi seçərək "Fikrinizi bildirin" modal pəncərəsində bütün məlumatların düzgün əks olunmasının yoxlanılması

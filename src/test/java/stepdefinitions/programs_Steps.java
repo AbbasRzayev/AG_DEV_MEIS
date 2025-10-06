@@ -3,6 +3,7 @@ package stepdefinitions;
 import Page.contactInformationEditing_Page;
 import Page.programs_Page;
 import Page.structureAndDuties_Page;
+import com.github.javafaker.Faker;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -24,7 +25,7 @@ import static utilities.Driver.getDriver;
 
 public class programs_Steps {
     programs_Page page = new programs_Page();
-
+    String keywordText;
     @And("switches to the my programs tab")
     public void switchesToTheMyProgramsTab() {
         ReusableMethods.wait(3);
@@ -44,13 +45,15 @@ public class programs_Steps {
     @And("added data to the program name and to the keyword field")
     public void addedDataToTheProgramNameAndToTheKeywordField(DataTable dataTable) {
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        Faker faker = new Faker();
         for (Map<String, String> row : data) {
             String programName = row.get("PROGRAM NAME");
-            String keyword = row.get("KEYWORD");
+//            String keyword = row.get("KEYWORD");
+            keywordText = row.get("KEYWORD") + "_" + faker.number().digits(4);
             System.out.println("programName = " + programName);
-            System.out.println("keyword = " + keyword);
+            System.out.println("keyword = " + keywordText);
             page.programNameField.sendKeys(programName);
-            page.kewwordField.sendKeys(keyword);
+            page.kewwordField.sendKeys(keywordText);
         }
     }
 
@@ -441,7 +444,7 @@ public class programs_Steps {
             WebElement inputValue2 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[2]"));
             String progKWEx = inputValue2.getAttribute("value");
             System.out.println("actual = " + progKWEx);
-            Assert.assertEquals(progKWEx, keyword);
+            Assert.assertEquals(progKWEx, keywordText);
 
             ReusableMethods.flash(page.programAdressField, getDriver());
             WebElement inputValue3 = getDriver().findElement(By.xpath(" //label[contains(., 'Proqramın adı')]/following::input[3]"));
