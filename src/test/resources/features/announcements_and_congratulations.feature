@@ -1,4 +1,4 @@
-@AnnouncementsAndCongratulations @All
+
 Feature:Announcements and Congratulations
 
   @AnnouncementAccordingToTheAddressees

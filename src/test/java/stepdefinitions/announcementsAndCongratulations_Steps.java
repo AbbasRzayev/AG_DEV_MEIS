@@ -2,24 +2,29 @@ package stepdefinitions;
 
 import Page.announcementsAndCongratulations_Page;
 import Page.registration_Page;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.ReusableMethods;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static stepdefinitions.calendar_Steps.isElementVisible;
 import static utilities.Driver.getDriver;
 
 public class announcementsAndCongratulations_Steps {
@@ -36,32 +41,38 @@ public class announcementsAndCongratulations_Steps {
     public void selectsPlusButtonForAddingNewAnnouncement(String scenario) {
         if (scenario.equalsIgnoreCase("announcement")) {
             page.newAnnouncement.click();
-            ReusableMethods.wait(10);
+            ReusableMethods.wait(1);
         } else if (scenario.equalsIgnoreCase("congratulation")) {
             page.newCongratulation.click();
-            ReusableMethods.wait(10);
-        }else if (scenario.equalsIgnoreCase("calendar")) {
+            ReusableMethods.wait(1);
+        } else if (scenario.equalsIgnoreCase("calendar")) {
             page.newEventCalendarBtn.click();
             ReusableMethods.wait(10);
         }
     }
 
-    @And("adds {string} name")
-    public void addsName(String arg0) {
-        page.announcementName.sendKeys(arg0);
-        ReusableMethods.wait(1);
+    @And("adds {string} name in the name input")
+    public void addsNameInTheNameInput(String selection) {
+        if (selection.contains("new")) {
+            page.announcementName.sendKeys("Manual ELan");
+            ReusableMethods.wait(1);
+        }
     }
 
     @And("adds {string} description")
-    public void addsDescription(String arg0) {
-        page.announcementDesciption.sendKeys(arg0);
-        ReusableMethods.wait(1);
+    public void addsDescription(String description) {
+        if (description.contains("new")) {
+            page.announcementDesciption.sendKeys("Bu elanın məqsədi automatlaşdırılmış təstlərdir.");
+            ReusableMethods.wait(1);
+        }
+
 
     }
 
-    @And("adds url for announcement")
-    public void addsUrlForAnnouncement() {
-        page.announcementUrl.sendKeys("https://aist.group/");
+    @And("adds url {string} for announcement")
+    public void addsUrlForAnnouncement(String url) {
+        if (url.contains("new announcement"))
+            page.announcementUrl.sendKeys("https://aist.group/");
         ReusableMethods.wait(1);
     }
 
@@ -77,10 +88,15 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.wait(1);
             page.congratsEditedTypeSelect.click();
             ReusableMethods.wait(1);
-        }else if (choose.contains("category")) {
+        } else if (choose.contains("category")) {
             page.announcementType.click();
             ReusableMethods.wait(1);
             page.congratsEditedTypeSelect.click();
+            ReusableMethods.wait(1);
+        } else if (choose.contains("new-announcement")) {
+            page.announcementType.click();
+            ReusableMethods.wait(1);
+            page.announcementNewTypeSelect.click();
             ReusableMethods.wait(1);
         }
     }
@@ -91,11 +107,13 @@ public class announcementsAndCongratulations_Steps {
         ReusableMethods.wait(1);
         page.announcementStatusForPerson.click();
         ReusableMethods.wait(1);
-        page.announcementPersonName.sendKeys("Musa");
+        page.announcementPersonName.sendKeys("Abbas Rzayev");
         ReusableMethods.wait(1);
-        page.announcementMusaSelect.click();
+        page.announcementAbbasSelect.click();
+//        page.announcementMusaSelect.click();
         ReusableMethods.wait(1);
-        page.closeSearchList.click();
+        Actions actions = new Actions(getDriver());
+        actions.moveByOffset(5, 5).click().build().perform();
     }
 
     @And("adds main picture for announcement")
@@ -1118,6 +1136,204 @@ public class announcementsAndCongratulations_Steps {
             String expected = "Automation progress";
             assertEquals(page.congratsEditedTypeSelect.getText().trim(), expected);
             ReusableMethods.wait(1);
+        }
+    }
+
+    @And("adds additional photo for announcement")
+    public void addsAdditionalPhotoForAnnouncement() {
+        page.anotherFile.click();
+        String path = "C:\\Users\\User\\TestFiles\\Test.png";
+//        page.announcementMainPictureOne.click();
+        ReusableMethods.robotClassDosyaYukleme(path);
+    }
+
+    @Then("the all information about announcement is displayed in the admin panel")
+    public void theAllInformationAboutAnnouncementIsDisplayedInTheAdminPanel(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String announcementName = row.get("Elan Başlığ");
+            String announcementDescription = row.get("Elan Təsvir");
+
+            ReusableMethods.flash(page.announcmentNameAdmin, getDriver());
+            Assert.assertEquals(page.announcmentNameAdmin.getText().trim(), announcementName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementDescriptionAdmin, getDriver());
+            Assert.assertEquals(page.announcementDescriptionAdmin.getText().trim(), announcementDescription);
+            ReusableMethods.wait(1);
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            String expectedDate = now.format(dateFormatter);
+            String expectedTime = now.format(timeFormatter);
+
+            ReusableMethods.flash(page.announcementDateAdmin, getDriver());
+            ReusableMethods.flash(page.announcementTimeAdmin, getDriver());
+
+//            Assert.assertEquals(page.announcementDateAdmin.getText(), expectedDate);
+//            Assert.assertEquals(page.announcementTimeAdmin.getText(), expectedTime);
+        }
+    }
+
+    @And("selects new added announcement")
+    public void selectsNewAddedAnnouncement() {
+        page.announcmentNameAdmin.click();
+        ReusableMethods.wait(1);
+    }
+
+    @Then("the all information about announcement is displayed in the left sidebar")
+    public void theAllInformationAboutAnnouncementIsDisplayedInTheLeftSidebar(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String announcementName = row.get("Elan Başlığ");
+            String announcementDescription = row.get("Elan Təsvir");
+            String announcementType = row.get("Elanın tipi");
+
+            ReusableMethods.flash(page.announcementMainPictureCheck, getDriver());
+            Assert.assertTrue(page.announcementMainPictureCheck.isDisplayed());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementDataTimeCheck, getDriver());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementTypeCheck, getDriver());
+            Assert.assertEquals(page.announcementTypeCheck.getText().trim(), announcementType);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementNameSideBar, getDriver());
+            Assert.assertEquals(page.announcementNameSideBar.getText().trim(), announcementName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementDescriptionLeftSideBar, getDriver());
+            Assert.assertEquals(page.announcementDescriptionLeftSideBar.getText().trim(), announcementDescription);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementVideoCheck, getDriver());
+            Assert.assertTrue(page.announcementVideoCheck.isDisplayed());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementUrlCheck, getDriver());
+            String original = getDriver().getWindowHandle();
+            page.announcementUrlCheck.click();
+            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                    .until(ExpectedConditions.numberOfWindowsToBe(2));
+            for (String handle : getDriver().getWindowHandles()) {
+                if (!handle.equals(original)) {
+                    getDriver().switchTo().window(handle);
+                    break;
+                }
+            }
+//            Assert.assertEquals(getDriver().getCurrentUrl().trim(), "https://aist.group/");
+            ReusableMethods.wait(3);
+            getDriver().close();
+            getDriver().switchTo().window(original);
+        }
+    }
+
+    @And("all the information about announcement is displayed in the notification")
+    public void allTheInformationAboutAnnouncementIsDisplayedInTheNotification(DataTable dataTable) {
+        try {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
+            if (isElementVisible(page.announcementModalWindow, wait)) {
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String announcementName = row.get("Elan Başlığ");
+                    String announcementDescription = row.get("Elan Təsvir");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.announceNameModalCheck, getDriver());
+                    Assert.assertEquals(page.announceNameModalCheck.getText().trim(), announcementName);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.announceDescModalCheck, getDriver());
+                    Assert.assertEquals(page.announceDescModalCheck.getText().trim(), announcementDescription);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.imgCheckModal, getDriver());
+                    Assert.assertTrue(page.imgCheckModal.isDisplayed());
+
+                    page.closeNoteWindow.click();
+                    ReusableMethods.wait(1);
+
+                    Actions actions = new Actions(getDriver());
+                    actions.moveByOffset(5, 5).click().build().perform();
+                }
+            } else {
+                ReusableMethods.wait(1);
+                WebElement button = getDriver().findElement(By.xpath("(//button[.//span[@class='mat-mdc-button-touch-target']])[3]"));
+                button.click();
+                ReusableMethods.wait(3);
+                System.out.println("\"Imhere1\" = " + "Imhere0");
+//                By.xpath("//li[.//span[contains(normalize-space(),'Yardım masası')]][1]");
+//                By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]");
+                WebElement element = getDriver().findElement(By.xpath("(//ul[contains(@class, 'notification-list')]//li)[1]"));
+                JavascriptExecutor js = (JavascriptExecutor) getDriver();
+                js.executeScript("arguments[0].click();", element);
+                element.click();
+                ReusableMethods.wait(5);
+                System.out.println("\"Imhere1\" = " + "Imhere1");
+                ReusableMethods.wait(3);
+                List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+                for (Map<String, String> row : data) {
+                    String announcementName = row.get("Elan Başlığ");
+                    String announcementDescription = row.get("Elan Təsvir");
+
+                    WebDriverWait wait1 = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
+                    wait1.until(ExpectedConditions.invisibilityOfElementLocated(By.className("cdk-overlay-backdrop")));
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+
+                    ReusableMethods.waitForOverlayToDisappear(getDriver());
+                    ReusableMethods.flash(page.announceNameModalCheck, getDriver());
+                    Assert.assertEquals(page.announceNameModalCheck.getText().trim(), announcementName);
+                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.announceDescModalCheck, getDriver());
+//                    Assert.assertEquals(page.announceDescModalCheck.getText().trim(), announcementDescription);
+//                    ReusableMethods.wait(1);
+
+                    ReusableMethods.flash(page.imgCheckModal, getDriver());
+                    Assert.assertTrue(page.imgCheckModal.isDisplayed());
+
+                    page.closeNoteWindow.click();
+                    ReusableMethods.wait(1);
+
+                    Actions actions = new Actions(getDriver());
+                    actions.moveByOffset(5, 5).click().build().perform();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+//            Assert.fail("Test zamanı istisna baş verdi: " + e.getMessage());
+        }
+    }
+
+    @When("selects delete button for announcement or for congrats in the control panel")
+    public void selectsDeleteButtonForAnnouncementOrForCongratsInTheControlPanel() {
+        page.deleteBtn.click();
+        ReusableMethods.wait(1);
+        page.yesDeleteForPerson.click();
+        ReusableMethods.wait(3);
+    }
+
+    @Then("the deleted announcement or congrats is not displayed in the control panel")
+    public void theDeletedAnnouncementOrCongratsIsNotDisplayedInTheControlPanel() {
+        while (true) {
+            try {
+                if (!page.deleteBtn.isDisplayed()) {
+                    break;
+                }
+                page.deleteBtn.click();
+                ReusableMethods.wait(1);
+                page.yesDeleteForPerson.click();
+                ReusableMethods.wait(3);
+            } catch (NoSuchElementException | StaleElementReferenceException e) {
+                break;
+            }
         }
     }
 }

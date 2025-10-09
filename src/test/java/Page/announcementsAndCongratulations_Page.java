@@ -24,7 +24,7 @@ public class announcementsAndCongratulations_Page {
     public WebElement newEventCalendarBtn;
     @FindBy(xpath = "//span[normalize-space()='Yeni təbrik']")
     public WebElement newCongrats;
-    @FindBy(id = "mat-input-8")
+    @FindBy(xpath = "//input[@formcontrolname='title']")
     public WebElement announcementName;
     @FindBy(id = "mat-input-52")
     public WebElement congratsName;
@@ -32,7 +32,7 @@ public class announcementsAndCongratulations_Page {
     public WebElement announcementDesciption;
     @FindBy(xpath = "//div[@class='ql-editor ql-blank']")
     public WebElement congratsDesciption;
-    @FindBy(id = "mat-input-9")
+    @FindBy(xpath = "//input[@formcontrolname='mlsppUrl']")
     public WebElement announcementUrl;
     @FindBy(id = "mat-input-9")
     public WebElement announcementUrlOpenPublic;
@@ -46,6 +46,10 @@ public class announcementsAndCongratulations_Page {
     public WebElement announcementEditedTypeSelect;
     @FindBy(xpath = "//span[text()='Automation progress']")
     public WebElement congratsEditedTypeSelect;
+    @FindBy(xpath = "//p[text()='Əlavə şəkil']")
+    public WebElement anotherFile;
+    @FindBy(xpath = "//span[text()='Elanlar']")
+    public WebElement announcementNewTypeSelect;
     @FindBy(xpath = "//span[text()='Automation category']")
     public WebElement calendarAutomation;
     @FindBy(xpath = "//span[text()='Automation event place']")
@@ -56,11 +60,11 @@ public class announcementsAndCongratulations_Page {
     public WebElement congratsTypeSelect;
     @FindBy(xpath = "//span[text()='Ümumi açıq']")
     public WebElement announcementStatus;
-    @FindBy(xpath = "//span[text()='Ünvanlanmış şəxslərə görə']")
+    @FindBy(xpath = "//span[text()='Ünvanlanmış şəxslərə görə ']")
     public WebElement announcementStatusForPerson;
     @FindBy(xpath = "//span[text()='Struktur bölmə daxilində']")
     public WebElement announcementStatusForStructure;
-    @FindBy(id = "mat-input-10")
+    @FindBy(css = "input.search-input")
     public WebElement announcementPersonName;
     @FindBy(xpath = "//span[contains(., 'Təsdiq et')]")
     public WebElement accceptStructure;
@@ -73,24 +77,26 @@ public class announcementsAndCongratulations_Page {
 
     @FindBy(xpath = "//span[text()='Ümumi açıq']")
     public WebElement congratsStatus;
-    @FindBy(xpath = "//label[text()='Musa Rzayev ']")
+    @FindBy(xpath = "//div[text()=' Musa Rzayev ']")
     public WebElement announcementMusaSelect;
-    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[4]")
+    @FindBy(xpath = "//div[text()=' Abbas Rzayev ']")
+    public WebElement announcementAbbasSelect;
+    @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[6]")
     public WebElement closeSearchList;
 
     @FindBy(xpath = "//span[text()='Ünvanlanmış şəxslərə görə']")
     public WebElement congratstStatusForPerson;
     @FindBy(xpath = "//div[@class='mat-mdc-form-field-infix ng-tns-c1205077789-207']")
     public WebElement congratsStatusForPerson;
-    @FindBy(xpath = "(//button[@class='add-btn'])[1]")
+    @FindBy(xpath = "//p[text()='Elanlarla bağlı əsas şəkil']")
     public WebElement announcementMainPictureOne;
-    @FindBy(xpath = "(//button[@class='add-btn'])[2]")
+    @FindBy(xpath = "//p[text()='Video']")
     public WebElement announcementPictureTwo;
-    @FindBy(id = "mat-input-11")
+    @FindBy(xpath = "(//mat-label[normalize-space()='URL']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input[@matinput])[2]")
     public WebElement videoUrlPerson;
     @FindBy(id = "mat-input-10")
     public WebElement videoUrlPublic;
-    @FindBy(xpath = "//span[text()='Təsdiq et']")
+    @FindBy(xpath = "//span[text()=' Təsdiq et ']")
     public WebElement acceptVideo;
     @FindBy(xpath = "//span[text()=' Yadda saxla ']")
     public WebElement saveBtn;
@@ -184,8 +190,45 @@ public class announcementsAndCongratulations_Page {
     public WebElement checkForDeleteForStructure;
     @FindBy(xpath = "//span[text()='Sil']")
     public WebElement deleteForPerson;
-    @FindBy(xpath = "//span[text()='Bəli']")
+    @FindBy(xpath = "//span[normalize-space()='Bəli']")
     public WebElement yesDeleteForPerson;
     @FindBy(xpath = "//p[text()='Elanlar']")
     public WebElement autorizationAnn;
+    @FindBy(xpath = "(//div[contains(@class,'post-content')]//h6)[1]")
+    public WebElement announcmentNameAdmin;
+    @FindBy(xpath = "//div[@class='main-texts']//h5")
+    public WebElement announcementNameSideBar;
+    @FindBy(xpath = "(//div[contains(@class,'post-content')]//p)[1]")
+    public WebElement announcementDescriptionAdmin;
+    @FindBy(xpath = "//div[@class='ql-editor']//p")
+    public WebElement announcementDescriptionLeftSideBar;
+    @FindBy(xpath = "(//div[contains(@class,'post-item')]//div[contains(@class,'datetime')]/p[1])[1]")
+    public WebElement announcementDateAdmin;
+    @FindBy(xpath = "(//div[contains(@class,'post-item')]//div[contains(@class,'datetime')]/p[2])[1]")
+    public WebElement announcementTimeAdmin;
+    @FindBy(xpath = "//img[contains(@class,'main-image') and @alt='Manual ELan']")
+    public WebElement announcementMainPictureCheck;
+    @FindBy(xpath = "//div[contains(@class,'meta-info')]//p[starts-with(normalize-space(.), 'Elanın tipi')]/strong")
+    public WebElement announcementTypeCheck;
+    @FindBy(xpath = "(//div[@class='texts']//p)[1]")
+    public WebElement announcementDataTimeCheck;
+    @FindBy(xpath = "//img[@alt='Video' and contains(@src,'img.youtube.com')]")
+    public WebElement announcementVideoCheck;
+    @FindBy(xpath = "//div[contains(@class,'external-url')]//a[contains(@class,'source-link')]")
+    public WebElement announcementUrlCheck;
+    @FindBy(xpath = "//span[text()='Bağla']")
+    public WebElement closeNoteWindow;
+    @FindBy(xpath = "(//ul[contains(@class, 'notification-list')]//li)[1]")
+    public WebElement firstNote;
+    @FindBy(xpath = "//div[contains(@class,'mat-mdc-dialog-surface')]")
+    public WebElement announcementModalWindow;
+    @FindBy(xpath = "//div[@class='mdc-dialog__container']//h5")
+    public WebElement announceNameModalCheck;
+    @FindBy(xpath = "//div[@class='mdc-dialog__container']//p")
+    public WebElement announceDescModalCheck;
+    @FindBy(css = "img.post-img")
+    public WebElement imgCheckModal;
+    @FindBy(xpath = "//span[normalize-space()='Sil']")
+    public WebElement deleteBtn;
+
 }

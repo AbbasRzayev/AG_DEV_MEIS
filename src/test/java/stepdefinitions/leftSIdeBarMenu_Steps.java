@@ -63,7 +63,7 @@ leftSIdeBarMenu_Page page =new leftSIdeBarMenu_Page();
     @When("user selects announcement and congratulations from left sidebar")
     public void userSelectsAnnouncementAndCongratulationsFromLeftSidebar() {
         page.congrats.click();
-        ReusableMethods.wait(60);
+        ReusableMethods.wait(15);
 
     }
 
