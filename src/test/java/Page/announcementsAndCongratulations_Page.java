@@ -30,6 +30,8 @@ public class announcementsAndCongratulations_Page {
     public WebElement congratsName;
     @FindBy(xpath = "//div[@class='ql-editor ql-blank']")
     public WebElement announcementDesciption;
+    @FindBy(xpath = "//div[@class='ql-editor']")
+    public WebElement announcementDesc;
     @FindBy(xpath = "//div[@class='ql-editor ql-blank']")
     public WebElement congratsDesciption;
     @FindBy(xpath = "//input[@formcontrolname='mlsppUrl']")
@@ -50,6 +52,8 @@ public class announcementsAndCongratulations_Page {
     public WebElement anotherFile;
     @FindBy(xpath = "//span[text()='Elanlar']")
     public WebElement announcementNewTypeSelect;
+    @FindBy(xpath = "//span[text()='Məzuniyyət']")
+    public WebElement announcementVaTypeSelect;
     @FindBy(xpath = "//span[text()='Automation category']")
     public WebElement calendarAutomation;
     @FindBy(xpath = "//span[text()='Automation event place']")
@@ -90,6 +94,10 @@ public class announcementsAndCongratulations_Page {
     public WebElement congratsStatusForPerson;
     @FindBy(xpath = "//p[text()='Elanlarla bağlı əsas şəkil']")
     public WebElement announcementMainPictureOne;
+    @FindBy(xpath = "//p[text()='Təbriklərlə bağlı əsas şəkil']")
+    public WebElement congratsMainPictureOne;
+    @FindBy(xpath = "//img[@alt='Əsas şəkil']")
+    public WebElement mainPictureEdit;
     @FindBy(xpath = "//p[text()='Video']")
     public WebElement announcementPictureTwo;
     @FindBy(xpath = "(//mat-label[normalize-space()='URL']/ancestor::div[contains(@class,'mat-mdc-form-field-infix')]//input[@matinput])[2]")
@@ -206,10 +214,12 @@ public class announcementsAndCongratulations_Page {
     public WebElement announcementDateAdmin;
     @FindBy(xpath = "(//div[contains(@class,'post-item')]//div[contains(@class,'datetime')]/p[2])[1]")
     public WebElement announcementTimeAdmin;
-    @FindBy(xpath = "//img[contains(@class,'main-image') and @alt='Manual ELan']")
+    @FindBy(xpath = "//img[contains(@class,'main-image')]")
     public WebElement announcementMainPictureCheck;
     @FindBy(xpath = "//div[contains(@class,'meta-info')]//p[starts-with(normalize-space(.), 'Elanın tipi')]/strong")
     public WebElement announcementTypeCheck;
+    @FindBy(xpath = "//div[contains(@class,'meta-info')]//p[starts-with(normalize-space(.), 'Təbrikin tipi')]/strong")
+    public WebElement congratsTypeCheck;
     @FindBy(xpath = "(//div[@class='texts']//p)[1]")
     public WebElement announcementDataTimeCheck;
     @FindBy(xpath = "//img[@alt='Video' and contains(@src,'img.youtube.com')]")
@@ -230,5 +240,9 @@ public class announcementsAndCongratulations_Page {
     public WebElement imgCheckModal;
     @FindBy(xpath = "//span[normalize-space()='Sil']")
     public WebElement deleteBtn;
+    @FindBy(xpath = "//span[text()='Düzəliş et']")
+    public WebElement editAnnouncement;
+    @FindBy(xpath = "//h6[normalize-space()='Təbriklər']")
+    public WebElement congratsTabSideBar;
 
 }

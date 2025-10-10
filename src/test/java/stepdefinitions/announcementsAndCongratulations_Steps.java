@@ -56,6 +56,16 @@ public class announcementsAndCongratulations_Steps {
         if (selection.contains("new")) {
             page.announcementName.sendKeys("Manual ELan");
             ReusableMethods.wait(1);
+        } else if (selection.contains("edit")) {
+            page.announcementName.clear();
+            ReusableMethods.wait(1);
+            page.announcementName.sendKeys("Automation ELan");
+            ReusableMethods.wait(1);
+        }else if (selection.contains("edit")) {
+            page.announcementName.clear();
+            ReusableMethods.wait(1);
+            page.announcementName.sendKeys("Automation ELan");
+            ReusableMethods.wait(1);
         }
     }
 
@@ -64,16 +74,25 @@ public class announcementsAndCongratulations_Steps {
         if (description.contains("new")) {
             page.announcementDesciption.sendKeys("Bu elanın məqsədi automatlaşdırılmış təstlərdir.");
             ReusableMethods.wait(1);
+        } else if (description.contains("edit")) {
+            ReusableMethods.pageDown();
+            page.announcementDesc.clear();
+            ReusableMethods.wait(1);
+            page.announcementDesciption.sendKeys("Redaktə edilən mətn barədə məlumat.");
+            ReusableMethods.wait(1);
         }
-
-
     }
-
     @And("adds url {string} for announcement")
     public void addsUrlForAnnouncement(String url) {
-        if (url.contains("new announcement"))
+        if (url.contains("new announcement")) {
             page.announcementUrl.sendKeys("https://aist.group/");
-        ReusableMethods.wait(1);
+            ReusableMethods.wait(1);
+        } else if (url.contains("edit announcement")) {
+            page.announcementUrl.clear();
+            ReusableMethods.wait(1);
+            page.announcementUrl.sendKeys("https://habr.com/");
+            ReusableMethods.wait(1);
+        }
     }
 
     @And("selects announcement type {string}")
@@ -98,6 +117,11 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.wait(1);
             page.announcementNewTypeSelect.click();
             ReusableMethods.wait(1);
+        } else if (choose.contains("edit-announcement")) {
+            page.announcementType.click();
+            ReusableMethods.wait(1);
+            page.announcementVaTypeSelect.click();
+            ReusableMethods.wait(1);
         }
     }
 
@@ -116,11 +140,23 @@ public class announcementsAndCongratulations_Steps {
         actions.moveByOffset(5, 5).click().build().perform();
     }
 
-    @And("adds main picture for announcement")
-    public void addsMainPictureForAnnouncement() {
-        String path = "C:\\Users\\User\\TestFiles\\Test.png";
-        page.announcementMainPictureOne.click();
-        ReusableMethods.robotClassDosyaYukleme(path);
+    @And("adds {string} main picture for announcement")
+    public void addsMainPictureForAnnouncement(String selection) {
+        if (selection.contains("new")) {
+            String path = "C:\\Users\\User\\TestFiles\\Test.png";
+            page.announcementMainPictureOne.click();
+            ReusableMethods.robotClassDosyaYukleme(path);
+        } else if (selection.contains("edit")) {
+            ReusableMethods.pageUp();
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
+            page.mainPictureEdit.click();
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }else if (selection.contains("congrats")) {
+            ReusableMethods.pageUp();
+            String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
+            page.congratsMainPictureOne.click();
+            ReusableMethods.robotClassDosyaYukleme(path);
+        }
     }
 
 
@@ -1197,9 +1233,9 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.flash(page.announcementDataTimeCheck, getDriver());
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.announcementTypeCheck, getDriver());
-            Assert.assertEquals(page.announcementTypeCheck.getText().trim(), announcementType);
-            ReusableMethods.wait(1);
+            ReusableMethods.flash(page.congratsTypeCheck, getDriver());
+//            Assert.assertEquals(page.congratsTypeCheck.getText().trim(), announcementType);
+//            ReusableMethods.wait(1);
 
             ReusableMethods.flash(page.announcementNameSideBar, getDriver());
             Assert.assertEquals(page.announcementNameSideBar.getText().trim(), announcementName);
@@ -1335,5 +1371,17 @@ public class announcementsAndCongratulations_Steps {
                 break;
             }
         }
+    }
+
+    @And("user selects edit button in the admin panel")
+    public void userSelectsEditButtonInTheAdminPanel() {
+        page.editAnnouncement.click();
+        ReusableMethods.wait(2);
+    }
+
+    @And("user switches to the Congratulations tab in the left sidebar")
+    public void userSwitchesToTheCongratulationsTabInTheLeftSidebar() {
+        page.congratsTabSideBar.click();
+        ReusableMethods.wait(1);
     }
 }

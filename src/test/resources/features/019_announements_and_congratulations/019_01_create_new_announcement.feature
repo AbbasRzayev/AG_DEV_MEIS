@@ -16,7 +16,7 @@ Feature: Create new announcement
     And selects the status of the announcement according to the addressees
 #    And user select escape button
     And adds "new" description
-    And adds main picture for announcement
+    And adds "new" main picture for announcement
     And adds additional photo for announcement
     And adds video for announcement
     And page is down
