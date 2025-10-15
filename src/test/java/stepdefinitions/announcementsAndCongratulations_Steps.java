@@ -1233,9 +1233,9 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.flash(page.announcementDataTimeCheck, getDriver());
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.congratsTypeCheck, getDriver());
-//            Assert.assertEquals(page.congratsTypeCheck.getText().trim(), announcementType);
-//            ReusableMethods.wait(1);
+            ReusableMethods.flash(page.congratsTypeCheck, getDriver()); //bug var 89187
+            Assert.assertEquals(page.congratsTypeCheck.getText().trim(), announcementType);
+            ReusableMethods.wait(1);
 
             ReusableMethods.flash(page.announcementNameSideBar, getDriver());
             Assert.assertEquals(page.announcementNameSideBar.getText().trim(), announcementName);
@@ -1328,9 +1328,9 @@ public class announcementsAndCongratulations_Steps {
                     Assert.assertEquals(page.announceNameModalCheck.getText().trim(), announcementName);
                     ReusableMethods.wait(1);
 
-                    ReusableMethods.flash(page.announceDescModalCheck, getDriver());
-//                    Assert.assertEquals(page.announceDescModalCheck.getText().trim(), announcementDescription);
-//                    ReusableMethods.wait(1);
+                    ReusableMethods.flash(page.announceDescModalCheck, getDriver());//bug var
+                    Assert.assertEquals(page.announceDescModalCheck.getText().trim(), announcementDescription);
+                    ReusableMethods.wait(1);
 
                     ReusableMethods.flash(page.imgCheckModal, getDriver());
                     Assert.assertTrue(page.imgCheckModal.isDisplayed());

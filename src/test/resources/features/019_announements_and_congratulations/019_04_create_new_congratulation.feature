@@ -53,7 +53,7 @@ Feature: Create new congratulation
    #28.Təbrikin tarix, başlıq və təsvir məlumatlarının düzgün əks olunmasının yoxlanılması
    #29.Təbrikə daxil olaraq baxış hissəsində əsas təsvirin düzgün əks olunmasının yoxlanılması
    #30.Təbrikin baxış hissəsində tarix məlumatlarının düzgün əks olunmasının yoxlanılması
-   #31.Təbrikin baxış hissəsində elan tipi məlumatlarının düzgün əks olunmasının yoxlanılması
+   #31.Təbrikin baxış hissəsində təbrik tipi məlumatlarının düzgün əks olunmasının yoxlanılması
    #32.Təbrikin baxış hissəsində başlıq məlumatlarının düzgün əks olunmasının yoxlanılması
    #33.Təbrikin baxış hissəsində əsas şəklin düzgün əks olunmasının yoxlanılması
    #34.Təbrikin baxış hissəsində video məlumatlarının düzgün əks olunmasının yoxlanılması

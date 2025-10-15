@@ -54,7 +54,7 @@ Feature: Edit new congratulation
     When selects delete button for announcement or for congrats in the control panel
     Then the deleted announcement or congrats is not displayed in the control panel
    #Test Ssenariləri:
-   #19.Təbrikin redaktə olunmasının yoxlanılması
-   #20.Redaktə edildikdən sonra admin paneldə təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
-   #21.Redaktə edildikdən sonra sol sidebarda təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
-   #22.Redaktə edildikdən sonra bildirişin gəlməsi və təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
+   #41.Təbrikin redaktə olunmasının yoxlanılması
+   #42.Redaktə edildikdən sonra admin paneldə təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
+   #43.Redaktə edildikdən sonra sol sidebarda təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
+   #44.Redaktə edildikdən sonra bildirişin gəlməsi və təbrik məlumatlarının düzgün əks olunmasının yoxlanılması
