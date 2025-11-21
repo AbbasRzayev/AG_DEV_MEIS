@@ -16,8 +16,8 @@ Feature: Program template addition
     And the user clicks the "Next" button
     When the user selects the "new" program for template
     Then the template information is displayed in the Admin Panel
-      | Şablonun adı        | Vəzifə          | Struktur      | Proqramlar |
-      | Automation Template | IT Mühəndis(QA) | AISTGroup MMC | 1          |
+      | Şablonun adı        | Vəzifə            | Struktur      | Proqramlar |
+      | Automation Template | Ofis koordinatoru | AISTGroup MMC | 1          |
     When selects delete button in the template tab
 #    Then the deleted template is not displayed in the template tab
     #Test ssenarilər:

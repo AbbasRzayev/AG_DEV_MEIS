@@ -150,6 +150,7 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.pageUp();
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
             page.mainPictureEdit.click();
+//            page.announcementMainPictureOne.click();
             ReusableMethods.robotClassDosyaYukleme(path);
         }else if (selection.contains("congrats")) {
             ReusableMethods.pageUp();

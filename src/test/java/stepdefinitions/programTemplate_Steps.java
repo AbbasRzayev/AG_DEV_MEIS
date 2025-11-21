@@ -60,7 +60,7 @@ public class programTemplate_Steps {
         if (selection.equals("new")) {
             page.dutySelection.click();
             ReusableMethods.wait(1);
-            page.qaDuty.click();
+            page.officeManager.click();
             ReusableMethods.wait(1);
         } else if (selection.equals("edit")) {
             page.dutySelection.click();

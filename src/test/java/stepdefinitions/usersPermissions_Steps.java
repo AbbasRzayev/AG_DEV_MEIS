@@ -317,7 +317,7 @@ public class usersPermissions_Steps {
                 ReusableMethods.scrollToElementByActions(page.helpDeskVisionCheck);
                 page.proqITHelpSpecCheck.click();
                 ReusableMethods.wait(1);
-//                page.helpDeskEditCheck.click();
+                page.helpDeskEditCheck.click();
                 page.helpDeskVisionCheck.click();
                 ReusableMethods.wait(1);
 
@@ -331,7 +331,7 @@ public class usersPermissions_Steps {
                 ReusableMethods.scrollToElementByActions(page.helpDeskVisionCheck);
                 page.proqITHelpSpecCheck.click();
                 ReusableMethods.wait(1);
-//                page.helpDeskEditCheck.click();
+                page.helpDeskEditCheck.click();
                 page.helpDeskVisionCheck.click();
                 ReusableMethods.wait(1);
             }

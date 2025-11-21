@@ -28,8 +28,8 @@ Feature:Edit useful information
     When goes to the electronic library tab in the control panel
     And switches to the "Useful information" tab in electronic library
     Then all information about the useful information is displayed in the table in the admin panel
-      | Məlumatın adı      | Materiallar      | Baxış sayı |
-      | Useful Autmaion QA | EndToEnd.pdf.pdf | 0          |
+      | Məlumatın adı      | Materiallar  | Baxış sayı |
+      | Useful Autmaion QA | EndToEnd.pdf | 0          |
     And selects delete button in the control panel
     Then the deleted training material is not displayed in the control panel
     #Test ssenarilər:

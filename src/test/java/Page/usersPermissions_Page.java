@@ -32,7 +32,7 @@ public class usersPermissions_Page {
     public WebElement proqITSpecCheck;
     @FindBy(xpath = "//label[contains(.,' Proqramçı & IT mütəxəssis ')]")
     public WebElement proqITHelpSpecCheck;
-    @FindBy(xpath = "//label[contains(.,' Fikir bankı modulunun idarə edilməsi ')]")
+    @FindBy(xpath = "//label[contains(.,' İdea bankı modulunun idarə edilməsi ')]")
     public WebElement ideaCheck;
     @FindBy(xpath = "//label[contains(.,' Təqvimə baxış imkanı ')]")
     public WebElement calendarCheck;

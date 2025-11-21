@@ -83,7 +83,7 @@ public class announcementsAndCongratulations_Page {
     public WebElement congratsStatus;
     @FindBy(xpath = "//div[text()=' Musa Rzayev ']")
     public WebElement announcementMusaSelect;
-    @FindBy(xpath = "//div[text()=' Abbas Rzayev ']")
+    @FindBy(xpath = "//div[text()=' Abbas Rzayev FUAD ']")
     public WebElement announcementAbbasSelect;
     @FindBy(xpath = "(//span[@class='mat-mdc-button-touch-target'])[6]")
     public WebElement closeSearchList;

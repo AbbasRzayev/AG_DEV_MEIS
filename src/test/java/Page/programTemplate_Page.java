@@ -20,6 +20,8 @@ public class programTemplate_Page {
     public WebElement programmerDuty;
     @FindBy(xpath = "//div[normalize-space()='IT Mühəndis(QA)']")
     public WebElement qaDuty;
+    @FindBy(xpath = "//div[normalize-space()='Ofis koordinatoru']")
+    public WebElement officeManager;
     @FindBy(xpath = "//h6[normalize-space()='AISTGroup MMC']")
     public WebElement aistStructure;
     @FindBy(xpath = "//h6[normalize-space()='Keyfiyyətə Nəzarət(AT)']")

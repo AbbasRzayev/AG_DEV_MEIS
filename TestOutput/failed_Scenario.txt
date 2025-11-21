@@ -1,4 +1,0 @@
-file:src/test/resources/features/019_announements_and_congratulations/019_03_edit_new_announcement.feature:8
-file:src/test/resources/features/019_announements_and_congratulations/019_06_edit_new_congratulation.feature:8
-file:src/test/resources/features/019_announements_and_congratulations/019_01_create_new_announcement.feature:8
-file:src/test/resources/features/019_announements_and_congratulations/019_04_create_new_congratulation.feature:8

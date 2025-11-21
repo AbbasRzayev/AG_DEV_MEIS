@@ -1,5 +1,8 @@
 @all
 Feature: Graduation
+  As an administrator
+  I want to assign a graduation (vacation) period to a user and control their access to the system during that time
+  So that users on leave cannot log into the system until their graduation period ends
 
   @graduation @new @test
   Scenario: Check that if it is possible assignment the graduation to the user in the MEİS system

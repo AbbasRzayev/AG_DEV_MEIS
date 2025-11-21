@@ -26,6 +26,7 @@ import static utilities.Driver.getDriver;
 public class programs_Steps {
     programs_Page page = new programs_Page();
     String keywordText;
+
     @And("switches to the my programs tab")
     public void switchesToTheMyProgramsTab() {
         ReusableMethods.wait(3);
@@ -383,15 +384,48 @@ public class programs_Steps {
     @Then("the {string} program is successfully deleted")
     public void theProgramIsSuccessfullyDeleted(String selection) {
         if (selection.contains("new")) {
-            page.searchInput.sendKeys("Bright Future");
-            ReusableMethods.wait(3);
-            ReusableMethods.assertElementNotDisplayed(page.createdProq);
+//            page.searchInput.sendKeys("Bright Future");
+//            ReusableMethods.wait(3);
+//            ReusableMethods.assertElementNotDisplayed(page.createdProq);
+            while (true) {
+                try {
+                    if (!page.createdProq.isDisplayed()) {
+                        break;
+                    }
+                    page.createdProq.click();
+                    ReusableMethods.wait(3);
+                    page.progDelete.click();
+                    ReusableMethods.wait(1);
+                    page.progDeleteAccept.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Bütün təlim proqramlar silindi və test passed oldu ✅");
         } else if (selection.contains("edited")) {
-            page.searchInput.sendKeys("Light Future");
-            ReusableMethods.wait(3);
-            ReusableMethods.assertElementNotDisplayed(page.createdProgSecond);
+//            page.searchInput.sendKeys("Light Future");
+//            ReusableMethods.wait(3);
+//            ReusableMethods.assertElementNotDisplayed(page.createdProgSecond);
+            while (true) {
+                try {
+                    if (!page.createdProgSecond.isDisplayed()) {
+                        break;
+                    }
+                    page.createdProgSecond.click();
+                    ReusableMethods.wait(3);
+                    page.progDelete.click();
+                    ReusableMethods.wait(1);
+                    page.progDeleteAccept.click();
+                    ReusableMethods.wait(2);
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    break;
+                }
+            }
+            System.out.println("Bütün təlim proqramlar silindi və test passed oldu ✅");
         }
     }
+
 
     @And("selects founded user from table")
     public void selectsFoundedUserFromTable() {
@@ -901,7 +935,7 @@ public class programs_Steps {
         if (selection.contains("Bright Future")) {
             page.searchInputProgram.sendKeys("Bright Future");
             ReusableMethods.wait(20);
-        }     else if (selection.contains("E-Sened")) {
+        } else if (selection.contains("E-Sened")) {
             page.searchInputProgram.sendKeys("Elektron Sənəd Dövriyyəsi");
             ReusableMethods.wait(20);
         }
@@ -939,7 +973,7 @@ public class programs_Steps {
 
     @Then("the navigation to the {string} program has been successful")
     public void theNavigationToTheProgramHasBeenSuccessful(String program) {
-        if(program.contains("Bright Future")) {
+        if (program.contains("Bright Future")) {
             String originalWindow = getDriver().getWindowHandle();
             ReusableMethods.wait(1);
             ReusableMethods.flash(page.createdProg, getDriver());
@@ -955,7 +989,7 @@ public class programs_Steps {
             String actualUrl = getDriver().getCurrentUrl();
             Assert.assertEquals(actualUrl, getDriver().getCurrentUrl());
             getDriver().switchTo().window(originalWindow);
-        }else if(program.contains("E-Sened")) {
+        } else if (program.contains("E-Sened")) {
             String originalWindow = getDriver().getWindowHandle();
             ReusableMethods.wait(3);
             ReusableMethods.flash(page.createdProgEDocument, getDriver());

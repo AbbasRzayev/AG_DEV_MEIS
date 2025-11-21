@@ -62,7 +62,7 @@ public class programs_Page {
     public WebElement saveButton;
     @FindBy(xpath = "(//input[@type='text'])[1]")
     public WebElement searchInput;
-    @FindBy(xpath = "//p[text()='Bright Future']")
+    @FindBy(xpath = "(//p[text()='Bright Future'])[1]")
     public WebElement createdProq;
     @FindBy(xpath = "//h6[text()='Bright Future']")
     public WebElement createdProg;

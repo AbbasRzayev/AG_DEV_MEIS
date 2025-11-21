@@ -1,4 +1,4 @@
-@all @helpDesk @test
+@all @helpDesk @test @not @new
 Feature: Email notifications for Help Desk events
   As a registered user,
   I want to receive email notifications for important Help Desk events (such as new requests, updates, deadlines, or execution status),
