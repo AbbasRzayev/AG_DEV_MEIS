@@ -1357,6 +1357,7 @@ public class electronLibrary_Steps {
                     actions.moveByOffset(5, 5).click().build().perform();
                 } else if (selection.contains("İbrahim")) {
                     calendar.choosePersonInput.sendKeys("İbrahim Rzayev");
+                    ReusableMethods.wait(1);
                     calendar.cancelIbrahimPerson.click();
                     ReusableMethods.wait(1);
                     Actions actions = new Actions(getDriver());

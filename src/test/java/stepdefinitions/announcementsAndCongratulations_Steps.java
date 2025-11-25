@@ -61,7 +61,7 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.wait(1);
             page.announcementName.sendKeys("Automation ELan");
             ReusableMethods.wait(1);
-        }else if (selection.contains("edit")) {
+        } else if (selection.contains("edit")) {
             page.announcementName.clear();
             ReusableMethods.wait(1);
             page.announcementName.sendKeys("Automation ELan");
@@ -82,6 +82,7 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.wait(1);
         }
     }
+
     @And("adds url {string} for announcement")
     public void addsUrlForAnnouncement(String url) {
         if (url.contains("new announcement")) {
@@ -152,7 +153,7 @@ public class announcementsAndCongratulations_Steps {
             page.mainPictureEdit.click();
 //            page.announcementMainPictureOne.click();
             ReusableMethods.robotClassDosyaYukleme(path);
-        }else if (selection.contains("congrats")) {
+        } else if (selection.contains("congrats")) {
             ReusableMethods.pageUp();
             String path = "C:\\Users\\User\\Desktop\\TestFiles\\QAAT.png";
             page.congratsMainPictureOne.click();
@@ -1234,8 +1235,8 @@ public class announcementsAndCongratulations_Steps {
             ReusableMethods.flash(page.announcementDataTimeCheck, getDriver());
             ReusableMethods.wait(1);
 
-            ReusableMethods.flash(page.congratsTypeCheck, getDriver()); //bug var 89187
-            Assert.assertEquals(page.congratsTypeCheck.getText().trim(), announcementType);
+            ReusableMethods.flash(page.announcementTypeCheck, getDriver());
+            Assert.assertEquals(page.announcementTypeCheck.getText().trim(), announcementType);
             ReusableMethods.wait(1);
 
             ReusableMethods.flash(page.announcementNameSideBar, getDriver());
@@ -1384,5 +1385,54 @@ public class announcementsAndCongratulations_Steps {
     public void userSwitchesToTheCongratulationsTabInTheLeftSidebar() {
         page.congratsTabSideBar.click();
         ReusableMethods.wait(1);
+    }
+
+    @Then("the all information about congratulation is displayed in the left sidebar")
+    public void theAllInformationAboutCongratulationIsDisplayedInTheLeftSidebar(DataTable table) {
+        List<Map<String, String>> data = table.asMaps(String.class, String.class);
+        for (Map<String, String> row : data) {
+            String announcementName = row.get("Elan Başlığ");
+            String announcementDescription = row.get("Elan Təsvir");
+            String announcementType = row.get("Elanın tipi");
+
+            ReusableMethods.flash(page.announcementMainPictureCheck, getDriver());
+            Assert.assertTrue(page.announcementMainPictureCheck.isDisplayed());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementDataTimeCheck, getDriver());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.congratsTypeCheck, getDriver());
+            Assert.assertEquals(page.congratsTypeCheck.getText().trim(), announcementType);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementNameSideBar, getDriver());
+            Assert.assertEquals(page.announcementNameSideBar.getText().trim(), announcementName);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementDescriptionLeftSideBar, getDriver());
+            Assert.assertEquals(page.announcementDescriptionLeftSideBar.getText().trim(), announcementDescription);
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementVideoCheck, getDriver());
+            Assert.assertTrue(page.announcementVideoCheck.isDisplayed());
+            ReusableMethods.wait(1);
+
+            ReusableMethods.flash(page.announcementUrlCheck, getDriver());
+            String original = getDriver().getWindowHandle();
+            page.announcementUrlCheck.click();
+            new WebDriverWait(getDriver(), Duration.ofSeconds(10))
+                    .until(ExpectedConditions.numberOfWindowsToBe(2));
+            for (String handle : getDriver().getWindowHandles()) {
+                if (!handle.equals(original)) {
+                    getDriver().switchTo().window(handle);
+                    break;
+                }
+            }
+//            Assert.assertEquals(getDriver().getCurrentUrl().trim(), "https://aist.group/");
+            ReusableMethods.wait(3);
+            getDriver().close();
+            getDriver().switchTo().window(original);
+        }
     }
 }

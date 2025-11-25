@@ -88,7 +88,7 @@ public class legalBasis_Page {
     public WebElement addressedPerson;
     @FindBy(css = "input.search-input")
     public WebElement addressedPersonInput;
-    @FindBy(xpath = "//div[text()=' Musa Rzayev - AT|TestUser(!) ']")
+    @FindBy(xpath = "//div[text()=' Musa Rzayev Davud - AT|TestUser(!) ']")
     public WebElement selectMusaPerson;
     @FindBy(xpath = "(//td[contains(@class,'mat-column-title')]//span)[1]")
     public WebElement legalNameCheck;

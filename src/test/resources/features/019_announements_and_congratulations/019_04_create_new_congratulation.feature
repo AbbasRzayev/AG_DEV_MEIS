@@ -1,4 +1,4 @@
-@all @announcementsAndCongratulations
+@all @announcementsAndCongratulations @new
 Feature: Create new congratulation
   As an administrator
   I want to create a new congratulation with details such as name, type, URL, description, and media files, and verify that it is displayed correctly for the relevant addressees
@@ -32,7 +32,7 @@ Feature: Create new congratulation
       | Elan Başlığ | Elan Təsvir                                      |
       | Manual ELan | Bu elanın məqsədi automatlaşdırılmış təstlərdir. |
     When selects new added announcement
-    Then the all information about announcement is displayed in the left sidebar
+    Then the all information about congratulation is displayed in the left sidebar
       | Elan Başlığ | Elan Təsvir                                      | Elanın tipi |
       | Manual ELan | Bu elanın məqsədi automatlaşdırılmış təstlərdir. | Elanlar     |
     And goes to the control panel
